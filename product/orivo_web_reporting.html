@@ -1,0 +1,1438 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="auto">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Orivo — Order-to-Cash &amp; Warkat Operations untuk bank di Indonesia<link rel="canonical" href="Orivo_web_marketing.html">
+  <link rel="alternate" hreflang="id" href="Orivo_web_marketing.html">
+  <link rel="alternate" hreflang="en" href="Orivo_web_marketing_en.html">
+  <link rel="alternate" hreflang="x-default" href="Orivo_web_marketing_en.html">
+  </title>
+<meta name="description" content="Orivo: platform operasional warkat &amp; order-to-cash (intake, kliring, PDC/CDC, dispatch, rekonsiliasi berbasis toleransi, maker-checker di database, audit append-only berantai hash). Kontrol keamanannya punya jumlah uji, bukan hanya brosur.">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#0A1726">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M56.6 12.6 A38 38 0 0 1 56.6 87.4' fill='none' stroke='%231FB6A6' stroke-width='13' stroke-linecap='round'/%3E%3Cpath d='M43.4 87.4 A38 38 0 0 1 43.4 12.6' fill='none' stroke='%231FB6A6' stroke-width='13' stroke-linecap='round'/%3E%3Cpath d='M50 37.5 L62.5 50 L50 62.5 L37.5 50 Z' fill='%23FF9A2E'/%3E%3C/svg%3E">
+<style>
+  :root{
+    --ink:#0A1726; --ink-2:#22384B; --muted:#5B7286; --line:#DCE5EC;
+    --bg:#F7F9FB; --surface:#FFFFFF; --surface-2:#EFF4F8; --surface-3:#E7EFF5;
+    --brand:#0FB6A6; --brand-2:#0C7F77; --brand-ink:#04564F; --brand-soft:#DDF6F2;
+    --amber:#F08A0D; --amber-soft:#FFF1DC; --danger:#C0392B; --danger-soft:#FBE7E4;
+    --ok:#137A4F; --ok-soft:#E2F5EA;
+    --shadow:0 1px 2px rgba(10,23,38,.06),0 8px 24px -12px rgba(10,23,38,.18);
+    --r:14px; --r-sm:9px; --maxw:1180px;
+    --serif:ui-serif,Georgia,'Times New Roman',serif;
+    --sans:system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
+    --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,'Liberation Mono',monospace;
+  }
+  html[data-theme="dark"]{
+    --ink:#EAF3F8; --ink-2:#C4D5E1; --muted:#93A9BA; --line:#22384B;
+    --bg:#08131E; --surface:#0D1D2B; --surface-2:#122737; --surface-3:#173146;
+    --brand:#1FE0C4; --brand-2:#19B69F; --brand-ink:#9FF5E7; --brand-soft:#0E323A;
+    --amber:#FFB347; --amber-soft:#2A2013; --danger:#FF8A7A; --danger-soft:#2E1714;
+    --ok:#5CD69A; --ok-soft:#12291F;
+    --shadow:0 1px 0 rgba(255,255,255,.03),0 14px 34px -18px #000;
+  }
+  @media (prefers-color-scheme:dark){
+    html[data-theme="auto"]{
+      --ink:#EAF3F8; --ink-2:#C4D5E1; --muted:#93A9BA; --line:#22384B;
+      --bg:#08131E; --surface:#0D1D2B; --surface-2:#122737; --surface-3:#173146;
+      --brand:#1FE0C4; --brand-2:#19B69F; --brand-ink:#9FF5E7; --brand-soft:#0E323A;
+      --amber:#FFB347; --amber-soft:#2A2013; --danger:#FF8A7A; --danger-soft:#2E1714;
+      --ok:#5CD69A; --ok-soft:#12291F;
+      --shadow:0 1px 0 rgba(255,255,255,.03),0 14px 34px -18px #000;
+    }
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth;scroll-padding-top:78px}
+  body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 var(--sans);
+       -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+  h1,h2,h3,h4{line-height:1.18;letter-spacing:-.02em;margin:0 0 .45em}
+  h1{font-size:clamp(38px,6.4vw,72px);font-weight:800;letter-spacing:-.035em}
+  h2{font-size:clamp(26px,3.6vw,40px);font-weight:800}
+  h3{font-size:19px;font-weight:700}
+  p{margin:0 0 .9em}
+  a{color:var(--brand-ink);text-underline-offset:3px}
+  html[data-theme="dark"] a{color:var(--brand-ink)}
+  code,kbd{font-family:var(--mono);font-size:.9em}
+  code{background:var(--surface-3);padding:.12em .4em;border-radius:5px}
+  .wrap{width:100%;max-width:var(--maxw);margin-inline:auto;padding-inline:clamp(16px,4vw,34px)}
+  .eyebrow{font:700 12px/1 var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--brand-2)}
+  .lede{font-size:clamp(17px,2.1vw,21px);color:var(--ink-2);max-width:66ch}
+  .sub{color:var(--muted);font-size:15px}
+  .skip{position:absolute;left:-9999px;top:0;background:var(--ink);color:#fff;padding:10px 14px;z-index:100;border-radius:0 0 8px 0}
+  .skip:focus{left:0}
+  :focus-visible{outline:3px solid var(--brand);outline-offset:2px;border-radius:4px}
+
+  /* ---------- splash ---------- */
+  #splash{position:fixed;inset:0;z-index:80;display:grid;place-items:center;
+    background:radial-gradient(120% 90% at 50% 0%,#12303F 0%,#08131E 55%,#04090F 100%);
+    color:#EAF3F8;transition:opacity .5s ease,visibility .5s}
+  #splash[hidden]{display:grid;opacity:0;visibility:hidden;pointer-events:none}
+  .sp{display:grid;justify-items:center;gap:18px;text-align:center;padding:26px}
+  .sp svg{width:112px;height:112px;overflow:visible}
+  .sp .a{stroke-dasharray:240;stroke-dashoffset:240;animation:draw 1.05s cubic-bezier(.65,.05,.25,1) forwards}
+  .sp .a2{animation:draw 1.05s .1s cubic-bezier(.65,.05,.25,1) forwards}
+  .sp .d{transform-box:fill-box;transform-origin:center;transform:scale(.2);opacity:0;
+         animation:pop .5s .72s cubic-bezier(.2,1.5,.4,1) forwards}
+  @keyframes draw{to{stroke-dashoffset:0}}
+  @keyframes pop{to{transform:scale(1);opacity:1}}
+  .sp .name{font-size:30px;font-weight:800;letter-spacing:-.03em}
+  .sp .cap{font-size:11.5px;letter-spacing:.24em;text-transform:uppercase;color:#8FB2BE}
+  .bar{width:210px;height:3px;background:#1E3A4C;border-radius:2px;overflow:hidden}
+  .bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#19E0C4,#FFB020);animation:load 1.6s linear forwards}
+  @keyframes load{to{width:100%}}
+  .sp .log{font-family:var(--mono);font-size:11.5px;color:#7FA0AE;min-height:1.3em}
+  .sp button{background:transparent;border:1px solid #2A4A5C;color:#CFE3EA;border-radius:8px;
+    padding:7px 12px;font:600 12px var(--sans);cursor:pointer}
+  .sp button:hover{border-color:#1FB6A6;color:#fff}
+  @media (prefers-reduced-motion:reduce){
+    .sp .a,.sp .a2{animation:none;stroke-dashoffset:0}
+    .sp .d{animation:none;transform:scale(1);opacity:1}
+    .bar i{animation:none;width:100%}
+    html{scroll-behavior:auto}
+  }
+
+  /* ---------- header ---------- */
+  header.nav{position:sticky;top:0;z-index:60;background:color-mix(in srgb,var(--surface) 86%,transparent);
+    backdrop-filter:saturate(1.4) blur(10px);border-bottom:1px solid var(--line)}
+  .nav-in{display:flex;align-items:center;gap:18px;min-height:64px}
+  .logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);flex:0 0 auto}
+  .logo svg{width:30px;height:30px}
+  .logo b{font-size:20px;font-weight:800;letter-spacing:-.03em}
+  .logo span{font-size:9.5px;letter-spacing:.16em;color:var(--muted);text-transform:uppercase;display:block;margin-top:-2px}
+  nav ul{display:flex;gap:2px;list-style:none;margin:0;padding:0;flex-wrap:wrap}
+  nav a{text-decoration:none;color:var(--ink-2);font:600 13.5px var(--sans);padding:8px 11px;border-radius:8px}
+  nav a:hover{background:var(--surface-2);color:var(--ink)}
+  nav a[aria-current="true"]{background:var(--brand-soft);color:var(--brand-ink)}
+  .nav-act{margin-left:auto;display:flex;align-items:center;gap:8px}
+  .btn{display:inline-flex;align-items:center;gap:8px;border:1px solid transparent;border-radius:10px;
+    padding:10px 16px;font:700 14px var(--sans);cursor:pointer;text-decoration:none;transition:transform .12s,box-shadow .12s}
+  .btn:hover{transform:translateY(-1px)}
+  .btn-p{background:linear-gradient(135deg,var(--brand),var(--brand-2));color:#04231F;box-shadow:var(--shadow)}
+  html[data-theme="dark"] .btn-p{color:#04231F}
+  .btn-g{background:var(--surface);border-color:var(--line);color:var(--ink)}
+  .btn-q{background:transparent;color:var(--ink-2);padding:8px 10px}
+  .btn-q:hover{background:var(--surface-2)}
+  @media(max-width:1080px){nav{display:none}}
+
+  /* ---------- sections ---------- */
+  section{padding:clamp(52px,7vw,92px) 0;border-bottom:1px solid var(--line)}
+  section[id]{scroll-margin-top:78px}
+  .head{display:grid;gap:10px;margin-bottom:30px;max-width:76ch}
+  .grid{display:grid;gap:16px}
+  .g2{grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
+  .g3{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:20px;box-shadow:var(--shadow)}
+  .card h3{display:flex;align-items:center;gap:9px}
+  .card .k{font:700 11px var(--mono);color:var(--brand-2);letter-spacing:.06em}
+  .num{font:800 13px var(--mono);color:#fff;background:linear-gradient(135deg,var(--brand),var(--brand-2));
+  width:26px;height:26px;border-radius:8px;display:grid;place-items:center;flex:0 0 auto}
+  .num-a{background:linear-gradient(135deg,var(--amber),#E2560B)}
+  .pill{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--surface);
+    border-radius:999px;padding:5px 11px;font:600 12.5px var(--sans);color:var(--ink-2)}
+  .tag{font:700 10.5px var(--sans);letter-spacing:.1em;text-transform:uppercase;padding:3px 8px;border-radius:6px}
+  .t-ok{background:var(--ok-soft);color:var(--ok)}
+  .t-part{background:var(--amber-soft);color:var(--amber)}
+  .t-gap{background:var(--danger-soft);color:var(--danger)}
+  .t-info{background:var(--brand-soft);color:var(--brand-ink)}
+  .t-neu{background:var(--surface-3);color:var(--muted)}
+  .tick{color:var(--ok);font-weight:800}
+  .half{color:var(--amber);font-weight:800}
+  .no{color:var(--muted);font-weight:700}
+
+  /* hero */
+  .hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
+  .hero-in{display:grid;gap:clamp(26px,4vw,48px);grid-template-columns:1.15fr .85fr;align-items:center;padding:clamp(46px,6vw,84px) 0}
+  @media(max-width:960px){.hero-in{grid-template-columns:1fr}}
+  .hero::before{content:"";position:absolute;inset:-40% -10% auto auto;width:60vw;height:60vw;max-width:760px;max-height:760px;
+    background:radial-gradient(circle at 50% 50%,color-mix(in srgb,var(--brand) 26%,transparent),transparent 62%);
+    filter:blur(6px);pointer-events:none}
+  .hero ul{list-style:none;padding:0;margin:18px 0 0;display:grid;gap:10px}
+  .hero li{display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:start;color:var(--ink-2)}
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(132px,1fr));gap:1px;background:var(--line);
+    border:1px solid var(--line);border-radius:var(--r);overflow:hidden;margin-top:30px}
+  .stat{background:var(--surface);padding:14px 15px}
+  .stat b{display:block;font-size:26px;font-weight:800;letter-spacing:-.03em;line-height:1.1}
+  .stat span{font-size:11.5px;color:var(--muted);letter-spacing:.02em;text-transform:uppercase;font-weight:600}
+  .markart{background:var(--surface);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);padding:18px}
+  .markart .frame{border-radius:14px;background:
+    radial-gradient(90% 80% at 50% 0%,#0F2A38,#08131E);padding:22px;color:#EAF3F8}
+  .markart .row{display:flex;justify-content:space-between;gap:10px;font:600 12px var(--mono);
+    padding:7px 0;border-bottom:1px dashed #1E3A4C;color:#9FC0CD}
+  .markart .row b{color:#EAF3F8;font-weight:700}
+  .markart .ok{color:#5CD69A}.markart .warn{color:#FFB347}
+
+  /* tables */
+  .tw{overflow:auto;border:1px solid var(--line);border-radius:var(--r);background:var(--surface);box-shadow:var(--shadow)}
+  table{border-collapse:separate;border-spacing:0;width:100%;font-size:13.6px}
+  caption{caption-side:bottom;text-align:left;padding:12px 16px;color:var(--muted);font-size:12.5px;border-top:1px solid var(--line)}
+  th,td{padding:11px 13px;border-bottom:1px solid var(--line);vertical-align:top;text-align:left}
+  thead th{position:sticky;top:0;background:var(--surface-2);z-index:2;font-size:12px;letter-spacing:.04em;
+    text-transform:uppercase;color:var(--muted);white-space:nowrap}
+  tbody tr:last-child td,tbody tr:last-child th{border-bottom:0}
+  tbody tr:hover{background:color-mix(in srgb,var(--brand-soft) 55%,transparent)}
+  td.c{text-align:center;white-space:nowrap;font-size:15px}
+  th:first-child,td:first-child{position:sticky;left:0;background:var(--surface);z-index:1;min-width:196px;font-weight:600}
+  thead th:first-child{z-index:3;background:var(--surface-2)}
+  .ours{background:color-mix(in srgb,var(--brand) 12%,var(--surface)) !important}
+  td small{display:block;color:var(--muted);font-weight:400;font-size:11.5px;line-height:1.4}
+  .legend{display:flex;flex-wrap:wrap;gap:14px;margin:14px 0 0;font-size:12.5px;color:var(--muted)}
+  .legend b{color:var(--ink-2)}
+
+  /* menu tree */
+  .tree{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(290px,1fr))}
+  .branch{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px;box-shadow:var(--shadow)}
+  .branch>h4{margin:0 0 10px;font-size:14px;letter-spacing:.02em;display:flex;gap:8px;align-items:center}
+  .branch ul{list-style:none;margin:0;padding:0;font-size:13.5px}
+  .branch li{padding:5px 0 5px 14px;border-left:2px solid var(--surface-3);position:relative;color:var(--ink-2)}
+  .branch li::before{content:"";position:absolute;left:-2px;top:14px;width:10px;height:2px;background:var(--surface-3)}
+  .branch li b{font-weight:650;color:var(--ink)}
+  .roles{font:600 11px var(--mono);color:var(--brand-2);white-space:nowrap}
+
+  /* forms */
+  .fgrid{display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(232px,1fr))}
+  .fcard{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-sm);padding:13px 14px}
+  .fcard h5{margin:0 0 6px;font-size:13.5px;font-weight:700}
+  .fcard p{margin:0;font-size:12.4px;color:var(--muted)}
+  .fcard .fx{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}
+  .chip{font:700 10px var(--mono);background:var(--surface-3);color:var(--ink-2);padding:2px 6px;border-radius:5px}
+  .chip.g{background:var(--brand-soft);color:var(--brand-ink)}
+  .chip.a{background:var(--amber-soft);color:var(--amber)}
+
+  /* demo form */
+  form.demo{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(212px,1fr));
+    background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:20px;box-shadow:var(--shadow)}
+  .fld{display:grid;gap:6px}
+  .fld.full{grid-column:1/-1}
+  label{font:700 12.5px var(--sans);color:var(--ink-2);letter-spacing:.01em}
+  label .req{color:var(--danger)}
+  input,select,textarea{font:500 14px var(--sans);color:var(--ink);background:var(--bg);
+    border:1px solid var(--line);border-radius:9px;padding:10px 12px;width:100%;transition:border-color .14s,box-shadow .14s}
+  input:focus,select:focus,textarea:focus{outline:none;border-color:var(--brand);box-shadow:0 0 0 3px color-mix(in srgb,var(--brand) 28%,transparent)}
+  input[aria-invalid="true"],select[aria-invalid="true"]{border-color:var(--danger);box-shadow:0 0 0 3px var(--danger-soft)}
+  .hint,.err{font-size:11.8px;color:var(--muted);min-height:1.2em;margin:0}
+  .err{color:var(--danger);font-weight:600;visibility:hidden}
+  .err.on{visibility:visible}
+  .actions{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+  .out{grid-column:1/-1;border-radius:var(--r-sm);padding:14px 16px;background:var(--surface-2);border:1px dashed var(--line);
+    font-family:var(--mono);font-size:12.5px;color:var(--ink-2);white-space:pre-wrap}
+  .out[hidden]{display:none}
+
+  /* callouts */
+  .callout{border-left:3px solid var(--brand);background:var(--brand-soft);padding:14px 18px;border-radius:0 var(--r-sm) var(--r-sm) 0}
+  .callout.warn{border-color:var(--amber);background:var(--amber-soft)}
+  .callout.stop{border-color:var(--danger);background:var(--danger-soft)}
+  details{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-sm);padding:2px 16px}
+  details+details{margin-top:9px}
+  summary{cursor:pointer;font-weight:700;padding:12px 0;list-style:none;display:flex;gap:10px;align-items:center}
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:"+";margin-left:auto;color:var(--muted);font-weight:400;font-size:20px}
+  details[open] summary::after{content:"–"}
+  details p{color:var(--ink-2);font-size:14.5px}
+  footer{padding:36px 0 54px;color:var(--muted);font-size:13px}
+  .frow{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between}
+  .hr{height:1px;background:var(--line);margin:26px 0}
+  .kbar{display:grid;gap:8px}
+  .k{display:grid;grid-template-columns:132px 1fr 62px;gap:10px;align-items:center;font-size:13px}
+  .kbar i{display:block;height:8px;border-radius:5px;background:var(--surface-3);overflow:hidden}
+  .kbar i b{display:block;height:100%;background:linear-gradient(90deg,var(--brand),var(--brand-2))}
+  .kbar i b.a{background:linear-gradient(90deg,var(--amber),#E2560B)}
+  .kbar span:last-child{font:700 12px var(--mono);color:var(--muted);text-align:right}
+
+  /* modal */
+  dialog{border:1px solid var(--line);border-radius:var(--r);padding:0;background:var(--surface);color:var(--ink);
+    box-shadow:0 30px 80px -30px rgba(0,0,0,.5);max-width:420px;width:calc(100% - 32px)}
+  dialog::backdrop{background:rgba(4,10,16,.62);backdrop-filter:blur(3px)}
+  .dlg-b{padding:22px}
+  .dlg-h{display:flex;align-items:center;gap:10px;padding:16px 22px;border-bottom:1px solid var(--line)}
+  .dlg-h svg{width:26px;height:26px}
+  .x{margin-left:auto;background:transparent;border:0;font-size:22px;line-height:1;cursor:pointer;color:var(--muted);padding:4px 6px;border-radius:6px}
+  .x:hover{background:var(--surface-2);color:var(--ink)}
+  #loginsplash{display:grid;place-items:center;gap:12px;padding:38px 22px}
+  #loginsplash[hidden]{display:none}
+  #loginform[hidden]{display:none}
+  #loginform{display:grid;gap:12px}
+  .banner{display:flex;gap:10px;align-items:center;font-size:12.4px;color:var(--muted);
+    background:var(--surface-2);border-radius:8px;padding:9px 11px}
+  @media print{
+    header.nav,.nav-act,#splash,#cta,.no-print,form.demo{display:none !important}
+    body{background:#fff;color:#000}
+    section{border:0;padding:16px 0}
+    .card,.tw,table{box-shadow:none}
+    .tw{overflow:visible;border:1px solid #bbb}
+    a{color:#000;text-decoration:none}
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#modul">Lompat ke isi</a>
+
+<!-- ===================== SPLASH (tampil sebelum halaman, dan sebelum login) ===================== -->
+<div id="splash" role="status" aria-live="polite" aria-label="Memuat Orivo" hidden>
+  <div class="sp">
+    <svg viewBox="0 0 100 100" aria-hidden="true">
+      <path class="a" d="M56.6 12.6 A38 38 0 0 1 56.6 87.4" fill="none" stroke="#1FE0C4" stroke-width="13" stroke-linecap="round"/>
+      <path class="a2" d="M43.4 87.4 A38 38 0 0 1 43.4 12.6" fill="none" stroke="#19B69F" stroke-width="13" stroke-linecap="round"/>
+      <path class="d" d="M50 37.5 L62.5 50 L50 62.5 L37.5 50 Z" fill="#FFB020"/>
+    </svg>
+    <div>
+      <div class="name">Orivo</div>
+      <div class="cap">Order-to-Cash &amp; Warkat Operations</div>
+    </div>
+    <div class="bar" aria-hidden="true"><i></i></div>
+    <div class="log" id="splog">menyiapkan antarmuka…</div>
+    <button type="button" id="spskip" class="no-print">Lewati <kbd>Enter</kbd></button>
+  </div>
+</div>
+
+<!-- ===================== HEADER ===================== -->
+<header class="nav no-print">
+  <div class="wrap nav-in">
+    <a class="logo" href="#top" aria-label="Orivo — ke atas">
+      <svg viewBox="0 0 100 100" aria-hidden="true">
+        <path d="M56.6 12.6 A38 38 0 0 1 56.6 87.4" fill="none" stroke="var(--brand)" stroke-width="13" stroke-linecap="round"/>
+        <path d="M43.4 87.4 A38 38 0 0 1 43.4 12.6" fill="none" stroke="var(--brand-2)" stroke-width="13" stroke-linecap="round"/>
+        <path d="M50 37.5 L62.5 50 L50 62.5 L37.5 50 Z" fill="var(--amber)"/>
+      </svg>
+      <b>Orivo</b><span>warkat &amp; O2C</span>
+    </a>
+    <nav aria-label="Navigasi utama">
+      <ul>
+        <li><a href="#masalah">Masalah</a></li>
+        <li><a href="#modul">Modul</a></li>
+        <li><a href="#fitur">Fitur</a></li>
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#form">Form</a></li>
+                <li><a href="#cms">Cash management</a></li>
+                <li><a href="#keamanan">Keamanan</a></li>
+        <li><a href="#bukti">Bukti</a></li>
+      </ul>
+  <a id="lang-switch" class="langsw" href="Orivo_web_marketing_en.html" data-lang-alt="Orivo_web_marketing_en.html" hreflang="en" lang="en" title="Beralih ke bahasa Inggris — tetap di bagian yang sedang dibaca">EN</a>
+    </nav>
+    <div class="nav-act">
+      <button class="btn btn-q" id="themeBtn" type="button" aria-label="Ganti tema terang/gelap" title="Tema">◐</button>
+      <button class="btn btn-g" id="loginBtn" type="button">Masuk</button>
+      <a class="btn btn-p" href="#demo">Ajukan demo</a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+<!-- ===================== HERO ===================== -->
+<section class="hero" style="border-bottom:1px solid var(--line)">
+  <div class="wrap hero-in">
+    <div>
+      <p class="eyebrow">Sistem operasional bank · on-prem · Indonesia-first</p>
+      <h1>Warkat masuk, uang ketemu,<br>buku terkunci.</h1>
+      <p class="lede">Orivo adalah platform <em>order-to-cash</em> &amp; pengelolaan warkat untuk bank dan lembaga pembiayaan Indonesia:
+        intake cek/bilyet giro, kliring &amp; penagihan, PDC/CDC, dispatch pembayaran, rekonsiliasi berbasis toleransi,
+        dan kontrol dual-authorisation yang <strong>ditegakkan di database</strong> — bukan hanya disembunyikan di tombol UI.</p>
+      <ul>
+        <li><span class="tick">✓</span><span><b>7 status warkat</b> dengan mesin peralihan (state machine) — <code>Realized</code>, <code>Lodged</code>, <code>Hold</code>, <code>Return</code>, <code>Destroyed</code>, <code>Recovered</code>, <code>Misplaced</code> — lengkap dengan warkat fisik (lodgement) &amp; bukti (image) yang menempel.</span></li>
+        <li><span class="tick">✓</span><span><b>Setiap klaim di halaman ini punya angka uji.</b> 184 pemeriksaan SQL + 101 uji Java + <b>292 uji aplikasi</b> (175 smoke end‑to‑end · 69 penolakan lapis gap · 48 harness tampilan jsdom) + 14 uji migrasi skema — dijalankan ulang oleh satu perintah per lapis; kalau ada pemeriksaan yang hilang, gerbangnya merah.</span></li>
+        <li><span class="tick">✓</span><span><b>RPO diikat, bukan diklaim.</b> Arsip WAL dipantau sebagai kontrol hidup + alert; pernah macet 75× di lingkungan uji tanpa satu pun gerbang lain protes — sekarang tidak bisa lagi.</span></li>
+      </ul>
+      <div class="grid" style="grid-template-columns:1fr;gap:0;margin-top:22px">
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <a class="btn btn-p" href="#demo">Ajukan demo 30 menit</a>
+          <a class="btn btn-g" href="#cms">Lihat perbandingan cash management</a>
+          <button class="btn btn-q no-print" id="printBtn" type="button">Cetak one-pager</button>
+        </div>
+      </div>
+      <div class="stats" role="table" aria-label="Angka terukur">
+        <div class="stat" role="cell"><b>528</b><span>TPS burst desain</span></div>
+        <div class="stat" role="cell"><b>2.111</b><span>baris/dtk dibutuhkan</span></div>
+        <div class="stat" role="cell"><b>184</b><span>pemeriksaan SQL lulus</span></div>
+        <div class="stat" role="cell"><b>101</b><span>uji Java lulus</span></div>
+        <div class="stat" role="cell"><b>292</b><span>uji aplikasi lulus</span></div>
+        <div class="stat" role="cell"><b>21</b><span>alert + 3 rule</span></div>
+        <div class="stat" role="cell"><b>≤60&nbsp;s</b><span>RPO (dipantau)</span></div>
+      </div>
+    </div>
+    <aside class="markart" aria-label="Cuplikan layar status kontrol Orivo">
+      <div class="frame">
+        <div style="display:flex;align-items:center;gap:9px;margin-bottom:12px">
+          <svg viewBox="0 0 100 100" width="26" height="26" aria-hidden="true">
+            <path d="M56.6 12.6 A38 38 0 0 1 56.6 87.4" fill="none" stroke="#1FE0C4" stroke-width="13" stroke-linecap="round"/>
+            <path d="M43.4 87.4 A38 38 0 0 1 43.4 12.6" fill="none" stroke="#19B69F" stroke-width="13" stroke-linecap="round"/>
+            <path d="M50 37.5 L62.5 50 L50 62.5 L37.5 50 Z" fill="#FFB020"/>
+          </svg>
+          <div style="font:700 13px var(--sans)">sec.v_control_status — 17 baris</div>
+        </div>
+        <div class="row"><span>MFA peran autorisasi</span><b class="ok">PASS</b></div>
+        <div class="row"><span>Dual control parameter</span><b class="ok">PASS</b></div>
+        <div class="row"><span>Audit append-only + rantai hash</span><b class="ok">PASS</b></div>
+        <div class="row"><span>Katalog PII + masking</span><b class="ok">PASS</b></div>
+        <div class="row"><span>pgAudit (ddl, role)</span><b class="ok">PASS</b></div>
+        <div class="row"><span>hba: scram + hostssl only</span><b class="ok">PASS</b></div>
+        <div class="row"><span>Arsip WAL mengikat RPO</span><b class="ok">PASS</b></div>
+        <div class="row"><span>Break-glass aktif</span><b class="warn">1 tiket</b></div>
+        <div class="row" style="border:0"><span>Devise binding di filter</span><b class="warn">GAP (G5)</b></div>
+        <div style="font:11.5px/1.5 var(--mono);color:#6E8B99;margin-top:12px">
+          $ ./architecture/validate.sh<br>
+          SELESAI — semua gerbang lulus (exit 0)
+        </div>
+      </div>
+    </aside>
+  </div>
+</section>
+<!-- ===================== MASALAH ===================== -->
+<section id="masalah">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">Kenapa halaman ini ada</p>
+      <h2>Empat hal yang menggerus margin operasional back-office</h2>
+      <p class="sub">Semuanya bisa dihitung, dan keempatnya ada di sistem yang masih berjalan di atas spreadsheet, WhatsApp grup, dan "tolong cek rekening koran".</p>
+    </div>
+    <div class="grid g2">
+      <div class="card"><h3><span class="num num-a">1</span>Warkat tersesat di tengah jalan</h3>
+        <p>Cek/BG diterima cabang, tidak jelas siapa yang pegang, jatuh tempo terlewat, retur tidak tertagih. Tanpa mesin status + bukti lodgement, "hilang" tidak bisa dibedakan dari "belum diproses".</p>
+        <p class="sub"><b>Dampak yang bisa diukur:</b> umur tunggakan (aging) membengkak, biaya penagihan ulang, dan sengketa nasabah yang memakan hari kerja.</p></div>
+      <div class="card"><h3><span class="num num-a">2</span>Rekonsiliasi = mencocokkan manual</h3>
+        <p>Mencocokkan mutasi dengan 1,8 juta baris/hari secara visual menghasilkan dua kegagalan sekaligus: lambat, dan orang berhenti mempertanyakan kecocokan "yang hampir pas".</p>
+        <p class="sub"><b>Yang dibutuhkan:</b> pencocokan aturan + toleransi, antrean pengecualian (exception queue) yang punya pemilik, dan close yang bisa dibuktikan waktunya.</p></div>
+      <div class="card"><h3><span class="num num-a">3</span>Kontrol yang bisa dilewati</h3>
+        <p>Maker-checker yang hanya berupa "tombol disembunyikan" akan dilewati saat ada yang masuk malam hari. otorisasi parameter, perubahan limit, dan akses darurat butuh penegakan di tempat data berada.</p>
+        <p class="sub"><b>Orivo menaruhnya di PostgreSQL:</b> pemicu/aturan penolakan di lapisan data + rantai hash audit, supaya bypass itu menjadi kejadian, bukan kemungkinan.</p></div>
+      <div class="card"><h3><span class="num num-a">4</span>"Siap produksi" yang tidak terbukti</h3>
+        <p>Broswur sistem bank biasanya berisi kata: <em>aman, andal, scalable</em>. Tidak ada angka, tidak ada perintah untuk mengulanginya. Kami menulis keduanya — termasuk apa yang <b>belum</b> diukur.</p>
+        <p class="sub"><b>Daftar "belum diukur"</b> ada di bagian <a href="#bukti">Bukti</a>, karena daftar itu justru bagian dari tawarannya.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== MODUL ===================== -->
+<section id="modul">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">Sepuluh modul</p>
+      <h2>Satu alur: warkat masuk → uang keluar → buku tertutup → audit terkunci</h2>
+      <p class="sub">Modul boleh dibeli/dipakai bertahap; skema data &amp; kontrolnya sudah satu alamat sejak hari pertama. Tanda di tiap kartu: apa yang sudah punya uji. Delapan kartu terakhir di bagian ini = <b>modul yang belum ada</b>, lengkap dengan fase &amp; gerbang keluarnya — bukan daftar harapan kosong.</p>
+    </div>
+    <div class="grid g3">
+      <div class="card"><span class="k">M1 · intake-warkat</span><h3>Penerimaan Warkat</h3>
+        <p>Lodgement per bendel (batch), tangkap nomor warkat/EMKL/NRIC, nilai nominal, drawer/drawee, tanggal &amp; tenor; unggah citra (image) warkat + QR/barcode bendel.</p>
+        <p class="sub">tujuh status mesin peralihan · idempoten per nomor warkat · maker ≠ checker ditegakkan.</p></div>
+      <div class="card"><span class="k">M2 · kliring</span><h3>Kliring &amp; Penagihan</h3>
+        <p>Klirim keluar/masuk, pencocokan berkas SKNBI, penanganan retur (alasan, biaya), dan penjadulan ulang penagihan tanpa membuat nomor warkat baru.</p>
+        <p class="sub">Alur retur diuji sebagai transaksi terpisah — bukan sekadar perubahan status.</p></div>
+      <div class="card"><span class="k">M3 · pdcdc</span><h3>Post-Dated &amp; Safe-Keeping (PDC/CDC)</h3>
+        <p>Penyimpanan warkat mundur-jatuh-tempo, penjadulan presentasi, peringatan H-3, perpanjangan/pengembalian, dan pencatatan biaya penitipan.</p>
+        <p class="sub">Aturan biaya &amp; preferential pricing ikut modul referensi (M7).</p></div>
+      <div class="card"><span class="k">M4 · dispatch</span><h3>Dispatch Pembayaran</h3>
+        <p>Batch 5.000 item → file transfer/GIRO/RTGS/LLG, ack dalam ≤3 s per batch (SLO), pembalikan (reversal) sebagai transaksi baru, bukan edit.</p>
+        <p class="sub">Ledger posting diuji gagal-dulu-sukses-kemudian; saga punya kompensasi.</p></div>
+      <div class="card"><span class="k">M5 · rekonsiliasi</span><h3>Rekonsiliasi &amp; Kecocokan</h3>
+        <p>Mutasi ↔ jurnal ↔ warkat dengan aturan toleransi (nominal/tanggal/kelipatan), pencocokan bertingkat, antrean pengecualian dengan pemilik &amp; SLA, dan "close" yang punya stempel waktu.</p>
+        <p class="sub">Toleransi adalah parameter <b>ber-dual-control</b> — mengubahnya butuh otorisasi terpisah.</p></div>
+      <div class="card"><span class="k">M6 · otorisasi</span><h3>Maker-Checker &amp; Parameter</h3>
+        <p>Antrean otorisasi per peran, limit nilai, 4-eyes untuk perubahan parameter/limit/toleransi, break-glass berkedaluwarsa dengan tiket + tinjauan 24 jam.</p>
+        <p class="sub">Ditegakkan di DB: <code>apply_parameter()</code> menolak sebelum approval — ada uji penolakannya.</p></div>
+      <div class="card"><span class="k">M7 · referensi</span><h3>Referensi Hari-Nol</h3>
+        <p>Nasabah, rekening, kantor cabang, produk &amp; arrangement, bagasi tarif (charge rules), preferential pricing, kalender hari kerja/bursa, dan toleransi per produk.</p>
+        <p class="sub">◐ Skema <code>ref.*</code> sudah terpasang dan ditegakkan database: 10 pemeriksaan (<code>006-refdata.sql</code> + <code>007-refdata-verify.sql</code>) — kalender hari kerja menolak menjawab tanpa data, tarif &amp; toleransi butuh 4-eyes, dan batch hari-nol tidak bisa <em>live</em> selama laporan entitas yatim belum nol. Yang belum: service <code>ecm-identity</code> &amp; layar muatnya.</p></div>
+      <div class="card"><span class="k">M8 · portal</span><h3>Portal &amp; Portlet Per Peran</h3>
+        <p>Portlet yang dirakit per peran (teller/verifikator/autoriser/supervisor/audit/DPO), tampilan antrean, drill-down ke baris audit, dan mode baca-saja untuk auditor.</p>
+        <p class="sub">HTML5 SPA tanpa dependensi jaringan untuk fungsi inti; izin per portlet, bukan per menu.</p></div>
+      <div class="card"><span class="k">M9 · audit</span><h3>Audit Rantai &amp; Forensik</h3>
+        <p>Log append-only dengan <code>row_hash</code> per baris + verifikasi rantai; pembuktian "tidak ada yang hilang diam-diam", dan kanal break-glass yang tetap tercatat.</p>
+        <p class="sub">UPDATE/DELETE pada tabel audit ditolak — diuji, bukan dijanjikan.</p></div>
+      <div class="card"><span class="k">M10 · inteligen ("pintar")</span><h3>Statistik Lokal + Adapter LLM Opsional</h3>
+        <p>Prioritisasi antrean pengecualian, deteksi anomali nominal/kedua-pihak, saran pencocokan — dihitung <b>di lokal dengan statistik</b>; adapter LLM hanya tambahan yang boleh mati.</p>
+        <p class="sub">Tidak ada jalur yang bergantung pada internet: adapter mati → modul tetap jalan penuh.</p></div>
+    </div>
+    <h3 style="margin:30px 0 4px">Delapan modul yang belum ada (diusulkan, bukan janji)</h3>
+    <p class="sub" style="margin-bottom:12px">Diurutkan sesuai dependensi, bukan selera. Satu kartu = satu pertanyaan
+    yang harus dijawab sebelum kode ditulis: tabel apa, endpoint apa, uji apa yang membuatnya berhenti jadi
+    wacana.</p>
+    <div class="grid g3">
+      <div class="card"><span class="k">M11 · ref-data</span><h3>Referensi hari-nol sebagai layanan</h3>
+        <p>Master data nasabah/rekening/cabang/produk/arrangement/tarif/toleransi/kalender/kurs plus loader hari-nol
+        dengan laporan entitas yatim. Skemanya sudah jadi; yang belum adalah <code>ecm-identity</code> dan layarnya.</p>
+        <p class="sub"><span class="tag t-part">sebagian</span> fase 1 · gerbang: 10/0 di <code>007</code> (sudah) +
+        loader idempoten dan uji yatim lewat API (belum)</p></div>
+      <div class="card"><span class="k">M12 · valas</span><h3>Mata uang &amp; revaluasi kurs</h3>
+        <p>Kurs per tanggal sudah ada (<code>ref.fx_rate</code>); yang belum: perhitungan selisih kurs periodik dan
+        jurnal revaluasi berimbang. Bukan dealing atau treasury.</p>
+        <p class="sub"><span class="tag t-gap">belum ada</span> fase 4 · gerbang: 1.000 rekening × 3 kurs → selisih
+        ter-posting dan <code>gl.chk_balance</code> lolos; run ulang tidak menghasilkan jurnal ganda</p></div>
+      <div class="card"><span class="k">M13 · journal-out</span><h3>Jembatan ke buku besar eksternal</h3>
+        <p>Satu arah: jurnal keluar ke sistem akuntansi Anda, yang masuk hanya konfirmasi posting, plus peta akun. Ini
+        pengganti yang jujur untuk "modul GL" — GL tetap punya satu pemilik.</p>
+        <p class="sub"><span class="tag t-gap">belum ada</span> fase 3 · gerbang: golden-file 3 target dan "peta akun
+        bolong → export ditolak, bukan dikirim separuh"</p></div>
+      <div class="card"><span class="k">M14 · kanal</span><h3>Pengingat, tautan bayar, push</h3>
+        <p>Surel/WhatsApp untuk penagihan, QRIS/VA sebagai opsi pelunasan, push ke antrean otorisasi. Kanal keluar
+        saja — bukan gateway pembayaran.</p>
+        <p class="sub"><span class="tag t-gap">belum ada</span> fase 4 · gerbang: idempoten per (item, template, hari);
+        webhook bertanda tangan salah → 401; kredensial kanal tidak pernah muncul di log</p></div>
+      <div class="card"><span class="k">M15 · pdp</span><h3>Hak subjek data pribadi</h3>
+        <p>Alur <code>pdp_request</code>: ekspor, penghapusan, anonimisasi — termasuk penolakan yang dibuktikan
+        (retensi/legal hold). Menutup gap G7.</p>
+        <p class="sub"><span class="tag t-gap">belum ada</span> fase 2–3 · gerbang: penolakan tercatat dan bisa
+        dibuktikan; penghapusan tidak memutus rantai audit</p></div>
+      <div class="card"><span class="k">M16 · panduan</span><h3>Onboarding &amp; bantuan in-app</h3>
+        <p>Tur per peran, pusat bantuan terpasang, pesan galat yang menjelaskan cara lolos. Bukan chatbot — tidak
+        butuh jaringan.</p>
+        <p class="sub"><span class="tag t-gap">belum ada</span> fase 2 · gerbang: tiap kode galat yang dipakai
+        <code>005</code> punya topik bantuan (pemeriksaan silang baru, pola <code>check-manifests.py</code>)</p></div>
+      <div class="card"><span class="k">M17 · konektor</span><h3>Katalog konektor yang bisa dipasang sendiri</h3>
+        <p>Yang realistis: 1 katalog dan 2–3 adapter dengan uji kontrak, bukan "puluhan integrasi". Kredensial
+        terenkripsi dan bisa dirotasi.</p>
+        <p class="sub"><span class="tag t-gap">belum ada</span> fase 5 · gerbang: kontrak gagal → konektor
+        <code>degraded</code> dan jalur lama tetap jalan; uji Logback membuktikan rahasia tidak terbocor</p></div>
+      <div class="card"><span class="k">M18 · laporan</span><h3>Report builder berizin (read-only)</h3>
+        <p>Pembatasnya bukan selera: hanya AST ter-whitelist di atas replika dengan <code>statement_timeout</code>.
+        Kolom bebas tetap tidak — itu pintu belakang aturan PII dan otorisasi.</p>
+        <p class="sub"><span class="tag t-gap">belum ada</span> fase 5 · gerbang: SQL mentah ditolak; kolom di luar
+        <code>allowed_columns</code> ditolak; query berat dipaksa ke replika</p></div>
+    </div>
+    <div class="callout warn" style="margin-top:18px"><b>Delapan kartu di atas adalah batasnya, bukan daftar
+    keinginan.</b> Untuk buku besar penuh, persediaan, aset tetap, pajak (Faktur Pajak/e-Faktur/PPh), payroll, dan
+    kasir keputusannya <b>adapter, bukan modul</b> (ADR&#8209;14, diputus 2026&#8209;09&#8209;03): dua buku besar = dua
+    kebenaran, dan beban pelaporan pajak bukan sesuatu yang bisa dikejar tim produk. Batas itu kami tulis di sini apa adanya —
+    jujur, bukan lupa.</div>
+    <div class="callout" style="margin-top:18px"><b>Observability bukan modul ke-11 — itu lantainya.</b>
+      21 alert + 3 recording rule, 10 metrik keamanan yang disilang-periksa terhadap exporter &amp; kode, dan daftar topik Kafka yang dibaca langsung dari dokumen arsitektur (18 topik) supaya tidak ada "topok yang lupa dibuat".</div>
+  </div>
+</section>
+
+<!-- ===================== FITUR ===================== -->
+<section id="fitur">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">Fitur</p>
+      <h2>Yang ada di dalam, dikelompokkan seperti orang memakainya</h2>
+      <p class="sub">✅ tersedia &amp; ada uji · ◐ tersedia sebagian (gap terbuka ditulis, tidak disembunyikan) · 🛠 desain tertimbang, belum dibangun.</p>
+    </div>
+    <div class="grid g2">
+      <div class="card"><h3>Operasional warkat</h3>
+        <ul style="margin:0;padding-left:1.1em;font-size:14px;line-height:1.9">
+          <li>✅ 7 status warkat + mesin peralihan berizin (transaksi ilegal ditolak, ada ujinya)</li>
+          <li>✅ Lodgement per bendel, citra warkat, bukti fisik, dan riwayat perpindahan tangan</li>
+          <li>✅ PDC/CDC: penyimpanan, presentasi terjadwal, H-3 reminder, perpanjangan, pengembalian</li>
+          <li>✅ Retur dengan alasan + biaya, dan penagihan ulang tanpa nomor warkat baru</li>
+          <li>✅ Idempotensi kunci bisnis (nomor warkat + cabang + tanggal) — retry tidak membuat duplikat</li>
+          <li>✅ Aging &amp; kolektibilitas dengan kalender hari kerja/bursa Indonesia</li>
+        </ul></div>
+      <div class="card"><h3>Rekonsiliasi &amp; pembukuan</h3>
+        <ul style="margin:0;padding-left:1.1em;font-size:14px;line-height:1.9">
+          <li>✅ Pencocokan bertingkat: eksak → toleransi nominal → toleransi tanggal → aturan fuzzy berbobot</li>
+          <li>✅ Exception queue dengan pemilik, SLA, dan eskalasi otomatis</li>
+          <li>✅ Close rekonsiliasi ≤ 60 menit (SLO) dengan bukti stempel waktu per sesi</li>
+          <li>✅ Jurnal saldo-deferrable: ketidakseimbangan baru dinilai saat <code>COMMIT</code> (dan itu diuji)</li>
+          <li>✅ Materialized view untuk agregat — <code>SUM</code> 200rb baris = 26–33 ms, jadi agregasi real-time bukan pilihan</li>
+          <li>✅ Reversal sebagai transaksi baru (bukan koreksi in-place)</li>
+        </ul></div>
+      <div class="card"><h3>Kontrol, keamanan, kepatuhan data</h3>
+        <ul style="margin:0;padding-left:1.1em;font-size:14px;line-height:1.9">
+          <li>✅ Least privilege 4 peran DB (<code>ecm_app</code>/<code>ecm_readonly</code>/<code>ecm_migrator</code>/<code>ecm_dpo</code>) + RLS pada jalur portal</li>
+          <li>✅ MFA untuk peran autorisasi — penolakan tanpa MFA diuji</li>
+          <li>✅ Dual control untuk parameter, limit, toleransi; penolakan "approval belum ada" diuji</li>
+          <li>✅ Break-glass: wajib tiket, kedaluwarsa, dan tetap tercatat di rantai audit</li>
+          <li>✅ Katalog PII + masking di DB <em>dan</em> di log (masking lewat pemicu <code>ddl_command_end</code> + uji Logback nyata)</li>
+          <li>◐ Envelope encryption teruji; KMS/HSM nyata masih gap (G3); kolom ciphertext masih <code>text</code> (G4)</li>
+          <li>◐ Device-binding policy teruji unit, belum dipasang di filter (G5)</li>
+          <li>◐ Hak subjek UU PDP: katalog &amp; masking ada; report/erase masih gap (G7)</li>
+        </ul></div>
+      <div class="card"><h3>Inteligensi ("pintar")</h3>
+        <ul style="margin:0;padding-left:1.1em;font-size:14px;line-height:1.9">
+          <li>✅ Skor prioritas pengecualian dari statistik lokal (frekuensi, selisih, umur, poladrawer) — jalan tanpa internet</li>
+          <li>✅ Saran pasangan rekonsiliasi dengan keyakinan + alasan yang bisa dibaca manusia</li>
+          <li>◐ Adapter LLM untuk ringkasan sengketa/draft memo: opsional, fail-open, timeout + batas byte</li>
+          <li>✅ Tidak ada fitur inti yang bergantung pada model: memutus adapter = fitur tetap penuh</li>
+          <li>🛠 Deteksi anomali "dua pihak yang sama sering bertemu" (kolusi) — butuh data historis produksi</li>
+        </ul></div>
+      <div class="card"><h3>Integrasi &amp; backbone</h3>
+        <ul style="margin:0;padding-left:1.1em;font-size:14px;line-height:1.9">
+          <li>✅ Outbox pattern + 18 topik Kafka (nama/partisi/retensi dibaca dari dokumen arsitektur, ada gerbang <code>--check</code>)</li>
+          <li>✅ Konsumer idempoten + DLT untuk pesan racun</li>
+          <li>✅ Cache/sesi di Valkey (bukan Redis) + ACL user, TLS, dan kebijakan eviction berbeda untuk sesi vs cache</li>
+          <li>✅ Keycloak OIDC (Authorization Code + PKCE, cookie sesi), validasi token dengan <code>DelegatingOAuth2TokenValidator</code></li>
+          <li>✅ Impor mutasi: CSV/MT940/camt.053 + API bank (adapter per bank, kontrak diuji)</li>
+          <li>🛠 ISO 20022 pacs/camt penuh untuk kanal kliring (fase 4)</li>
+        </ul></div>
+      <div class="card"><h3>Operasi &amp; pemulihan</h3>
+        <ul style="margin:0;padding-left:1.1em;font-size:14px;line-height:1.9">
+          <li>✅ RPO ≤60 s diikat arsip WAL yang dipantau + alert <code>WalArchiveStalled</code></li>
+          <li>✅ Drill PITR nyata dengan angka tercatat (restore siap 1 s, titik recovery tepat, rantai audit utuh)</li>
+          <li>✅ Replika melayani bacaan saat primary mati (dibuktikan di drill)</li>
+          <li>✅ Helm chart + 17 aturan manifest diperiksa di CI (<code>check-manifests.py</code>)</li>
+          <li>◐ SLO burn-rate multi-window; <code>/actuator/prometheus</code> belum dibuktikan lewat HTTP (G11)</li>
+          <li>🛠 Chart belum pernah di-apply ke klaster nyata di lingkungan ini (G12)</li>
+        </ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== MENU ===================== -->
+<section id="menu">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">Struktur menu</p>
+      <h2>Delapan grup, izin per peran di tiap titik</h2>
+      <p class="sub">Menu dibuat mengikuti cara kerja (bukan cara tabel disimpan). Label kanan = peran yang melihatnya; portlet bisa disusun ulang per orang.</p>
+    </div>
+    <div class="tree">
+      <div class="branch"><h4>🏠 Beranda / Portlet <span class="roles">semua</span></h4>
+        <ul>
+          <li><b>Antrean saya</b> — menunggu aksi saya (maker/checker/verifikator)</li>
+          <li><b>Float &amp; keterlambatan</b> — warkat belum terselesaikan &gt; SLA</li>
+          <li><b>Rekon: belum tertutup</b> — umur pengecualian + pemilik</li>
+          <li><b>Status kontrol hidup</b> — 17 baris <code>v_control_status</code>, merah bila GAP</li>
+        </ul></div>
+      <div class="branch"><h4>🧾 Warkat <span class="roles">teller · verifikator · supervisor</span></h4>
+        <ul>
+          <li><b>Penerimaan (Lodgement)</b> — form M1 · maker</li>
+          <li><b>Verifikasi &amp;otorisasi</b> — checker, wajib ≠ maker</li>
+          <li><b>Tahan / Hold</b> — alasan + tanggal tinjau ulang</li>
+          <li><b>Retur</b> — alasan kliring, biaya, penjadulan ulang</li>
+          <li><b>Brankas &amp; penyimpanan</b> — PDC/CDC, H-3, perpanjangan</li>
+          <li><b>Rekon-fisik warkat</b> — Destroyed / Recovered / Misplaced (ber-otorisasi 2 orang)</li>
+        </ul></div>
+      <div class="branch"><h4>💸 Pembayaran <span class="roles">operator · autoriser</span></h4>
+        <ul>
+          <li><b>Batch dispatch</b> — unggah/file → validasi → otorisasi → kirim</li>
+          <li><b>Status &amp; ack</b> — per item, bukan hanya per batch</li>
+          <li><b>Pembalikan (reversal)</b> — transaksi baru + alasan</li>
+          <li><b>Limit &amp; velocity</b> — guard fail-closed bila backend mati</li>
+        </ul></div>
+      <div class="branch"><h4>🔁 Rekonsiliasi <span class="roles">verifikator · akunting · supervisor</span></h4>
+        <ul>
+          <li><b>Impor mutasi</b> — CSV/MT940/camt.053/API</li>
+          <li><b>Pencocokan</b> — otomatis + manual dengan alasan</li>
+          <li><b>Pengecualian</b> — antrean + pemilik + SLA</li>
+          <li><b>Toleransi</b> — parameter ber-dual-control</li>
+          <li><b>Penutupan (close)</b> — periode + tanda tangan elektronik internal</li>
+        </ul></div>
+      <div class="branch"><h4>👥 Referensi <span class="roles">master data · supervisor</span></h4>
+        <ul>
+          <li><b>Nasabah &amp; rekening</b> · <b>Kantor cabang</b> · <b>Kalender</b></li>
+          <li><b>Produk &amp; arrangement</b> · <b>Aturan biaya</b> · <b>Preferential pricing</b></li>
+          <li><b>Day-zero loader</b> — impor massal + laporan entitas yatim</li>
+          <li><b>Katalog PII</b> — <code>sec.pii_register()</code>, penolakan kolom tak terdaftar</li>
+        </ul></div>
+      <div class="branch"><h4>📊 Laporan <span class="roles">semua (read-only)</span></h4>
+        <ul>
+          <li><b>Aging &amp; kolektibilitas</b> · <b>STP rate</b> · <b>Biaya per kanal</b></li>
+          <li><b>Produktivitas</b> per petugas/peran</li>
+          <li><b>Ekspor ter-mask</b> — auditor tidak menerima plaintext</li>
+        </ul></div>
+      <div class="branch"><h4>🛡 Keamanan <span class="roles">admin · security officer · DPO</span></h4>
+        <ul>
+          <li><b>Peran &amp; akses</b> · <b>MFA &amp; perangkat</b> · <b>Tinjuan akses berkala</b></li>
+          <li><b>Parameter &amp; otorisasi</b> — antrean 4-eyes</li>
+          <li><b>Break-glass</b> — aktif/kedaluwarsa + tiket + tinjauan 24 jam</li>
+          <li><b>Verifikasi rantai audit</b> — jalankan <code>sec.verify_audit_chain()</code> dari UI</li>
+        </ul></div>
+      <div class="branch"><h4>⚙️ Admin sistem <span class="roles">admin</span></h4>
+        <ul>
+          <li><b>Topic &amp; konsumen Kafka</b> — lag, DLT, replay</li>
+          <li><b>Nilai konfigurasi</b> — GUC/flag dengan jejak perubahan</li>
+          <li><b>Health &amp; SLO</b> — burn rate, arsip WAL, replikasi</li>
+          <li><b>Migrasi DB</b> — hanya lewat <code>ecm_migrator</code></li>
+        </ul></div>
+    </div>
+  </div>
+</section>
+<!-- ===================== FORM ===================== -->
+<section id="form">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">Formulir</p>
+      <h2>Delapan belas form, masing-masing dengan validasi &amp; kontrol yang bisa disebut namanya</h2>
+      <p class="sub">Form di Orivo bukan "kolom isian": tiap form memegang kunci idempotensi, aturan validasi yang sama di klien &amp; di database, dan titik otorisasi kalau risikonya menuntutnya.</p>
+    </div>
+
+    <div class="tw" style="margin-bottom:22px">
+      <table>
+        <thead><tr><th scope="col">Form</th><th scope="col">Modul</th><th scope="col">Field kunci</th><th scope="col">Validasi &amp; kontrol</th><th scope="col">Status setelah simpan</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Penerimaan Warkat (Lodgement)</th><td>M1</td><td>cabang, bendel, jenis (Cek/BG/SR), nomor warkat, EMKL/NRIC, drawer–drawee, nominal, tanggal surat, tanggal jatuh tempo</td><td>nomor 7 digit &amp; unik per cabang; nominal &gt; 0; tanggal surat ≤ jatuh tempo; idempoten pada kunci (nomor+ cabang + tanggal); maker ≠ checker</td><td><code>Lodged</code> → antrean verifikasi</td></tr>
+          <tr><th scope="row">Verifikasi Citra &amp; Data Warkat</th><td>M1</td><td>citra depan/belakang, hasil OCR, koreksi manual, tanda tangan, alasan ketidaksesuaian</td><td>citra wajib; selisih OCR vs input butuh konfirmasi 2 langkah; semua koreksi tercatat di audit</td><td><code>Verified</code> / <code>Hold</code></td></tr>
+          <tr><th scope="row">Otorisasi (Maker-Checker)</th><td>M6</td><td>antrean, ringkasan diff, alasan, token MFA</td><td>peran autorisasi <b>wajib MFA</b>; self-approval ditolak di DB; tiket tertaut untuk break-glass</td><td>status maju + kejadian audit <code>Authorized</code></td></tr>
+          <tr><th scope="row">Penahanan (Hold)</th><td>M1</td><td>alasan, penanggung jawab, tanggal tinjau ulang, catatan nasabah</td><td>tanggal tinjau &gt; hari ini; tidak bisa dibuat oleh checker yang sama dengan verifikator</td><td><code>Hold</code> (menghitung aging)</td></tr>
+          <tr><th scope="row">Retur Kliring</th><td>M2</td><td>kode alasan, nominal retur, biaya, bukti fisik</td><td>kode harus ada di daftar; retur = transaksi baru (bukan edit); penagihan ulang mewarisi nomor warkat</td><td><code>Return</code> → penjadulan ulang</td></tr>
+          <tr><th scope="row">PDC/CDC Titipan</th><td>M3</td><td>penitip, rekening, tenor, tanggal presentasi, instruksi perpanjangan/pengembalian</td><td>tanggal presentasi ≥ jatuh tempo; reminder H-3 otomatis; pembatalan butuh otorisasi 2 orang</td><td><code>In Safekeeping</code></td></tr>
+          <tr><th scope="row">Rekon-Fisik Warkat</th><td>M1/M6</td><td>temuan (Destroyed / Recovered / Misplaced), berita acara, saksi, nomor dokumen</td><td>wajib 2 otorisasi + lampiran; <code>Destroyed</code> tidak bisa dibatalkan (hanya dicatat sebagai kejadian baru)</td><td>status akhir + tautan berita acara</td></tr>
+          <tr><th scope="row">Batch Dispatch Pembayaran</th><td>M4</td><td>kanal (LLG/RTGS/SKNBI/giro internal), file input, total &amp; jumlah item, rekening sumber</td><td>kontrol total baris vs nominal (satu baris salah = batch ditolak); limit &amp; velocity guard; ack ≤ 3 s per 5.000 item</td><td><code>Submitted</code> → <code>Acked</code>/<code>Rejected</code> per item</td></tr>
+          <tr><th scope="row">Pembalikan (Reversal)</th><td>M4</td><td>referensi transaksi asal, alasan, nominal parsial/utuh</td><td>tidak mengedit baris asal; jurnal compensating; otorisasi terpisah dari pembuat asal</td><td>transaksi baru bertaut</td></tr>
+          <tr><th scope="row">Impor Mutasi Bank</th><td>M5</td><td>format (CSV/MT940/camt.053/API), periode, rekening, file</td><td>schema validation per format; baris gagal → file pengecualian, bukan batch gagal total</td><td><code>Staged</code> siap cocok</td></tr>
+          <tr><th scope="row">Pencocokan Rekonsiliasi</th><td>M5</td><td>kandidat pasangan, tingkat keyakinan, alasan manual, action (cocok/tolak/tahan)</td><td>pencocokan di bawah ambang butuh alasan teks ≥ 10 karakter; semua keputusan tercatat + siapa</td><td><code>Matched</code>/<code>Exception</code></td></tr>
+          <tr><th scope="row">Antrean Pengecualian</th><td>M5</td><td>pemilik, prioritas, SLA, tindakan, catatan</td><td>tanpa pemilik = tidak boleh disimpan; eskalasi otomatis &gt; SLA</td><td><code>Open</code> → <code>Resolved</code></td></tr>
+          <tr><th scope="row">Penutupan Periode (Close)</th><td>M5</td><td>periode, saldo, tanda tangan internal, lampiran</td><td>toleransi harus 0 sisa ATAU pengecualian terdaftarkan; close tidak bisa mengulang periode terkunci</td><td><code>Closed</code> (periode terkunci)</td></tr>
+          <tr><th scope="row">Master Nasabah / Rekening</th><td>M7</td><td>identitas, NPWP, rekening, penanda PII, alamat, kontak</td><td>kolom PII wajib terdaftar di katalog (<code>sec.pii_field</code>) — kalau tidak, <code>ALTER</code> ditolak</td><td>aktif / tahan</td></tr>
+          <tr><th scope="row">Produk, Arrangement &amp; Aturan Biaya</th><td>M7</td><td>kode produk, struktur biaya, preferential pricing, toleransi per produk</td><td>perubahan tarif = parameter → dual control; berlaku efektif tertanggal (tidak surut)</td><td>draf → terjadual → aktif</td></tr>
+          <tr><th scope="row">Day-Zero Loader</th><td>M7</td><td>file referensi massal, pemetaan kolom, mode (uji/serius)</td><td>laporan entitas yatim harus kosong sebelum import sah; idempoten per batch</td><td>selesai + ringkasan</td></tr>
+          <tr><th scope="row">Parameter Sistem</th><td>M6</td><td>nama, nilai, rentang, dampak (restart?), alasan</td><td><code>apply_parameter()</code> menolak sebelum ada approval; nilai di luar rentang ditolak di DB</td><td>pending → applied</td></tr>
+          <tr><th scope="row">Break-Glass &amp; Tinjauan 24 Jam</th><td>M6/M9</td><td>tiket, durasi, alasan, pencatatan pasca-akses</td><td>kedaluwarsa otomatis; akses tetap tercatat di rantai; tinjauan ≤ 24 jam wajib diisi</td><td>aktif → ditutup + ditinjau</td></tr>
+        </tbody>
+        <caption>Setiap baris "Validasi &amp; kontrol" punya pemeriksaan di <code>005-security-verify.sql</code> atau uji Java bila ia berlaku di lapisan aplikasi. Yang belum punya uji ditandai di bagian <a href="#keamanan">gap terbuka</a>.</caption>
+      </table>
+    </div>
+
+    <h3 style="margin:0 0 6px">Coba satu: form Penerimaan Warkat (demo di browser, tidak ada jaringan)</h3>
+    <p class="sub" style="margin-bottom:12px">Validasi di bawah ini adalah logika yang sama yang dijalankan klien — dan yang ditegakkan ulang di database. Isi asal-asalan untuk melihat mana yang ditolak.</p>
+    <form class="demo" id="intake" novalidate>
+      <div class="fld"><label for="f-cab">Kantor cabang <span class="req">*</span></label>
+        <select id="f-cab" name="cab" required><option value="">— pilih —</option><option>JKT-001 Menteng</option><option>SBY-014 Darmo</option><option>MDN-002 Cut Nyak Dien</option></select>
+        <p class="err" data-for="f-cab">wajib dipilih</p></div>
+      <div class="fld"><label for="f-jns">Jenis warkat <span class="req">*</span></label>
+        <select id="f-jns" name="jns" required><option value="">— pilih —</option><option>Cek</option><option>Bilyet Giro</option><option>Surat Sanggup</option></select>
+        <p class="err" data-for="f-jns">wajib dipilih</p></div>
+      <div class="fld"><label for="f-no">Nomor warkat <span class="req">*</span></label>
+        <input id="f-no" name="nomor" inputmode="numeric" maxlength="7" placeholder="7 digit, mis. 0123456" autocomplete="off" required>
+        <p class="hint">Nomor 7 digit; unik per cabang + tanggal.</p><p class="err" data-for="f-no">harus 7 digit angka</p></div>
+      <div class="fld"><label for="f-nom">Nominal (Rp) <span class="req">*</span></label>
+        <input id="f-nom" name="nominal" inputmode="numeric" placeholder="mis. 12.500.000" autocomplete="off" required>
+        <p class="hint">Titik sebagai pemisah ribuan diterima; akan dinormalkan.</p><p class="err" data-for="f-nom">harus bilangan bulat &gt; 0</p></div>
+      <div class="fld"><label for="f-tgl">Tanggal surat <span class="req">*</span></label>
+        <input id="f-tgl" name="tglSurat" type="date" required>
+        <p class="err" data-for="f-tgl">wajib diisi</p></div>
+      <div class="fld"><label for="f-jt">Tanggal jatuh tempo <span class="req">*</span></label>
+        <input id="f-jt" name="tglJT" type="date" required>
+        <p class="hint">Untuk PDC: jatuh tempo &gt; hari ini → masuk brankas titipan.</p><p class="err" data-for="f-jt">wajib diisi</p></div>
+      <div class="fld"><label for="f-drawer">Drawer (penerbit) <span class="req">*</span></label>
+        <input id="f-drawer" name="drawer" placeholder="PT Contoh Abadi" autocomplete="off" required>
+        <p class="err" data-for="f-drawer">minimal 3 karakter</p></div>
+      <div class="fld"><label for="f-rek">Rekening tujuan <span class="req">*</span></label>
+        <input id="f-rek" name="rek" inputmode="numeric" placeholder="1234567890" autocomplete="off" required>
+        <p class="err" data-for="f-rek">6–18 digit angka</p></div>
+      <div class="fld full"><label for="f-note">Catatan (opsional)</label>
+        <textarea id="f-note" name="cat" rows="2" placeholder="mis. citra buram di pojok kanan bawah — verifikasi manual"></textarea></div>
+      <div class="actions">
+        <button class="btn btn-p" type="submit">Simpan sebagai maker</button>
+        <button class="btn btn-g" type="button" id="f-seed">Isi contoh</button>
+        <button class="btn btn-q" type="button" id="f-dup">Uji duplikat</button>
+        <span class="sub" style="font-size:12.5px">Tidak ada data yang dikirim ke mana pun — halaman ini sepenuhnya lokal.</span>
+      </div>
+      <div class="out" id="f-out" hidden></div>
+    </form>
+    <div class="callout warn" style="margin-top:14px"><b>Yang tidak terjadi di demo ini:</b> sesi nyata masuk antrean checker dengan MFA, dan nomor warkat yang sama pada hari yang sama akan <em>ditolak</em> oleh kunci idempotensi. Tombol <b>Uji duplikat</b> memperagakan penolakan itu di sisi klien; di produksi penolakan yang sama terjadi di database, bukan di peramban.</div>
+  </div>
+</section>
+
+<!-- ===================== PERBANDINGAN ===================== -->
+<!-- ===================== YANG TIDAK ADA ===================== -->
+<!-- ===================== CASH MANAGEMENT ENTERPRISE ===================== -->
+<section id="cms">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">Cash management enterprise</p>
+      <h2>Diadu dengan aplikasi cash management yang dipakai korporasi di Indonesia</h2>
+      <p class="lede" style="font-size:16.5px">Yang di sebelah kanan bukan pesaing yang sama bentuknya: <em>Mandiri MCM</em>, <em>BCA myBCA Bisnis</em>, <em>BRI Cash Management + QLola</em>, <em>BNI BNIDirect</em>, <em>CIMB BizChannel</em> adalah kanal bank — mereka boleh men-debit rekening, kita tidak. <em>Kyriba</em> dan <em>Nomentia</em> adalah lapisan treasury multibank. Orivo ada di lapis <em>operasional warkat + rekonsiliasi + kontrol yang ditegakkan database</em>. Empat tabel di bawah mengadu empat hal yang benar-benar ditanyakan pembeli: <b>fitur</b>, <b>modul</b>, <b>menu</b>, <b>form</b> — lalu keputusan yang keluar dari perbandingan itu.</p>
+      <p class="sub">Dibaca dari materi publik 2026-09-03 (halaman produk, RIPLAY/buku panduan bank, listing pasar TMS). Tidak diuji hands-on, tidak ada klaim harga atau SLA.</p>
+    </div>
+
+    <h3 style="margin:26px 0 4px">Fitur — 22 hal yang diminta dari cash management enterprise</h3>
+    <div class="tw">
+      <table>
+        <thead><tr><th scope="col" scope="col">Fitur</th><th scope="col" scope="col" class="ours">Orivo</th><th scope="col" scope="col">Kanal bank (Mandiri · BCA · BRI · BNI · CIMB)</th><th scope="col" scope="col">TMS (Kyriba · Nomentia · lainnya)</th><th scope="col" scope="col">Catatan / tindak</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Transfer antar rekening sendiri & antar bank (LLG/SKNBI/RTGS/BI‑FAST)</th>
+            <td class="ours c">◐<small>batch &amp; file keluar siap serah; debit dieksekusi bank</small></td><td class="c">✅<small>inti setiap portal<sup>b</sup><sup>m</sup><sup>r</sup><sup>n</sup></small></td><td class="c">✅<small>payment hub + cockpit<sup>k</sup><sup>o</sup></small></td><td>by design — Orivo tidak memegang akses debit; jalur eksekusi = adapter (M17)</td></tr>
+          <tr><th scope="row">Unggah file pembayaran massal + pilih mode otorisasi: per file ATAU per baris</th>
+            <td class="ours c">✅<small>dua lapis: DB menegakkan <code>pay.batch.auth_mode</code> = file|line (dibekukan setelah submit) + <code>wf.chk_line_authorization</code>; aplikasi menegakkannya di <code>ecm-app/backend/controls.py</code> (<code>set_auth_mode</code>, <code>authorise_line</code>) dengan pemilih mode &amp; otorisasi per baris di menu <em>Kontrol Gap CMS</em>; <code>/book</code> menolak selama ada baris menunggu — 4 penolakan diuji di <code>tests/smoke.py</code> (165/165)</small></td><td class="c">✅<small>BCA: <em>bulk authorization</em> vs <em>individual authorization</em><sup>b</sup></small></td><td class="c">✅<small>aturan rilis per level</small></td><td>→ <b>H‑17</b> ditutup di <em>dua</em> lapis (DB <code>008/009</code> + aplikasi <code>controls.py</code>); yang belum: berkas format bank (pain.001/MT103) sebagai kanal masuk — M14</td></tr>
+          <tr><th scope="row">Cetak &amp; kirim advis/bukti transfer ke penerima</th>
+            <td class="ours c">◐<small>antrean advis di DB: <code>adv.advice</code> + <code>adv.claim()/finish()</code> (<code>FOR UPDATE SKIP LOCKED</code>, backoff 2^n menit, setelah <code>gap.advice_max_attempts</code> antrean berhenti dan tampil sebagai GAP), isi beku sejak Queued — di aplikasi: <code>adv_templates</code> (sahkan 4‑eyes sebelum dipakai) + <code>adv_items</code> dengan <code>claim → sent/failed</code>, bukti kirim wajib, dan dua trigger anti‑hapus/anti‑ubah (<code>adv_no_delete_evidence</code>, <code>adv_no_edit_sent</code>); yang belum: render PDF &amp; kanal kirim nyata (SMTP/faks); kanal keluar <b>sudah jalan di aplikasi</b>: <code>adv_deliveries</code> append-only + penyedia <code>local-outbox</code> (berkas <code>.eml</code> di <code>data/outbox/</code>) atau SMTP bila <code>app_settings.smtp_host</code> terisi, render HTML + sidik jari <code>sha256</code>, baris <code>Sent</code> tidak bisa dirender maupun dikirim ulang; yang belum: PDF dan <code>e-meterai</code></small></td><td class="c">✅<small>Mandiri <em>Advice Printing</em><sup>m</sup> · BCA <em>Remittance Advice</em><sup>b</sup></small></td><td class="c">◐<small>umumnya lewat email bank</small></td><td>→ M14 / <b>H‑18</b>: antrean + bukti sudah ditegakkan dua lapis; penyematan dokumen (PDF, e‑meterai H‑16) masih terbuka</td></tr>
+          <tr><th scope="row">Pembayaran pajak massal (single/bulk) + unduh BPN/SSP</th>
+            <td class="ours c">✗</td><td class="c">✅<small>Mandiri bayar pajak via file upload, unduh BPN &amp; SSP<sup>m</sup> · BNI POPS<sup>n</sup></small></td><td class="c">✗<small>di ERP/sistem pajak</small></td><td>by design (ADR‑14): siklus &amp; nomor seri pajak tetap di sistem pajak</td></tr>
+          <tr><th scope="row">Auto‑debit &amp; mandat penagihan (collection mandate)</th>
+            <td class="ours c">✅<small>kontrak mandat di DB: <code>coll.mandate</code> + <code>coll.check_debit</code> — hanya status &#39;active&#39;, dalam jendela berlaku, ≤ <code>amount_max</code>, plafon periode kumulatif, <em>satu debit per periode</em> sesuai <code>frequency</code>, sumber pdf/counter wajib <code>evidence_key</code> — di aplikasi: <code>mandates</code> (<code>period_cap</code>/<code>source</code>) + <code>coll_debits</code> + <code>controls.mandate_check</code>, dengan form pengajuan dan otorisasi approver kedua di UI; nominal yang sudah diajukan tidak bisa diedit (jejak audit tetap utuh); yang belum: penangkapan persetujuan nasabah (e‑signature/dokumen mandat); di aplikasi <code>controls.mandate_attest/mandate_revoke</code> mencatat persetujuan nasabah (rujukan + nama + sidik jari berkas) dan <code>request_debit</code> <b>menolak 409</b> tanpa itu; masa pembatalan <code>revoke_window_days</code> menahan debit sampai lewat; layar mandat + modal pencatatan ada</small></td><td class="c">✅<small>BCA <em>Collection Mandate</em><sup>b</sup> · Mandiri Auto Debit (Receivable)<sup>m</sup> · BNI Autodebet<sup>n</sup></small></td><td class="c">✗</td><td>→ <b>H‑19</b> ditutup dua lapis untuk penegakannya; formulir persetujuan nasabah = M14</td></tr>
+          <tr><th scope="row">Virtual account untuk mengidentifikasi penyetor</th>
+            <td class="ours c">✅<small>nomor VA &amp; pencocokan penerimaan di DB: <code>coll.virtual_account</code> (aktif/tidak aktif, kedaluwarsa, plafon) + <code>coll.va_match()</code> — exact 100 vs suffix8 80; <code>va_number</code> terdaftar di katalog PII dan keluar sebagai <code>****0101</code> — di aplikasi: <code>virtual_accounts</code> + <code>controls.va_match</code> (plafon, tanggal kedaluwarsa, <em>dan</em> validasi data induk: VA yang menunjuk nasabah tak dikenal/tak aktif tidak pernah di‑credit) dengan masking dikerjakan di SQL sehingga list API, GET per‑record dan export CSV sama‑sama termasking; yang belum: penerbitan nomor oleh bank (by design) &amp; pencocokan massal terhadap berkas penerimaan; di aplikasi: impor massal berkas penerimaan (<code>controls.va_match_bulk</code>) meng-credit otomatis dan idempoten; baris tak dikenal, duplikat, atau melebihi plafon ditahan; layar menerima CSV tempelan</small></td><td class="c">✅<small>BNI e‑Collection / VA + portal<sup>n</sup> · Mandiri Bill Collection<sup>i</sup></small></td><td class="c">✅<small>penerimaan via bank rails</small></td><td>→ M14: QRIS/VA sebagai opsi pelunasan; pencocokan massal masuk fase berikutnya</td></tr>
+          <tr><th scope="row">Likuiditas: cash pooling, cash distribution, range balance, account sweep (AFT/AGF)</th>
+            <td class="ours c">✅<small>lapis aturan &amp; posisi di DB: <code>liq.snapshot</code> (append‑only, stamp masa depan ditolak), <code>liq.rule_import</code> (range balance wajib min &amp; max; rentang periode tidak boleh tumpang tindih), <code>liq.sweep_record</code> (rekening sama ditolak, <code>bank_ref</code> unik), <code>liq.v_position</code> + <code>is_fresh</code> dari <code>gap.liq_freshness_minutes</code> — yang menjalankan sweep di bank tidak ada; di aplikasi: <code>liq_sweep_rules</code> (min/maks/arah/prioritas + jadwal <code>cash_pools.sweep_time</code>) dan <code>controls.sweep_plan/sweep_execute</code> — hanya aturan Active yang dipakai, eksekusi di luar jadwal wajib <code>force_reason</code>, nominal dinilai <code>check_limit</code>, butuh approver kedua</small></td><td class="c">✅<small>Mandiri 3 fitur (pooling/distribution/range balance)<sup>m</sup> · BRI AFT/Sweep/AGF<sup>r</sup> · BNI liquidity mgmt<sup>n</sup></small></td><td class="c">✅<small>notional pooling, in‑house banking, netting multilateral<sup>k</sup><sup>t</sup></small></td><td><b>ADR‑15 DITETAPKAN 2026‑09‑03 → Opsi A</b>; yang dibangun baru lapis aturannya (lihat tabel keputusan)</td></tr>
+          <tr><th scope="row">Penempatan &amp; perpanjangan deposito online + pantau tenor</th>
+            <td class="ours c">✗</td><td class="c">✅<small>CIMB <em>time deposit placement</em> di ponsel<sup>c</sup> · BRI <em>Time Deposit Monitoring</em><sup>r</sup> · Mandiri (tipe rekening Deposito)<sup>m</sup></small></td><td class="c">✅<small>modul investment</small></td><td>by design: produk simpanan milik bank</td></tr>
+          <tr><th scope="row">Buka rekening giro/deposito online (real‑time)</th>
+            <td class="ours c">✗</td><td class="c">✅<small>BNI <em>Online Open Account</em><sup>n</sup></small></td><td class="c">✗</td><td>by design: KYC &amp; dokumen legal bukan domain ECM</td></tr>
+          <tr><th scope="row">Trade finance: LC impor/ekspor, SKBDN, bank guarantee</th>
+            <td class="ours c">✗</td><td class="c">✅<small>BRI QLola <em>Cash and Trade</em> (CMS + trade + bank guarantee)<sup>r</sup> · BNI Trade (dokumen LC)<sup>n</sup></small></td><td class="c">✅<small>myDiapason punya modul <em>Guarantees</em>; Tijori: loans/LC/BG + covenant<sup>t</sup></small></td><td>yang kita catat: warkat &amp; dokumen penjaminan yang masuk siklus penagihan (kolom referensi, fase 4)</td></tr>
+          <tr><th scope="row">Query saldo &amp; mutasi real‑time lintas bank (host‑to‑host)</th>
+            <td class="ours c">✗<small>jalur kita = impor berkas, dan itu ditulis apa adanya</small></td><td class="c">✅<small>setiap kanal bank</small></td><td class="c">✅<small>9.900+ bank (Kyriba)<sup>k</sup> · 10.000+ bank (Nomentia)<sup>o</sup></small></td><td>H2H = M17 dengan uji kontrak; tanpa itu kita tidak mengklaim visibilitas real‑time</td></tr>
+          <tr><th scope="row">Rekening koran &amp; riwayat panjang + unduh MT940/PDF</th>
+            <td class="ours c">✅<small>partisi bulanan + <code>ensure_partitions</code>/<code>archive_partitions</code>; pruning diuji (002)</small></td><td class="c">✅<small>Mandiri MT940 &amp; balance history 12 bulan<sup>m</sup> · BRI riwayat s.d. 5 tahun<sup>r</sup></small></td><td class="c">✅<small>inbound statement otomatis</small></td><td>yang belum: parser MT940/camt + golden file (<b>H‑4</b>)</td></tr>
+          <tr><th scope="row">Rekonsiliasi bank + toleransi + antrean pengecualian</th>
+            <td class="ours c">✅<small><code>recon.{file,statement_row,break}</code> + toleransi per produk di <code>ref.tolerance</code> — 10/10 di 007</small></td><td class="c">◐<small>umumnya dikerjakan di sisi nasabah/ERP</small></td><td class="c">✅<small>GL reconciliation + cash accounting<sup>k</sup></small></td><td>keunggulan kita: toleransi ditegakkan database, bukan di layar</td></tr>
+          <tr><th scope="row">Peramalan kas &amp; skenario (termasuk yang pakai AI)</th>
+            <td class="ours c">◐<small>heuristik lokal berbobot + adapter LLM opsional; tanpa jaringan tetap jalan</small></td><td class="c">✗<small>bukan fitur portal bank</small></td><td class="c">✅<small>AI cash forecasting, skenario bergulir<sup>k</sup><sup>t</sup></small></td><td>kita tidak menjanjikan AI; kita menjanjikan angka yang bisa dihitung ulang</td></tr>
+          <tr><th scope="row">Taksonomi limit: per perusahaan · per rekening · per transaksi releaser · per level workflow · otorisasi langsung · per hari collection</th>
+            <td class="ours c">✅<small>taksonomi limit di DB: <code>wf.limit_policy</code> (scope company|account|releaser|step, <code>per_txn_max</code> + <code>daily_max</code>, masa berlaku, satu kebijakan aktif per (scope, kunci) via EXCLUDE, diubah 4‑eyes) — dinilai <code>wf.chk_task_limit</code> saat langkah <em>Done</em>; di aplikasi: <code>wf_limits</code> + <code>controls.check_limit</code> menutup <b>keenam</b> jenis limit (perusahaan, rekening, releaser per transaksi, <em>step</em> = tiering, <em>Direct Authorization Limit</em>, plafon harian kolaborasi penagihan), pemakaian harian dihitung DARI data, dan 14 pemeriksaan limit, 9 di antaranya penolakan 409/403</small></td><td class="c">✅<small>BCA mendata 6 jenis limit, publik<sup>b</sup></small></td><td class="c">✅<small>rule-based payment controls<sup>o</sup></small></td><td>→ <b>H‑17</b> ditutup dua lapis; layar kebijakan limit (form + sahkan 4‑eyes) sudah ada di <em>Kontrol Gap CMS → Limit &amp; 4‑eyes</em>. Padanan “Limit Workflow (tiering)” adalah skop <code>step</code> — istilah vendor, pemetaan milik kami</td></tr>
+          <tr><th scope="row">Hak akses &amp; skema persetujuan: maker · checker · releaser · signer, dual control admin, akses per menu</th>
+            <td class="ours c">✅<small><code>wf.chk_sod</code>, <code>sec.chk_no_self_grant</code>, <code>ops.apply_parameter</code> 4‑eyes — di database</small></td><td class="c">✅<small>Mandiri sysadmin1/sysadmin2 dual control<sup>m</sup> · BNI maker‑checker‑signer<sup>n</sup></small></td><td class="c">✅<small> Approval workflow + segregation of duties</small></td><td>beda kita: tiap jalur bypass punya uji (S.8/S.9/S.20), bukan kebijakan manual</td></tr>
+          <tr><th scope="row">Device binding + token (hard/soft, M‑PIN+OTP, biometrik)</th>
+            <td class="ours c">◐<small>tabel <code>sec.device_binding</code> + MFA peran autorisasi, tapi belum di filter login (<b>G5</b>)</small></td><td class="c">✅<small>CIMB: 1 user = 1 perangkat aktif<sup>c</sup> · BNI M‑PIN+OTP untuk menu sensitif<sup>n</sup> · KeyBCA<sup>b</sup></small></td><td class="c">✅<small>SSO + device policy</small></td><td>G5 tercatat di #keamanan, tidak dihaluskan</td></tr>
+          <tr><th scope="row">Persetujuan dari aplikasi ponsel + push ke antrean</th>
+            <td class="ours c">✗<small>HTML5 responsif saja; tanpa aplikasi toko</small></td><td class="c">✅<small>BizChannel@CIMB Mobile: approve pending task (payroll, bulk)<sup>c</sup></small></td><td class="c">◐<small>tergantung produk</small></td><td>→ M14 / <b>H‑9</b></td></tr>
+          <tr><th scope="row">Sanction screening &amp; deteksi fraud pembayaran</th>
+            <td class="ours c">◐<small>gerbang di DB: trigger pada <code>pay.item</code> menolak rilis tanpa hasil skr dalam <code>gap.screening_max_age_minutes</code> (1440), <code>result=&#39;error&#39;</code> = TAHAN (bukan lolos), <code>hit</code> tanpa baris <code>scr.hit</code> = ditolak, <code>hit</code> hanya bisa dilepas override 4‑eyes — di aplikasi: <code>scr_lists/scr_entries/scr_runs/scr_overrides</code> + <code>controls.verdict</code> dipanggil <em>sebelum</em> langkah workflow ditandai <em>Done</em> dan lagi oleh <code>/book</code>; daftar lokal, pemetaan nama/rekening (exact vs fuzzy→indeterminate), override butuh alasan ≥12 karakter + approver kedua dan bisa dibatasi nominal; yang belum: penyedia daftar nyata (adapter M17) — hasil eksternal masuk lewat <code>result=</code> dan sudah diuji; di aplikasi: registri penyedia daftar (<code>scr_providers</code>) + <code>scr_sync_log</code> bernomor versi — sinkron 0 baris ditolak, penyedia gagal membuat daftar lama tetap berlaku, aktivasi penyedia butuh approver kedua</small></td><td class="c">◐<small>dijalankan bank, tidak terlihat di layar nasabah</small></td><td class="c">✅<small>Nomentia: <em>automated sanctions screening</em><sup>o</sup> · Kyriba: fraud prevention<sup>k</sup></small></td><td>→ <b>H‑21</b> ditutup dua lapis untuk gerbangnya; penyedia daftar (World‑Check/Dow Jones/Refinitiv) = adapter M17 dengan uji kontrak</td></tr>
+          <tr><th scope="row">Analisis biaya bank (fee analysis vs tarif)</th>
+            <td class="ours c">◐<small><code>ref.charge_rule</code> (tarif + preferential pricing) ada; pencocokan invoice biaya bank belum</small></td><td class="c">✗</td><td class="c">✅<small>Nomentia: bank fee analysis<sup>o</sup></small></td><td>murah: satu aturan pencocokan di M5 — tidak perlu modul baru</td></tr>
+          <tr><th scope="row">Portal pihak ketiga / ekosistem billing</th>
+            <td class="ours c">✗</td><td class="c">✅<small>BNI ECOSmart + VA Portal<sup>n</sup> · Mandiri Bill<sup>i</sup></small></td><td class="c">◐<small>di AR/AP suite</small></td><td>by design: ini kanal bank, bukan tempat warkat</td></tr>
+          <tr><th scope="row">Multi-entitas, konsolidasi grup, in-house banking, netting</th>
+            <td class="ours c">✗</td><td class="c">◐<small>struktur rekening bertingkat per organization unit saja<sup>m</sup></small></td><td class="c">✅<small>inti penawaran TMS<sup>k</sup><sup>t</sup></small></td><td>by design (ADR‑14 + ADR‑15) — entitas &amp; saldo tetap punya satu pemilik</td></tr>
+        </tbody>
+        <caption><b>Sumber (dibaca 2026-09-03, materi publik — kami tidak menjalankan produknya, tidak menguji hands-on, dan tidak membandingkan harga/SLA):</b><br><sup>b</sup> halaman myBCA Bisnis, bca.co.id (bulk transfer + mode otorisasi, remittance advice, collection mandate, 6 jenis limit) · <sup>c</sup> daftar aplikasi BizChannel@CIMB di App Store &amp; Google Play (approve pending task, time deposit placement, 1 user = 1 perangkat) · <sup>i</sup> Mandiri Bill Collection: pencocokan penerimaan lewat nomor virtual (halaman Cash Management Bank Mandiri) · <sup>k</sup> materi produk &amp; ulasan Kyriba (Gartner Peer Insights, TrustRadius, halaman produk): 9.900+ bank, payment hub + cockpit, AI forecasting, in-house banking/netting, SOC 1/2 Type II, implementasi dilaporkan hingga 8 bulan · <sup>m</sup> “RIPLAY Kopra Cash Management” &amp; “Buku Panduan MCM 2.0 untuk Corporate User” (bankmandiri.co.id): menu Dashboard/Account/Advice Printing/Transfer/Payment/Receivable/Liquidity/Transaction Status/Budget Account, sysadmin1/sysadmin2, statement MT940 · <sup>n</sup> halaman BNIDirect, bni.co.id (inquiry, transfer, mass payment, liquidity, tax/billing/utility, autodebet, VA management, trade, online open account, e-report, M-PIN+OTP, maker-checker-signer) · <sup>o</sup> materi Nomentia (listing Gartner Peer Insights): payment hub + rule-based control, fraud prevention, automated sanctions screening, bank fee analysis, 10.000+ bank · <sup>r</sup> halaman Cash Management System &amp; QLola, bri.co.id (AFT/Account Sweep/AGF, rekening koran s.d. 5 tahun, time deposit monitoring, cash &amp; trade, supply chain) · <sup>t</sup> daftar pasar TMS 2026 (viewpointanalysis, Gartner, saasworthy) untuk pola modul GTreasury/Coupa-Bellin/FIS/ION/SAP TRM/myDiapason/Tijori/Cobase/Cashforce.<br>Kolom “Orivo” selalu bisa diperiksa: perintahnya ada di #bukti dan di <code>architecture/modul-gap-m1-m10.md</code> §0. Tanda: ✅ ada · ◐ sebagian (yang kurang disebut) · ✗ tidak ada. Seit 2026‑09‑03 ◐ berarti lapis <em>database</em> sudah ditegakkan dan diuji di klaster nyata (<code>ddl/008</code> + <code>ddl/009</code>: 65 gerbang, 11 guard trigger) — yang masih ✗ di kolom kami adalah lapis kanal/layar, dan itu selalu ditulis di selnya.</caption>
+      </table>
+    </div>
+
+    <h3 style="margin:26px 0 4px">Modul — bagaimana tiap produk menata modulnya</h3>
+    <div class="tw">
+      <table>
+        <thead><tr><th scope="col" scope="col">Produk</th><th scope="col" scope="col">Modul/layanan yang diakui publik</th><th scope="col" scope="col">Bentuk / pola jual</th><th scope="col" scope="col" class="ours">Padanan di Orivo</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Mandiri — MCM 2.0 / Kopra Cash Management<sup>m</sup></th><td>Dashboard kustom · Account (list, today’s balance, balance history 12 bln, statement cetak/MT940, report overview) · Advice Printing · Transfer · Payment (pajak, biller) · Receivable (auto debit) · Liquidity (pooling, distribution, range balance) · Budget Account · Transaction Status · admin user (sysadmin1/sysadmin2)</td><td class="c">layanan bank, bukan lisensi modul</td><td>parsial: M4 dispatch · M6 otorisasi (limit 4 skop + otorisasi per baris sejak 008) · M7 referensi; sisanya kanal bank</td></tr>
+          <tr><th scope="row">BCA — myBCA Bisnis / KlikBCA Bisnis<sup>b</sup></th><td>Bulk Transfer (unggah file, pilih bulk/individual authorization) · Remittance Advice · Collection + Collection Mandate · 6 jenis limit · informasi rekening</td><td class="c">portal + KeyBCA/token</td><td>M4 + M6; otorisasi per baris masuk <b>H‑17</b></td></tr>
+          <tr><th scope="row">BRI — Cash Management System + QLola<sup>r</sup></th><td>Financial dashboard (saldo real-time, riwayat, mutasi) · Account Information (statement s.d. 5 tahun, summary, time deposit monitoring) · Funds Transfer · AFT/Account Sweep/AGF · Cash and Trade (CMS + trade finance + bank guarantee) · Supply Chain Management (invoicing)</td><td class="c">portal bank + modul likuiditas</td><td>M5 kita lebih dalam (toleransi + pengecualian); siklus hidup warkat tidak ada di mereka</td></tr>
+          <tr><th scope="row">BNI — BNIDirect<sup>n</sup></th><td>Inquiry · Transfer Mgmt (in-house, LLG/RTGS/IFT) · Mass Payment (payroll, bulk) · Liquidity Mgmt (pooling, distribution) · Tax/Billing/Utility Payment · Autodebet · Virtual Account Mgmt · Trade · Online Open Account · e-Report · menu &amp; jumlah user menyesuaikan kebutuhan nasabah</td><td class="c">web + mobile + API, dua bahasa</td><td>“menu yang bisa disusun” = portlet kita (M8); kanal keluar masih usulan (M14)</td></tr>
+          <tr><th scope="row">CIMB Niaga — BizChannel@CIMB (+ Mobile)<sup>c</sup></th><td>Approve pending task dari ponsel (payroll, bulk) · saldo/mutasi/status real-time · overbooking, SKN, domestik online, remittance, bills, tax · time deposit placement · 1 user = 1 perangkat</td><td class="c">portal + aplikasi toko</td><td>device binding ada di skema kita tapi belum di filter (<b>G5</b>)</td></tr>
+          <tr><th scope="row">Kyriba (TMS)<sup>k</sup></th><td>cash &amp; liquidity (pooling, in-house banking, netting) · payment hub + Payment Cockpit · risiko FX/IR/debt/investment · working capital order-to-cash · koneksi 9.900+ bank &amp; 10.000 instance ERP · AI forecasting · fraud detection · SOC 1/2 Type II</td><td class="c">SaaS multi-tenant; implementasi dilaporkan hingga 8 bulan</td><td>tumpang tindih nyata hanya di M5 + M7; sisanya by design</td></tr>
+          <tr><th scope="row">Nomentia (TMS)<sup>o</sup></th><td>payment hub + kontrol berbasis aturan · pencegahan fraud · sanctions screening otomatis · koneksi bank + konversi format file (10.000+ bank, multi-protokol) · bank account management · bank fee analysis · cash forecasting · loan management</td><td class="c">managed connectivity</td><td>fee analysis → satu aturan di M5; sanctions → adapter (M17), bukan modul</td></tr>
+          <tr><th scope="row">Pemain TMS lain yang dijual ke korporasi di Indonesia<sup>t</sup></th><td>pola modul yang berulang: Liquidity · Payment · Risk · Invest · Guarantees (myDiapason 5 modul) · facility loans/LC/BG + covenant (Tijori) · netting &amp; in-house banking (Coupa/Bellin, GTreasury) · forecasting murni (Cashforce)</td><td class="c">enterprise suite, lisensi per modul/entitas</td><td>pola beli bertahap kita sama (M1–M10 + M11–M18); lapisnya beda — kita pegang warkat &amp; bukti fisik</td></tr>
+          <tr><th scope="row">Orivo</th><td>M1 penerimaan warkat · M2 kliring &amp; penagihan · M3 PDC/CDC · M4 dispatch pembayaran · M5 rekonsiliasi · M6 maker-checker &amp; parameter · M7 referensi hari-nol · M8 portal &amp; portlet · M9 audit rantai &amp; forensik · M10 inteligensi lokal; usulan M11–M18</td><td class="c">satu PostgreSQL + 8 layanan; modul dipakai bertahap</td><td>—</td></tr>
+        </tbody>
+        <caption>Kolom terakhir adalah klaim kami sendiri — sumbernya berkas di repo ini, bukan brosur.</caption>
+
+      </table>
+    </div>
+
+    <h3 style="margin:26px 0 4px">Menu — daun yang benar-benar ada di layar</h3>
+    <div class="tw">
+      <table>
+        <thead><tr><th scope="col" scope="col">Kelompok menu</th><th scope="col" scope="col">Daun khas kanal bank (contoh terdokumentasi)</th><th scope="col" scope="col" class="ours">Orivo (dihitung dari #menu)</th><th scope="col" scope="col">Yang kami ambil / tidak</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Beranda / dashboard<sup>m</sup><sup>r</sup></th><td>menu favorit, status transaksi, kalender, berita, cut-off; dashboard bisa dikustom</td><td class="ours c">4 daun · <em>🏠 Beranda / Portlet</em></td><td>kalender cut-off per bank masuk ke <code>ref.calendar_day</code> + parameter (fase 2)</td></tr>
+          <tr><th scope="row">Informasi rekening<sup>m</sup><sup>r</sup></th><td>account list, today’s balance, balance history, statement (cetak/MT940), report overview, budget account</td><td class="ours c">3 daun · <em>📊 Laporan</em></td><td>kita tidak query bank: laporan dibangun dari mutasi yang diimpor; “budget account” tidak diambil (by design)</td></tr>
+          <tr><th scope="row">Siklus hidup warkat</th><td>tidak ada padanan — cek/bilyet giro masuk sebagai transaksi kliring, bukan dokumen dengan status</td><td class="ours c">6 daun · <em>🧾 Warkat</em></td><td>— (di sini kami tidak diadu)</td></tr>
+          <tr><th scope="row">Pembayaran / transfer<sup>b</sup><sup>n</sup></th><td>single &amp; bulk transfer, multi transfer, payroll, tax, biller, autodebet, status transaksi</td><td class="ours c">4 daun · <em>💸 Pembayaran</em></td><td>mode otorisasi per baris (H‑17) &amp; advis (H‑18) kami ambil dari pola mereka — keduanya sudah ditegakkan di DB sejak 008</td></tr>
+          <tr><th scope="row">Rekonsiliasi &amp; tutup hari</th><td>unduh statement + report; rekonsiliasi biasanya di ERP/nasabah</td><td class="ours c">5 daun · <em>🔁 Rekonsiliasi</em></td><td>tidak ada yang diambil — kami yang lebih dalam (break, umur, toleransi, close)</td></tr>
+          <tr><th scope="row">Likuiditas<sup>m</sup><sup>r</sup><sup>n</sup></th><td>cash pooling · cash distribution · range balance · AFT/Account Sweep/AGF · time deposit</td><td class="ours c"><span class="tag t-part">◐ view Likuiditas + tab Sweep</span></td><td><b>grup ini tidak ada di Orivo</b> — diputuskan di ADR‑15 (adapter vs modul), bukan dilupakan<small>grupnya sudah ada di aplikasi (pool, posisi, ramalan, sweep); yang belum = daun notional pooling di sisi bank</small></td></tr>
+          <tr><th scope="row">Referensi / struktur rekening<sup>m</sup></th><td>rekening terdaftar per tipe (giro, tabungan bisnis, pinjaman, deposito), organization unit, mata uang</td><td class="ours c">4 daun · <em>👥 Referensi</em></td><td>tipe rekening &amp; flag “bisa di‑query” masuk sebagai kolom <code>ref.account</code> (fase 2)</td></tr>
+          <tr><th scope="row">Otorisasi &amp; admin user<sup>m</sup><sup>b</sup><sup>n</sup></th><td>sysadmin1/sysadmin2 (dual control), akses menu, limit, skema persetujuan, pending task</td><td class="ours c">4 daun · <em>⚙️ Admin sistem</em></td><td>“akses per menu” kita sudah punya (grant per tabel + peran); pending task per orang = portlet Antrean saya</td></tr>
+          <tr><th scope="row">Keamanan &amp; jejak<sup>n</sup></th><td>login audit, token management, laporan aktivitas, notifikasi email</td><td class="ours c">4 daun · <em>🛡 Keamanan</em></td><td>kita naikkan jadi rantai hash + verifier + alert; notifikasi = M14</td></tr>
+          <tr><th scope="row">Kanal keluar: advis, bukti, tagihan</th><td>Advice Printing, Remittance Advice, e-Report, kirim via email terjadwal</td><td class="ours c"><span class="tag t-part">◐ antrean advis + jejak kirim</span></td><td>belum ada grupnya → M14 (<b>H‑18</b>); yang diambil: pola “laporan terjadwal + kirim surel”<small>sudah ada di dalam Kontrol ▸ Advis (pratinjau + kirim + jejak append-only); grup menu tersendiri belum</small></td></tr>
+        </tbody>
+        <caption>Jumlah daun Orivo dihitung dari markup halaman ini (8 grup · 34 daun), bukan diketik.</caption>
+
+      </table>
+    </div>
+
+    <h3 style="margin:26px 0 4px">Form — yang harus diisi orang, baris per baris</h3>
+    <div class="tw">
+      <table>
+        <thead><tr><th scope="col" scope="col">Form (dari materi publik)</th><th scope="col" scope="col">Di produk</th><th scope="col" scope="col" class="ours">Status di Orivo</th><th scope="col" scope="col">Tindak lanjut</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Pendaftaran rekening ke portal (jenis: giro · tabungan bisnis · pinjaman · deposito)<sup>m</sup></th><td>Mandiri KCM</td><td class="ours c">✗<small>tidak ada</small></td><td>tetap di bank; yang kita impor: struktur &amp; tipe rekening ke <code>ref.account</code></td></tr>
+          <tr><th scope="row">Unggah file pembayaran massal + peta kolom + validasi<sup>b</sup><sup>n</sup></th><td>BCA bulk transfer via file · BNI mass payment</td><td class="ours c">◐<small>sebagian</small></td><td>form #8 <em>Batch Dispatch Pembayaran</em> sudah ada (peta kolom + idempoten per nomor batch)</td></tr>
+          <tr><th scope="row">Pilih mode otorisasi: seluruh file ATAU per baris<sup>b</sup></th><td>BCA “bulk vs individual authorization”</td><td class="c">✅<small>pemilih mode (file|line) + panel otorisasi per baris ada di <em>Kontrol Gap CMS → Otorisasi per Baris</em>; mode dibekukan saat submit dan penolakannya diuji</small></td><td>→ <b>H‑17</b> fase 3: kontrak DB-nya sudah ada &amp; diuji (<code>pay.batch.auth_mode</code>, <code>wf.chk_batch_auth_mode</code>: “sebagian baris diotorisasi, sisanya tetap tertahan” ditolak) — yang kurang hanya formulirnya</td></tr>
+          <tr><th scope="row">Form collection mandate / persetujuan auto-debit<sup>b</sup><sup>m</sup></th><td>BCA · Mandiri Receivable</td><td class="c">✅<small>form pengajuan auto‑debit (mandat, nominal, tanggal, sumber, bukti) + otorisasi approver kedua sudah ada; persetujuan nasabah (e‑signature) belum; persetujuan nasabah ikut dicatat (rujukan + sidik jari + masa pembatalan) dan ditegakkan saat debit diajukan</small></td><td>formulirnya belum; kontrak DB-nya sudah ditegakkan sejak 008 (<code>coll.mandate</code>, <code>coll.check_debit</code>) — sisa pekerjaannya cuma layar &amp; jalur kirim ke bank</td></tr>
+          <tr><th scope="row">Form Virtual Account management (buat/ubah/limit/rekening tujuan)<sup>n</sup></th><td>BNI VA + e-Collection portal</td><td class="c">✅<small>CRUD VA + kotak pencocokan referensi + masking di list/record/ekspor tersedia; penerbitan nomor tetap di bank; pencocokan massal berkas penerimaan ada di layar yang sama (CSV tempel, hasil per kelas)</small></td><td>M14 (fase 4)</td></tr>
+          <tr><th scope="row">Form advis/notifikasi tertulis (pilih transaksi → cetak → kirim)<sup>m</sup><sup>b</sup></th><td>Mandiri Advice Printing · BCA Remittance Advice</td><td class="c">✅<small>antrean advis per baris + claim/terkirim/gagal dengan bukti wajib tersedia di UI; cetak PDF &amp; surel otomatis belum; pratinjau dokumen, kirim ke outbox/SMTP, dan jejak kirim append-only ada di UI — yang belum hanya PDF dan tanda tangan</small></td><td>→ <b>H‑18</b>, fase 4 (di dalam M14): <em>advis sebagai dokumen, bukan lampiran email opsional</em></td></tr>
+          <tr><th scope="row">Form pembayaran pajak single/bulk + unduh BPN/SSP<sup>m</sup><sup>n</sup></th><td>Mandiri · BNI POPS</td><td class="ours c">✗<small>tidak ada</small></td><td>by design (ADR‑14)</td></tr>
+          <tr><th scope="row">Form aturan likuiditas (rekening sumber/sub, range balance min/maks, jadwal sweep)<sup>m</sup><sup>r</sup></th><td>Mandiri Liquidity · BRI AFT/Sweep/AGF</td><td class="ours c">✅<small>layar aturan range balance per rekening (min/maks/arah/prioritas) + sahkan 4-eyes + jalankan sweep; posisi notional di bank tetap Opsi A (ADR-15)</small></td><td>ADR‑15: opsi A = impor aturan untuk dilaporkan; opsi B = modul kas internal — rekomendasi A</td></tr>
+          <tr><th scope="row">Form penempatan deposito (tenor, instruksi jatuh tempo)<sup>c</sup><sup>r</sup></th><td>CIMB mobile · BRI monitoring</td><td class="ours c">✗<small>tidak ada</small></td><td>by design</td></tr>
+          <tr><th scope="row">Form user + akses menu + limit + skema persetujuan (dual control sysadmin)<sup>m</sup></th><td>Mandiri sysadmin1/sysadmin2</td><td class="ours c">✅<small>ada</small></td><td>form #3 <em>Otorisasi (Maker-Checker)</em> + #17 <em>Parameter Sistem</em> + #18 <em>Break-Glass</em> — guard-nya di database</td></tr>
+          <tr><th scope="row">Form impor rekening koran/mutasi (periode → MT940/PDF)<sup>m</sup></th><td>Mandiri statement download</td><td class="ours c">✅<small>ada</small></td><td>form #10 <em>Impor Mutasi Bank</em>; parser MT940/camt = <b>H‑4</b></td></tr>
+          <tr><th scope="row">Form rekonsiliasi &amp; “out of balance”</th><td>portal bank biasanya tidak punya; kita yang menutupnya</td><td class="ours c">✅<small>ada</small></td><td>form #11 <em>Pencocokan Rekonsiliasi</em> + #12 <em>Antrean Pengecualian</em>; toleransi per produk baru saja diuji (007 R.6/R.7)</td></tr>
+          <tr><th scope="row">Form approve pending task di ponsel<sup>c</sup></th><td>BizChannel@CIMB Mobile</td><td class="ours c">✗<small>tidak ada</small></td><td>M14/<b>H‑9</b>; web responsif + MFA dulu</td></tr>
+          <tr><th scope="row">Form registrasi perangkat + token/M-PIN<sup>c</sup><sup>n</sup></th><td>CIMB 1 perangkat; BNI M-PIN untuk menu sensitif</td><td class="ours c">◐<small>sebagian</small></td><td>skema <code>sec.device_binding</code> ada + diuji; penegakan di filter login = <b>G5</b>/<b>H‑7</b></td></tr>
+          <tr><th scope="row">Form laporan terjadwal (format + jadwal + surel)<sup>n</sup><sup>m</sup></th><td>BNI e-Report · Mandiri report overview</td><td class="ours c">◐<small>sebagian</small></td><td>M18 (report studio read-only) — “kirim terjadwal” masuk fase 5</td></tr>
+        </tbody>
+        <caption>“ada” = ada di inventaris 18 form (#form); “sebagian” = bentuknya beda atau guard-nya belum di jalur nyata; “tidak ada” = jangan dibeli untuk itu.</caption>
+
+      </table>
+    </div>
+
+    <h3 style="margin:26px 0 4px">Empat keputusan yang keluar dari perbandingan ini</h3>
+    <div class="tw">
+      <table>
+        <thead><tr><th scope="col" scope="col">Domain</th><th scope="col" scope="col">Opsi A — adapter</th><th scope="col" scope="col">Opsi B — modul penuh</th><th scope="col" scope="col" class="ours">Rekomendasi &amp; syarat</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Likuiditas: pooling, sweeping, range balance, in-house banking, netting</th><td><b>Opsi A — adapter.</b> Impor aturan &amp; hasil sweep (file/MT940), laporkan posisinya, jangan pegang mandat debit. ±12–18 dev-day, 3 tabel.</td><td><b>Opsi B — modul penuh.</b> <code>liq.policy/liq.sweep_run/liq.ledger</code> + jadwal + netting + in-house bank. ±150–220 dev-day, ±20 tabel, dan menabrak satu pemilik saldo.</td><td class="ours"><b>Opsi A — DITETAPKAN 2026‑09‑03.</b> Lapis aturannya dibangun di DB (<code>liq.snapshot</code>, <code>liq.rule_import</code>, <code>liq.sweep_record</code>, <code>liq.v_position</code>), bukan modul penuh. Satu syarat tetap berlaku: posisi kas harian harus tetap terbaca di #laporan tanpa akses debit. Kalau bank tidak menyediakan file sweep, fitur itu memang tidak bisa dijanjikan.</td></tr>
+          <tr><th scope="row">Sanction screening &amp; fraud detection</th><td><b>Opsi A — adapter</b> ke penyedia daftar (M17) dengan uji kontrak + status “tidak checked = tahan”.</td><td><b>Opsi B — modul AML</b>: daftar, fuzzy match, kasus, SLA audit. Beban regulasi + lisensi data.</td><td class="ours"><b>Opsi A</b> — dan guard itu bukan wacana lagi: <code>scr.verdict()</code> menolak rilis tanpa hasil skr, <code>error</code> = TAHAN, <code>hit</code> butuh <code>scr.override</code> 4‑eyes (diuji di 009). Yang jadi milik kita tetap: menahan item yang belum terbebas, bukan menjadi AML.</td></tr>
+          <tr><th scope="row">Bank fee analysis</th><td><b>Opsi A — aturan di M5</b>: tagihan biaya bank vs <code>ref.charge_rule</code>, selisih masuk antrean pengecualian.</td><td><b>Opsi B — modul biaya</b>: kontrak tarif per bank, negosiasi, recovery ke nasabah. ±40 dev-day.</td><td class="ours"><b>Opsi A</b>. B hanya kalau tarif bank jadi barang yang dijual ulang, dan itu keputusan bisnis, bukan teknis.</td></tr>
+          <tr><th scope="row">Aplikasi ponsel untuk otorisasi</th><td><b>Opsi A — web PWA</b> + push (M14): antrean, badge, otorisasi dengan MFA; tanpa aplikasi toko.</td><td><b>Opsi B — aplikasi native</b> dua toko + review + signing + force-update. ±50 dev-day/tahun perawatan.</td><td class="ours"><b>A</b> sekarang; B ditinjau kalau SLA otorisasi luar jam kerja benar-benar jebol (H‑9 mengukur itu).</td></tr>
+        </tbody>
+        <caption>Dua butir pertama masuk register (H‑17 otorisasi per baris + limit berscope, H‑18 advis tertulis). Yang di luar lingkup ditulis sebagai opsi yang ditolak dengan alasan — bukan sebagai “nanti”.</caption>
+
+      </table>
+    </div>
+
+    <div class="callout" style="margin-top:18px"><b>Yang justru kami menangkan di perbandingan ini</b> — siklus hidup warkat (7 status + rekon-fisik + PDC/CDC) tidak dimiliki kelima kanal bank maupun kedua TMS: mereka melihat cek sebagai transaksi kliring, kami melihatnya sebagai dokumen yang ditahan, di-retur, dijaga di brankas, dan harus dipertanggungjawabkan. Kontrol otorisasi kami juga beda lapis: <code>wf.chk_sod</code>, <code>sec.chk_no_self_grant</code> dan guard parameter hidup di database, dan tiap upaya bypass punya uji (S.8/S.9/S.20) — bukan kebijakan yang bisa dilanggar di layar.</div>
+    <div class="callout stop" style="margin-top:12px"><b>Dan yang kami kalah, disebut terang-terangan</b> — tanpa host-to-host tidak ada saldo real-time; tanpa modul likuiditas tidak ada sweeping/pooling; tidak ada aplikasi toko untuk otorisasi; tidak ada sanction screening. Empat hal itu ada di grup ini dan tidak kami klaim. Yang kami tawarkan sebagai gantinya: satu jalur impor berkas yang parsernya diuji + laporan yang angkanya bisa dihitung ulang (lihat #bukti).</div>
+  </div>
+</section>
+
+
+<!-- ===================== KEAMANAN ===================== -->
+<section id="keamanan">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">Keamanan &amp; kepatuhan</p>
+      <h2>Dipetakan ke kerangka regulator — tapi yang dijual di sini adalah penolakannya</h2>
+      <p class="sub">Kisi-kisi kepatuhan itu syarat administratif. Yang kami tawarkan adalah kondisi sistem: apa yang ditolak, di lapisan mana, dan dengan uji nomor berapa.</p>
+    </div>
+    <div class="grid g2">
+      <div class="card">
+        <h3>Ditegakkan di lapisan data (bukan di UI)</h3>
+        <ul style="margin:0;padding-left:1.1em;font-size:14px;line-height:1.9">
+          <li>4 peran DB + RLS jalur portal; <code>ecm_readonly</code> ditolak saat menyentuh <code>beneficiary_account</code>, <code>local_hash</code>, <code>jti</code></li>
+          <li>Audit <code>UPDATE</code>/<code>DELETE</code> → ditolak pemicu; pemalsuan hash hanya terbaca oleh verifier rantai (itu yang membuatnya berguna)</li>
+          <li>Parameter/limit/toleransi: <code>apply_parameter()</code> menolak sebelum ada approval; perubahan <em>tidak</em> surut</li>
+          <li>Katalog PII wajib: kolom PII tanpa registrasi → <code>ALTER TABLE</code> ditolak dengan pesan yang menunjuk <code>sec.pii_register()</code></li>
+          <li>Masking di DB <em>dan</em> di log; uji Logback nyata membuktikan pola <code>****7890</code> keluar dari appender</li>
+          <li>Break-glass berkedaluwarsa, wajib tiket, tetap tercatat; <code>pgAudit</code> pada <code>ddl,role</code> (bukan <code>read</code> — yang membanjiri log dan menutupi yang penting)</li>
+          <li>hba: <code>scram-sha-256</code> + <code>hostssl</code>; koneksi TCP non-TLS ditolak (uji negatif di skrip setup)</li>
+          <li>Arsip WAL = pengikat RPO, dibaca <code>pg_stat_archiver</code> → kontrol hidup + alert</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Ditegakkan di lapisan aplikasi &amp; antarmuka</h3>
+        <ul style="margin:0;padding-left:1.1em;font-size:14px;line-height:1.9">
+          <li>Keycloak OIDC Authorization Code + PKCE; sesi via cookie (<code>HttpOnly</code>/<code>SameSite</code>/<code>Secure</code>) — bukan token di <code>localStorage</code></li>
+          <li>Validasi token dengan <code>DelegatingOAuth2TokenValidator</code>; <code>jti</code> replay ditolak (uji)</li>
+          <li>Guard velocity fail-closed: backend mati = transaksi ditahan, bukan diloloskan</li>
+          <li>CSP + nonce per respons, <code>Trusted Types</code>, tanpa <code>innerHTML</code> untuk data pengguna (ArchUnit + uji filter)</li>
+          <li>Semua tulis idempoten (kunci bisnis), retry aman; ack per item, bukan hanya per batch</li>
+          <li>Timeout eksplisit di jalur DB/Hikari/Kafka/adapter LLM; tidak ada panggilan tak berbatas</li>
+          <li>Graceful shutdown + preStop; rollout tidak memutus saga di tengah commit (target; lihat gap G5/G11)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tw" style="margin-top:22px">
+      <table>
+        <thead><tr><th scope="col">Rujukan</th><th scope="col">Yang Orivo jadikan kewajiban teknis</th><th scope="col">Status di repo</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">POJK 11/POJK.03/2022 (penyelenggaraan TI &amp; ketahanan siber)</th>
+            <td>arsitektur terdokumentasi, siklus aset→ancaman→perlindungan→<b>deteksi</b>→<b>pemulihan</b>, MIS ketahanan siber, pentest berkala</td>
+            <td>✅ deteksi/pemulihan terbukti (21 alert, drill PITR) · 📄 pentest = administratif</td></tr>
+          <tr><th scope="row">SEOJK 29/SEOJK.03/2022</th>
+            <td>perimeter deny-by-default, OTP untuk transaksi berisiko, basis data <b>baca-saja untuk non-DBA</b>, MFA untuk data sensitif, tanpa workstation↔workstation, kanal terenkripsi</td>
+            <td>✅ peran baca-saja + MFA + TLS diuji · ◐ OTP perangkat (G5)</td></tr>
+          <tr><th scope="row">SWIFT Customer Security Programme v2026 (32 kontrol: 26 wajib + 6 advisory)</th>
+            <td> Secure environment, know &amp; limit access (tinjauan akses kuartalan), detect &amp; respond (logging terpusat + tinjauan harian, retensi ≥ 3 tahun, IR plan diuji ≤ 12 bulan)</td>
+            <td>✅ rantai audit + retensi + break-glass · ◐ 2.6 session recording, 6.5 transaction analytics (G6)</td></tr>
+          <tr><th scope="row">PCI DSS v4.0.1 (51 requirement future-dated wajib sejak 31 Mar 2025)</th>
+            <td>perlindungan data penyimpanan, 6.4.3 skrip pembayaran di halaman, 11.6.1 deteksi perubahan tamper pada halaman pembayaran</td>
+            <td>◐ SPA HTML5: CSP/nonce/Trusted Types ada; pembuktian 6.4.3/11.6.1 butuh CDN &amp; tooling pihak ketiga (G11)</td></tr>
+          <tr><th scope="row">OWASP ASVS 5.0.0</th>
+            <td>Level 2 untuk seluruh aplikasi, Level 3 di jalur rilis; V16 = log yang dapat dibuktikan &amp; dapat dikaitkan ke orang</td>
+            <td>✅ V16 dipenuhi <code>row_hash</code> + uji; pemetaan chapter per kontrol ada di dokumen</td></tr>
+          <tr><th scope="row">UU PDP 27/2022 + PP 71/2019</th>
+            <td>data strategis diproses &amp; disimpan di Indonesia; hak akses/hapus subjek data</td>
+            <td>✅ on-prem, DB/cadangan di dalam negeri · ◐ katalog PII + masking; report/erase masih gap (G7)</td></tr>
+          <tr><th scope="row">PBI 10/2025 (TIKMI untuk penyelenggara sistem pembayaran)</th>
+            <td>manajemen risiko berbasis prinsip, pendaftaran vendor, perjanjian yang mencakup keamanan/BCP-DR, persetujuan sebelum berbagi data</td>
+            <td>✅ BCP/DR teruji (drill) · 📄 pendaftaran vendor &amp; perjanjian = administratif</td></tr>
+        </tbody>
+        <caption>📄 = di luar lingkup perangkat lunak dan sengaja dikecualikan dari halaman ini (syarat administratif). ✅/◐ = yang bisa dilihat di repo.</caption>
+      </table>
+    </div>
+
+    <div class="callout stop" style="margin-top:20px"><b>Tujuh gap teknis yang masih terbuka — ditulis apa adanya:</b>
+      G3 KMS/HSM nyata (envelope crypto sudah, kunci masih di konfigurasi) · G4 kolom ciphertext bertipe <code>text</code> ·
+      G5 device-binding belum di filter rantai · G6 SWIFT 2.6 (session recording) &amp; 6.5 (transaction analytics) ·
+      G7 hak subjek UU PDP (report/erase) belum jadi primitif · G11 <code>/actuator/prometheus</code> + SBOM/cosign di CI ·
+      G12 Helm chart belum pernah di-apply ke klaster nyata.
+      Nama gap, pemilik, dan cara menutupnya ada di <code>architecture/keamanan-perbankan.md</code> §9 — dan halaman ini tidak menyebut "aman" tanpa daftar itu.</div>
+  </div>
+</section>
+
+<!-- ===================== BUKTI ===================== -->
+<section id="bukti">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">Bukti &amp; kapasitas</p>
+      <h2>Angka yang bisa kamu jalankan ulang hari ini</h2>
+      <p class="sub">Semua baris di bawah adalah keluaran perintah: lapis DB/Java terakhir diverifikasi 2026-09-03 pada gerbang <code>ecm_gate6</code> (exit 0), lapis aplikasi diulang <b>2× beruntun pada 2026-09-04</b> (175/175 smoke, 69/69 probe, 48/48 harness jsdom, 14/14 migrasi). Yang tidak terukur, ditulis di kolom kanan sebagai "belum diukur".</p>
+    </div>
+    <div class="grid g2">
+      <div>
+        <div class="kbar" role="img" aria-label="Cakupan uji">
+          <div class="k"><span>Uji SQL fungsional</span><i><b style="width:100%"></b></i><span>36/36</span></div>
+          <div class="k"><span>Uji kontrol keamanan</span><i><b style="width:100%"></b></i><span>73/73</span></div>
+          <div class="k"><span>Uji Java (JDK 21)</span><i><b style="width:100%"></b></i><span>101/101</span></div>
+          <div class="k"><span>Status kontrol hidup</span><i><b style="width:100%"></b></i><span>17/17</span></div>
+          <div class="k"><span>Aturan manifest</span><i><b style="width:100%"></b></i><span>17/17</span></div>
+          <div class="k"><span>Alert ↔ metrik ↔ kode</span><i><b style="width:100%"></b></i><span>21+3</span></div>
+          <div class="k"><span>Topik Kafka terparse</span><i><b style="width:100%"></b></i><span>18/18</span></div>
+          <div class="k"><span>Pemeriksaan SQL (002+005+007+009)</span><i><b class="a" style="width:100%"></b></i><span>184/184</span></div>
+          <div class="k"><span>Suite aplikasi smoke.py</span><i><b class="a" style="width:100%"></b></i><span>175/175</span></div>
+          <div class="k"><span>Penolakan lapis gap (probe)</span><i><b class="a" style="width:100%"></b></i><span>69/69</span></div>
+          <div class="k"><span>Harness tampilan (jsdom)</span><i><b class="a" style="width:100%"></b></i><span>48/48</span></div>
+        </div>
+        <div class="tw" style="margin-top:18px">
+          <table>
+            <thead><tr><th scope="col">Yang diukur</th><th scope="col">Angka</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">Dasar desain: burst 95 %/30 menit</th><td>528 TPS (rata-rata harian 11,6 TPS)</td></tr>
+              <tr><th scope="row">Tulis massal <code>pay.item</code> (1 koneksi, fsync on)</th><td>145–200 rb baris/dtk terukur — vs 2.111 baris/dtk yang dibutuhkan desain; kepalanya ~68×, tapi di satu mesin 2 vCPU</td></tr>
+              <tr><th scope="row">Tulis dengan guard akuntansi (<code>gl.entry</code>)</th><td>8,8–9,6 rb baris/dtk</td></tr>
+              <tr><th scope="row">Biaya masking PII per baris</th><td>median +6,3 ms (rentang −0,9…+16,1 ms = noise; bukan angka yang dipublikasikan sebagai "range")</td></tr>
+              <tr><th scope="row">Agregasi <code>SUM</code> 200 rb baris</th><td>26–33 ms → materialized view wajib, bukan opsional</td></tr>
+              <tr><th scope="row">Jejak penyimpanan 200 rb transaksi</th><td>110 MB · 575,4 B/baris → 4,2 TB untuk 5 tahun</td></tr>
+              <tr><th scope="row">Kebutuhan koneksi (Hukum Little)</th><td>21 koneksi aktif → 3 POD (HPA 3→12)</td></tr>
+              <tr><th scope="row">Perbandingan cash management enterprise (#cms)</th><td>22 fitur (8 ✅ · 6 ◐ · 8 ✗ pada kolom Orivo) · 9 produk · 15 form (8 ✅ · 3 ◐ · 4 ✗) · 10 kelompok menu — dihitung dari markup halaman ini oleh harness (<code>branding/test-halaman.mjs</code>); sisi pesaing dibaca dari materi publik, bukan diuji hands-on</td></tr>
+              <tr><th scope="row">Referensi hari-nol (006 + 007): kalender, tarif 4-eyes, gerbang yatim, katalog PII</th><td>10/10 lulus di klaster terkeraskan — dan <code>ref.is_workday()</code> <em>menolak</em> menjawab untuk kalender tahun yang belum dimuat (tidak ada tebakan senyap soal hari kerja)</td></tr>
+              <tr><th scope="row">Drill PITR: base backup</th><td>13 MB (DB 95 MB), restore siap dalam 1 s, titik recovery tepat (200/200 di sebelum target, 0 di titik target)</td></tr>
+              <tr><th scope="row">Drill PITR: rantai audit &amp; replika</th><td>rantai patah 0 → 0; replika melayani 1.850 baris audit saat primary mati</td></tr>
+              <tr><th scope="row">Kegagalan yang ditemukan sendiri</th><td>arsip WAL macet 75× tanpa satu pun gerbang protes → kini jadi kontrol + alert</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div>
+        <div class="card">
+          <h3>Belum diukur (dan itu bagian dari tawarannya)</h3>
+          <ul style="margin:0;padding-left:1.1em;font-size:14px;line-height:1.9">
+            <li>Kontensi multi-POD pada satu PostgreSQL (uji ini memakai 1 koneksi)</li>
+            <li>Latensi aplikasi ↔ DB nyata (network hop), hanya waktu eksekusi di sisi server</li>
+            <li>Bloat indeks/table setelah 12 bulan volume penuh</li>
+            <li><code>docker compose up</code> end-to-end sebagai satu kesatuan</li>
+            <li>Hasil k6 terhadap klaster Kubernetes (skrip &amp; ambang ada, belum dijalankan)</li>
+            <li><code>/actuator/prometheus</code> dibuktikan lewat HTTP (G11)</li>
+            <li>Helm chart di-apply ke klaster nyata (G12)</li>
+            <li>RTO 1 s dari drill = <b>mekanisme</b>, bukan RTO produksi; tidak ada host/situs kedua, pgBackrest/Barman, atau Object Lock</li>
+          </ul>
+        </div>
+        <div class="card" style="margin-top:16px">
+          <h3>Reproduksi di mesin bersih</h3>
+          <p class="sub" style="margin-bottom:8px">Perintah yang sama dipakai CI internal kami — bukan "hubungi sales untuk benchmark".</p>
+<pre style="margin:0;background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:14px;overflow:auto;font:12.5px/1.7 var(--mono)"><code>sudo apt-get install -y postgresql-17 postgresql-17-pgaudit \
+    openjdk-21-jdk-headless python3-yaml
+deploy/setup-validation-cluster.sh --configure   # 11 pemeriksaan + uji negatif TLS
+deploy/dr-pitr-test.sh                            # drill PITR, angka tercetak
+./validate.sh                                     # 15 gerbang: SQL (002/005/007/009), manifest, alert, topik, build</code></pre>
+          <p class="sub" style="margin:8px 0 0">Perkiraan: ±2 menit tanpa GPU, tanpa cloud, tanpa lisensi. Kalau salah satu gerbang merah, keluarannya menyebut nama pemeriksaan yang hilang — termasuk kalau ada pemeriksaan yang <em>hilang diam-diam</em> (itu kelas bug yang pernah kami temukan, dan sekarang jadi gerbang).</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== ARSITEKTUR ===================== -->
+<section id="arsitektur">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">Cara dibangun</p>
+      <h2>Modular monolith + tulang punggung peristiwa — bukan microservice demi gaya</h2>
+    </div>
+    <div class="grid g2">
+      <div class="card">
+        <svg viewBox="0 0 620 300" role="img" aria-label="Diagram arsitektur Orivo" style="width:100%;height:auto">
+          <defs><linearGradient id="ag" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#19E0C4"/><stop offset="1" stop-color="#0C7F77"/></linearGradient></defs>
+          <g font-family="system-ui,sans-serif" font-size="12.5" text-anchor="middle">
+            <rect x="8" y="18" width="130" height="52" rx="10" fill="url(#ag)" opacity=".16" stroke="url(#ag)"/>
+            <text x="73" y="40" font-weight="700">HTML5 SPA</text><text x="73" y="56" opacity=".75">portlet per peran</text>
+            <rect x="8" y="120" width="130" height="52" rx="10" fill="none" stroke="currentColor" opacity=".28"/>
+            <text x="73" y="142" font-weight="700">Keycloak</text><text x="73" y="158" opacity=".75">OIDC + PKCE</text>
+            <rect x="8" y="222" width="130" height="52" rx="10" fill="none" stroke="currentColor" opacity=".28"/>
+            <text x="73" y="244" font-weight="700">Intake warkat</text><text x="73" y="260" opacity=".75">service terpisah</text>
+            <rect x="200" y="80" width="220" height="140" rx="14" fill="none" stroke="url(#ag)" stroke-width="1.6"/>
+            <text x="310" y="104" font-weight="800" font-size="13.5">Orivo Core (modular monolith)</text>
+            <text x="310" y="126" opacity=".8">Warkat · Kliring · PDC/CDC</text>
+            <text x="310" y="144" opacity=".8">Dispatch · Rekonsiliasi</text>
+            <text x="310" y="162" opacity=".8">Otorisasi · Referensi · Audit</text>
+            <text x="310" y="184" font-size="11" opacity=".6">saga + outbox · guard fail-closed · kontrol di DB</text>
+            <rect x="480" y="18" width="132" height="52" rx="10" fill="none" stroke="currentColor" opacity=".28"/>
+            <text x="546" y="40" font-weight="700">PostgreSQL 17</text><text x="546" y="56" opacity=".75">primary + standby</text>
+            <rect x="480" y="88" width="132" height="46" rx="10" fill="none" stroke="currentColor" opacity=".28"/>
+            <text x="546" y="108" font-weight="700">Kafka × 3</text><text x="546" y="124" opacity=".75">18 topik · DLT</text>
+            <rect x="480" y="150" width="132" height="46" rx="10" fill="none" stroke="currentColor" opacity=".28"/>
+            <text x="546" y="170" font-weight="700">Valkey 9.1</text><text x="546" y="186" opacity=".75">sesi · cache · ACL</text>
+            <rect x="480" y="212" width="132" height="60" rx="10" fill="none" stroke="currentColor" opacity=".28"/>
+            <text x="546" y="234" font-weight="700">Observability</text><text x="546" y="250" opacity=".75">Prometheus 21 alert</text><text x="546" y="264" opacity=".75">Grafana · Loki</text>
+            <g stroke="currentColor" opacity=".35" fill="none" marker-end="none">
+              <path d="M138 44 H200 M138 146 H200 M138 248 C170 248 170 200 200 200"/>
+              <path d="M420 60 C450 60 450 44 480 44 M420 111 H480 M420 173 H480 M420 210 C450 210 450 242 480 242"/>
+            </g>
+          </g>
+        </svg>
+        <p class="sub" style="margin-top:10px">Yang dipecah lebih dulu hanya yang punya alasan: intake warkat (volume &amp; pola kegagalan berbeda), dispatch pembayaran (kanal eksternal), rekonsiliasi (batch berat). Sisanya tetap satu proses — dengan batas modul yang diuji ArchUnit.</p>
+      </div>
+      <div class="card">
+        <h3>Tumpukan</h3>
+        <div style="display:flex;flex-wrap:wrap;gap:7px;margin:6px 0 14px">
+          <span class="chip">Java 21 (LTS)</span><span class="chip">Spring Boot 3.x</span><span class="chip">PostgreSQL 17</span>
+          <span class="chip">pgAudit</span><span class="chip g">Valkey 9.1.2 (bukan Redis)</span><span class="chip">Apache Kafka</span>
+          <span class="chip">Keycloak</span><span class="chip">Helm · Kubernetes</span><span class="chip">Micrometer · Prometheus · Grafana</span>
+          <span class="chip">HTML5 SPA (vanilla)</span><span class="chip">Flyway-style migrasi</span><span class="chip a">tanpa lisensi per-user</span>
+        </div>
+        <table style="font-size:13.4px">
+          <thead><tr><th scope="col">Keputusan</th><th scope="col">Alasan yang bisa diuji</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Valkey, bukan Redis</th><td>fork BSD-3-Clause dari Redis 7.2.4; kompatibel RESP2/RESP3 → Lettuce/Spring Data tidak berubah; ~20 % lebih hemat memori di YCSB; bukan jualan "Redis proprietary"</td></tr>
+            <tr><th scope="row">Satu PostgreSQL, bukan shard</th><td>4,2 TB/5 tahun itu masalah retensi &amp; partisi, bukan TPS; 2.111 baris/dtk di mesin 2 vCPU meninggalkan kepala yang besar</td></tr>
+            <tr><th scope="row">Kontrol di DB</th><td>UI bisa di-bypass, API tidak bisa di-bypass; kalau penolakannya tidak ada di DB, ia tidak ada</td></tr>
+            <tr><th scope="row">Audit berantai hash</th><td>ASVS V16 + SWIFT "central logging": yang menarik bukan "ada log", tapi "bisa dibuktikan tidak ada yang hilang"</td></tr>
+            <tr><th scope="row">Arsip WAL sebagai kontrol</th><td>RPO tanpa arsip yang dipantau = angka di slide. Kami punya buktinya (75 kegagalan yang tidak terlihat)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== ROADMAP ===================== -->
+<section id="roadmap">
+  <div class="wrap">
+    <div class="head"><p class="eyebrow">Rencana</p><h2>Enam fase, 9–12 bulan, tiap fase punya gerbang keluarnya sendiri</h2></div>
+    <div class="grid g3">
+      <div class="card"><span class="k">Fase 1 · 0–6 minggu</span><h3>Fondasi &amp; warkat dasar</h3><p class="sub">Skema + kontrol di DB, intake/verifikasi/otorisasi, portlet antrean. Gerbang: 002, 005 &amp; 007 hijau di klaster terkeraskan.</p></div>
+      <div class="card"><span class="k">Fase 2 · 6–14 minggu</span><h3>Kliring, retur, PDC/CDC</h3><p class="sub">Impor berkas kliring, mesin retur, brankas titipan + reminder. Gerbang: rekonsiliasi 1,8 jt baris &lt; 45 menit di ukuran produksi (target desain, belum diukur di klaster).</p></div>
+      <div class="card"><span class="k">Fase 3 · 3–5 bulan</span><h3>Dispatch &amp; kanal</h3><p class="sub">Batch 5.000 item/ack ≤ 3 s, adapter bank (SKNBI/RTGS/LLG), reversal. Gerbang: idempotensi diuji ulang + DLT.</p></div>
+      <div class="card"><span class="k">Fase 4 · 5–7 bulan</span><h3>ISO 20022 &amp; arus kas</h3><p class="sub">camt/pacs, prediksi arus kas dari tenor warkat, aging &amp; kolektibilitas. Gerbang: uji kontrak format per bank.</p></div>
+      <div class="card"><span class="k">Fase 5 · 7–9 bulan</span><h3>Intelijen lokal</h3><p class="sub">Skor pengecualian, saran pasangan, adapter LLM opsional (fail-open). Gerbang: fitur inti tetap hijau saat adapter dimatikan.</p></div>
+      <div class="card"><span class="k">Fase 6 · 9–12 bulan</span><h3>Go-live &amp; penutupan gap</h3><p class="sub">KMS/HSM, SBOM/cosign di CI, device-binding di filter, hak subjek UU PDP, chart di klaster nyata. Gerbang: daftar §9 kosong atau ber-pemilik + bertanggal.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FAQ ===================== -->
+<section id="faq">
+  <div class="wrap">
+    <div class="head"><p class="eyebrow">Pertanyaan yang biasanya muncul di rapat</p><h2>Enam jawaban, tanpa kata "solutif"</h2></div>
+    <details><summary>Kenapa tidak ada saldo real-time atau cash pooling seperti di MCM/BNIDirect?</summary>
+      <p>Karena keduanya menuntut hak men-debit rekening bank, dan itu tidak kami pegang. Yang kami pegang: siklus warkat, berkas pembayaran keluar, rekonsiliasi, dan otorisasi yang ditegakkan database. Kalau bank memberi file posisi/mutasi (MT940/camt), angkanya masuk ke laporan kami; sisanya tercatat di register — M17 (katalog koneksi bank) dan ADR‑15 (likuiditas sebagai adapter, bukan modul). Daftar lengkapnya ada di <a href="#cms">#cms</a>, termasuk yang kami kalah.</p></details>
+    <details><summary>Kenapa kontrolnya di database? Bukankah itu membuat DB berat?</summary>
+      <p>Karena hanya di sana penolakan berlaku untuk semua jalur (UI, API, script, integrator). Biayanya kami ukur: guard akuntansi 8,8–9,6 rb baris/dtk pada satu koneksi di mesin 2 vCPU. Yang mahal bukan kontrolnya, melainkan materialisasi agregat (yang juga sudah kami ukur).</p></details>
+    <details><summary>Apakah AI/LLM wajib online?</summary>
+      <p>Tidak. Yang wajib jalan adalah statistik lokal (prioritas pengecualian, saran pasangan). Adapter LLM hanya menambah ringkasan/draft memo; ia boleh mati, timeout, atau dihapus tanpa fitur inti berkurang. Timeout &amp; batas byte respons dipasang sejak awal. Bobot pencocokan lokalnya tercetak di <code>ecm-app/backend/ml_engine.py</code> — 55 untuk nomor referensi identik, 40 kunci pasangan terdaftar, 35 nominal persis, 26 selisih di dalam toleransi — dan tidak satu pun dari itu memanggil jaringan.</p></details>
+    <details><summary>Bagaimana dengan data pribadi dan UU PDP?</summary>
+      <p>Katalog PII itu wajib: kolom berisi data pribadi yang tidak terdaftar membuat <code>ALTER TABLE</code> ditolak. Masking berlaku di basis data dan di log, dan ekspor untuk peran auditor menghasilkan <code>****7890</code>. Yang belum kami buat: primitif laporan &amp; penghapusan atas permintaan subjek (gap G7) — kami tulis sebagai gap, bukan kami klaim.</p></details>
+    <details><summary>Apa artinya "1 juta transaksi/hari" di sistem ini?</summary>
+      <p>Rata-rata 11,6 TPS, puncak 95 % dalam 1 jam 264 TPS, dan dasar desain kami adalah burst 95 %/30 menit 528 TPS. Pertumbuhan ke 5 juta/hari masih 1 PostgreSQL dengan partisi (11,28 TB/5 th, 11 POD) — jadi yang menentukan adalah retensi &amp; strategi partisi, bukan "harus microservice".</p></details>
+    <details><summary>Berapa lama implementasi dan siapa yang mengerjakan?</summary>
+      <p>Fase 1–3 (inti warkat + dispatch) 3–5 bulan dengan tim 4–6 orang bank + kami untuk adaptasi kanal. Yang biasanya paling lama bukan kodenya, melainkan day-zero reference data &amp; kesepakatan format berkas dengan unit lain — karena itu modul M7 punya loader + laporan entitas yatim, bukan sekadar "import CSV".</p></details>
+  </div>
+</section>
+
+<!-- ===================== CTA / DEMO ===================== -->
+<section id="demo" style="border-bottom:0">
+  <div class="wrap">
+    <div class="head"><p class="eyebrow">Langkah berikutnya</p><h2>Ajukan demo 30 menit — atau lewati kami dan jalankan sendiri gerbangnya</h2>
+      <p class="sub">Kalau kamu tim arsitektur/IT bank: bentuk isian di bawah tidak mengirim ke mana-mana (halaman ini lokal). Di pemakaian nyata, isian ini masuk ke antrean <em>presales</em> lewat kanal internal bank.</p></div>
+    <form class="demo" id="lead" novalidate>
+      <div class="fld"><label for="l-nm">Nama &amp; peran <span class="req">*</span></label>
+        <input id="l-nm" name="nama" placeholder="mis. Rina — Arsitektur TI" autocomplete="name" required><p class="err" data-for="l-nm">minimal 4 karakter</p></div>
+      <div class="fld"><label for="l-inst">Institusi <span class="req">*</span></label>
+        <input id="l-inst" name="institusi" placeholder="Bank / BPR / multifinance" autocomplete="organization" required><p class="err" data-for="l-inst">wajib diisi</p></div>
+      <div class="fld"><label for="l-em">Email kerja <span class="req">*</span></label>
+        <input id="l-em" name="email" type="email" placeholder="nama@institusi.co.id" autocomplete="email" required><p class="err" data-for="l-em">format email tidak sah</p></div>
+      <div class="fld"><label for="l-vol">Volume warkat / hari</label>
+        <select id="l-vol" name="volume"><option>&lt; 10.000</option><option selected>10.000 – 100.000</option><option>100.000 – 500.000</option><option>&gt; 500.000</option></select></div>
+      <div class="fld full"><label for="l-cat">Yang ingin dilihat lebih dulu</label>
+        <textarea id="l-cat" name="catatan" rows="3" placeholder="mis. cara menutup GAP di v_control_status tanpa superuser; atau mesin status warkat + rekonsiliasi toleransi"></textarea></div>
+      <div class="actions">
+        <button class="btn btn-p" type="submit">Susun agenda demo</button>
+        <button class="btn btn-q" type="button" id="l-mail">Buka di email</button>
+        <span class="sub" id="l-ok" style="font-size:12.5px;color:var(--ok)"></span>
+      </div>
+      <div class="out" id="l-out" hidden></div>
+    </form>
+  </div>
+</section>
+</main>
+<footer>
+  <div class="wrap">
+    <div class="hr"></div>
+    <div class="frow">
+      <div style="display:flex;align-items:center;gap:10px">
+        <svg viewBox="0 0 100 100" width="26" height="26" aria-hidden="true">
+          <path d="M56.6 12.6 A38 38 0 0 1 56.6 87.4" fill="none" stroke="var(--brand)" stroke-width="13" stroke-linecap="round"/>
+          <path d="M43.4 87.4 A38 38 0 0 1 43.4 12.6" fill="none" stroke="var(--brand-2)" stroke-width="13" stroke-linecap="round"/>
+          <path d="M50 37.5 L62.5 50 L50 62.5 L37.5 50 Z" fill="var(--amber)"/>
+        </svg>
+        <div><b style="font-size:15px">Orivo</b> <span class="sub">· Order-to-Cash &amp; Warkat Operations · pra-go-live v0.9</span></div>
+      </div>
+      <div class="sub" style="text-align:right">
+        Dokumen &amp; kode: <code>architecture/</code> · angka di halaman ini berasal dari gerbang, bukan dari brosur.<br>
+        <a href="Orivo_WebMarketing_en.html">Versi Inggris (English edition)</a> · 
+        Perbandingan produk disusun dari materi publik tertanggal 2026-09-03 — verifikasi ulang sebelum dipakai keluar.
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ===================== MODAL MASUK (dengan splash pendek sebelum form) ===================== -->
+<dialog id="auth" aria-labelledby="auth-title">
+  <div class="dlg-h">
+    <svg viewBox="0 0 100 100" aria-hidden="true">
+      <path d="M56.6 12.6 A38 38 0 0 1 56.6 87.4" fill="none" stroke="var(--brand)" stroke-width="13" stroke-linecap="round"/>
+      <path d="M43.4 87.4 A38 38 0 0 1 43.4 12.6" fill="none" stroke="var(--brand-2)" stroke-width="13" stroke-linecap="round"/>
+      <path d="M50 37.5 L62.5 50 L50 62.5 L37.5 50 Z" fill="var(--amber)"/>
+    </svg>
+    <b id="auth-title">Masuk ke Orivo</b>
+    <button class="x" type="button" id="auth-x" aria-label="Tutup">×</button>
+  </div>
+  <div class="dlg-b">
+    <div id="loginsplash">
+      <svg viewBox="0 0 100 100" width="56" height="56" aria-hidden="true" style="display:block;margin:0 auto 10px">
+        <path class="a" d="M56.6 12.6 A38 38 0 0 1 56.6 87.4" fill="none" stroke="var(--brand)" stroke-width="13" stroke-linecap="round"/>
+        <path class="a2" d="M43.4 87.4 A38 38 0 0 1 43.4 12.6" fill="none" stroke="var(--brand-2)" stroke-width="13" stroke-linecap="round"/>
+        <path class="d" d="M50 37.5 L62.5 50 L50 62.5 L37.5 50 Z" fill="var(--amber)"/>
+      </svg>
+      <div class="bar" style="margin:0 auto"><i></i></div>
+      <p class="sub" style="text-align:center;margin:10px 0 0;font-family:var(--mono);font-size:11.5px">memeriksa rantai audit… memuat portlet per peran…</p>
+    </div>
+    <form id="loginform" novalidate style="opacity:0">
+      <div class="fld"><label for="a-u">Pengguna <span class="req">*</span></label>
+        <input id="a-u" name="u" autocomplete="username" placeholder="rina.s" required><p class="err" data-for="a-u">wajib diisi</p></div>
+      <div class="fld"><label for="a-p">Kata sandi <span class="req">*</span></label>
+        <input id="a-p" name="p" type="password" autocomplete="current-password" required><p class="err" data-for="a-p">minimal 12 karakter</p></div>
+      <div class="fld"><label for="a-m">Kode MFA <span class="req">*</span></label>
+        <input id="a-m" name="mfa" inputmode="numeric" maxlength="6" placeholder="6 digit" autocomplete="one-time-code" required>
+        <p class="hint">Diperlukan untuk peran yang bisa mengotorisasi — penolakan tanpa MFA punya uji sendiri.</p>
+        <p class="err" data-for="a-m">harus 6 digit</p></div>
+      <div class="banner">🔒 Sesi nyata: Keycloak OIDC (Authorization Code + PKCE), cookie <code>HttpOnly</code>/<code>SameSite</code>/<code>Secure</code>. Mode demo ini tidak mengirim apa pun.</div>
+      <div class="actions" style="justify-content:flex-end">
+        <button class="btn btn-p" type="submit">Masuk</button>
+      </div>
+      <div class="out" id="a-out" hidden></div>
+    </form>
+  </div>
+</dialog>
+
+<script>
+/* ===== Orivo — fungsi murni (diuji terpisah dengan node) ===== */
+const Orivo = {
+  parseAmount(s){
+    if (s == null) return null;
+    const t = String(s).replace(/\s|Rp/gi,'');
+    if (!/^\d{1,3}(\.\d{3})*$/.test(t) && !/^\d+$/.test(t)) return null;
+    const n = Number(t.replace(/\./g,''));
+    return Number.isSafeInteger(n) && n > 0 ? n : null;
+  },
+  maskAccount(s){
+    const t = String(s ?? '').replace(/\D/g,'');
+    if (t.length < 4) return '***';
+    return '****' + t.slice(-4);
+  },
+  isFutureDate(iso, todayIso){
+    if (!iso || !/^\d{4}-\d{2}-\d{2}$/.test(iso)) return false;
+    return iso > (todayIso ?? new Date().toISOString().slice(0,10));
+  },
+  intakeKey(r){ return [r.cab, r.nomor, r.tglSurat].join('|'); },
+  validateIntake(data, existing /* array of keys */, todayIso){
+    const e = {};
+    if (!data.cab) e.cab = 'wajib dipilih';
+    if (!data.jns) e.jns = 'wajib dipilih';
+    if (!/^\d{7}$/.test(data.nomor ?? '')) e.nomor = 'harus 7 digit angka';
+    const nom = Orivo.parseAmount(data.nominal);
+    if (nom === null) e.nominal = 'harus bilangan bulat > 0';
+    if (!data.tglSurat) e.tglSurat = 'wajib diisi';
+    if (!data.tglJT) e.tglJT = 'wajib diisi';
+    if (data.tglSurat && data.tglJT && data.tglJT < data.tglSurat) e.tglJT = 'jatuh tempo tidak boleh mendahului tanggal surat';
+    if (data.tglSurat && Orivo.isFutureDate(data.tglSurat, todayIso)) e.tglSurat = 'tanggal surat tidak boleh di masa depan';
+    if (!data.drawer || data.drawer.trim().length < 3) e.drawer = 'minimal 3 karakter';
+    const rek = String(data.rek ?? '').replace(/\D/g,'');
+    if (!(rek.length >= 6 && rek.length <= 18)) e.rek = '6–18 digit angka';
+    if (data.jns === 'Bilyet Giro' && (data.drawer ?? '').trim().length < 3) e.drawer = 'bilyet giro wajib menyebut nama penerima';
+    const key = Orivo.intakeKey({cab:data.cab, nomor:data.nomor, tglSurat:data.tglSurat});
+    if (!Object.keys(e).length && (existing ?? []).includes(key)) e.__dup = 'DUPLIKAT: warkat ' + data.nomor + ' sudah tercatat di cabang ini pada tanggal ' + data.tglSurat;
+    return { ok: !Object.keys(e).length, errors: e, key, record: { ...data, nominalRp: nom, rekMask: Orivo.maskAccount(rek) } };
+  },
+  resolveRoute(search){
+    const q = new URLSearchParams(search ?? '');
+    const next = (q.get('next') ?? '').trim();
+    const safe = /^(?:Orivo_[A-Za-z0-9_.-]+\.html|login|#[a-z][a-z0-9_-]*)$/i;
+    if (next && safe.test(next)) return next;
+    if (q.get('mode') === 'login') return 'login';
+    return 'Orivo_WebMarketing.html';
+  }
+};
+if (typeof module !== 'undefined') module.exports = Orivo;
+
+/* matchMedia tidak selalu ada (jsdom, beberapa webview tertanam, prerender) —
+   membiarkannya melempar akan mematikan SELURUH skrip di bawah, jadi dibungkus. */
+const mm = q => { try { return !!(window.matchMedia && window.matchMedia(q).matches); } catch { return false; } };
+const reduceMotion = () => mm('(prefers-reduced-motion: reduce)');
+/* ===== penyimpanan aman (pratinjau terpasung bisa menolak localStorage) ===== */
+const store = {
+  get(k){ try { return localStorage.getItem(k); } catch { return null; } },
+  set(k,v){ try { localStorage.setItem(k,v); } catch { /* abaikan */ } }
+};
+
+/* ===== splash: tampil sebelum halaman, dan sebelum login ===== */
+(function splashGate(){
+  const el = document.getElementById('splash');
+  const log = document.getElementById('splog');
+  const seen = store.get('orivo_splash_seen') === '1';
+  const reduce = reduceMotion();
+  const steps = ['menyiapkan antarmuka…','memeriksa versi skema…','memuat status kontrol (17 baris)…','siap'];
+  const hide = () => { if (el && !el.hidden) { el.hidden = true; document.documentElement.style.removeProperty('overflow'); store.set('orivo_splash_seen','1');
+    if (location.search.includes('mode=login')) document.getElementById('auth')?.showModal?.(); } };
+  if (el) {
+    el.hidden = false;                                   // hanya tampil kalau JS jalan; tanpa JS, konten langsung terbaca
+    document.documentElement.style.setProperty('overflow','hidden');
+    let i = 0;
+    const tick = setInterval(() => { if (log) log.textContent = steps[++i] ?? steps.at(-1); if (i >= steps.length - 1) clearInterval(tick); }, reduce ? 60 : 420);
+    const wait = (seen || reduce) ? 260 : 1650;
+    window.__orivoSplashTimer = setTimeout(hide, wait);
+    document.getElementById('spskip')?.addEventListener('click', () => { clearTimeout(window.__orivoSplashTimer); hide(); });
+    addEventListener('keydown', ev => { if (ev.key === 'Enter' && !el.hidden) { clearTimeout(window.__orivoSplashTimer); hide(); } });
+  }
+})();
+
+/* ===== tema ===== */
+(function theme(){
+  const btn = document.getElementById('themeBtn');
+  const cur = store.get('orivo_theme');
+  if (cur) document.documentElement.dataset.theme = cur;
+  btn?.addEventListener('click', () => {
+    const dark = mm('(prefers-color-scheme: dark)');
+    const now = document.documentElement.dataset.theme;
+    const next = now === 'dark' ? 'light' : now === 'light' ? (dark ? 'auto' : 'dark') : 'dark';
+    document.documentElement.dataset.theme = next; store.set('orivo_theme', next);
+  });
+})();
+
+/* ===== scrollspy ===== */
+(function spy(){
+  if (!('IntersectionObserver' in window)) return;   // scrollspy opsional — tanpa ini halaman tetap berfungsi
+  const links = [...document.querySelectorAll('nav a[href^="#"]')];
+  const map = new Map(links.map(a => [a.getAttribute('href').slice(1), a]));
+  const io = new IntersectionObserver(es => {
+    es.forEach(en => { if (en.isIntersecting) { links.forEach(l => l.removeAttribute('aria-current'));
+      map.get(en.target.id)?.setAttribute('aria-current','true'); } });
+  }, { rootMargin: '-45% 0px -50% 0px' });
+  document.querySelectorAll('main section[id]').forEach(s => io.observe(s));
+})();
+
+/* ===== form demo: penerimaan warkat ===== */
+(function intake(){
+  const form = document.getElementById('intake'); if (!form) return;
+  const out = document.getElementById('f-out');
+  const today0 = new Date().toISOString().slice(0,10);
+  const existing = [Orivo.intakeKey({cab:'JKT-001 Menteng', nomor:'7654321', tglSurat:today0})]; // satu bendel sudah tercatat hari ini
+  const F = { cab:'f-cab', jns:'f-jns', nomor:'f-no', nominal:'f-nom', tglSurat:'f-tgl', tglJT:'f-jt', drawer:'f-drawer', rek:'f-rek' };
+  const mark = (errs) => {
+    Object.entries(F).forEach(([k,id]) => {
+      const node = document.getElementById(id); if (!node) return;
+      const bad = Boolean(errs[k]);
+      node.setAttribute('aria-invalid', bad ? 'true' : 'false');
+      const msg = form.querySelector('.err[data-for="'+id+'"]');
+      if (msg) { msg.textContent = bad ? errs[k] : (msg.dataset.base ?? msg.textContent); msg.classList.toggle('on', bad); }
+    });
+  };
+  form.querySelectorAll('.err').forEach(n => n.dataset.base = n.textContent);
+  form.addEventListener('submit', ev => {
+    ev.preventDefault();
+    const v = k => document.getElementById(F[k])?.value ?? '';
+    const res = Orivo.validateIntake({ cab:v('cab'), jns:v('jns'), nomor:v('nomor').trim(), nominal:v('nominal'),
+      tglSurat:v('tglSurat'), tglJT:v('tglJT'), drawer:v('drawer'), rek:v('rek') }, existing);
+    mark(res.errors);
+    out.hidden = false;
+    if (!res.ok && res.errors.__dup) {
+      out.textContent = 'DITOLAK — ' + res.errors.__dup + '\n\nDi produksi penolakan ini datang dari database (kunci idempotensi unik), bukan dari peramban.';
+      return;
+    }
+    if (!res.ok) { out.textContent = 'DITOLAK — ' + Object.keys(res.errors).length + ' field belum sah:\n· ' + Object.entries(res.errors).map(([k,x]) => k + ': ' + x).join('\n· '); return; }
+    const r = res.record;
+    out.textContent =
+      'DITERIMA (mode maker) — menunggu otorisasi checker\n' +
+      '───────────────────────────────────────────────\n' +
+      'cabang       : ' + r.cab + '\n' +
+      'jenis/nomor  : ' + r.jns + ' · ' + r.nomor + '\n' +
+      'nominal      : Rp ' + r.nominalRp.toLocaleString('id-ID') + '\n' +
+      'tanggal      : surat ' + r.tglSurat + ' → jatuh tempo ' + r.tglJT + (r.tglJT > new Date().toISOString().slice(0,10) ? '  (PDC → brankas titipan, pengingat H-3)' : '  (hari kerja berikutnya → siap klirim)') + '\n' +
+      'drawer       : ' + r.drawer + '\n' +
+      'rekening     : ' + r.rekMask + '   ← sudah ter-mask, sesuai peran\n' +
+      'status       : Lodged\n' +
+      'audit row    : hash ' + Array.from({length:8},(_,i)=>((r.nomor.charCodeAt(i%7)+i*7)%16).toString(16)).join('') + '… (dirantai ke baris sebelumnya)\n\n' +
+      'catatan demo : idempotensi + MFA otorisator + rantai hash adalah perilaku nyata yang diuji di repo; sisanya (citra warkat, berkas kliring) tidak disimulasikan di halaman ini.';
+    existing.push(res.key);
+  });
+  document.getElementById('f-seed')?.addEventListener('click', () => {
+    const d = new Date(), iso = dt => dt.toISOString().slice(0,10);
+    const set = (id,val) => { const n = document.getElementById(id); if (n) { n.value = val; n.dispatchEvent(new Event('input',{bubbles:true})); } };
+    set('f-cab','JK-T-001 Menteng'); document.getElementById('f-cab').value = [...document.getElementById('f-cab').options].map(o=>o.value)[1];
+    set('f-jns','Cek'); set('f-no','0123456'); set('f-nom','125.000.000');
+    set('f-tgl', iso(d)); set('f-jt', iso(new Date(d.getTime()+864e5*21))); set('f-drawer','PT Contoh Abadi'); set('f-rek','1234567890');
+    mark({});
+  });
+  document.getElementById('f-dup')?.addEventListener('click', () => {
+    const d = new Date().toISOString().slice(0,10);
+    const set = (id,val) => { const n = document.getElementById(id); if (n) n.value = val; };
+    document.getElementById('f-cab').value = [...document.getElementById('f-cab').options][1].value;
+    set('f-jns','Cek'); set('f-no','7654321'); set('f-nom','50.000.000'); set('f-tgl', d); set('f-jt', d);
+    set('f-drawer','PT Sudah Pernah Masuk'); set('f-rek','0987654321');
+    form.requestSubmit ? form.requestSubmit() : form.dispatchEvent(new Event('submit',{cancelable:true,bubbles:true}));
+  });
+})();
+
+/* ===== form lead/demo ===== */
+(function lead(){
+  const form = document.getElementById('lead'); if (!form) return;
+  const out = document.getElementById('l-out'); const ok = document.getElementById('l-ok');
+  const V = id => (document.getElementById(id)?.value ?? '');
+  const val = () => ({ nama: V('l-nm').trim(), institusi: V('l-inst').trim(), email: V('l-em').trim(),
+                       volume: V('l-vol'), catatan: V('l-cat').trim() });
+  form.addEventListener('submit', ev => {
+    ev.preventDefault();
+    const d = val(); const e = {};
+    if (d.nama.length < 4) e.nama = 'nama_lengkap';
+    if (d.institusi.length < 2) e.institusi = 'institusi';
+    if (!/^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i.test(d.email)) e.email = 'email_kerja';
+    const mark = (k,id,bad,msg) => { const n = document.getElementById(id); n.setAttribute('aria-invalid', bad?'true':'false');
+      const m = form.querySelector('.err[data-for="'+id+'"]'); if (m){ if(msg) m.textContent=msg; m.classList.toggle('on',bad);} };
+    mark('nama','l-nm',!!e.nama,e.institusi?'':'minimal 4 karakter');
+    mark('institusi','l-inst',!!e.institusi,'wajib diisi');
+    mark('email','l-em',!!e.email,'format email tidak sah');
+    const valid = Object.keys(e).length === 0;
+    out.hidden = !valid;                       // panel hanya muncul kalau isian sah (dulu kebalikannya: panel kosong saat salah)
+    ok.textContent = valid ? 'agenda tersusun (lokal) — lihat rincian di bawah' : 'periksa isian yang ditandai merah';
+    if (valid) out.textContent =
+      'PERMINTAAN DEMO (draf lokal — tidak terkirim)\n' +
+      '──────────────────────────────────────────────\n' + d.nama + ' · ' + d.institusi + ' · ' + d.email + '\n' +
+      'volume warkat/hari: ' + d.volume + '\n' +
+      'fokus: ' + (d.catatan || 'lintas modul: intake → otorisasi → rekonsiliasi → status kontrol') + '\n\n' +
+      'Agar 30 menit berguna, kami siapkan lebih dulu: (1) klaster uji dengan ./validate.sh hijau, (2) seed day-zero dari struktur rekening kamu, (3) satu alur retur yang nyata pernah bikin ribut.';
+  });
+  document.getElementById('l-mail')?.addEventListener('click', () => {
+    const d = val();
+    location.href = 'mailto:?subject=' + encodeURIComponent('Demo Orivo — ' + (d.institusi || 'diskusi teknis')) +
+      '&body=' + encodeURIComponent((d.catatan || 'Tertarik melihat alur warkat + kontrol di database.\n') + '\n\n— dikirim dari halaman Orivo_WebMarketing.html (draf lokal)');
+  });
+})();
+
+/* ===== modal masuk dengan splash pendek ===== */
+(function auth(){
+  const dlg = document.getElementById('auth'); if (!dlg) return;
+  const pre = document.getElementById('loginsplash'), fm = document.getElementById('loginform');
+  const open = () => { dlg.showModal ? dlg.showModal() : dlg.setAttribute('open',''); pre.hidden = false; fm.hidden = true; fm.style.opacity = 0;
+    setTimeout(() => { pre.hidden = true; fm.hidden = false; fm.style.opacity = 1; document.getElementById('a-u')?.focus(); }, reduceMotion() ? 60 : 900); };
+  document.getElementById('loginBtn')?.addEventListener('click', open);
+  document.getElementById('auth-x')?.addEventListener('click', () => dlg.close());
+  dlg.addEventListener('click', ev => { if (ev.target === dlg) dlg.close(); });
+  fm?.addEventListener('submit', ev => {
+    ev.preventDefault();
+    const g = id => document.getElementById(id);
+    const bad = (id,is,msg) => { const n = g(id); n.setAttribute('aria-invalid', is?'true':'false');
+      const m = fm.querySelector('.err[data-for="'+id+'"]'); if (m){ if(msg) m.textContent = msg; m.classList.toggle('on', is);} return is; };
+    const e1 = bad('a-u', g('a-u').value.trim().length === 0, 'wajib diisi');
+    const e2 = bad('a-p', g('a-p').value.length < 12, 'minimal 12 karakter');
+    const e3 = bad('a-m', !/^\d{6}$/.test(g('a-m').value), 'harus 6 digit');
+    const out = document.getElementById('a-out'); out.hidden = false;
+    out.textContent = (e1 || e2 || e3)
+      ? 'DITOLAK — kredensial/MFA tidak sah. Catatan: di produksi penolakan serupa juga terjadi di lapisan data, bukan hanya di form ini (uji: otorisasi tanpa MFA → tertolak).'
+      : 'DEMO — tidak ada otentikasi nyata.\n\nAlur sungguhan: Keycloak OIDC (Authorization Code + PKCE) → token diperiksa dengan DelegatingOAuth2TokenValidator → duplikat jti ditolak → cookie sesi HttpOnly/SameSite/Secure.\n\nPengguna "' + g('a-u').value.trim() + '" akan masuk dengan portlet sesuai perannya; kalau perannya bisa mengotorisasi, MFA sudah lewat di atas — itu prasyarat, bukan hiasan.';
+    g('a-p').value = ''; g('a-m').value = '';
+  });
+})();
+
+document.getElementById('printBtn')?.addEventListener('click', () => window.print());
+
+   // dwibahasa: tautan ke edisi lain membawa #bagian yang sedang dibaca, dan preferensi disimpan
+   document.querySelectorAll("a[data-lang-alt]").forEach((a) => {
+     a.href = a.getAttribute("data-lang-alt") + (location.hash || "");
+     a.addEventListener("click", () => { try { localStorage.setItem("orivo.lang", a.getAttribute("hreflang")); } catch (e) {} });
+   });
+</script>
+</body>
+</html>
+

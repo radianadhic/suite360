@@ -1,0 +1,656 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TreasuryOne — Platform Treasury &amp; Back-Office Bank Indonesia</title>
+<meta name="description" content="Platform treasury bank Indonesia: modul, menu, form, fitur — dibandingkan dengan Calypso, Murex, OPICS dan Front Arena. Angka terukur, celah dinyatakan.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 rx=%2714%27 fill=%27%230f2f3f%27/%3E%3Crect x=%2714%27 y=%2720%27 width=%2736%27 height=%276%27 rx=%273%27 fill=%27%2312a9b6%27/%3E%3Crect x=%2714%27 y=%2732%27 width=%2724%27 height=%276%27 rx=%273%27 fill=%27%23f2b33d%27/%3E%3C/svg%3E">
+<style>
+
+:root{--ink:#0d2b36;--mut:#4b6b78;--teal:#12a9b6;--deep:#0f2f3f;--gold:#f2b33d;--line:#d7e5ea;--bg:#f6fafb;--card:#fff}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 "Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
+a{color:var(--teal);text-decoration:none}a:hover{text-decoration:underline}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+header.top{position:sticky;top:0;z-index:30;background:rgba(15,47,63,.95);backdrop-filter:blur(8px);color:#e8f3f5;border-bottom:1px solid #12414f}
+header.top .row{display:flex;gap:12px;align-items:center;padding:9px 20px;max-width:1180px;margin:0 auto;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;color:#fff}
+.brand i{width:20px;height:20px;border-radius:6px;background:linear-gradient(140deg,var(--teal),#12707d 60%,var(--gold));display:inline-block}
+nav.links{display:flex;gap:2px;flex-wrap:wrap;margin-left:auto}
+nav.links a{color:#cfe6ea;font-size:12.5px;padding:6px 9px;border-radius:7px}
+nav.links a:hover,nav.links a.on{background:#154150;color:#fff;text-decoration:none}
+.lang{display:flex;gap:4px;margin-left:6px}
+.lang button{background:#123c4a;color:#cfe6ea;border:1px solid #1d5466;font:600 11.5px/1 system-ui;padding:7px 9px;border-radius:7px;cursor:pointer}
+.lang button.on{background:var(--teal);color:#03252b;border-color:var(--teal)}
+.hero{background:radial-gradient(1100px 460px at 12% -10%,#16505f,#0f2f3f 62%);color:#e9f5f7;padding:40px 0 30px}
+.hero h1{font-size:clamp(26px,4.2vw,42px);line-height:1.15;margin:0 0 10px;color:#fff}
+.hero h1 span{color:var(--gold)}
+.hero p.lead{max-width:66ch;color:#c8e3e7;font-size:16px;margin:0}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(172px,1fr));gap:10px;margin:20px 0 0}
+.stat{background:#123e4c;border:1px solid #1b5365;border-radius:12px;padding:11px 12px}
+.stat b{display:block;font-size:24px;line-height:1.1;color:#fff}
+.stat span{display:block;font-size:11.4px;color:#a9cfd6;margin-top:3px}
+.hero-note{color:#8fb9c2;margin-top:14px;font-size:12px}
+.cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.btn{display:inline-block;border-radius:10px;padding:11px 15px;font-weight:600;font-size:13.5px;border:1px solid transparent;cursor:pointer}
+.btn.p{background:var(--teal);color:#03252b}
+.btn.g{background:transparent;color:#cfe6ea;border-color:#2b6478}
+.btn.p:hover{text-decoration:none;filter:brightness(1.06)}
+section.blk{padding:34px 0 4px}
+.sec-h h2{font-size:clamp(19px,2.5vw,26px);margin:0 0 6px}
+.sec-h p{color:var(--mut);max-width:96ch;font-size:13.8px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px;margin:16px 0 8px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:13px;display:flex;gap:11px}
+.card .ic{font-size:19px;line-height:1.2;width:26px;text-align:center;flex:0 0 26px}
+.card h3{margin:0 0 3px;font-size:14px}
+.card p{margin:0;font-size:12.7px;color:#33586a}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:13px 14px}
+.tbl{margin-top:12px}
+.tbl-h{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.tbl-h h3{margin:0;font-size:15px}
+.filter{margin-left:auto;background:#fff;border:1px solid var(--line);border-radius:9px;padding:7px 10px;font-size:12.5px;min-width:190px;color:var(--ink)}
+.scroll{overflow-x:auto;margin-top:8px}
+table.mx{width:100%;border-collapse:collapse;font-size:12.3px}
+table.mx th{text-align:left;font-size:11px;color:#31596b;border-bottom:1.5px solid var(--line);padding:7px 8px;background:#f2f8fa}
+table.mx td{border-bottom:1px solid #eaf2f4;padding:7px 8px;vertical-align:top}
+table.mx tbody tr:hover td{background:#f7fcfd}
+.st{display:inline-block;font-size:11px;font-weight:700;border-radius:999px;padding:2px 8px;white-space:nowrap}
+.st.ok{background:#e8f6ee;color:#0d6b3f}
+.st.part{background:#fff6e5;color:#8a5a06}
+.st.no{background:#f1eef6;color:#583a7e}
+.hint{color:var(--mut);font-size:12px}
+.basis{font-size:11.8px;color:var(--mut);border-left:3px solid var(--teal);padding:6px 0 6px 10px;margin:12px 0}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:12px;margin-top:12px}
+ul.tick{list-style:none;padding:0;margin:8px 0 0}
+ul.tick li{position:relative;padding:0 0 8px 22px;font-size:13.3px;color:#2b4f5f}
+ul.tick li:before{content:"\2714";position:absolute;left:0;top:0;color:var(--teal);font-weight:700}
+.warn{background:#fff8ec;border:1px solid #f0d9a8;border-radius:12px;padding:10px 12px;font-size:12.5px;color:#5a4413;margin:10px 0}
+.kv{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.kv span{background:#eef5f7;border:1px solid var(--line);border-radius:999px;padding:3px 10px;font-size:11.5px;color:#2b5567}
+
+.twm-splash{position:fixed;inset:0;z-index:100;display:flex;flex-direction:column;align-items:center;
+ justify-content:center;gap:14px;text-align:center;padding:24px;color:#eaf6f8;
+ background:radial-gradient(1200px 620px at 50% -12%,#1a6a7c,#0c2733 58%,#081b24 100%);
+ animation:twmFade .45s ease-out both}
+.twm-splash[hidden]{display:none}
+.twm-splash.out{opacity:0;transition:opacity .22s ease}
+.twm-splash .mark{width:92px;height:92px;filter:drop-shadow(0 8px 22px rgba(18,169,182,.28))}
+.twm-splash .mark .b1{animation:twmBar 1.5s ease-in-out infinite both}
+.twm-splash .mark .b2{animation:twmBar 1.5s .16s ease-in-out infinite both}
+.twm-splash .mark .b3{animation:twmBar 1.5s .32s ease-in-out infinite both}
+.twm-splash .name{font-size:clamp(24px,4.6vw,38px);font-weight:800;letter-spacing:-.4px;color:#fff;margin:2px 0 0}
+.twm-splash .tag{font-size:clamp(13px,1.7vw,16px);color:#a9d6de;margin:0;max-width:52ch}
+.twm-splash .ev{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:2px}
+.twm-splash .ev i{font-style:normal;background:#123e4cbb;border:1px solid #1d5466;border-radius:999px;
+ padding:5px 11px;font-size:11.5px;color:#cfe9ee}
+.twm-splash .skip{margin-top:8px;background:transparent;border:1px solid #2b6478;color:#cfe6ea;
+ border-radius:10px;padding:9px 15px;font:600 12.5px/1 inherit;cursor:pointer}
+.twm-splash .skip:hover,.twm-splash .skip:focus-visible{background:#16495a;outline:none;border-color:var(--teal)}
+.twm-splash .bar{width:min(340px,72vw);height:3px;border-radius:3px;background:#ffffff22;overflow:hidden;margin-top:4px}
+.twm-splash .bar i{display:block;height:100%;width:100%;transform-origin:left;background:linear-gradient(90deg,var(--teal),var(--gold));animation:twmBar2 var(--twm-splash-ms,2200ms) linear forwards}
+@keyframes twmFade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@keyframes twmBar{0%,100%{transform:scaleY(.72)}50%{transform:scaleY(1)}}
+@keyframes twmBar2{from{transform:scaleX(1)}to{transform:scaleX(0)}}
+@media (prefers-reduced-motion:reduce){
+ .twm-splash,.twm-splash .mark .b1,.twm-splash .mark .b2,.twm-splash .mark .b3,.twm-splash .bar i{animation:none}
+}
+@media print{.twm-splash{display:none!important}}
+footer{margin-top:32px;background:var(--deep);color:#a9cfd6;font-size:11.7px;padding:16px 0 24px}
+footer .wrap{display:flex;gap:14px;flex-wrap:wrap;justify-content:space-between}
+code{background:#eef5f7;border-radius:4px;padding:0 4px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+@media (max-width:720px){.filter{margin-left:0;width:100%}}
+@media print{header.top,.cta,.filter,.lang{display:none!important}
+ body{background:#fff}.hero{background:none;color:#000;padding:0}
+ .hero h1,.hero h1 span,.stat b,.stat span,.hero p.lead,.hero-note{color:#111}
+ .card,.panel{break-inside:avoid}section.blk{padding:10px 0}.scroll{overflow:visible}}
+
+
+/* #peta: tabel per daftar (modul·menu·form·fitur) */
+.mx .cnt{display:inline-block;margin-left:6px;font-weight:400;color:#4b6b78;font-size:10.5px;
+  background:#eef5f7;border-radius:999px;padding:0 6px}
+.mx .dom{width:15%}.mx .to{width:29%}.mx .vv{width:7%}.mx .note{width:27%}
+.st.nd{background:#eef1f5;color:#5b6b78}
+.mx .st[title]{cursor:help}
+.basis{font-size:11px;color:#4b6b78;margin:8px 0 0}
+
+
+/* #gap — celah vs pembanding (terverifikasi pindai kode) */
+.gapnote{background:#fff8ec;border:1px solid #f0d9a8;border-radius:8px;padding:10px 12px;font-size:12px;color:#5a4413}
+.mx .pri{width:19%;font-size:11px;color:#25495c}
+.mx .to{width:28%}
+#gap .mx .vv{width:6.5%;white-space:nowrap}
+#gap .st.nd{background:#eef1f5;color:#5b6b78}
+#gap .st.ok{background:#f2f7f4}
+
+
+/* #frontarena — Front Arena (FIS) vs TreasuryOne */
+#frontarena .fa{width:23%;font-size:11px;color:#3d5f6e}
+#frontarena .note{width:17%}
+#frontarena .to{width:26%}
+#frontarena .dom{width:15%}
+#frontarena .st.nd{background:#eef1f5;color:#5b6b78}
+#frontarena .cite{font-size:10px;color:#087e8b}
+.fahead{display:flex;gap:10px;flex-wrap:wrap;align-items:baseline;margin:6px 0 2px}
+.fasrc{font-size:11px;color:#4b6b78;margin-top:8px}
+.fasrc a{color:#087e8b;text-decoration:none}
+</style>
+</head>
+<body>
+<div class="twm-splash" id="twmSplash" role="status" aria-live="polite" data-auto-dismiss="2200">
+  <svg class="mark" viewBox="0 0 64 64" aria-hidden="true">
+    <rect x="3" y="3" width="58" height="58" rx="15" fill="#0f2f3f" stroke="#12a9b6" stroke-opacity=".45"/>
+    <rect class="b1" x="12" y="18" width="40" height="7" rx="3.5" fill="#12a9b6"/>
+    <rect class="b2" x="12" y="29" width="27" height="7" rx="3.5" fill="#f2b33d"/>
+    <rect class="b3" x="12" y="40" width="15" height="7" rx="3.5" fill="#e8f3f5"/>
+  </svg>
+  <p class="name">TreasuryOne</p>
+  <p class="tag" data-i18n="splashTag">Operasi treasury digital untuk bank Indonesia — ledger, audit, dan tata kelola dalam satu platform.</p>
+  <div class="ev">
+    <i data-i18n="splashEv1">298 uji JUnit · 0 gagal</i>
+    <i data-i18n="splashEv2">145 panggilan endpoint terverifikasi</i>
+    <i data-i18n="splashEv3">Flyway V1–V31 · PostgreSQL 16</i>
+  </div>
+  <div class="bar" aria-hidden="true"><i></i></div>
+  <button class="skip" type="button" onclick="skipSplash()" data-i18n="splashSkip">Lewati →</button>
+</div>
+<noscript><style>.twm-splash{display:none}</style></noscript>
+<header class="top">
+  <div class="row">
+    <span class="brand"><i></i> TreasuryOne</span>
+    <nav class="links" aria-label="navigasi seksi">
+      <a href="#modul" data-i18n="navModul">Modul</a>
+      <a href="#banding" data-i18n="navBanding">Perbandingan</a>
+      <a href="#gap" data-i18n="navGap">Celah</a>
+      <a href="#platform" data-i18n="navPlatform">Platform</a>
+      <a href="#proses" data-i18n="navProses">Proses</a>
+      <a href="#kontak" data-i18n="navKontak">Kontak</a>
+    </nav>
+    <span class="lang" role="group" aria-label="bahasa">
+      <button id="btnId" class="on" onclick="setLang('id')">ID</button>
+      <button id="btnEn" onclick="setLang('en')">EN</button>
+    </span>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="wrap">
+    <h1 data-i18n="hero">Ledger treasury bank Indonesia — <span>dengan bukti, bukan brosur</span></h1>
+    <p class="lead" data-i18n="lead">TreasuryOne menyatukan capture deal, settlement, jurnal, rekonsiliasi,
+      pelaporan Antasena/OBOX/NOP/PDN/LHBU, modul Syariah, dan risiko pasar (limit, skenario, VaR) dalam satu
+      platform Spring Boot + PostgreSQL — dengan status per modul yang bisa Anda periksa ulang.</p>
+    <div class="stats">
+      <div class="stat"><b>18</b><span data-i18n="st1">18 grup navigasi · 185 item menu (203 baris)</span></div>
+      <div class="stat"><b>298</b><span data-i18n="st2">uji JUnit · 0 gagal · 0 skip</span></div>
+      <div class="stat"><b>145</b><span data-i18n="st3">panggilan endpoint terverifikasi · 0 GAGAL</span></div>
+      <div class="stat"><b>16</b><span data-i18n="st4">kartu modul — 10 ✅ · 6 🟡 · 0 ⚪</span></div>
+      <div class="stat"><b>221</b><span data-i18n="st5">tabel · 4 partisi · 2 view · Flyway V1–V31</span></div>
+      <div class="stat"><b>174</b><span data-i18n="st6">method endpoint · 22 controller · 28 kelas layanan</span></div>
+    </div>
+    <div class="cta">
+      <a class="btn p" href="#kontak" data-i18n="ctaDemo">Jadwalkan demo</a>
+      <a class="btn g" href="#banding" data-i18n="ctaCmp">Lihat perbandingan Calypso · Murex · OPICS · Front Arena</a>
+      <a class="btn g" href="#gap" data-i18n="ctaGap">Apa yang belum kami punya</a>
+    </div>
+    <p class="hero-note" data-i18n="heroNote">Semua angka di halaman ini dihitung dari kode + basis data provisioning
+      (<code>tools/inventory_report.py</code>) dan diverifikasi <code>mvn -B test</code> serta
+      <code>scripts/endpoint_check.py</code> — bukan dari daftar fitur pemasaran.</p>
+  </div>
+</div>
+
+<main>
+<section class="blk" id="modul">
+  <div class="wrap">
+    <div class="sec-h"><h2 data-i18n="modH">Modul yang ada — dengan status yang jujur</h2>
+      <p data-i18n="modP">18 grup navigasi · 185 item menu (203 baris navigasi) ·
+        221 tabel + 4 partisi + 2 view di skema
+        <code>treasury</code> (Flyway V1–V31). Legenda: <b>✅</b> jalur API + uji nyata ·
+        <b>🟡</b> skema &amp; seed ada, logika/UI sebagian · <b>⚪</b> skema saja (roadmap).</p></div>
+    <div class="cards">
+      <article class="card" data-status="part"><span class="ic">🗂️</span><div><h3>Master Data &amp; Parameter</h3><p><b>🟡</b> counterparty, book, SSI, holiday calendar, securities, currencies — tabel + seed; CRUD lewat API konfigurasi + persetujuan.</p></div></article>
+      <article class="card" data-status="part"><span class="ic">💱</span><div><h3>Dealing Center</h3><p><b>🟡</b> FX / money market / fixed income / derivatives: skema deal + generator komponen settlement &amp; jurnal beruji; smart ticket UI memakai data contoh lokal.</p></div></article>
+      <article class="card" data-status="ok"><span class="ic">🎯</span><div><h3>Risk &amp; Control</h3><p><b>✅</b> LimitEngine (PASS &lt;80% / WARN / BLOCK &gt;100, mismatch mata uang = BLOCK), pre-deal check value-date &amp; status counterparty, utilisasi dihitung set-based (flat di 3.000+ open deal).</p></div></article>
+      <article class="card" data-status="ok"><span class="ic">🌪️</span><div><h3>Skenario Risiko &amp; VaR</h3><p><b>✅</b> definisi skenario tekanan berfour-eyes; VaR delta-normal plus <b>Expected Shortfall</b> parametrik (<code>es_amount</code> + <code>es_method</code> di tiap run) (draf → ajukan → disetujui orang kedua → retire), dijalankan di atas <code>valuation_results</code>; VaR delta-normal dari sigma/korelasi + limit dengan bukti pelanggaran di <code>control_violation_log</code>. Yang tanpa model dilaporkan UNMODELED/UNSUPPORTED, bukan dianggap nol.</p></div></article>
+      <article class="card" data-status="ok"><span class="ic">📐</span><div><h3>Valuasi</h3><p><b>✅</b> ACT/360 accrued, FX mark-to-market, bond price→clean; <code>NO_PRICE</code> dikembalikan null — tidak pernah menebak harga.</p></div></article>
+      <article class="card" data-status="part"><span class="ic">🧾</span><div><h3>Finance &amp; Accounting</h3><p><b>🟡</b> JournalEngine (whitelist variabel, DR=CR per mata uang), aturan jurnal 9 produk, posting idempoten, rekonsiliasi sub-ledger↔GL; accrual/fee/tax masih roadmap.</p></div></article>
+      <article class="card" data-status="ok"><span class="ic">🔁</span><div><h3>Rekonsiliasi Nostro</h3><p><b>✅</b> tier-1 exact 100 · tier-2 fuzzy ±2 hari (skor 80−5/hari, strip prefiks FT/RTGS/BI/TT/SES/SSS) · tier-3 kandidat amount-only TIDAK auto-applied; break idempoten.</p></div></article>
+      <article class="card" data-status="part"><span class="ic">🌐</span><div><h3>Kanal Pembayaran</h3><p><b>🟡</b> SWIFT <code>.fin</code>, BI-RTGS/SSSS <code>.txt</code>, FAST <code>.xml</code>, core-banking <code>GL-*.csv</code> — generator file ke direktori yang disepakati + <code>integration_file_log</code>; layout final &amp; ACK inbound menunggu sertifikasi BI/bank.</p></div></article>
+      <article class="card" data-status="part"><span class="ic">🏛️</span><div><h3>Regulatory Hub</h3><p><b>🟡</b> Antasena (TPU01/TSD01/TRS01…), OBOX, NOP, LHBU, PDN: struktur, aturan &amp; governance terpasang; perhitungan bentuk laporan tertentu belum lengkap.</p></div></article>
+      <article class="card" data-status="part"><span class="ic">☪️</span><div><h3>Treasury Syariah</h3><p><b>🟡</b> akad, DPS approval, wadiah/mudarabah, nisbah, zakat sebagai modul (bukan add-on) — skema + alur, logika sebagian.</p></div></article>
+      <article class="card" data-status="ok"><span class="ic">📊</span><div><h3>Report Designer &amp; Viewer</h3><p><b>✅ drag-and-drop</b> — lihat blok di bawah.</p></div></article>
+      <article class="card" data-status="ok"><span class="ic">🧩</span><div><h3>Extension Studio</h3><p><b>✅</b> form builder drag-drop (JSON Schema), registry menu/modul, modeler BPMN 2.0 — semua lewat alur persetujuan 4-eyes.</p></div></article>
+      <article class="card" data-status="ok"><span class="ic">🛡️</span><div><h3>Tata Kelola &amp; Audit</h3><p><b>✅</b> maker-checker — termasuk aktivasi master data (calon → ajukan → disetujui orang kedua, V31) — matriks wewenang Flowable, hash payload anti-drift, <code>audit_log</code> <b>berantai-hash SHA-256</b> dengan trigger yang menolak UPDATE/DELETE, verifikasi lewat <code>GET /api/v1/audit/chain/verify</code> + ekspor bukti ter-sign ECDSA utk auditor luar, konfigurasi berversi + <code>config_effective_state</code>.</p></div></article>
+      <article class="card" data-status="ok"><span class="ic">⏱️</span><div><h3>Batch &amp; Penjadwalan</h3><p><b>✅</b> EOD chain (freeze → valuasi → jurnal → nostro) dengan ledger <code>eod_task_run</code>, retry terukur; penjadwal report CRUD + sewa pemimpin (<code>scheduler_lease</code>) sehingga aman di N instance.</p></div></article>
+      <article class="card" data-status="ok"><span class="ic">🧊</span><div><h3>Operasi Data</h3><p><b>✅</b> kapasitas diterapkan dengan guard terukur (V28): autovacuum + fillfactor pada <code>deals</code>/<code>journal_*</code>, BRIN hanya bila volume &amp; korelasi membenarkan (kalau ditolak, angkanya masuk <code>capacity_action_log</code>), <code>report_runs</code> dipartisi RANGE(run_at) karena FK masuk = 0; retensi arsip (V27) &amp; pembersihan <code>ACT_HI_*</code> tetap default-mati. pemangkasan jejak lama = <code>DETACH PARTITION</code> (data tetap terbaca di tabel <code>*_detached_*</code>, bukan DELETE); <code>deals</code> sengaja TIDAK dipartisi — 25 FK masuk.</p></div></article>
+      <article class="card" data-status="ok"><span class="ic">📋</span><div><h3>Task Station (antrean kerja)</h3><p><b>✅</b> klaim tunggal, <b>unclaim</b> kembali ke pool kelompok, <b>delegasi</b> ke identitas aktif dengan jejak <code>delegated_by</code> lalu <b>Kembalikan</b> (PENDING→RESOLVED), complete/reopen ber-peran; tombol yang dirender = aksi yang diterima server (<code>actions[]</code> dari kebijakan), setiap aksi menulis history + audit; saringan antrean dibaca dari <code>task_filter</code> (USER/GROUP/ALL, <code>filter=NONE</code> utk seluruh pool).</p></div></article>
+    </div>
+    <p class="basis" data-i18n="modBasis">Status tiap kartu diambil dari brosur kanonik
+      (<code>marketing/TREASURYONE_MARKETING.html</code>) yang sendiri dibangkitkan dari hasil ukur — halaman ini
+      tidak menambah atau mengurangi klaim.</p>
+  </div>
+</section>
+
+<section class="blk" id="banding">
+  <div class="wrap">
+    <div class="sec-h"><h2 data-i18n="tblH">Perbandingan per daftar — Modul · Menu · Form · Fitur/API</h2>
+      <p data-i18n="tblP">Empat tabel, empat produk pembanding. Kolom TreasuryOne berisi <b>status + bukti</b>
+        (kelas Java, tabel migrasi, jumlah method, hasil uji); kolom vendor menilai <b>cakupan domain</b> —
+        bukan klaim fitur per rilis, bukan pula perbandingan harga lisensi. Ketik di kotak saring untuk
+        memfilter baris pada tabel mana pun.</p></div>
+    <div class="warn" data-i18n="tblLang">Teks bukti tetap berbahasa Indonesia karena itulah bahasa audit &amp;
+      dokumen kerjanya; judul kolom, legenda, dan seluruh kerangka halaman tersedia ID/EN.</div>
+              <div class="panel tbl" id="banding-modul">
+        <div class="tbl-h"><h3 data-i18n="tblModulTitle">Tabel A — 16 modul vs Calypso · Murex · OPICS · Front Arena</h3>
+          <input class="filter" type="search" data-filter="banding-modul" data-i18n-ph="fPh" placeholder="saring baris…" aria-label="saring baris"></div>
+        <p class="hint" data-i18n="tblModulHint">Status &amp; bukti tiap modul diambil dari kartu <a href="#modul">#modul</a>; kolom vendor = cakupan setara di produk tersebut.</p>
+        <div class="scroll"><table class="mx" data-kid="tblModul">
+          <thead><tr><th class="dom" data-i18n="tblModulCol">Modul</th><th class="to" data-i18n="colTo">TreasuryOne — status &amp; bukti</th><th class="vv">Calypso</th><th class="vv">Murex</th><th class="vv">OPICS</th><th class="vv">Front&nbsp;Arena</th><th class="note" data-i18n="colNote">Catatan pembanding</th></tr></thead>
+          <tbody>
+              <tr><td class="dom">Master Data &amp; Parameter</td><td class="to"><span class="st part">🟡</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st ok" title="Business Data Processing utk data referensi/master [F2:BP080]">✅</span></td><td class="note">Calypso: BoM/static data penuh; OPICS sebatas master anggota & sekuritas</td></tr>
+              <tr><td class="dom">Dealing Center</td><td class="to"><span class="st part">🟡</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st no">⚪</span></td><td class="vv"><span class="st nd" title="n/d — tidak terdokumentasi di materi publik yang kami baca">n/d</span></td><td class="note">Deal Capture/OMS di Calypso &amp; MX.3; OPICS bukan utk bank; Front Arena: booking &amp; lifecycle produk pasar [F1], klaim per-formulir n/d</td></tr>
+              <tr><td class="dom">Risk &amp; Control</td><td class="to"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st nd" title="n/d — tidak terdokumentasi di materi publik yang kami baca">n/d</span></td><td class="note">pre-trade limit real-time justru inti OPICS; Front Arena: Limit/Compliance PRIME + rules engine [F2:BP110]</td></tr>
+              <tr><td class="dom">Skenario Risiko &amp; VaR</td><td class="to"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st ok" title="VaR, greeks/cross-greeks, DV01, CS01, sensitivities + risk factor scenarios & stress [F1][F2:BP120]">✅</span></td><td class="note">Calypso/MX.3: skenario + VaR historis/ES &amp; surface; OPICS lewat modul risiko; Front Arena: VaR/skenario/stress [F2:BP120] — kami: delta-normal + stress + ES parametrik (V31); backtest historis belum</td></tr>
+              <tr><td class="dom">Valuasi</td><td class="to"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st ok" title="200+ valuation models (dapat diperluas), yield curves & volatility manager; UDMC Monte Carlo (lisensi tambahan) [F1][F5:FA106/FA107/FA129]">✅</span></td><td class="note">MX.3 paling dalam (kurva, surface, XVA); Front Arena: 200+ valuation model, yield curve &amp; volatility manager [F5:FA106]</td></tr>
+              <tr><td class="dom">Finance &amp; Accounting</td><td class="to"><span class="st part">🟡</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st nd" title="n/d — tidak terdokumentasi di materi publik yang kami baca">n/d</span></td><td class="note">accrual/fee/tax &amp; multi-buku penuh di Calypso/MX.3; Front Arena: GL real-time + jurnal dari settlement [F2:BP100]</td></tr>
+              <tr><td class="dom">Rekonsiliasi Nostro</td><td class="to"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st nd" title="n/d — tidak terdokumentasi di materi publik yang kami baca">n/d</span></td><td class="note">Calypso/MX.3 punya rekonsiliasi bank + break workflow; Front Arena: rekonsiliasi kustodian/prime [F1]; nostro bank n/d</td></tr>
+              <tr><td class="dom">Kanal Pembayaran</td><td class="to"><span class="st part">🟡</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st no">⚪</span></td><td class="vv"><span class="st nd" title="n/d — tidak terdokumentasi di materi publik yang kami baca">n/d</span></td><td class="note">hub tersertifikasi SWIFT di Calypso/MX.3 (lisensi terpisah); Front Arena: kanal pembayaran Indonesia n/d</td></tr>
+              <tr><td class="dom">Regulatory Hub</td><td class="to"><span class="st part">🟡</span></td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st no">⚪</span></td><td class="vv"><span class="st part" title="templat laporan terdokumentasi utk UCITS/AIFMD/FormPF/OPERA + solvency capital — yurisdiksi lain [F1]">🟡</span></td><td class="note">Antasena/OBOX/PDN/LHBU tidak bawaan di ketiganya; Front Arena: templat yurisdiksi lain (UCITS/AIFMD) [F1]</td></tr>
+              <tr><td class="dom">Treasury Syariah</td><td class="to"><span class="st part">🟡</span></td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st no">⚪</span></td><td class="vv"><span class="st nd" title="n/d — modul Syariah tidak terdokumentasi">n/d</span></td><td class="note">kami native; Calypso/MX.3 lewat proyek konfigurasi; Front Arena: modul Syariah n/d</td></tr>
+              <tr><td class="dom">Report Designer &amp; Viewer</td><td class="to"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok" title="kerangka laporan XML/XSLT + ARENA Business Intelligence; laporan terjadwal/ad-hoc; agregasi &amp; scheduling via web [F1][F5:FA104]">✅</span></td><td class="note">report studio/web builder setara di ketiganya; Front Arena: report framework + BI engine [F1]; kami belum chart &amp; cross-tab</td></tr>
+              <tr><td class="dom">Extension Studio</td><td class="to"><span class="st ok">✅</span></td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st no">⚪</span></td><td class="vv"><span class="st ok" title="AEF: AEL/ACM/ADFL/ASQL + Python utk model harga &amp; logika bisnis [F5:FA101-FA107][F2:BP130]">✅</span></td><td class="note">MX.3 punya form &amp; workflow builder native; Calypso lewat CAKE/config; Front Arena: perpanjangan lewat AEF — jalur developer [F5]</td></tr>
+              <tr><td class="dom">Tata Kelola &amp; Audit</td><td class="to"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st nd" title="n/d — tidak terdokumentasi di materi publik yang kami baca">n/d</span></td><td class="note">approval matrix + jejak audit di ketiganya; kami tambah rantai-hash DB-level + anchor Merkle (V31) — di pembanding tidak terdokumentasi sebagai fitur</td></tr>
+              <tr><td class="dom">Batch &amp; Penjadwalan</td><td class="to"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st part" title="report scheduling + BDP utk proses data; rantai EOD khas bank tidak dirinci [F1][F2:BP080]">🟡</span></td><td class="note">EOD chain + restart-by-dependency setara; Front Arena: report-scheduling/BDP [F1]; rantai EOD bank n/d</td></tr>
+              <tr><td class="dom">Operasi Data</td><td class="to"><span class="st ok">✅</span></td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st nd" title="n/d — tidak terdokumentasi di materi publik yang kami baca">n/d</span></td><td class="note">keempatnya menyerahkan tuning/retensi ke DBA &amp; vendor</td></tr>
+              <tr><td class="dom">Task Station (antrean kerja)</td><td class="to"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st nd" title="n/d — tidak terdokumentasi di materi publik yang kami baca">n/d</span></td><td class="note">worklist Calypso/MX.3 lebih kaya (routing, SLA board, eskalasi); Front Arena: antrean via workflow PRIME; SLA board n/d</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="panel tbl" id="banding-menu">
+        <div class="tbl-h"><h3 data-i18n="tblMenuTitle">Tabel B — 18 grup navigasi (185 item dari 203 baris) vs pembanding</h3>
+          <input class="filter" type="search" data-filter="banding-menu" data-i18n-ph="fPh" placeholder="saring baris…" aria-label="saring baris"></div>
+        <p class="hint" data-i18n="tblMenuHint">Jumlah item per grup dihitung dari <code>frontend/public/index.html</code> lalu registry dinamis <code>ui_module</code>/<code>ui_menu</code> ditambahkan di atasnya.</p>
+        <div class="scroll"><table class="mx" data-kid="tblMenu">
+          <thead><tr><th class="dom" data-i18n="tblMenuCol">Grup menu</th><th class="to" data-i18n="colTo">TreasuryOne — status &amp; bukti</th><th class="vv">Calypso</th><th class="vv">Murex</th><th class="vv">OPICS</th><th class="vv">Front&nbsp;Arena</th><th class="note" data-i18n="colNote">Catatan pembanding</th></tr></thead>
+          <tbody>
+              <tr><td class="dom">MASTER DATA & PARAMETERS <span class="cnt">16 item</span></td><td class="to"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st ok" title="Business Data Processing utk data referensi/master [F2:BP080]">✅</span></td><td class="note">BoM / static data / reference</td></tr>
+              <tr><td class="dom">DEALING CENTER <span class="cnt">13 item</span></td><td class="to"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st no">⚪</span></td><td class="vv"><span class="st nd" title="n/d — tidak terdokumentasi di materi publik yang kami baca">n/d</span></td><td class="note">Deal Capture &amp; OMS — di luar produk bursa</td></tr>
+              <tr><td class="dom">RISK & CONTROL <span class="cnt">10 item</span></td><td class="to"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st nd" title="n/d — tidak terdokumentasi di materi publik yang kami baca">n/d</span></td><td class="note">limit &amp; pre-trade risk = jantung OPICS</td></tr>
+              <tr><td class="dom">POSITION, LIQUIDITY & ALM <span class="cnt">10 item</span></td><td class="to"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st part" title=" liquidity/position view lewat PMS & cash management; rasio regulatori tidak [F1]">🟡</span></td><td class="note">position keeping OPICS utk akun anggota</td></tr>
+              <tr><td class="dom">RISK & LIQUIDITY <span class="cnt">0 item</span></td><td class="to"><span class="st no">⚪</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st part" title=" liquidity/position view lewat PMS & cash management; rasio regulatori tidak [F1]">🟡</span></td><td class="note">grup lama tanpa item — isinya sudah digabung ke POSITION, LIQUIDITY &amp; ALM</td></tr>
+              <tr><td class="dom">MARKET DATA & RISK PARAMETERS <span class="cnt">16 item</span></td><td class="to"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st no">⚪</span></td><td class="vv"><span class="st nd" title="n/d — tidak terdokumentasi di materi publik yang kami baca">n/d</span></td><td class="note">curve/surface manager MX.3 paling lengkap; Front Arena: volatility manager + yield curve [F5:FA106]</td></tr>
+              <tr><td class="dom">OPERATIONS & SETTLEMENT <span class="cnt">14 item</span></td><td class="to"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st nd" title="n/d — tidak terdokumentasi di materi publik yang kami baca">n/d</span></td><td class="note">alur clearing &amp; settlement bursa</td></tr>
+              <tr><td class="dom">FINANCE & ACCOUNTING <span class="cnt">9 item</span></td><td class="to"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st nd" title="n/d — tidak terdokumentasi di materi publik yang kami baca">n/d</span></td><td class="note">accounting engine + multi-ledger</td></tr>
+              <tr><td class="dom">REGULATORY HUB <span class="cnt">6 item</span></td><td class="to"><span class="st ok">✅</span></td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st no">⚪</span></td><td class="vv"><span class="st part" title="templat laporan terdokumentasi utk UCITS/AIFMD/FormPF/OPERA + solvency capital — yurisdiksi lain [F1]">🟡</span></td><td class="note">lapor BI/OJK = proyek lokalisasi; bawaan nol di keempat pembanding utk yurisdiksi ID</td></tr>
+              <tr><td class="dom">ANT — Antasena <span class="cnt">17 item</span></td><td class="to"><span class="st ok">✅</span></td><td class="vv"><span class="st no">⚪</span></td><td class="vv"><span class="st no">⚪</span></td><td class="vv"><span class="st no">⚪</span></td><td class="vv"><span class="st nd" title="n/d — pelaporan & kanal Indonesia tidak terdokumentasi sebagai modul bawaan">n/d</span></td><td class="note">tidak ada yang bawaan — keunggulan kami</td></tr>
+              <tr><td class="dom">OBOX <span class="cnt">8 item</span></td><td class="to"><span class="st ok">✅</span></td><td class="vv"><span class="st no">⚪</span></td><td class="vv"><span class="st no">⚪</span></td><td class="vv"><span class="st no">⚪</span></td><td class="vv"><span class="st nd" title="n/d — pelaporan & kanal Indonesia tidak terdokumentasi sebagai modul bawaan">n/d</span></td><td class="note">idem</td></tr>
+              <tr><td class="dom">BLOM — Bloomberg <span class="cnt">7 item</span></td><td class="to"><span class="st ok">✅</span></td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st no">⚪</span></td><td class="vv"><span class="st nd" title="n/d — tidak terdokumentasi di materi publik yang kami baca">n/d</span></td><td class="note">lewat feed/adapter komersial, bukan modul menu</td></tr>
+              <tr><td class="dom">RPT — Web Reporting <span class="cnt">20 item</span></td><td class="to"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok" title="kerangka laporan XML/XSLT + ARENA Business Intelligence; laporan terjadwal/ad-hoc; agregasi &amp; scheduling via web [F1][F5:FA104]">✅</span></td><td class="note">portal report bawaan ketiganya</td></tr>
+              <tr><td class="dom">TREASURY SYARIAH <span class="cnt">9 item</span></td><td class="to"><span class="st ok">✅</span></td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st no">⚪</span></td><td class="vv"><span class="st nd" title="n/d — modul Syariah tidak terdokumentasi">n/d</span></td><td class="note">modul Islamik via konfigurasi/lokalisasi; n/d di materi publik Front Arena</td></tr>
+              <tr><td class="dom">ADMINISTRATION & INTEGRATION <span class="cnt">11 item</span></td><td class="to"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st nd" title="n/d — tidak terdokumentasi di materi publik yang kami baca">n/d</span></td><td class="note">user/role + integration hub</td></tr>
+              <tr><td class="dom">CONTROL <span class="cnt">1 item</span></td><td class="to"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st nd" title="n/d — tidak terdokumentasi di materi publik yang kami baca">n/d</span></td><td class="note">compliance &amp; limit monitoring</td></tr>
+              <tr><td class="dom">CONFIG & WORKFLOW <span class="cnt">7 item</span></td><td class="to"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st part" title="“extensive workflows” + pre/post-trade compliance checks &amp; audit trail; pemisahan 4-eyes eksplisit tidak dirinci [F1][F3]">🟡</span></td><td class="note">workflow designer native di MX.3</td></tr>
+              <tr><td class="dom">PARAMETER & ADVANCED CONTROL <span class="cnt">10 item</span></td><td class="to"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st nd" title="n/d — tidak terdokumentasi di materi publik yang kami baca">n/d</span></td><td class="note">set-up risiko/limit lanjut; Front Arena: limit set-up + skenario risiko [F2:BP110][F2:BP120]</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="panel tbl" id="banding-form">
+        <div class="tbl-h"><h3 data-i18n="tblFormTitle">Tabel C — 11 bentuk formulir &amp; form builder</h3>
+          <input class="filter" type="search" data-filter="banding-form" data-i18n-ph="fPh" placeholder="saring baris…" aria-label="saring baris"></div>
+        <p class="hint" data-i18n="tblFormHint">Termasuk pengakuan jujur: pada instalasi bersih belum ada definisi form tersimpan — fitur tersedia, belum dipakai.</p>
+        <div class="scroll"><table class="mx" data-kid="tblForm">
+          <thead><tr><th class="dom" data-i18n="tblFormCol">Formulir</th><th class="to" data-i18n="colTo">TreasuryOne — status &amp; bukti</th><th class="vv">Calypso</th><th class="vv">Murex</th><th class="vv">OPICS</th><th class="vv">Front&nbsp;Arena</th><th class="note" data-i18n="colNote">Catatan pembanding</th></tr></thead>
+          <tbody>
+              <tr><td class="dom">Form deal (capture &amp; submit)</td><td class="to"><span class="st part">🟡</span> <b>halaman <code>new-deal</code> + validasi server (limit, status counterparty, kalender libur); shell punya mode demo utk jalan tanpa backend</b></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st no">⚪</span></td><td class="vv"><span class="st nd" title="n/d — tidak terdokumentasi di materi publik yang kami baca">n/d</span></td><td class="note">form dealing penuh + auto-enrichment di Calypso/MX.3; Front Arena: booking via PRIME; form per instrumen n/d</td></tr>
+              <tr><td class="dom">Form pengajuan perubahan konfigurasi</td><td class="to"><span class="st ok">✅</span> <b>register → matriks wewenang → persetujuan → <code>config_effective_state</code>; payload di-hash sehingga tidak bisa diubah setelah disetujui</b></td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st nd" title="n/d — tidak terdokumentasi di materi publik yang kami baca">n/d</span></td><td class="note">di ketiganya perubahan konfigurasi lewat project/rilis, bukan form berversi</td></tr>
+              <tr><td class="dom">Form layout laporan (desainer)</td><td class="to"><span class="st ok">✅</span> <b>drag-and-drop band + 6 region layout; pratinjau browser &amp; renderer backend memakai dokumen JSON yang sama</b></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st part" title="kerangka laporan + kustomisasi terdokumentasi, tapi lewat XML/XSLT (pengembangan), bukan editor utk pengguna bisnis [F5:FA104]">🟡</span></td><td class="note">report studio setara</td></tr>
+              <tr><td class="dom">Form builder kustom</td><td class="to"><span class="st ok">✅</span> <b>7 tipe field; JSON Schema subset ≤ 60 field, kedalaman 1, min/max/pattern ditegakkan server</b></td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st no">⚪</span></td><td class="vv"><span class="st nd" title="n/d — kustomisasi di materi publik diarahkan ke AEF (developer), bukan builder utk pengguna bisnis">n/d</span></td><td class="note">MX.3 native; Calypso lewat CAKE/config; Front Arena: kustomisasi lewat AEF utk developer [F5]</td></tr>
+              <tr><td class="dom">Form proses BPMN</td><td class="to"><span class="st ok">✅</span> <b>8 proses: product activation, limit override, margin dispute, settlement exception, report publication, model governance, config change (2 varian)</b></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st nd" title="n/d — kustomisasi di materi publik diarahkan ke AEF (developer), bukan builder utk pengguna bisnis">n/d</span></td><td class="note">BPMN 2.0 standar terbuka hanya di kami &amp; MX.3; Front Arena: workflow internal PRIME, bukan BPMN [F1]</td></tr>
+              <tr><td class="dom">Form aksi task station</td><td class="to"><span class="st ok">✅</span> <b>claim/unclaim/delegate/undelegate/complete/reopen/comment; <code>actions[]</code> dihitung server + saringan <code>task_filter</code></b></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st nd" title="n/d — tidak terdokumentasi di materi publik yang kami baca">n/d</span></td><td class="note">action rights per user/group ada di ketiganya; Front Arena: action per peran via workflow, saringan tersimpan n/d</td></tr>
+              <tr><td class="dom">Form persetujuan pembayaran</td><td class="to"><span class="st ok">✅</span> <b>maker-checker per peran: approve → release → ACK/NACK → repair → settle; update status langsung ditolak</b></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st part" title="“extensive workflows” + pre/post-trade compliance checks &amp; audit trail; pemisahan 4-eyes eksplisit tidak dirinci [F1][F3]">🟡</span></td><td class="note">release authorization setara; OPICS utk settlement bursa; Front Arena: release/authorization utk trade pasar [F1]</td></tr>
+              <tr><td class="dom">Form penutupan rekonsiliasi</td><td class="to"><span class="st ok">✅</span> <b>Operations resolve dengan bukti, Supervisor menutup independen; break tidak pernah dihapus</b></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st nd" title="n/d — tidak terdokumentasi di materi publik yang kami baca">n/d</span></td><td class="note">break workflow + aging di keduanya</td></tr>
+              <tr><td class="dom">Form login portal klien</td><td class="to"><span class="st no">⚪</span> <b>halaman demo — belum tersambung ke backend otentikasi/SSO bank</b></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st nd" title="n/d — aplikasi mobile/portal tidak terdokumentasi">n/d</span></td><td class="note">SSO/OIDC + MFA bawaan Calypso/MX.3; Front Arena: hosted mode, MFA n/d</td></tr>
+              <tr><td class="dom">Definisi form tersimpan (instalasi bersih)</td><td class="to"><span class="st part">🟡</span> <b><code>object_form</code> = 5 baris: fitur tersedia &amp; beruji, belum dipakai — bukan pustaka form siap-pakai dari pabrik</b></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st no">⚪</span></td><td class="vv"><span class="st nd" title="n/d — tidak terdokumentasi di materi publik yang kami baca">n/d</span></td><td class="note">puluhan form bawaan produk komersial</td></tr>
+              <tr><td class="dom">Form skenario risiko &amp; uji tekan</td><td class="to"><span class="st ok">✅</span> <b>List/New/View/Edit/Submit/Approve/Retire + Run; tombol dari <code>actions</code> server, four-eyes 409, posisi tanpa model dilaporkan UNMODELED (bukan nol)</b></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st nd" title="n/d — tidak terdokumentasi di materi publik yang kami baca">n/d</span></td><td class="note">desain skenario + run + approval ada di Calypso/MX.3; OPICS lewat modul risiko; Front Arena: risk factor scenario &amp; stress [F1][F2:BP120]</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="panel tbl" id="banding-fitur">
+        <div class="tbl-h"><h3 data-i18n="tblApiTitle">Tabel D — 22 kelompok fitur / 174 method API</h3>
+          <input class="filter" type="search" data-filter="banding-fitur" data-i18n-ph="fPh" placeholder="saring baris…" aria-label="saring baris"></div>
+        <p class="hint" data-i18n="tblApiHint">Jumlah method per controller dihitung dari kode sumber, bukan dari daftar fitur pemasaran.</p>
+        <div class="scroll"><table class="mx" data-kid="tblApi">
+          <thead><tr><th class="dom" data-i18n="tblApiCol">Fitur (API)</th><th class="to" data-i18n="colTo">TreasuryOne — status &amp; bukti</th><th class="vv">Calypso</th><th class="vv">Murex</th><th class="vv">OPICS</th><th class="vv">Front&nbsp;Arena</th><th class="note" data-i18n="colNote">Catatan pembanding</th></tr></thead>
+          <tbody>
+              <tr><td class="dom"><code>HealthController</code> <span class="cnt">1 method</span></td><td class="to"><span class="st ok">✅</span> <b>health/readiness</b></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st nd" title="n/d — tidak terdokumentasi di materi publik yang kami baca">n/d</span></td><td class="note">&nbsp;</td></tr>
+              <tr><td class="dom"><code>RateLimitController</code> <span class="cnt">1 method</span></td><td class="to"><span class="st part">🟡</span> <b>token bucket per pemanggil (429 + Retry-After, penghitung dapat dibaca); default mati, belum kuota per kontrak</b></td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st nd" title="n/d — tidak terdokumentasi di materi publik yang kami baca">n/d</span></td><td class="note">&nbsp;</td></tr>
+              <tr><td class="dom"><code>AccountingController</code> <span class="cnt">5 method</span></td><td class="to"><span class="st ok">✅</span> <b>entries, rekonsiliasi sub-ledger↔GL, ekspor GL</b></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st nd" title="n/d — tidak terdokumentasi di materi publik yang kami baca">n/d</span></td><td class="note">&nbsp;</td></tr>
+              <tr><td class="dom"><code>AuditController</code> <span class="cnt">8 method</span></td><td class="to"><span class="st ok">✅</span> <b>kueri + verifikasi rantai-hash/anchor Merkle + ekspor bukti ter-sign ECDSA-P256; Front Arena: audit trail ✅ [F1], rantai-hash n/d</b></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st nd" title="n/d — tidak terdokumentasi di materi publik yang kami baca">n/d</span></td><td class="note">&nbsp;</td></tr>
+              <tr><td class="dom"><code>BatchController</code> <span class="cnt">5 method</span></td><td class="to"><span class="st ok">✅</span> <b>EOD run + rantai tugas berledger</b></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st part" title="report scheduling + BDP utk proses data; rantai EOD khas bank tidak dirinci [F1][F2:BP080]">🟡</span></td><td class="note">&nbsp;</td></tr>
+              <tr><td class="dom"><code>ConfigChangeController</code> <span class="cnt">16 method</span></td><td class="to"><span class="st ok">✅</span> <b>tata kelola konfigurasi lewat BPMN + matriks wewenang; FA n/d utk config-change berversi</b></td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st nd" title="n/d — tidak terdokumentasi di materi publik yang kami baca">n/d</span></td><td class="note">&nbsp;</td></tr>
+              <tr><td class="dom"><code>DealController</code> <span class="cnt">8 method</span></td><td class="to"><span class="st ok">✅</span> <b>lifecycle deal + ingest batch</b></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st no">⚪</span></td><td class="vv"><span class="st nd" title="n/d — tidak terdokumentasi di materi publik yang kami baca">n/d</span></td><td class="note">&nbsp;</td></tr>
+              <tr><td class="dom"><code>CounterpartyController</code> <span class="cnt">9 method</span></td><td class="to"><span class="st ok">✅</span> <b>master data + siklus aktivasi 4-eyes: submit→approve→EFFECTIVE, deactivate tangan kedua (V31); Front Arena: BDP master data [F2:BP080], approval berjenjang n/d</b></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st nd" title="n/d — tidak terdokumentasi di materi publik yang kami baca">n/d</span></td><td class="note">&nbsp;</td></tr>
+              <tr><td class="dom"><code>MasterReferenceController</code> <span class="cnt">3 method</span></td><td class="to"><span class="st ok">✅</span> <b>rujukan master utk dropdown layar (entitas, mata uang, kalender)</b></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st nd" title="n/d — tidak terdokumentasi di materi publik yang kami baca">n/d</span></td><td class="note">&nbsp;</td></tr>
+              <tr><td class="dom"><code>ReconciliationController</code> <span class="cnt">7 method</span></td><td class="to"><span class="st ok">✅</span> <b>break &amp; matching nostro 3-tier; Front Arena: prime/custodian reconciliation workflow [F1]</b></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st nd" title="n/d — tidak terdokumentasi di materi publik yang kami baca">n/d</span></td><td class="note">&nbsp;</td></tr>
+              <tr><td class="dom"><code>ReportDesignerController</code> <span class="cnt">14 method</span></td><td class="to"><span class="st ok">✅</span> <b>desainer + dataset ber-whitelist</b></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st nd" title="n/d — tidak terdokumentasi di materi publik yang kami baca">n/d</span></td><td class="note">&nbsp;</td></tr>
+              <tr><td class="dom"><code>ReportOpsController</code> <span class="cnt">13 method</span></td><td class="to"><span class="st ok">✅</span> <b>run/unduh/jadwal laporan</b></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st nd" title="n/d — tidak terdokumentasi di materi publik yang kami baca">n/d</span></td><td class="note">&nbsp;</td></tr>
+              <tr><td class="dom"><code>MaintenanceController</code> <span class="cnt">9 method</span></td><td class="to"><span class="st ok">✅</span> <b>kapasitas &amp; partisi: di produk lain urusan DBA</b></td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st nd" title="n/d — tidak terdokumentasi di materi publik yang kami baca">n/d</span></td><td class="note">&nbsp;</td></tr>
+              <tr><td class="dom"><code>RetentionController</code> <span class="cnt">3 method</span></td><td class="to"><span class="st ok">✅</span> <b>retensi arsip eksplisit, default mati</b></td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st nd" title="n/d — tuning/retensi basis data tidak terdokumentasi sbg fitur produk">n/d</span></td><td class="note">&nbsp;</td></tr>
+              <tr><td class="dom"><code>RiskLimitsController</code> <span class="cnt">2 method</span></td><td class="to"><span class="st ok">✅</span> <b>limit board + pre-deal check</b></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st nd" title="n/d — tidak terdokumentasi di materi publik yang kami baca">n/d</span></td><td class="note">&nbsp;</td></tr>
+              <tr><td class="dom"><code>RiskScenarioController</code> <span class="cnt">17 method</span></td><td class="to"><span class="st ok">✅</span> <b>skenario tekanan + VaR delta-normal + ES parametrik, four-eyes, hasil append-only (V30–V31); Front Arena: VaR/stress ✅ [F2:BP120], builder skenario berversi n/d</b></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st nd" title="n/d — tidak terdokumentasi di materi publik yang kami baca">n/d</span></td><td class="note">&nbsp;</td></tr>
+              <tr><td class="dom"><code>ValuationController</code> <span class="cnt">3 method</span></td><td class="to"><span class="st ok">✅</span> <b>MTM &amp; accrued; pricing penuh per instrumen di Calypso/MX.3; Front Arena: 200+ valuation model ✅ [F5]</b></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st nd" title="n/d">n/d</span></td><td class="note">&nbsp;</td></tr>
+              <tr><td class="dom"><code>SettlementController</code> <span class="cnt">8 method</span></td><td class="to"><span class="st ok">✅</span> <b>mesin status settlement</b></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st nd" title="n/d — tidak terdokumentasi di materi publik yang kami baca">n/d</span></td><td class="note">&nbsp;</td></tr>
+              <tr><td class="dom"><code>TaskStationController</code> <span class="cnt">9 method</span></td><td class="to"><span class="st ok">✅</span> <b>worklist + kepemilikan + saringan</b></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st nd" title="n/d — tidak terdokumentasi di materi publik yang kami baca">n/d</span></td><td class="note">&nbsp;</td></tr>
+              <tr><td class="dom"><code>ObjectFormController</code> <span class="cnt">15 method</span></td><td class="to"><span class="st part">🟡</span> <b>builder form kustom — lebih muda dari MX.3</b></td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st no">⚪</span></td><td class="vv"><span class="st nd" title="n/d — tidak terdokumentasi di materi publik yang kami baca">n/d</span></td><td class="note">&nbsp;</td></tr>
+              <tr><td class="dom"><code>ProcessModelerController</code> <span class="cnt">5 method</span></td><td class="to"><span class="st part">🟡</span> <b>modeler BPMN vs workflow designer proprietary</b></td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st no">⚪</span></td><td class="vv"><span class="st nd" title="n/d — kustomisasi di materi publik diarahkan ke AEF (developer), bukan builder utk pengguna bisnis">n/d</span></td><td class="note">&nbsp;</td></tr>
+              <tr><td class="dom"><code>UiNavController</code> <span class="cnt">13 method</span></td><td class="to"><span class="st part">🟡</span> <b>registry menu/modul; produk lain lewat config rilis</b></td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st no">⚪</span></td><td class="vv"><span class="st nd" title="n/d — tidak terdokumentasi di materi publik yang kami baca">n/d</span></td><td class="note">&nbsp;</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+    <p class="basis" data-i18n="tblBasis">Basis penilaian vendor: <i>Calypso Back Office End-User Manual V13</i>
+      (dipakai sebagai checklist kontrol back-office), dokumentasi publik Murex MX.3 &amp; Nasdaq OPICS, dan materi
+      publik FIS Front Arena. Untuk Front Arena hanya yang terdokumentasi diberi ✅/🟡; sisanya <b>n/d</b> —
+      <i>bukan</i> berarti produk itu tidak punya.</p>
+    <p class="basis" data-i18n="tblSrc">Tautan materi yang dipakai: <a href="https://www.fisglobal.com/-/media/fisglobal/files/pdf/product-sheet/explore-fis-front-arena-for-hedge-funds-product-sheet.pdf" target="_blank" rel="noopener">F1</a> · <a href="https://www.fisglobal.com/trading-university/certification/fabp" target="_blank" rel="noopener">F2</a> · <a href="https://financialit.net/products/trading-systems/front-arena" target="_blank" rel="noopener">F3</a> · <a href="https://www.fisglobal.com/capital-markets-solutions/investment-banking-and-brokerage/trading-connectivity-and-market-data/l3b-frontarena" target="_blank" rel="noopener">F4</a> · <a href="https://www.fisglobal.com/trading-university/courses/course-list" target="_blank" rel="noopener">F5</a>.</p>
+  </div>
+</section>
+
+<section class="blk" id="gap">
+  <div class="wrap">
+<div class="sec-h"><h2 data-i18n="gapH">Yang dimiliki OPICS, Calypso, Murex &amp; Front Arena — dan belum kami punya</h2>
+  <p data-i18n="gapIntro">Daftar ini bukan pengakuan seremonial: tiap baris ⚪ diverifikasi NIHIL di kode (java/resources/frontend + skema migrasi), tiap baris 🟡 punya skema/menu/konfigurasi tetapi belum berlogika. Bila klaim dan kode berbeda, generator berhenti dan brosur tidak ditulis.</p></div>
+  <div class="gapnote"><b>Ringkas:</b> 51 celah dipetakan — 31 ⚪ belum sama sekali, 20 🟡 sebagian. Sumber: <code>treasury-one/tools/gap_probe.py</code> (pindai 95 berkas Java, 176 nama tabel dari migrasi, 203 label menu, 174 method endpoint) pada 2026-09-05. <b>Kolom Front Arena</b> memakai konvensi n/d: hanya yang terdokumentasi di materi publik yang diberi ✅/🟡 (rincian: <a href="#frontarena">#frontarena</a>); sisanya <span class="st nd">n/d</span> — bukan pernyataan bahwa produk itu tidak punya. <span data-i18n="gapOut">Yang ditandai “tidak direncanakan” memang di luar cakupan</span> — kami menulis alasannya, bukan menghilangkan barisnya.</div>
+  <div class="panel" style="margin-top:12px" id="gap-modul">
+    <h3 data-i18n="gapModul">A · Modul — 21 baris (10 ⚪ belum sama sekali · 11 🟡 sebagian)</h3>
+    <table class="mx">
+      <thead><tr><th>Kemampuan di produk pembanding</th><th class="vv">Calypso</th><th class="vv">Murex</th><th class="vv">OPICS</th><th class="vv">Front&nbsp;Arena</th><th class="to">TreasuryOne sekarang — bukti hasil pindai</th><th>Prioritas &amp; dampak</th></tr></thead>
+      <tbody>
+      <tr data-claim="partial" data-probe="xva_pfe" data-fa="nd"><td class="dom">XVA — CVA / DVA / FVA &amp; PFE</td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st no">⚪</span></td><td class="vv"><span class="st nd" title="n/d — XVA/PFE tidak terdokumentasi">n/d</span></td><td class="to"><span class="st part">🟡</span> label <b>XVA</b> ada di navigasi &amp; skema risiko ada; engine valuasi eksposur belum dibangun</td><td class="pri">P2 · perlu utk bank dgn book derivatif besar</td></tr>
+      <tr data-claim="absent" data-probe="simm,voice_broker" data-fa="nd"><td class="dom">SIMM / initial margin &amp; broker feed (voice-broker)</td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st no">⚪</span></td><td class="vv"><span class="st nd" title="n/d — SIMM tidak terdokumentasi">n/d</span></td><td class="to"><span class="st no">⚪</span> 0 jejak di kode maupun skema</td><td class="pri">P2 · derivatif teregulasi (IM)</td></tr>
+      <tr data-claim="partial" data-probe="volatility_surface,curve_builder" data-fa="ok"><td class="dom">Kurva &amp; surface: builder, bootstrapping, implied vol</td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st no">⚪</span></td><td class="vv"><span class="st ok" title="200+ valuation models (dapat diperluas), yield curves & volatility manager; UDMC Monte Carlo (lisensi tambahan) [F1][F5:FA106/FA107/FA129]">✅</span></td><td class="to"><span class="st part">🟡</span> menu + <b>layar parameter VaR/ES</b> nyata (sigma/korelasi tersimpan, riwayat SUPERSEDED; ES parametrik memakai sigma ini — V31); kurva masih hanya utk mark-to-market sederhana — tanpa builder, bootstrap &amp; implied vol</td><td class="pri">P1 · prasyarat pricing derivatif serius</td></tr>
+      <tr data-claim="absent" data-probe="loan_deposit" data-fa="nd"><td class="dom">Pinjaman, deposito &amp; sindikasi</td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st no">⚪</span></td><td class="vv"><span class="st nd" title="n/d — buku pinjaman/deposito tidak terdokumentasi">n/d</span></td><td class="to"><span class="st no">⚪</span> tidak ada tabel maupun endpoint</td><td class="pri">P2 · funding side</td></tr>
+      <tr data-claim="absent" data-probe="inhouse_bank" data-fa="nd"><td class="dom">In-house banking: cash pool &amp; sweeping</td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st no">⚪</span></td><td class="vv"><span class="st nd" title="n/d — in-house banking tidak terdokumentasi">n/d</span></td><td class="to"><span class="st no">⚪</span> tidak ada skema/logika</td><td class="pri">P2 · grup konglomerasi</td></tr>
+      <tr data-claim="absent" data-probe="structured_products" data-fa="nd"><td class="dom">Structured products / CLN / penerbitan note</td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st no">⚪</span></td><td class="vv"><span class="st nd" title="n/d">n/d</span></td><td class="to"><span class="st no">⚪</span> tidak ada</td><td class="pri">P3 · niche</td></tr>
+      <tr data-claim="absent" data-probe="ifrs9_ecl" data-fa="nd"><td class="dom">IFRS 9 — staging ECL &amp; impairment</td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st no">⚪</span></td><td class="vv"><span class="st nd" title="n/d — IFRS 9/ECL tidak terdokumentasi">n/d</span></td><td class="to"><span class="st no">⚪</span> tidak ada perhitungan provisioning</td><td class="pri">P1 · diminta akuntansi &amp; audit internal</td></tr>
+      <tr data-claim="absent" data-probe="basel_capital" data-fa="nd"><td class="dom">Basel — RWA &amp; output floor</td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st no">⚪</span></td><td class="vv"><span class="st nd" title="n/d — RWA/Basel tidak terdokumentasi">n/d</span></td><td class="to"><span class="st no">⚪</span> tidak ada engine kalkulasi modal</td><td class="pri">P1 · modal regulatoris</td></tr>
+      <tr data-claim="partial" data-probe="lcr_nsfr" data-fa="nd"><td class="dom">LCR &amp; NSFR computation</td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st no">⚪</span></td><td class="vv"><span class="st nd" title="n/d — rasio LCR/NSFR tidak terdokumentasi">n/d</span></td><td class="to"><span class="st part">🟡</span> layar/istilah likuiditas ada di shell; perhitungan rasio belum</td><td class="pri">P1 · lapor likuiditas BI/OJK</td></tr>
+      <tr data-claim="partial" data-probe="ftp_engine,alm_duration" data-fa="nd"><td class="dom">FTP (funds transfer pricing) &amp; duration gap</td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st no">⚪</span></td><td class="vv"><span class="st nd" title="n/d — FTP/duration gap tidak terdokumentasi (≠ “pricing” model valuasi)">n/d</span></td><td class="to"><span class="st part">🟡</span> skema FTP/ALM ada (V8) + menu; algoritma alokasi &amp; repricing bucket belum</td><td class="pri">P2 · ALM</td></tr>
+      <tr data-claim="partial" data-probe="collateral_opt,optimization_solver" data-fa="nd"><td class="dom">Optimisasi &amp; substitusi collateral, haircut schedule</td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st nd" title="n/d — optimisasi collateral tidak terdokumentasi">n/d</span></td><td class="to"><span class="st part">🟡</span> tabel <code>collateral_substitution_requests</code> + skema haircut; tanpa solver/optimisasi</td><td class="pri">P2 · efisiensi margin</td></tr>
+      <tr data-claim="absent" data-probe="document_gen" data-fa="nd"><td class="dom">Generasi dokumen (konfirmasi, ISDA/CSA) &amp; e-signature</td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st no">⚪</span></td><td class="vv"><span class="st nd" title="n/d — generasi dokumen legal & e-signature tidak terdokumentasi">n/d</span></td><td class="to"><span class="st no">⚪</span> tidak ada; report designer kami hanya menghasilkan laporan, bukan dokumen legal</td><td class="pri">P1 · operasional daily</td></tr>
+      <tr data-claim="absent" data-probe="surveillance" data-fa="nd"><td class="dom">Market surveillance &amp; monitoring order anggota</td><td class="vv"><span class="st no">⚪</span></td><td class="vv"><span class="st no">⚪</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st nd" title="n/d — pengawasan pasar tidak terdokumentasi">n/d</span></td><td class="to"><span class="st no">⚪</span> di luar cakupan back-office bank — ditandai jujur, bukan disembunyikan</td><td class="pri">tidak direncanakan (bukan produk bursa)</td></tr>
+      <tr data-claim="partial" data-probe="ccp_clearing" data-fa="nd"><td class="dom">CCP / clearing: netting set &amp; default fund</td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st nd" title="n/d — CCP/clearing house tidak terdokumentasi (itu wilayah OPICS)">n/d</span></td><td class="to"><span class="st part">🟡</span> skema <code>netting_sets</code> ada; engine netting &amp; margincall belum</td><td class="pri">P2 · jika masuk clearing house</td></tr>
+      <tr data-claim="partial" data-probe="kafka_cdc" data-fa="part"><td class="dom">Event fan-out: outbox → Kafka / CDC</td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st part" title="messaging backbone (AMB) &amp; feed gudang data terdokumentasi; Kafka/CDC spesifik tidak [F5:FA113]">🟡</span></td><td class="to"><span class="st part">🟡</span> tabel <code>event_outbox</code> + blok <code>spring.kafka</code> ada; 0 producer/consumer</td><td class="pri">P1 · integrasi real-time</td></tr>
+      <tr data-claim="partial" data-probe="multi_gaap_ledger" data-fa="nd"><td class="dom">Buku besar multi-GAAP, cost centre &amp; budget</td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st nd" title="n/d — multi-GAAP/cost centre/budget tidak terdokumentasi">n/d</span></td><td class="to"><span class="st part">🟡</span> tabel <code>cost_centers</code> ada; tanpa pemisahan standar akuntansi ganda</td><td class="pri">P2 · holding besar</td></tr>
+      <tr data-claim="partial" data-probe="data_lineage" data-fa="nd"><td class="dom">Data lineage &amp; semantic layer / BI</td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st no">⚪</span></td><td class="vv"><span class="st nd" title="n/d">n/d</span></td><td class="to"><span class="st part">🟡</span> menu <b>Source Lineage</b> ada; tanpa pelacakan kolom ke hulu</td><td class="pri">P2 · audit data</td></tr>
+      <tr data-claim="partial" data-probe="client_portal,mobile_app" data-fa="nd"><td class="dom">Portal klien, dealer web &amp; approval mobile + push</td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st no">⚪</span></td><td class="vv"><span class="st nd" title="n/d — aplikasi mobile/portal tidak terdokumentasi">n/d</span></td><td class="to"><span class="st part">🟡</span> tabel <code>mobile_approval_requests/audit</code> ada; tanpa aplikasi, tanpa push, tanpa portal</td><td class="pri">P1 · adopsi pengguna</td></tr>
+      <tr data-claim="partial" data-probe="digital_asset" data-fa="nd"><td class="dom">Aset digital / tokenised collateral</td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st no">⚪</span></td><td class="vv"><span class="st nd" title="n/d — aset digital/tokenisasi tidak terdokumentasi">n/d</span></td><td class="to"><span class="st part">🟡</span> skema <code>digital_asset_identifiers</code> &amp; <code>tokenized_collateral_movements</code>; tanpa logika</td><td class="pri">tidak direncanakan (roadmap)</td></tr>
+      <tr data-claim="absent" data-probe="statement_gen,penalty_interest" data-fa="nd"><td class="dom">Rekening koran &amp; denda late settlement</td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st nd" title="n/d — statement nasabah & perhitungan denda tidak terdokumentasi">n/d</span></td><td class="to"><span class="st no">⚪</span> 0 perhitungan penalti/bunga keterlambatan</td><td class="pri">P1 · SLA nasabah</td></tr>
+      <tr data-claim="absent" data-probe="test_workbench" data-fa="nd"><td class="dom">Workbench data uji / sandbox UAT</td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st no">⚪</span></td><td class="vv"><span class="st nd" title="n/d">n/d</span></td><td class="to"><span class="st no">⚪</span> tidak ada; uji kami berbasis seed, bukan generator data</td><td class="pri">P2 · percepat UAT bank</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="panel" style="margin-top:12px" id="gap-menu">
+    <h3 data-i18n="gapMenu">B · Grup menu — 12 baris (10 ⚪ belum sama sekali · 2 🟡 sebagian)</h3>
+    <table class="mx">
+      <thead><tr><th>Kemampuan di produk pembanding</th><th class="vv">Calypso</th><th class="vv">Murex</th><th class="vv">OPICS</th><th class="vv">Front&nbsp;Arena</th><th class="to">TreasuryOne sekarang — bukti hasil pindai</th><th>Prioritas &amp; dampak</th></tr></thead>
+      <tbody>
+      <tr data-claim="menu-absent" data-probe="loan_deposit" data-fa="nd"><td class="dom">Loan &amp; Deposit</td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st no">⚪</span></td><td class="vv"><span class="st nd" title="n/d — buku pinjaman/deposito tidak terdokumentasi">n/d</span></td><td class="to"><span class="st no">⚪</span> tidak ada label navigasi sama sekali</td><td class="pri">ikut modul terkait</td></tr>
+      <tr data-claim="menu-absent" data-probe="inhouse_bank" data-fa="nd"><td class="dom">In-house Banking / Cash Pool</td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st no">⚪</span></td><td class="vv"><span class="st nd" title="n/d — in-house banking tidak terdokumentasi">n/d</span></td><td class="to"><span class="st no">⚪</span> tidak ada label</td><td class="pri">ikut modul</td></tr>
+      <tr data-claim="menu-absent" data-probe="document_gen" data-fa="nd"><td class="dom">Documents &amp; E-signature</td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st no">⚪</span></td><td class="vv"><span class="st nd" title="n/d — generasi dokumen legal & e-signature tidak terdokumentasi">n/d</span></td><td class="to"><span class="st no">⚪</span> tidak ada label</td><td class="pri">P1</td></tr>
+      <tr data-claim="menu-absent" data-probe="surveillance" data-fa="nd"><td class="dom">Market Surveillance</td><td class="vv"><span class="st no">⚪</span></td><td class="vv"><span class="st no">⚪</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st nd" title="n/d — pengawasan pasar tidak terdokumentasi">n/d</span></td><td class="to"><span class="st no">⚪</span> tidak ada label (di luar cakupan bank)</td><td class="pri">tidak direncanakan</td></tr>
+      <tr data-claim="menu-absent" data-probe="" data-fa="nd"><td class="dom">Clearing &amp; Netting (CCP)</td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st nd" title="n/d — CCP/clearing house tidak terdokumentasi (itu wilayah OPICS)">n/d</span></td><td class="to"><span class="st no">⚪</span> tanpa menu; skema <code>netting_sets</code> memang sudah ada (dihitung di baris modul)</td><td class="pri">P2</td></tr>
+      <tr data-claim="menu-absent" data-probe="ifrs9_ecl" data-fa="nd"><td class="dom">IFRS 9 / Impairment</td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st no">⚪</span></td><td class="vv"><span class="st nd" title="n/d — IFRS 9/ECL tidak terdokumentasi">n/d</span></td><td class="to"><span class="st no">⚪</span> tidak ada label</td><td class="pri">P1</td></tr>
+      <tr data-claim="menu-absent" data-probe="basel_capital" data-fa="nd"><td class="dom">Capital &amp; RWA (Basel)</td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st no">⚪</span></td><td class="vv"><span class="st nd" title="n/d — RWA/Basel tidak terdokumentasi">n/d</span></td><td class="to"><span class="st no">⚪</span> tidak ada label</td><td class="pri">P1</td></tr>
+      <tr data-claim="menu-absent" data-probe="" data-fa="nd"><td class="dom">Release &amp; Config Promotion</td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st nd" title="n/d — tidak terdokumentasi di materi publik yang kami baca">n/d</span></td><td class="to"><span class="st no">⚪</span> tidak ada menu promosi konfigurasi antar lingkungan; riwayat efektif-state sudah ada (lihat baris Fitur)</td><td class="pri">P1 · ops rilis</td></tr>
+      <tr data-claim="menu-absent" data-probe="" data-fa="nd"><td class="dom">Disaster Recovery / RPO-RTO</td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st nd" title="n/d — tidak terdokumentasi di materi publik yang kami baca">n/d</span></td><td class="to"><span class="st no">⚪</span> tidak ada label maupun layar</td><td class="pri">P1 · go-live</td></tr>
+      <tr data-claim="menu-absent" data-probe="client_portal" data-fa="nd"><td class="dom">Client / Dealer Portal</td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st no">⚪</span></td><td class="vv"><span class="st nd" title="n/d — aplikasi mobile/portal tidak terdokumentasi">n/d</span></td><td class="to"><span class="st no">⚪</span> tidak ada label</td><td class="pri">P2</td></tr>
+      <tr data-claim="partial" data-probe="volatility_surface" data-fa="nd"><td class="dom">Volatility surface editor</td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st no">⚪</span></td><td class="vv"><span class="st nd" title="n/d — tidak terdokumentasi di materi publik yang kami baca">n/d</span></td><td class="to"><span class="st part">🟡</span> label volatility hanya tersisa di halaman demo (<code>marketdata|vol</code>); tidak ada editor surface/implied-vol di backend — yang sudah nyata parameter sigma &amp; korelasi utk VaR &amp; ES (<code>/api/v1/risk/var/parameters</code>, riwayat SUPERSEDED)</td><td class="pri">P2 · prasyarat pricing opsi</td></tr>
+      <tr data-claim="menu-present" data-probe="data_lineage" data-fa="nd"><td class="dom">Source Lineage</td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st no">⚪</span></td><td class="vv"><span class="st nd" title="n/d">n/d</span></td><td class="to"><span class="st part">🟡</span> label ADA, fungsi belum</td><td class="pri">P2</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="panel" style="margin-top:12px" id="gap-form">
+    <h3 data-i18n="gapForm">C · Bentuk formulir — 8 baris (5 ⚪ belum sama sekali · 3 🟡 sebagian)</h3>
+    <table class="mx">
+      <thead><tr><th>Kemampuan di produk pembanding</th><th class="vv">Calypso</th><th class="vv">Murex</th><th class="vv">OPICS</th><th class="vv">Front&nbsp;Arena</th><th class="to">TreasuryOne sekarang — bukti hasil pindai</th><th>Prioritas &amp; dampak</th></tr></thead>
+      <tbody>
+      <tr data-claim="absent" data-probe="attachment" data-fa="nd"><td class="dom">Form pengajuan limit + lampiran dokumen + kalkulator exposure</td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st nd" title="n/d — unggah/lampiran dokumen tidak terdokumentasi">n/d</span></td><td class="to"><span class="st no">⚪</span> tidak ada layanan attachment/upload di kode</td><td class="pri">P1 · officer workflow</td></tr>
+      <tr data-claim="partial" data-probe="volatility_surface" data-fa="ok"><td class="dom">Form input smile/vol &amp; recalibration kurva</td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st no">⚪</span></td><td class="vv"><span class="st ok" title="200+ valuation models (dapat diperluas), yield curves & volatility manager; UDMC Monte Carlo (lisensi tambahan) [F1][F5:FA106/FA107/FA129]">✅</span></td><td class="to"><span class="st part">🟡</span> form parameter sigma/korelasi <b>sudah ada</b> (tersimpan + beruji); smile/implied-vol &amp; recalibration kurva belum</td><td class="pri">P2</td></tr>
+      <tr data-claim="absent" data-probe="ifrs9_ecl" data-fa="nd"><td class="dom">Form staging ECL &amp; parameter IFRS 9</td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st no">⚪</span></td><td class="vv"><span class="st nd" title="n/d — IFRS 9/ECL tidak terdokumentasi">n/d</span></td><td class="to"><span class="st no">⚪</span> tidak ada</td><td class="pri">P1</td></tr>
+      <tr data-claim="partial" data-probe="mobile_app" data-fa="nd"><td class="dom">Form approval mobile (OTP / tanda tangan elektronik)</td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st no">⚪</span></td><td class="vv"><span class="st nd" title="n/d — generasi dokumen legal & e-signature tidak terdokumentasi">n/d</span></td><td class="to"><span class="st part">🟡</span> skema approval mobile ada, form &amp; verifikasi tidak</td><td class="pri">P1</td></tr>
+      <tr data-claim="absent" data-probe="kyc_onboarding" data-fa="nd"><td class="dom">Form onboarding KYC/AML &amp; beneficial ownership</td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st nd" title="n/d — onboarding KYC/AML tidak terdokumentasi">n/d</span></td><td class="to"><span class="st no">⚪</span> builder punya kategori <code>KYC</code> utk form kustom, tetapi tanpa alur onboarding/dokumen legal</td><td class="pri">P1 · kepatuhan</td></tr>
+      <tr data-claim="absent" data-probe="penalty_interest" data-fa="nd"><td class="dom">Form settlement fail: denda &amp; bunga keterlambatan</td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st nd" title="n/d — statement nasabah & perhitungan denda tidak terdokumentasi">n/d</span></td><td class="to"><span class="st no">⚪</span> tidak ada perhitungannya</td><td class="pri">P1</td></tr>
+      <tr data-claim="partial" data-probe="multi_gaap_ledger" data-fa="nd"><td class="dom">Form budget / cost centre &amp; accrual approval</td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st nd" title="n/d — multi-GAAP/cost centre/budget tidak terdokumentasi">n/d</span></td><td class="to"><span class="st part">🟡</span> tabel <code>cost_centers</code> ada; form &amp; alur tidak</td><td class="pri">P2</td></tr>
+      <tr data-claim="absent" data-probe="nested_form,computed_field" data-fa="nd"><td class="dom">Builder: sub-form nested, grid repeatable &amp; field terhitung</td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st no">⚪</span></td><td class="vv"><span class="st nd" title="n/d — sub-form/field terhitung pada builder tidak terdokumentasi">n/d</span></td><td class="to"><span class="st no">⚪</span> form builder kami sengaja dibatasi: kedalaman 1, tanpa formula — konsekuensi pilihan keamanan kami — tetap kami catat sebagai celah</td><td class="pri">P2 · keputusan desain, bisa dibuka bertahap</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="panel" style="margin-top:12px" id="gap-fitur">
+    <h3 data-i18n="gapApi">D · Fitur / API — 10 baris (6 ⚪ belum sama sekali · 4 🟡 sebagian)</h3>
+    <table class="mx">
+      <thead><tr><th>Kemampuan di produk pembanding</th><th class="vv">Calypso</th><th class="vv">Murex</th><th class="vv">OPICS</th><th class="vv">Front&nbsp;Arena</th><th class="to">TreasuryOne sekarang — bukti hasil pindai</th><th>Prioritas &amp; dampak</th></tr></thead>
+      <tbody>
+      <tr data-claim="absent" data-probe="realtime_stream" data-fa="part"><td class="dom">Push risiko real-time (WebSocket/SSE)</td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st part" title="AMB = message broker internal utk integrasi real-time; push ke browser tidak terdokumentasi [F5:FA113]">🟡</span></td><td class="to"><span class="st no">⚪</span> 0 dependensi/websocket di kode</td><td class="pri">P1 · intraday</td></tr>
+      <tr data-claim="partial" data-probe="dmn" data-fa="nd"><td class="dom">API keputusan berbasis DMN</td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st nd" title="n/d — keputusan berbasis DMN tidak terdokumentasi">n/d</span></td><td class="to"><span class="st part">🟡</span> sengaja tidak dibawa (Flowable BPMN+IDM saja) — tertulis eksplisit di layar BPMN</td><td class="pri">P2</td></tr>
+      <tr data-claim="absent" data-probe="document_gen" data-fa="nd"><td class="dom">API generasi dokumen &amp; e-signature</td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st no">⚪</span></td><td class="vv"><span class="st nd" title="n/d — generasi dokumen legal & e-signature tidak terdokumentasi">n/d</span></td><td class="to"><span class="st no">⚪</span> tidak ada</td><td class="pri">P1</td></tr>
+      <tr data-claim="absent" data-probe="sso_oidc" data-fa="nd"><td class="dom">Endpoint OIDC/SCIM/MFA</td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st nd" title="n/d — yang terdokumentasi hanya firewall & hosted mode">n/d</span></td><td class="to"><span class="st no">⚪</span> HTTP Basic + bootstrap saja</td><td class="pri">P0 · penghalang go-live</td></tr>
+      <tr data-claim="partial" data-probe="kafka_cdc" data-fa="part"><td class="dom">Dispatcher outbox → Kafka / consumer CDC</td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st part" title="messaging backbone (AMB) &amp; feed gudang data terdokumentasi; Kafka/CDC spesifik tidak [F5:FA113]">🟡</span></td><td class="to"><span class="st part">🟡</span> tabel + konfigurasi ada, 0 kode</td><td class="pri">P1</td></tr>
+      <tr data-claim="absent" data-probe="charts,email_delivery,file_delivery" data-fa="nd"><td class="dom">Render chart + distribusi e-mail/SFTP laporan</td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st nd" title="n/d — chart/cross-tab tidak terdokumentasi (kerangka laporan: ya)">n/d</span></td><td class="to"><span class="st no">⚪</span> ekspor kami PDF/XLSX/CSV/TXT/HTML/JSON — tanpa chart &amp; tanpa kanal kirim</td><td class="pri">P1 · pelaporan harian</td></tr>
+      <tr data-claim="partial" data-probe="rate_limit" data-fa="nd"><td class="dom">Rate limit / kuota / scope token</td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st nd" title="n/d — pembatasan laju API tidak terdokumentasi (≠ “limit management” perdagangan)">n/d</span></td><td class="to"><span class="st part">🟡</span> V31: token bucket per pemanggil di <code>RateLimitFilter</code> (429 + Retry-After, kuota pulih, penghitung dibaca via <code>GET /api/v1/platform/rate-limit</code>); default MATI lewat <code>treasury.rate-limit.enabled</code>. Kuota per kontrak &amp; scope token belum ada</td><td class="pri">P1 · API publik — gerbangnya sudah ada, kuota per kontrak belum</td></tr>
+      <tr data-claim="partial" data-probe="promotion_tooling" data-fa="nd"><td class="dom">API promosi konfigurasi antar lingkungan (change-set)</td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st nd" title="n/d — tidak terdokumentasi di materi publik yang kami baca">n/d</span></td><td class="to"><span class="st part">🟡</span> efektif-state + riwayat ada; tool promotion tidak</td><td class="pri">P1 · rilis</td></tr>
+      <tr data-claim="absent" data-probe="bulk_export" data-fa="nd"><td class="dom">Ekspor analitik masif (Parquet/Arrow)</td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st nd" title="n/d">n/d</span></td><td class="to"><span class="st no">⚪</span> tidak ada</td><td class="pri">P2 · BI</td></tr>
+      <tr data-claim="absent" data-probe="sla_alerting" data-fa="nd"><td class="dom">API alerting SLA / webhook</td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st nd" title="n/d">n/d</span></td><td class="to"><span class="st no">⚪</span> SLA ada di data (<code>sla_due_at</code>) dan timer eskalasi BPMN, tapi tidak ada notifikasi keluar</td><td class="pri">P1</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="basis" data-i18n="gapBasis">Kolom vendor mengikuti penilaian cakupan kami (daftar periksa manual back-office Calypso V13 + dokumentasi publik MX.3 &amp; OPICS); bukan pernyataan vendor, dan tidak memuat harga lisensi.</p>
+  </div>
+</section>
+
+<section class="blk" id="platform">
+  <div class="wrap">
+    <div class="grid2">
+      <div class="panel"><h3 data-i18n="platH">Dibuat untuk realitas bank Indonesia</h3>
+        <ul class="tick">
+          <li data-i18n="plat1"><b>Control-first:</b> limit pradeal menghitung utilisasi nyata &amp; menolak saat melewati ambang.</li>
+          <li data-i18n="plat2"><b>Satu rantai finansial:</b> deal → settlement → komponen → jurnal balance (DR=CR per mata uang) → rekonsiliasi, idempoten &amp; dapat diaudit.</li>
+          <li data-i18n="plat3"><b>Syariah native:</b> akad, DPS, wadiah/mudarabah, nisbah, zakat sebagai modul.</li>
+          <li data-i18n="plat4"><b>Regulator native:</b> Antasena, OBOX, NOP, PDN, LHBU, PSAK 71 &amp; 112.</li>
+          <li data-i18n="plat5"><b>Risiko pasar terhitung:</b> skenario tekanan (kurva · FX · ekuitas) di atas ledger valuasi, VaR delta-normal dengan limit; yang tanpa model dilaporkan UNMODELED, bukan nol.</li>
+          <li data-i18n="plat6"><b>Terbuka &amp; terukur:</b> REST API + kanal berbasis file; 298 uji otomasi hijau di PostgreSQL 16.</li>
+        </ul>
+        <div class="kv"><span>Java 21</span><span>Spring Boot 3.3.5</span><span>JdbcTemplate (tanpa ORM)</span>
+          <span>PostgreSQL 16 · Flyway V1–V31</span><span>Flowable 7 · BPMN 2.0</span>
+          <span>PDFBox 3</span><span>HTML + CSS + vanilla JS</span></div>
+      </div>
+      <div class="panel"><h3 data-i18n="mxArs">Matriks cakupan fungsi — 24 domain</h3>
+        <p class="hint" data-i18n="mxSum">11 setara &amp; terbukti · 10 berjalan sebagian ·
+          3 belum ada kodenya — yang terakhir kami sebut sebagai bagian dari kontrak, bukan disembunyikan.</p>
+        <div class="scroll"><table class="mx">
+          <thead><tr><th class="dom">Domain fungsi</th><th class="to" data-i18n="colTo2">TreasuryOne</th>
+            <th class="vv">Calypso</th><th class="vv">Murex</th><th class="vv">OPICS</th><th class="vv">Front Arena</th></tr></thead>
+          <tbody>
+      <tr><td class="dom">Master data &amp; parameter</td><td class="to">🟡 tabel + seed + API konfigurasi lewat persetujuan (ber-versi, tidak dihapus)</td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st ok" title="Business Data Processing utk data referensi/master [F2:BP080]">✅</span></td></tr>
+      <tr><td class="dom">Deal capture &amp; siklus hidup (FX, MM, SBN, derivatif)</td><td class="to">🟡 ingest tunggal + batch (terukur 10–19rb deal/dtk), generator komponen settlement &amp; jurnal</td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st no">⚪</span></td><td class="vv"><span class="st ok" title="full trade lifecycle + pre/post-trade compliance + alokasi & matching + FIX pre-built + order routing/internalization [F1][F3][F5:FA115]">✅</span></td></tr>
+      <tr><td class="dom">Risk &amp; limit engine</td><td class="to">✅ pre-deal check, PASS/WARN/BLOCK, mismatch mata uang = BLOCK, utilisasi set-based (flat di 3.000+ open deal)</td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st nd" title="n/d — tidak terdokumentasi di materi publik yang kami baca">n/d</span></td></tr>
+      <tr><td class="dom">Valuasi &amp; pricing</td><td class="to">✅ ACT/360 accrued, MTM FX, bond price→clean; <code>NO_PRICE</code> dikembalikan null, tidak menebak harga</td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st ok" title="200+ valuation models (dapat diperluas), yield curves & volatility manager; UDMC Monte Carlo (lisensi tambahan) [F1][F5:FA106/FA107/FA129]">✅</span></td></tr>
+      <tr><td class="dom">Akuntansi &amp; jurnal</td><td class="to">🟡 JournalEngine variabel ber-whitelist, DR=CR per mata uang, posting idempoten, ekspor GL; accrual/fee/tax belum</td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st ok" title="GL terintegrasi + real-time accounting, journals from settlements, web reporting, drill-down posting [F1][F2:BP100]">✅</span></td></tr>
+      <tr><td class="dom">Rekonsiliasi nostro &amp; break</td><td class="to">✅ tier-1 exact · tier-2 fuzzy ±2 hari · tier-3 kandidat TIDAK auto-applied; break idempoten</td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st nd" title="n/d — tidak terdokumentasi di materi publik yang kami baca">n/d</span></td></tr>
+      <tr><td class="dom">Kanal pembayaran &amp; pesan</td><td class="to">🟡 SWIFT <code>.fin</code>, BI-RTGS/SSSS <code>.txt</code>, FAST <code>.xml</code>, core-banking CSV → direktori kesepakatan + <code>integration_file_log</code>; layout final &amp; ACK inbound menunggu sertifikasi</td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st no">⚪</span></td><td class="vv"><span class="st nd" title="n/d — tidak terdokumentasi di materi publik yang kami baca">n/d</span></td></tr>
+      <tr><td class="dom">Regulatory reporting Indonesia</td><td class="to">🟡 Antasena TPU01/TSD01/TRS01, OBOX, NOP, LHBU, PDN: struktur + aturan + governance; sebagian perhitungan bentuk laporan</td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st no">⚪</span></td><td class="vv"><span class="st part" title="templat laporan terdokumentasi utk UCITS/AIFMD/FormPF/OPERA + solvency capital — yurisdiksi lain [F1]">🟡</span></td></tr>
+      <tr><td class="dom">Treasury Syariah</td><td class="to">✅ akad, approval DPS, wadiah/mudarabah, nisbah, zakat sebagai modul native (bukan add-on)</td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st no">⚪</span></td><td class="vv"><span class="st nd" title="n/d — modul Syariah tidak terdokumentasi">n/d</span></td></tr>
+      <tr><td class="dom">Report designer &amp; viewer</td><td class="to">✅ drag-and-drop band + ekspor PDF/XLSX/CSV/TXT/HTML/JSON + hash di <code>report_runs</code>; belum chart/cross-tab/conditional formatting/e-mail-FTP</td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok" title="kerangka laporan XML/XSLT + ARENA Business Intelligence; laporan terjadwal/ad-hoc; agregasi &amp; scheduling via web [F1][F5:FA104]">✅</span></td></tr>
+      <tr><td class="dom">Form builder &amp; registry modul/menu</td><td class="to">✅ Extension Studio: 7 tipe field, JSON Schema subset ditegakkan server, instance ber-hash &amp; beku setelah submit; registry menu lewat persetujuan</td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st no">⚪</span></td><td class="vv"><span class="st nd" title="n/d — kustomisasi di materi publik diarahkan ke AEF (developer), bukan builder utk pengguna bisnis">n/d</span></td></tr>
+      <tr><td class="dom">Workflow BPMN &amp; four-eyes</td><td class="to">✅ Flowable 7.2 — 8 definisi proses divalidasi saat start-up, matriks wewenang, hash payload, publish berpersetujuan</td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st nd" title="n/d — kustomisasi di materi publik diarahkan ke AEF (developer), bukan builder utk pengguna bisnis">n/d</span></td></tr>
+      <tr><td class="dom">Task station (antrean kerja)</td><td class="to">✅ claim/unclaim/delegate/undelegate/complete/reopen + saringan tersimpan <code>task_filter</code>; <code>actions[]</code> dihitung server</td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st nd" title="n/d — tidak terdokumentasi di materi publik yang kami baca">n/d</span></td></tr>
+      <tr><td class="dom">Batch EOD &amp; penjadwalan</td><td class="to">✅ rantai freeze→valuasi→jurnal→nostro dengan <code>eod_task_run</code>; scheduler sewa pemimpin (aman di N instance)</td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st part" title="report scheduling + BDP utk proses data; rantai EOD khas bank tidak dirinci [F1][F2:BP080]">🟡</span></td></tr>
+      <tr><td class="dom">Retensi &amp; kapasitas data</td><td class="to">✅ arsip menanda (V27), purge <code>ACT_HI_*</code> opt-in, autovacuum/BRIN/partisi ber-guard + prune <code>DETACH</code> (V28–V29); tiap keputusan tercatat</td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st nd" title="n/d — tuning/retensi basis data tidak terdokumentasi sbg fitur produk">n/d</span></td></tr>
+      <tr><td class="dom">ALM / FTP / liquidity ladder</td><td class="to">🟡 skema + <code>cash-forecast</code> teruji; FTP &amp; funding curve sebagian logika</td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st no">⚪</span></td><td class="vv"><span class="st nd" title="n/d — FTP/duration gap tidak terdokumentasi (≠ “pricing” model valuasi)">n/d</span></td></tr>
+      <tr><td class="dom">Collateral &amp; margin</td><td class="to">🟡 skema CSA/GMRA + margin call &amp; dispute lewat BPMN; kalkulasi lanjutan roadmap</td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st nd" title="n/d — tidak terdokumentasi di materi publik yang kami baca">n/d</span></td></tr>
+      <tr><td class="dom">Derivatif: PFE / XVA / backtesting</td><td class="to">⚪ skema ada (V8); logika &amp; price model belum dibangun</td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st no">⚪</span></td><td class="vv"><span class="st nd" title="n/d — XVA/PFE tidak terdokumentasi">n/d</span></td></tr>
+      <tr><td class="dom">Posisi &amp; inventory</td><td class="to">🟡 <code>positions</code> + <code>position_history</code> + posisi kerja; rekonsiliasi posisi↔GL sebagian</td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st nd" title="n/d — tidak terdokumentasi di materi publik yang kami baca">n/d</span></td></tr>
+      <tr><td class="dom">Corporate action &amp; election</td><td class="to">🟡 skema event, election, approval; submission ke kustodian masih manual</td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st no">⚪</span></td><td class="vv"><span class="st ok" title="lifecycle events: fixings, options exercise, corporate actions [F1]">✅</span></td></tr>
+      <tr><td class="dom">Repo / securities lending</td><td class="to">🟡 skema + status hidup; netting &amp; collar maintenance sebagian</td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st ok" title="tipe pelanggan termasuk securities lending &amp; financing organizations [F3]">✅</span></td></tr>
+      <tr><td class="dom">Identitas: SSO/OIDC/MFA</td><td class="to">⚪ HTTP Basic + bootstrap (termasuk sinkronisasi <code>app_users</code>); belum resource-server bank</td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st nd" title="n/d — yang terdokumentasi hanya firewall & hosted mode">n/d</span></td></tr>
+      <tr><td class="dom">Audit &amp; jejak kontrol</td><td class="to">✅ rantai-hash <b>SHA256-CHAIN-v1</b> di <code>audit_log</code> + trigger DB append-only + anchor Merkle utk baris warisan (V31, beruji); <code>workflow_violation</code>, <code>capacity_action_log</code>; <b>ekspor bukti ter-sign ECDSA-P256</b> via <code>GET /api/v1/audit/chain/evidence</code> (verifikasi offline: <code>openssl dgst -verify</code>)</td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st ok">✅</span></td><td class="vv"><span class="st nd" title="n/d — tidak terdokumentasi di materi publik yang kami baca">n/d</span></td></tr>
+      <tr><td class="dom">Mobile &amp; digital asset</td><td class="to">⚪ skema roadmap; belum ada API/layar</td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st part">🟡</span></td><td class="vv"><span class="st no">⚪</span></td><td class="vv"><span class="st nd" title="n/d — aset digital/tokenisasi tidak terdokumentasi">n/d</span></td></tr>
+          </tbody></table></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="blk" id="proses">
+  <div class="wrap">
+    <div class="sec-h"><h2 data-i18n="procH">Empat langkah, satu lini waktu</h2>
+      <p data-i18n="procP">Dari baseline beku ke implementasi lalu serah terima — dengan data uji 100 baris per modul.</p></div>
+    <div class="cards">
+      <article class="card"><span class="ic">①</span><div><h3 data-i18n="p1t">Nilai awal &amp; bekukan baseline</h3><p data-i18n="p1p">Gap analysis modul vs sistem lama; baseline data &amp; proses dibekukan dan ditandatangani.</p></div></article>
+      <article class="card"><span class="ic">②</span><div><h3 data-i18n="p2t">Bangun &amp; integrasi</h3><p data-i18n="p2p">Konfigurasi modul, migrasi master, jalur file kanal, laporan regulator, data uji 100 baris/modul.</p></div></article>
+      <article class="card"><span class="ic">③</span><div><h3 data-i18n="p3t">Uji SIT → UAT</h3><p data-i18n="p3p">Uji integrasi, skrip UAT per peran, latihan EOD, triase defect sampai nol kritikal.</p></div></article>
+      <article class="card"><span class="ic">④</span><div><h3 data-i18n="p4t">Go-live &amp; alih operasi</h3><p data-i18n="p4p">Parallel run, cutover terjadwal, opsi alih operasi harian dengan SLA.</p></div></article>
+    </div>
+  </div>
+</section>
+
+<section class="blk" id="keunggulan">
+  <div class="wrap">
+    <div class="grid2">
+      <div class="panel"><h3 data-i18n="whyH">Kenapa TreasuryOne</h3>
+        <ul class="tick">
+          <li data-i18n="w1"><b>Audit di atas estetika.</b> Setiap angka di halaman ini bisa ditelusuri ke kode, uji, dan artefak verifikasi.</li>
+          <li data-i18n="w2"><b>Lokal sampai kolom.</b> Kalender libur BI, IDR, format file kanal, pelaporan OJK/BI, UI &amp; dokumen Indonesia.</li>
+          <li data-i18n="w3"><b>Anti-lock-in.</b> Stack terbuka (PostgreSQL, Java, BPMN 2.0). Data &amp; proses milik bank.</li>
+          <li data-i18n="w4"><b>Satu tim accountable.</b> Platform + operasi + sertifikasi kanal dalam satu kontrak &amp; SLA.</li>
+          <li data-i18n="w5"><b>Angka risiko ada rumusnya.</b> VaR/skenario diuji sebagai unit murni dan siklus layar penuh; belum ada greeks/CS01/Expected Shortfall — dan itu kami tulis.</li>
+        </ul>
+      </div>
+      <div class="panel"><h3 data-i18n="secH">Keamanan &amp; operasional</h3>
+        <ul class="tick">
+          <li data-i18n="sec1">RBAC/ABAC + maker-checker ditegakkan kode; pelanggaran tercatat permanen</li>
+          <li data-i18n="sec2">Append-only: tidak ada DELETE pada data finansial &amp; audit — arsip/retire/reverse</li>
+          <li data-i18n="sec3">Retensi &amp; partisi berbasis hasil ukur (autovacuum/BRIN ber-guard, DETACH bukan DELETE)</li>
+          <li data-i18n="sec4">Enkripsi in-transit (TLS) &amp; at-rest; skema &amp; role terpisah per subsistem</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="blk" id="kontak">
+  <div class="wrap">
+    <div class="panel">
+      <h2 data-i18n="ctH">Siap menyalakan operasi treasury Anda?</h2>
+      <p data-i18n="ctP">Kirim kebutuhan Anda — dalam 2 hari kerja kami balas dengan lingkungan demo, gap assessment
+        awal, dan rencana 90 hari yang realistis.</p>
+      <div class="warn" data-i18n="ctNote">Kontak berikut masih <b>placeholder</b>: hello@treasuryone.id ·
+        +62 21 5000 1234 — mohon diganti sebelum halaman ini dikirim ke bank.</div>
+      <div class="cta"><a class="btn p" href="mailto:hello@treasuryone.id" data-i18n="ctBtn">Kirim kebutuhan &amp; jadwalkan demo</a>
+        <a class="btn g" href="#banding" data-i18n="ctBtn2">Buka tabel perbandingan</a></div>
+      <div class="kv"><span data-i18n="ctHours">Jam layanan: Sen–Jum 08.00–18.00 WIB</span>
+        <span data-i18n="ctHot">Hotline insiden 24/7 untuk klien BPO</span></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 PT TreasuryOne Digital Nusantara — <span data-i18n="ftTag">platform treasury &amp; BPO back-office bank Indonesia</span></span>
+    <span data-i18n="ftNote">Dibangkitkan <code>tools/make_web_marketing.py</code> pada 2026-09-05 (sumber tanggal: TEST-id.co.treasuryone.AuditChainSmokeTest.xml).
+      Flyway V1–V31 · 298 uji JUnit 0 gagal · 145 panggilan endpoint terverifikasi · menggantikan
+      TREASURYONE_MARKETING.html dengan sumber ukur yang sama.</span>
+  </div>
+</footer>
+<script>
+
+(function () {
+  var EN = {"navTabel": "Tables per list", "tblH": "Comparison per list — Modules · Menus · Forms · Features/API", "tblModul": "Table A — modules", "tblMenu": "Table B — navigation groups (menu items measured)", "tblForm": "Table C — forms &amp; the form builder", "tblApi": "Table D — feature areas exposed as APIs", "navGap": "Gaps", "gapH": "What OPICS, Calypso, Murex &amp; Front Arena have that TreasuryOne does not (yet)", "gapIntro": "This list is generated from a code scan, not from memory: every ⚪ row was verified absent in the repository, every 🟡 row has schema/menu/wiring but no logic. If the claim and the code disagree, the generator refuses to write the brochure.", "gapModul": "A — modules", "gapMenu": "B — navigation groups", "gapForm": "C — forms", "gapApi": "D — feature areas / APIs", "gapOut": "Not planned on purpose (out of a bank treasury back-office scope)", "gapBasis": "Vendor columns follow our coverage assessment (Calypso Back Office manual V13 checklist, public MX.3/OPICS documentation).", "splashTag": "Digital treasury operations for Indonesian banks — ledger, audit and governance on one platform.", "splashEv1": "298 JUnit tests · 0 failed", "splashEv2": "145 verified endpoint calls", "splashEv3": "Flyway V1–V31 on PostgreSQL 16", "splashSkip": "Skip →", "navModul": "Modules", "navBanding": "Comparison", "navPlatform": "Platform", "navProses": "Process", "navKontak": "Contact", "hero": "An Indonesian bank treasury ledger — <span>with evidence, not brochures</span>", "lead": "TreasuryOne unifies deal capture, settlement, journaling, reconciliation, Antasena/OBOX/NOP/PDN/LHBU reporting, Sharia modules and market risk (limits, scenarios, VaR) in one Spring Boot + PostgreSQL platform — with a per-module status you can re-check yourself.", "st1": "navigation groups · 185 menu items (203 nav rows)", "st2": "JUnit tests · 0 failed · 0 skipped", "st3": "verified endpoint calls · 0 failures", "st4": "module cards — 10 ✅ · 6 🟡 · 0 ⚪", "st5": "tables · 4 partitions · 2 views · Flyway V1–V31", "st6": "API methods · 22 controllers · 28 service classes", "ctaDemo": "Book a demo", "ctaCmp": "See the Calypso · Murex · OPICS · Front Arena comparison", "ctaGap": "What we do not have yet", "heroNote": "Every number on this page is computed from the code plus the provisioning database (<code>tools/inventory_report.py</code>) and verified by <code>mvn -B test</code> and <code>scripts/endpoint_check.py</code> — never from a marketing feature list.", "modH": "Modules that exist — with honest status", "modP": "18 navigation groups · 185 menu items (203 nav rows) · 221 tables + 4 partitions + 2 views in the <code>treasury</code> schema (Flyway V1–V31). Legend: <b>✅</b> API path + real tests · <b>🟡</b> schema &amp; seed exist, logic/UI partial · <b>⚪</b> schema only (roadmap).", "modBasis": "Card statuses are read from the canonical brochure (<code>marketing/TREASURYONE_MARKETING.html</code>), itself generated from measurements — this page neither adds nor removes claims.", "tblSrc": "Links to the public material used:", "tblP": "Four tables, four comparator products. TreasuryOne columns hold <b>status + evidence</b> (Java class, migration table, method count, test result); vendor columns judge <b>domain coverage</b> — not release-specific feature claims and not licence pricing. Type in the filter box to narrow any table.", "tblLang": "Evidence strings stay in Indonesian — the working language of our audit and documentation. Column headers, legends and the entire page chrome are bilingual.", "tblModulTitle": "Table A — 16 modules vs Calypso · Murex · OPICS · Front Arena", "tblModulCol": "Module", "tblModulHint": "Per-module status &amp; evidence come from the #modul cards; vendor columns show equivalent coverage.", "tblMenuTitle": "Table B — 18 navigation groups vs comparators", "tblMenuCol": "Menu group", "tblMenuHint": "Items per group are counted from <code>frontend/public/index.html</code> (185 items in 203 rows) plus the dynamic <code>ui_module</code>/<code>ui_menu</code> registry.", "tblFormTitle": "Table C — 11 form shapes &amp; form builder", "tblFormCol": "Form", "tblFormHint": "Including the honest admission: a clean install stores no form definitions — the feature exists, unused.", "tblApiTitle": "Table D — 22 feature groups / 174 API methods", "tblApiCol": "Feature (API)", "tblApiHint": "Methods per controller are counted from source code, not from a marketing feature list.", "colTo": "TreasuryOne — status &amp; evidence", "colTo2": "TreasuryOne", "colNote": "Comparator note", "fPh": "filter rows…", "tblBasis": "Vendor basis: the <i>Calypso Back Office End-User Manual V13</i> (used as a back-office control checklist), public Murex MX.3 and Nasdaq OPICS documentation, and public FIS Front Arena material. For Front Arena only documented items get ✅/🟡; the rest is <b>n/d</b> — which does not mean the product lacks it.", "platH": "Built for Indonesian bank reality", "plat1": "<b>Control-first:</b> pre-deal limits compute real utilisation and block past the threshold.", "plat2": "<b>One financial chain:</b> deal → settlement → components → balanced journals (DR=CR per currency) → reconciliation; idempotent and auditable.", "plat3": "<b>Sharia native:</b> akad, DPS, wadiah/mudarabah, nisbah, zakat as first-class modules.", "plat4": "<b>Regulator-native:</b> Antasena, OBOX, NOP, PDN and LHBU reporting plus PSAK 71 &amp; 112 treatments.", "plat5": "<b>Market risk, computed:</b> stress scenarios (curve · FX · equity) run on the valuation ledger, delta-normal VaR against limits; anything without a model is reported UNMODELED, never zero.", "plat6": "<b>Open &amp; measured:</b> REST API + file-based channels; 298 automated tests passing on PostgreSQL 16.", "mxArs": "Function coverage matrix — 24 domains", "mxSum": "11 on par and proven · 10 partially delivered · 3 with no code at all — the last group is stated as part of the contract instead of hidden.", "procH": "Four steps, one timeline", "procP": "From a frozen baseline to implementation to handover — with 100-row test data per module.", "p1t": "Assess &amp; freeze the baseline", "p1p": "Module gap analysis against the legacy estate; data &amp; process baseline frozen and signed.", "p2t": "Build &amp; integrate", "p2p": "Module configuration, master migration, channel file paths, regulatory reports, 100-row test data per module.", "p3t": "SIT → UAT", "p3p": "Integration tests, role-by-role UAT scripts, EOD rehearsal, defect triage until zero criticals.", "p4t": "Go-live &amp; BPO handover", "p4p": "Parallel run, scheduled cutover, optional daily-operations outsourcing under SLA.", "whyH": "Why TreasuryOne", "w1": "<b>Audit over aesthetics.</b> Every number here traces to code, tests and verification artifacts.", "w2": "<b>Local to the column.</b> BI holiday calendars, IDR, channel file formats, OJK/BI reporting, full Indonesian UI &amp; docs.", "w3": "<b>Anti lock-in.</b> Open stack (PostgreSQL, Java, BPMN 2.0). Data and process belong to the bank.", "w4": "<b>One accountable team.</b> Platform + operations + channel certification under one contract, one SLA.", "w5": "<b>Risk numbers have a formula.</b> VaR/scenarios are covered by pure unit tests and a full screen-cycle smoke suite; greeks, CS01 and Expected Shortfall are not implemented — and we say so.", "secH": "Security &amp; operations", "sec1": "RBAC/ABAC + maker-checker enforced in code; violations recorded permanently", "sec2": "Append-only: no DELETE on financial &amp; audit data — archive / retire / reverse", "sec3": "Measured retention &amp; partitioning (guarded autovacuum/BRIN, DETACH rather than DELETE)", "sec4": "TLS in transit &amp; encryption at rest; separate schema and role per subsystem", "ctH": "Ready to light up your treasury operations?", "ctP": "Send your requirements — within 2 business days we reply with a demo environment, an initial gap assessment and a realistic 90-day plan.", "ctNote": "The contact details below are still <b>placeholders</b>: hello@treasuryone.id · +62 21 5000 1234 — replace them before this page is sent to a bank.", "ctBtn": "Send requirements &amp; book a demo", "ctBtn2": "Open the comparison tables", "ctHours": "Service hours: Mon–Fri 08.00–18.00 WIB", "ctHot": "24/7 incident hotline for BPO clients", "ftTag": "Treasury platform &amp; banking back-office BPO services in Indonesia", "ftNote": "Generated by <code>tools/make_web_marketing.py</code> on 2026-09-05 (date source: TEST-id.co.treasuryone.AuditChainSmokeTest.xml). Flyway V1–V31 · 298 JUnit tests with 0 failures · 145 verified endpoint calls · replaces TREASURYONE_MARKETING.html on the same measured sources."};
+  var LANG = "id";
+  try { LANG = localStorage.getItem("twm-lang") || "id"; } catch (e) {}
+  // hook kecil utk harness: daftar kunci yang benar-benar punya terjemahan. Tanpa ini,
+  // kunci yatim hanya kelihatan sebagai "teks tidak berubah" — dan itu tidak bisa dibedakan
+  // dari istilah yang memang sama di dua bahasa (mis. "Platform", "SIT → UAT").
+  try { window.__EN_KEYS__ = Object.keys(EN || {}); } catch (e) {}
+  function each(sel, fn) {
+    // boleh dipanggil dengan selector ATAU NodeList: dulu selalu querySelectorAll(sel),
+    // sehingga each(box.querySelectorAll("tbody tr"), …) melempar „not a valid selector„
+    // dan saring baris mati total (tertangkep harness, bukan mata).
+    var list = (typeof sel === "string") ? document.querySelectorAll(sel) : sel;
+    Array.prototype.forEach.call(list, fn);
+  }
+  function strip(html) { var d = document.createElement("div"); d.innerHTML = html; return d.textContent || ""; }
+  window.setLang = function (l) {
+    LANG = l;
+    try { localStorage.setItem("twm-lang", l); } catch (e) {}
+    document.documentElement.lang = l;
+    var bi = document.getElementById("btnId"), be = document.getElementById("btnEn");
+    if (bi) bi.className = (l === "id") ? "on" : "";
+    if (be) be.className = (l === "en") ? "on" : "";
+    each("[data-i18n]", function (el) {
+      var k = el.dataset.i18n;
+      if (!el.dataset.orig) el.dataset.orig = el.innerHTML;
+      var v = (l === "en" && EN && EN[k] !== undefined) ? EN[k] : el.dataset.orig;
+      el.innerHTML = v;
+      if (el.tagName === "TH") el.textContent = strip(v);
+    });
+    each("[data-i18n-ph]", function (el) {
+      var k = el.dataset.i18nPh;
+      if (el.dataset.origPh === undefined) el.dataset.origPh = el.getAttribute("placeholder") || "";
+      el.setAttribute("placeholder", (l === "en" && EN[k]) ? EN[k] : el.dataset.origPh);
+    });
+    var t = document.querySelector("head title");
+    if (t) { if (!t.dataset.orig) t.dataset.orig = t.textContent;
+             t.textContent = (l === "en" && EN.pageTitle) ? strip(EN.pageTitle) : t.dataset.orig; }
+    each(".tbl table.mx", function (tb) { tb.dataset.lang = l; });
+    document.dispatchEvent(new CustomEvent("twm:lang", { detail: { lang: l } }));
+  };
+  each(".filter", function (inp) {
+    inp.addEventListener("input", function () {
+      var box = document.getElementById(inp.dataset.filter); if (!box) return;
+      var q = (inp.value || "").trim().toLowerCase(), shown = 0;
+      each(box.querySelectorAll("tbody tr"), function (tr) {
+        var hit = !q || (tr.textContent || "").toLowerCase().indexOf(q) >= 0;
+        tr.style.display = hit ? "" : "none"; if (hit) shown++;
+      });
+      var n = box.querySelector(".nohit");
+      if (!shown) {
+        if (!n) { n = document.createElement("p"); n.className = "hint nohit";
+                  n.setAttribute("data-static", "1"); box.querySelector(".scroll").insertAdjacentElement("afterend", n); }
+        n.textContent = (LANG === "en") ? "No row matches the filter." : "Tidak ada baris yang cocok dengan saringan.";
+      } else if (n) { n.remove(); }
+    });
+  });
+  document.addEventListener("click", function (e) {
+    var a = e.target && e.target.closest ? e.target.closest('nav.links a[href^="#"]') : null;
+    if (!a) return;
+    each("nav.links a", function (x) { x.classList.remove("on"); });
+    a.classList.add("on");
+  });
+  /* ── layar pembuka: hilang sendiri, jangan pernah menahan halaman ── */
+  function hideSplash(why) {
+    var el = document.getElementById("twmSplash");
+    if (!el || el.hidden) return;
+    el.classList.add("out");
+    setTimeout(function () { el.hidden = true; el.setAttribute("aria-hidden", "true"); }, 240);
+    try { sessionStorage.setItem("twm-splash", why || "seen"); } catch (e) {}
+  }
+  window.skipSplash = function () { hideSplash("skipped"); };
+  (function () {
+    var el = document.getElementById("twmSplash");
+    if (!el) return;
+    var seen = false;
+    try { seen = /^(seen|skipped|escaped)$/.test(sessionStorage.getItem("twm-splash") || ""); } catch (e) {}
+    var deep = !!location.hash || /[?&]nosplash=1/.test(location.search);
+    var calm = !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+    if (seen || deep || calm) { el.hidden = true; return; }
+    var ms = parseInt(el.dataset.autoDismiss || "2200", 10);
+    setTimeout(function () { hideSplash("seen"); }, ms);
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape") hideSplash("escaped"); });
+  })();
+  setLang(LANG);
+})();
+</script>
+</body>
+</html>

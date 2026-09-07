@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>pensia — DPLK syariah · pensiun sehat mandiri</title>
+<link rel="icon" href="img/logo-pensia-mark.png"/>
+<link rel="apple-touch-icon" href="img/apple-touch-icon.png"/>
+<style>
+  :root { --teal:#0b3d3a; --teal2:#0e6b63; --gold:#c9a227; --bg:#f4f7f6; --ink:#12221f; --mut:#5a6570; }
+  * { box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { margin:0; font:16px/1.55 "Segoe UI",Calibri,sans-serif; color:var(--ink); background:var(--bg); }
+  a { color:var(--teal2); }
+  header { position:sticky; top:0; z-index:10; background:#fff; border-bottom:1px solid #d5e4e1; display:flex; align-items:center; justify-content:space-between; padding:10px 28px; }
+  header img.hz { height:40px; }
+  header nav a { margin-left:18px; text-decoration:none; font-size:14px; font-weight:600; color:var(--teal); }
+  .btn { display:inline-block; background:var(--teal2); color:#fff !important; text-decoration:none; padding:10px 18px; border-radius:8px; font-weight:650; }
+  .btn-g { background:transparent; color:var(--teal) !important; border:1px solid var(--teal2); }
+  .hero { display:grid; grid-template-columns:1.05fr .95fr; min-height:78vh; background:var(--teal); color:#fff; }
+  .hero-copy { padding:56px 48px; display:flex; flex-direction:column; justify-content:center; }
+  .hero-copy .k { letter-spacing:.18em; font-size:12px; color:#f5d78a; text-transform:uppercase; }
+  .hero-copy h1 { font-size:40px; line-height:1.15; margin:10px 0 14px; font-weight:650; }
+  .hero-copy p { color:#d7ece9; max-width:520px; }
+  .hero-copy .cta { margin-top:22px; display:flex; gap:12px; flex-wrap:wrap; }
+  .hero img { width:100%; height:100%; object-fit:cover; }
+  .wrap { max-width:1080px; margin:0 auto; padding:48px 20px; }
+  h2 { color:var(--teal); font-size:26px; }
+  .grid3 { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+  .card { background:#fff; border-radius:12px; padding:18px; border:1px solid #d5e4e1; }
+  .card h3 { margin:0 0 8px; color:var(--teal); }
+  .pol { display:inline-block; font-size:11px; font-weight:700; padding:2px 8px; border-radius:4px; }
+  .p1 { background:#ccfbf1; color:#0e6b63; }
+  .p2 { background:#ffedd5; color:#b45309; }
+  .p3 { background:#dbeafe; color:#1d4ed8; }
+  .split { display:grid; grid-template-columns:1fr 1fr; gap:28px; align-items:center; }
+  .split img { width:100%; border-radius:12px; }
+  .note { background:#fff7ed; border-left:4px solid #c2410c; padding:12px 14px; font-size:14px; }
+  .marks { display:flex; gap:16px; align-items:center; flex-wrap:wrap; margin:20px 0; }
+  .marks img { height:64px; background:#fff; border-radius:12px; border:1px solid #d5e4e1; padding:6px; }
+  footer { background:var(--teal); color:#ccfbf1; padding:28px; font-size:13px; }
+  @media (max-width:860px){
+    .hero, .split, .grid3 { grid-template-columns:1fr; }
+    .hero { min-height:auto; }
+    .hero img { height:240px; }
+    header nav { display:none; }
+  }
+  #pen-splash{position:fixed;inset:0;z-index:80;background:#061f1e;color:#fff;overflow:hidden;transition:opacity .7s ease}
+  #pen-splash .bg{position:absolute;inset:0;background:#0b3d3a center/cover no-repeat;background-image:url('img/splash-login-pensia.png');animation:penKen 8s ease-out forwards}
+  #pen-splash .veil{position:absolute;inset:0;background:radial-gradient(ellipse 70% 55% at 50% 42%,rgba(11,61,58,.15),rgba(6,31,30,.78) 70%),linear-gradient(180deg,rgba(6,31,30,.2),rgba(6,31,30,.88))}
+  #pen-splash .orb{position:absolute;border-radius:50%;filter:blur(40px);opacity:.4;pointer-events:none}
+  #pen-splash .orb.a{width:260px;height:260px;background:#c9a227;left:-50px;bottom:8%}
+  #pen-splash .orb.b{width:200px;height:200px;background:#0e6b63;right:-30px;top:10%}
+  #pen-splash .frame{position:absolute;inset:16px;border:1px solid rgba(245,215,138,.28);pointer-events:none}
+  #pen-splash .c{position:relative;z-index:2;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:32px 20px}
+  #pen-splash .ring{position:relative;width:128px;height:128px}
+  #pen-splash .ring svg{position:absolute;inset:0;transform:rotate(-90deg)}
+  #pen-splash .ring circle{fill:none;stroke:#f5d78a;stroke-width:1.6;stroke-dasharray:320;stroke-dashoffset:320;animation:penDraw 1.4s .2s ease forwards}
+  #pen-splash img.mark{width:88px;height:88px;border-radius:22px;background:#fff;padding:7px;position:absolute;inset:20px;box-shadow:0 18px 50px rgba(0,0,0,.35);animation:penPop .7s cubic-bezier(.2,1.2,.3,1) both}
+  #pen-splash .k{margin-top:26px;letter-spacing:.34em;text-transform:uppercase;font-size:11px;color:#f5d78a;opacity:0;animation:penUp .7s .45s ease forwards}
+  #pen-splash h1{font-size:clamp(40px,8vw,64px);font-weight:650;margin:10px 0 8px;letter-spacing:-.04em;background:linear-gradient(90deg,#efe0a6,#c9a227,#f5d78a);-webkit-background-clip:text;background-clip:text;color:transparent;opacity:0;animation:penUp .7s .6s ease forwards}
+  #pen-splash p{max-width:440px;color:#d7ece9;margin:0 0 20px;opacity:0;animation:penUp .7s .75s ease forwards}
+  #pen-splash .pills{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:0 0 24px;opacity:0;animation:penUp .7s .9s ease forwards}
+  #pen-splash .pills span{font-size:11px;font-weight:700;padding:6px 10px;border-radius:999px;border:1px solid rgba(245,215,138,.35);color:#f5d78a}
+  #pen-splash button{background:linear-gradient(180deg,#f0d57a,#c9a227);color:#0b3d3a;border:0;font-weight:750;padding:13px 30px;border-radius:999px;cursor:pointer;font-size:15px;box-shadow:0 10px 28px rgba(201,162,39,.35);opacity:0;animation:penUp .7s 1.05s ease forwards}
+  #pen-splash .bar{position:absolute;left:12%;right:12%;bottom:28px;height:2px;background:rgba(255,255,255,.12);z-index:3}
+  #pen-splash .bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#c9a227,#f5d78a);animation:penLoad 3.4s linear forwards}
+  @keyframes penKen{from{transform:scale(1.12)}to{transform:scale(1)}}
+  @keyframes penDraw{to{stroke-dashoffset:0}}
+  @keyframes penPop{from{transform:scale(.6);opacity:0}to{transform:scale(1);opacity:1}}
+  @keyframes penUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  @keyframes penLoad{to{width:100%}}
+</style>
+</head>
+<body>
+<div id="pen-splash" role="dialog" aria-label="Splash pensia">
+  <div class="bg"></div>
+  <div class="veil"></div>
+  <div class="orb a"></div>
+  <div class="orb b"></div>
+  <div class="frame"></div>
+  <div class="c">
+    <div class="ring">
+      <svg viewBox="0 0 128 128" aria-hidden="true"><circle cx="64" cy="64" r="58"/></svg>
+      <img class="mark" src="img/logo-pensia-mark.png" alt="pensia"/>
+    </div>
+    <div class="k">DPLK syariah</div>
+    <h1>pensia</h1>
+    <p>Pensiun sehat, mandiri, amanah.<br/>Iuran pasti · kesehatan KSO · ujrah transparan.</p>
+    <div class="pills"><span>POL01 investasi</span><span>POL02 tabarru'</span><span>POL03 ujrah</span></div>
+    <button type="button" id="pen-splash-go">Masuk brosur</button>
+  </div>
+  <div class="bar"><i></i></div>
+</div>
+<script>
+(function(){
+  var el=document.getElementById('pen-splash');
+  function hide(){ el.style.opacity='0'; setTimeout(function(){ el.style.display='none'; }, 700); }
+  document.getElementById('pen-splash-go').onclick=hide;
+  if(location.hash){ el.style.display='none'; return; }
+  setTimeout(hide, 3800);
+})();
+</script>
+<header>
+  <a href="#atas"><img class="hz" src="img/logo-pensia-horizontal.png" alt="pensia"/></a>
+  <nav>
+    <a href="#produk">Produk</a>
+    <a href="#pool">Tiga pool</a>
+    <a href="#korporat">Korporat</a>
+    <a href="#merek">Merek</a>
+    <a href="#amanah">Amanah</a>
+  </nav>
+</header>
+
+<section class="hero" id="atas">
+  <div class="hero-copy">
+    <div class="k">DPLK syariah</div>
+    <h1>Pensiun yang tumbuh. Kesehatan yang terpisah. Ujrah yang terang.</h1>
+    <p>pensia adalah aplikasi pengelola dana pensiun lembaga keuangan — orkestrator, bukan perusahaan asuransi. Nama aplikasi, bukan merek dagang bank.</p>
+    <div class="cta">
+      <a class="btn" href="#produk">Lihat produk</a>
+      <a class="btn btn-g" href="#amanah">Prinsip syariah</a>
+    </div>
+  </div>
+  <img src="img/hero-pensia.jpg" alt="Keluarga merencanakan pensiun"/>
+</section>
+
+<div class="wrap" id="produk">
+  <h2>Satu platform, tiga janji</h2>
+  <p>Untuk peserta mandiri, karyawan, dan pemberi kerja. Back-office maker-checker. Kanal mobile bank induk belum menjadi kanal hidup (F-059 gap).</p>
+  <div class="grid3">
+    <div class="card">
+      <span class="pol p1">POL01</span>
+      <h3>Pensiun iuran pasti</h3>
+      <p>Unit × NAB. Hasil fluktuatif, forward pricing. NAB kosong = valuasi berhenti — tidak ditebak.</p>
+    </div>
+    <div class="card">
+      <span class="pol p2">POL02</span>
+      <h3>Kesehatan tabarru'</h3>
+      <p>Porsi iuran ke mitra asuransi syariah (KSO). Klaim tidak mengambil dana pensiun.</p>
+    </div>
+    <div class="card">
+      <span class="pol p3">POL03</span>
+      <h3>Ujrah transparan</h3>
+      <p>Biaya pengelola dari parameter, bukan angka undang-undang yang dikunci di kode.</p>
+    </div>
+  </div>
+</div>
+
+<div class="wrap split" id="pool">
+  <div>
+    <h2>Dana tidak dicampur</h2>
+    <p>Rekening dan jurnal <strong>POL01 / POL02 / POL03</strong> terpisah. pensia adalah orkestrator DPLK, bukan penanggung risiko klaim RS.</p>
+    <p>Akad peserta: Wakalah bil Ujrah dan Tabarru' KSO. Nominee adalah wakil administratif, bukan penetapan faraidh.</p>
+  </div>
+  <img src="img/tiga-pool.jpg" alt="Ilustrasi tiga pool dana"/>
+</div>
+
+<div class="wrap split" id="korporat">
+  <img src="img/korporat.jpg" alt="Tim HR korporat"/>
+  <div>
+    <h2>Untuk korporasi</h2>
+    <p>Daftar badan usaha, payroll, top-up meski belum ada karyawan, dan saldo korporat yang berdiri sendiri. Maker tidak boleh menyetujui pekerjaannya sendiri.</p>
+    <p class="note">Onboarding CIF, TPA, dan NAB manajer investasi pada rilis uji masih berlabel MOCK — jangan diiklankan sebagai host bank hidup.</p>
+  </div>
+</div>
+
+<div class="wrap" id="merek">
+  <h2>Identitas merek</h2>
+  <p>Logo penuh (mark) untuk splash, favicon, dan sidebar. Logo lite untuk kartu login terang dan ukuran kecil.</p>
+  <div class="marks">
+    <img src="img/logo-pensia-mark.png" alt="Logo pensia"/>
+    <img src="img/logo-pensia-lite.png" alt="Logo lite pensia"/>
+    <img src="img/logo-pensia-horizontal.png" alt="Wordmark pensia" style="height:48px;padding:8px 12px"/>
+  </div>
+</div>
+
+<div class="wrap" id="amanah">
+  <h2>Amanah yang tidak dinegosiasi</h2>
+  <div class="grid3">
+    <div class="card"><h3>Maker ≠ checker</h3><p>Setiap uang dan master data dual control.</p></div>
+    <div class="card"><h3>Buku tidak diubah</h3><p>Jurnal yang sudah POSTED hanya dikoreksi dengan jurnal balik.</p></div>
+    <div class="card"><h3>Asia/Jakarta</h3><p>Tanggal yyyy-MM-dd. Valuasi mengikuti hari buku.</p></div>
+  </div>
+</div>
+
+<footer>
+  pensia — nama aplikasi DPLK syariah. Bukan merek dagang resmi bank. Brosur pemasaran, bukan prospektus / fatwa / jaminan hasil.<br/>
+  Hubungi pengelola DPLK untuk materi legal. © 2026
+</footer>
+</body>
+</html>

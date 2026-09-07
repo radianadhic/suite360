@@ -1,0 +1,1345 @@
+<!DOCTYPE html>
+<html lang="id"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>nara — Wealth Super-App Indonesia | Satu aplikasi, seluruh kekayaanmu</title>
+<meta name="description" content="Nara: satu aplikasi untuk saham IDX, SBN ritel, obligasi, reksa dana, emas & kripto, deposito, dan valas. e-KYC 5 menit, goal-based investing, auto-invest, alert harga. Konsep platform wealth management Indonesia.">
+<link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="%230F2B46"/><stop offset=".55" stop-color="%2314508C"/><stop offset="1" stop-color="%231B6FB8"/></linearGradient></defs><rect width="512" height="512" rx="115" fill="url(%23g)"/><path d="M118 384 C 200 404 268 352 396 336" stroke="%238FC4F2" stroke-width="26" stroke-linecap="round" fill="none"/></svg>'>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--navy:#0F2B46;--blue:#14508C;--sky:#1B6FB8;--ice:#8FC4F2;--mist:#F5F7FA;--green:#0E9F6E;--red:#B42318;--ink:#1F2937;--mut:#64748B;--line:#E5EAF1}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;background:#fff;color:var(--ink);line-height:1.6}
+.wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+h2{font-size:26px;color:var(--navy);letter-spacing:-.4px;line-height:1.25}
+h3{color:var(--navy)}
+.kicker{font-size:11px;font-weight:800;letter-spacing:1.8px;text-transform:uppercase;color:var(--sky);margin-bottom:8px}
+.mut{color:var(--mut);font-size:14px}
+section{padding:64px 0}
+.alt{background:var(--mist)}
+.dark{background:linear-gradient(160deg,var(--navy),var(--blue) 62%,var(--sky));color:#fff}
+.dark h2,.dark h3{color:#fff}.dark .mut{color:#C9DCF0}
+.btn{display:inline-block;background:var(--sky);color:#fff;font-weight:700;font-size:14px;border-radius:999px;padding:10px 20px;text-decoration:none;border:none;cursor:pointer;transition:.15s}
+.btn:hover{background:var(--blue)}
+.btn.ghost{background:transparent;border:1.5px solid var(--ice);color:#fff}
+.btn.green{background:var(--green)}
+.btn.big{display:block;text-align:center;font-size:15px;padding:14px;border-radius:14px;width:100%}
+
+/* ============ SPLASH ============ */
+#splash{position:fixed;inset:0;z-index:9999;background:linear-gradient(135deg,#0F2B46,#14508C 55%,#1B6FB8);display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity .55s ease;cursor:pointer}
+#splash.out{opacity:0;pointer-events:none}
+#splash .logo{width:118px;height:118px;border-radius:28px;overflow:hidden;box-shadow:0 16px 44px rgba(0,0,0,.42);animation:popIn .8s cubic-bezier(.2,.8,.2,1) both}
+#splash .tag{color:#EAF3FC;font-weight:700;margin-top:20px;font-size:16px;animation:rise .7s .35s ease both}
+#splash .sub{color:#9CC1E8;font-size:12px;margin-top:6px;animation:rise .7s .5s ease both}
+#splash .bar{width:210px;height:3px;background:rgba(255,255,255,.18);border-radius:99px;margin-top:26px;overflow:hidden}
+#splash .bar i{display:block;height:100%;width:0;background:#8FC4F2;border-radius:99px;animation:fill 2.3s .25s ease forwards}
+#splash .foot{position:absolute;bottom:26px;color:#6E96C4;font-size:10px;letter-spacing:2px;text-transform:uppercase}
+#splash .skip{position:absolute;top:20px;right:22px;color:#9CC1E8;font-size:11px;letter-spacing:1.5px;border:1px solid rgba(156,193,232,.4);border-radius:99px;padding:5px 14px;background:none;cursor:pointer}
+@keyframes popIn{0%{opacity:0;transform:scale(.5)}60%{opacity:1;transform:scale(1.06)}100%{opacity:1;transform:scale(1)}}
+@keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@keyframes fill{to{width:100%}}
+
+/* ============ NAV ============ */
+nav{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.94);backdrop-filter:blur(10px);border-bottom:1px solid #EEF2F6}
+nav .in{max-width:1080px;margin:0 auto;padding:11px 22px;display:flex;align-items:center;gap:20px}
+nav .lg{display:flex;align-items:center;gap:9px;font-weight:800;color:var(--navy);font-size:18px;text-decoration:none}
+nav .lg svg{height:30px}
+nav a.nl{color:var(--mut);font-size:13.5px;text-decoration:none;font-weight:600}
+nav a.nl:hover{color:var(--sky)}
+nav .cta{margin-left:auto}
+
+/* ============ HERO ============ */
+.hero{background:linear-gradient(160deg,var(--navy),var(--blue) 60%,var(--sky));color:#fff;padding:70px 0 60px}
+.hero .grid{display:grid;grid-template-columns:1.25fr 1fr;gap:44px;align-items:center}
+.hero h1{font-size:38px;letter-spacing:-.8px;line-height:1.18}
+.hero h1 span{color:var(--ice)}
+.hero p{color:#C9DCF0;font-size:15.5px;margin:16px 0 22px}
+.stores{display:flex;gap:10px;margin-bottom:22px}
+.store{flex:1;max-width:170px;background:#0A1626;border:1px solid #2A425F;color:#fff;border-radius:10px;padding:8px 13px;font-size:13px;font-weight:700}
+.store small{display:block;font-size:8.5px;font-weight:400;color:#8FA9C6;letter-spacing:.5px}
+.stats{display:flex;gap:26px;flex-wrap:wrap;margin-top:26px}
+.stats b{font-size:22px;display:block}
+.stats small{color:#A9C8E8;font-size:11px;letter-spacing:.6px}
+/* mini phone */
+.ph{background:#0A1626;border-radius:34px;padding:10px;box-shadow:0 24px 60px rgba(0,0,0,.4);max-width:280px;margin:0 auto}
+.ph .scr{background:var(--mist);border-radius:26px;overflow:hidden;font-size:11px}
+.ph .top{background:var(--navy);color:#fff;padding:9px 14px;font-size:10px;display:flex;justify-content:space-between}
+.ph .greet{padding:12px 14px 4px;font-weight:800;color:var(--navy);font-size:13px}
+.ph .card{margin:8px 12px;background:linear-gradient(135deg,var(--navy),var(--sky));color:#fff;border-radius:14px;padding:12px 14px}
+.ph .card small{color:#A9C8E8;font-size:9px;letter-spacing:.5px}
+.ph .bal{font-size:19px;font-weight:800;margin:2px 0}
+.ph .chip{display:inline-block;background:rgba(14,159,110,.25);color:#7BE3BB;font-size:9px;font-weight:800;border-radius:99px;padding:2px 8px}
+.ph .row{display:flex;justify-content:space-between;padding:5px 14px;color:var(--ink)}
+.ph .tabs{display:flex;border-top:1px solid var(--line);background:#fff;padding:7px 6px;color:var(--mut);font-size:9px;justify-content:space-around}
+
+/* ============ FITUR ============ */
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+.feat{background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px}
+.feat .ic{font-size:26px}
+.feat h3{font-size:15.5px;margin:8px 0 6px}
+.feat p{font-size:13.5px;color:var(--mut)}
+
+/* ============ MODUL ============ */
+.tier{font-size:11px;font-weight:800;letter-spacing:1.4px;text-transform:uppercase;color:#8CA3BD;margin:26px 0 10px}
+.mods{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px}
+.mod{background:#fff;border:1px solid var(--line);border-radius:13px;padding:13px 15px}
+.mod b{color:var(--blue);font-size:13.5px;display:flex;align-items:center;gap:7px}
+.mod b::before{content:"";width:7px;height:7px;border-radius:99px;background:var(--green)}
+.mod.small b::before{background:var(--ice)}
+.mod.cand{border:1.5px dashed #B9CBDE;background:#FBFDFF}
+.mod.cand b::before{background:#B45309}
+.mod small{display:block;color:var(--mut);font-size:11.5px;margin-top:3px}
+details.tech{margin-top:22px;background:#0A1626;border-radius:14px;padding:16px 20px;color:#C9DCF0}
+details.tech summary{cursor:pointer;font-weight:700;font-size:13.5px;color:#8FC4F2}
+details.tech table{width:100%;border-collapse:collapse;margin-top:12px;font-size:12px}
+details.tech td{padding:4px 10px 4px 0;border-bottom:1px solid #16283E;font-family:ui-monospace,Menlo,Consolas,monospace}
+details.tech td:last-child{color:#7BE3BB}
+
+/* ============ MENU ============ */
+.seg{display:inline-flex;background:#fff;border:1px solid var(--line);border-radius:12px;padding:4px;gap:4px;margin-bottom:26px}
+.seg button{border:none;background:none;padding:9px 22px;border-radius:9px;font-weight:700;font-size:13.5px;color:var(--mut);cursor:pointer}
+.seg button.on{background:var(--navy);color:#fff}
+.mgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.mcard{background:#fff;border:1px solid var(--line);border-radius:15px;overflow:hidden}
+.mcard h4{background:linear-gradient(135deg,var(--navy),var(--blue));color:#fff;font-size:13.5px;padding:11px 16px}
+.mcard ul{list-style:none;padding:8px 0}
+.mcard li{padding:7px 16px;font-size:13.5px;border-bottom:1px solid #F3F6FA;display:flex;gap:8px}
+.mcard li:last-child{border-bottom:none}
+.mcard li small{color:var(--mut);display:block;font-size:11px}
+.menu-pane{display:none}.menu-pane.on{display:block}
+
+/* ============ FORM ============ */
+.fgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px}
+.form{background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px}
+.form h3{font-size:15px;margin-bottom:4px}
+.form .d{font-size:12px;color:var(--mut);margin-bottom:14px}
+label{display:block;font-size:11px;font-weight:700;color:#475569;margin:10px 0 4px}
+input,select{width:100%;border:1px solid #CBD5E1;border-radius:10px;padding:9px 12px;font-size:13.5px;background:#fff;font-family:inherit}
+input:focus,select:focus{outline:2px solid rgba(27,111,184,.2);border-color:var(--sky)}
+.drop{flex:1;height:62px;border:1.5px dashed #9DB8D6;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--mut);background:#FBFDFF}
+.res{background:#F0FDF4;border:1px solid #BBF7D0;border-radius:11px;padding:10px 13px;font-size:12.5px;color:#166534;margin-top:12px;display:none}
+.res.err{background:#FEF2F2;border-color:#FECACA;color:#B91C1C}
+.res.info{background:#EFF6FF;border-color:#BFDBFE;color:#1E40AF}
+section,header.hero{scroll-margin-top:70px}
+.gapform{position:relative}
+.gapform .flag{position:absolute;top:16px;right:16px}
+.gapform .src{font-size:11px;color:var(--mut);margin-top:8px}
+.res b{display:block;margin-bottom:2px}
+.orow{display:flex;gap:8px}.orow>*{flex:1}
+.calc{background:#F8FAFC;border:1px solid var(--line);border-radius:11px;padding:12px 14px;font-size:13px;margin-top:12px}
+.calc .r{display:flex;justify-content:space-between;padding:3px 0}
+.calc .r.t{border-top:1px dashed #CBD5E1;margin-top:5px;padding-top:8px;font-weight:800;color:var(--navy)}
+.badge{display:inline-block;border-radius:99px;padding:2px 10px;font-size:10.5px;font-weight:800}
+.b-g{background:#DCFCE7;color:#166534}.b-r{background:#FEE2E2;color:#B91C1C}.b-i{background:#DBEAFE;color:#1E40AF}
+
+/* ============ REFERENSI ============ */
+.rtab{display:grid;grid-template-columns:repeat(auto-fill,minmax(480px,1fr));gap:16px}
+@media(max-width:560px){.rtab{grid-template-columns:1fr}}
+.ref{background:#fff;border:1px solid var(--line);border-radius:15px;overflow:hidden}
+.ref h4{background:linear-gradient(135deg,var(--navy),var(--blue));color:#fff;font-size:13.5px;padding:11px 16px}
+.ref table{width:100%;border-collapse:collapse;font-size:12.5px}
+.ref td{padding:9px 14px;border-bottom:1px solid #F3F6FA;vertical-align:top}
+.ref tr:last-child td{border-bottom:none}
+.ref td:first-child{font-weight:800;color:var(--navy);white-space:nowrap}
+.ref td em{color:var(--mut);font-style:normal;display:block;font-size:11.5px}
+.ref td span{color:var(--blue);font-weight:700;font-size:11.5px}
+
+.apps{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px;margin-bottom:26px}
+.app{background:#fff;border:1px solid var(--line);border-radius:15px;overflow:hidden}
+.app h4{background:linear-gradient(135deg,var(--navy),var(--blue));color:#fff;font-size:13.5px;padding:11px 16px}
+.app h4 small{display:block;font-size:10px;font-weight:400;color:#A9C8E8}
+.app ul{list-style:none;padding:8px 0}
+.app li{padding:7px 16px;font-size:13px;border-bottom:1px solid #F3F6FA}
+.app li:last-child{border-bottom:none}
+.app li::before{content:"✗ ";color:var(--red);font-weight:800}
+.gapm{width:100%;border-collapse:collapse;font-size:12px;background:#fff;border:1px solid var(--line);border-radius:13px;overflow:hidden}
+.gapm th{background:var(--navy);color:#fff;padding:8px 10px;font-size:10.5px;letter-spacing:.4px;text-align:left}
+.gapm td{padding:8px 10px;border-bottom:1px solid #F3F6FA;vertical-align:top}
+.gapm tr:last-child td{border-bottom:none}
+.gapm tr:nth-child(even) td{background:#F8FAFC}
+.gapm .y{color:var(--green);font-weight:800}.gapm .p{color:#B45309;font-weight:800}.gapm .n{color:#CBD5E1;font-weight:800}
+.gapm td:last-child{color:var(--blue);font-weight:700;font-size:11.5px}
+/* strip kepatuhan */
+.strip{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.strip span{background:rgba(255,255,255,.1);border:1px solid rgba(143,196,242,.35);color:#DBEAF9;border-radius:99px;padding:6px 16px;font-size:12px;font-weight:600}
+
+footer{background:#0A1626;color:#8FA9C6;font-size:12px;padding:44px 0}
+footer .fgrid2{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:30px;margin-bottom:26px}
+footer h5{color:#DBEAF9;font-size:13px;margin-bottom:8px}
+footer a{color:#8FA9C6;text-decoration:none;display:block;padding:2px 0}
+footer a:hover{color:var(--ice)}
+.disc{border-top:1px solid #16283E;padding-top:18px;font-size:10.5px;line-height:1.7;color:#5E7BA0}
+@media(max-width:820px){.hero .grid{grid-template-columns:1fr}.fgrid2{grid-template-columns:1fr!important}}
+</style></head><body>
+
+<!-- ══════════════ SPLASH SCREEN ══════════════ -->
+<div id="splash" onclick="tutupSplash()">
+  <button class="skip" onclick="event.stopPropagation();tutupSplash()" data-i18n="s1">LEWATI</button>
+  <div class="logo"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+    <defs><linearGradient id="gnara" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#12385C"/><stop offset="1" stop-color="#1B6FB8"/></linearGradient></defs>
+    <rect width="512" height="512" rx="115" fill="url(#gnara)"/>
+    <text x="50%" y="47%" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system,'Segoe UI',Arial" font-size="200" font-weight="800" fill="#fff">n</text>
+    <path d="M118 384 C 200 404 268 352 396 336" stroke="#8FC4F2" stroke-width="26" stroke-linecap="round" fill="none"/>
+  </svg></div>
+  <div class="tag">Satu aplikasi, seluruh kekayaanmu.</div>
+  <div class="sub">SAHAM · SBN · OBLIGASI · REKSA DANA · EMAS &amp; KRIPTO · DEPOSITO · VALAS</div>
+  <div class="bar"><i></i></div>
+  <div class="foot">nara · wealth super-app indonesia</div>
+</div>
+
+<!-- ══════════════ NAV ══════════════ -->
+<nav><div class="in">
+  <a class="lg" href="#top"><svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><rect width="512" height="512" rx="115" fill="#0F2B46"/><path d="M118 384 C 200 404 268 352 396 336" stroke="#8FC4F2" stroke-width="26" stroke-linecap="round" fill="none"/><text x="50%" y="46%" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="200" font-weight="800" fill="#fff">n</text></svg>nara</a>
+  <a class="nl" href="#fitur">Fitur</a>
+  <a class="nl" href="#modul">Modul</a>
+  <a class="nl" href="#menu">Menu Aplikasi</a>
+  <a class="nl" href="#demo">Form Demo</a>
+  <a class="nl" href="#referensi">Referensi Global</a>
+  <a class="nl" href="#gap">Analisis Gap</a>
+  <a class="btn cta" href="#demo">Mulai — Buka Akun</a>
+</div></nav>
+
+<!-- ══════════════ HERO ══════════════ -->
+<header class="hero" id="top"><div class="wrap"><div class="grid">
+  <div>
+    <h1 data-i18n="s2">Kelola saham, SBN, emas,<br>hingga valas. <span>Satu aplikasi.</span></h1>
+    <p>Nara menyatukan enam pintu investasi Indonesia dalam satu wealth super-app — lengkap dengan perencana tujuan finansial, alert harga, auto-invest, dan saran cerdas. Dibuka 5 menit lewat e-KYC, mulai dari Rp 10.000.</p>
+    <div class="stores">
+      <div class="store"><small data-i18n="s3">UNDUH DI</small>App Store</div>
+      <div class="store"><small data-i18n="s4">DAPATKAN DI</small>Google Play</div>
+    </div>
+    <a class="btn green" href="#demo" style="padding:12px 26px">🚀 Simulasi buka akun — 5 menit</a>
+    <div class="stats">
+      <div><b>33</b><small data-i18n="s5">MODUL LAYANAN</small></div>
+      <div><b>6</b><small data-i18n="s6">KELAS ASET</small></div>
+      <div><b>86</b><small data-i18n="s7">MENU B2C + B2B</small></div>
+      <div><b>5 MENIT</b><small data-i18n="s8">E-KYC → RDN</small></div>
+    </div>
+  </div>
+  <div class="ph"><div class="scr">
+    <div class="top"><span>09:41</span><span>IDX BUKA ☀️</span></div>
+    <div class="greet">Halo, Radian 👋</div>
+    <div class="card"><small data-i18n="s9">TOTAL KEKAYAAN BERSIH</small><div class="bal">Rp 125.400.000</div><span class="chip">▲ +6,2% bulan ini</span></div>
+    <div class="row"><span>📈 BBCA</span><b>12.650 ▲</b></div>
+    <div class="row"><span>📜 FR0098</span><b>99,52</b></div>
+    <div class="row"><span>🥇 Emas/gram</span><b>1.385.000</b></div>
+    <div class="row"><span>🎯 Target "S1 anak"</span><b style="color:var(--sky)">Rp 2,44 jt/bln</b></div>
+    <div class="tabs"><span>🏠 Beranda</span><span>💼 Investasi</span><span>📊 Portofolio</span><span>🤖 Otomatis</span><span>👤 Profil</span></div>
+  </div></div>
+</div></div></header>
+
+<!-- ══════════════ FITUR ══════════════ -->
+<section id="fitur"><div class="wrap">
+  <div class="kicker">Fitur Utama</div>
+  <h2 data-i18n="s10">Semua yang dimiliki wealth app kelas dunia —<br>dalam satu aplikasi berbahasa Indonesia.</h2>
+  <p class="mut" style="margin:10px 0 30px" data-i18n="s11">Setiap fitur ditenaga modul layanan khusus yang bisa diaudit, diuji, dan diskalakan terpisah.</p>
+  <div class="grid3">
+    <div class="feat"><div class="ic">🪪</div><h3 data-i18n="s12">e-KYC 5 menit → SID &amp; RDN otomatis</h3><p>Foto KTP + selfie, verifikasi Dukcapil, penerbitan SID KSEI dan Rekening Dana Nasabah langsung dari aplikasi. Tidak perlu ke kantor sekuritas.</p></div>
+    <div class="feat"><div class="ic">🌐</div><h3 data-i18n="s13">6 kelas aset, satu portofolio</h3><p>Saham IDX (dengan batas ARA/ARB), SBN ritel SR/ORI/ST, obligasi korporasi &amp; pemerintah, reksa dana, emas &amp; kripto PFAK, deposito, dan valas — terkonsolidasi real-time.</p></div>
+    <div class="feat"><div class="ic">🎯</div><h3 data-i18n="s14">Goal-based investing</h3><p>Pilih tujuan — pendidikan, rumah, haji, pensiun — dan Nara menghitung setoran bulanan (rumus anuitas) plus alokasi aset sesuai profil risiko CHP band 1–6.</p></div>
+    <div class="feat"><div class="ic">⭐</div><h3 data-i18n="s15">Watchlist &amp; price alert</h3><p>Pasang ambang "naik di atas / turun di bawah" untuk saham maupun kripto. Alert sekali-picu dengan notifikasi — seperti alert di Stockbit, tapi lintas kelas aset.</p></div>
+    <div class="feat"><div class="ic">🤖</div><h3 data-i18n="s16">Auto-invest, rebalancing &amp; sweep</h3><p>Setoran rutin otomatis, penyeimbang portofolio saat menyimpang dari target (approval ganda untuk nilai besar), dan sweep kas ke deposito.</p></div>
+    <div class="feat"><div class="ic">✨</div><h3 data-i18n="s17">NBA — saran cerdas harian</h3><p>Next-best-action dari feature store: "alokasi sahammu 5% di atas target", "kupon SBN cair besok" — rekomendasi menjelang kebutuhan, dengan consent penuh (UU PDP).</p></div>
+    <div class="feat"><div class="ic">💎</div><h3 data-i18n="s18">Networth konsolidasi &amp; e-statement</h3><p>Total kekayaan bersih lintas rekening &amp; mata uang, revaluasi kurs harian, plus laporan PDF bulanan siap unduh untuk keperluan pajak/visa.</p></div>
+    <div class="feat"><div class="ic">🛡️</div><h3 data-i18n="s19">Keamanan standar perbankan</h3><p>Kredensial mitra di vault (tanpa plaintext), audit trail lengkap, deteksi APU-PPT, masking PII, sesi cache Valkey, OTP perangkat baru — dikerahkan tim kepatuhan internal.</p></div>
+    <div class="feat"><div class="ic">📊</div><h3 data-i18n="s20">Dashboard BI manajemen</h3><p>Untuk pengelola: KPI lintas layanan (instrumen, pipeline EOD, endpoint mitra) agregat real-time — sumber mati tetap tampil, dashboard tak pernah jatuh.</p></div>
+  </div>
+</div></section>
+
+<!-- ══════════════ MODUL ══════════════ -->
+<section class="alt" id="modul"><div class="wrap">
+  <div class="kicker">Arsitektur Terbuka</div>
+  <h2 data-i18n="s21">33 modul layanan di balik satu aplikasi.</h2>
+  <p class="mut" style="margin:10px 0 6px" data-i18n="s22">Microservices Java 21 + Spring Boot — pola yang sama dipakai bank-bank besar. Setiap modul punya test, health check, dan bisa dideploy mandiri (Docker/Kubernetes).</p>
+  <div class="tier">Aplikasi Nasabah</div>
+  <div class="mods">
+    <div class="mod"><b>Onboarding</b><small data-i18n="s23">e-KYC Dukcapil → SID KSEI → RDN</small></div>
+    <div class="mod"><b>Equity</b><small data-i18n="s24">order saham IDX, ARA/ARB, settlement T+2</small></div>
+    <div class="mod"><b>Reksa Dana</b><small data-i18n="s25">langganan/pencairan/switch, NAV harian</small></div>
+    <div class="mod"><b>Obligasi</b><small data-i18n="s26">dirty price, kupon, yield</small></div>
+    <div class="mod"><b>SBN Ritel</b><small data-i18n="s27">SR/ORI/ST, kupon &amp; tenor</small></div>
+    <div class="mod"><b>Emas &amp; Kripto</b><small data-i18n="s28">ledger gram, PFAK, spekulasi aman</small></div>
+    <div class="mod"><b>Deposito</b><small data-i18n="s29">tenor, bunga, sweep kas otomatis</small></div>
+    <div class="mod"><b>Valas</b><small data-i18n="s30">kurs board, konversi lintas mata uang</small></div>
+    <div class="mod"><b>Multi-Mata Uang</b><small data-i18n="s31">rekening 9 mata uang + revaluasi</small></div>
+    <div class="mod"><b>Auto-Invest</b><small data-i18n="s32">rencana rutin + v2: autodebet bank mitra (baru)</small></div>
+    <div class="mod"><b>Networth &amp; E-Statement</b><small data-i18n="s33">konsolidasi + v2: analitik benchmark &amp; laporan 3 format (baru)</small></div>
+    <div class="mod"><b>Profil Risiko</b><small data-i18n="s34">angket CHP 5–25 → band 1–6</small></div>
+    <div class="mod"><b>Tujuan Finansial</b><small data-i18n="s35">goal planner anuitas + alokasi</small></div>
+    <div class="mod"><b>Watchlist &amp; Alert</b><small data-i18n="s36">pantauan + ambang harga sekali-picu</small></div>
+    <div class="mod"><b>Asuransi</b><small data-i18n="s37">bancassurance — polis, premi, klaim (baru)</small></div>
+    <div class="mod"><b>Dashboard BI</b><small data-i18n="s38">agregasi manajemen lintas layanan</small></div>
+  </div>
+  <div class="tier">Front Office</div>
+  <div class="mods">
+    <div class="mod"><b>RM Advisor</b><small data-i18n="s39">book klien, proposal, suitability</small></div>
+    <div class="mod"><b>Rebalancing</b><small data-i18n="s40">drift vs target + approval bertingkat</small></div>
+    <div class="mod"><b>NBA Engine</b><small data-i18n="s41">rekomendasi next-best-action</small></div>
+  </div>
+  <div class="tier">Back Office &amp; Kepatuhan</div>
+  <div class="mods">
+    <div class="mod"><b>Fund Admin</b><small data-i18n="s42">NAV unit, transaksi reksa dana</small></div>
+    <div class="mod"><b>Master Data</b><small data-i18n="s43">100+ instrumen, parameter, hari libur</small></div>
+    <div class="mod"><b>Pipeline EOD</b><small data-i18n="s44">9 langkah penutupan buku harian</small></div>
+    <div class="mod"><b>Kepatuhan</b><small data-i18n="s45">APU-PPT, consent, masking PII</small></div>
+  </div>
+  <div class="tier">Platform</div>
+  <div class="mods">
+    <div class="mod"><b>Integrasi</b><small data-i18n="s46">8 mitra eksternal, circuit breaker</small></div>
+    <div class="mod"><b>Workflow</b><small data-i18n="s47">BPMN 2.0 + Flowable 7 embedded</small></div>
+    <div class="mod"><b>Feature Store</b><small data-i18n="s48">fitur model rekomendasi</small></div>
+    <div class="mod"><b>Notifikasi</b><small data-i18n="s49">email, inbox, WhatsApp-stub</small></div>
+    <div class="mod small"><b>API Gateway</b><small data-i18n="s50">edge tunggal, rate limit, docs.html</small></div>
+  </div>
+  <details class="tech"><summary>🔧 Mode teknis — peta lengkap 33 service &amp; port (klik)</summary>
+    <table>
+      <tr><td>gateway</td><td>8080</td><td>workflow</td><td>8401</td><td>equity</td><td>8093</td></tr>
+      <tr><td>onboarding</td><td>8099</td><td>goal</td><td>8102</td><td>mutualfund</td><td>8092</td></tr>
+      <tr><td>watchlist</td><td>8103</td><td>bi</td><td>8104</td><td>bond</td><td>8091</td></tr>
+      <tr><td>sbn</td><td>8084</td><td>altasset</td><td>8085</td><td>moneymarket</td><td>8094</td></tr>
+      <tr><td>fx</td><td>8090</td><td>multicurrency</td><td>8097</td><td>autoinvest</td><td>8086</td></tr>
+      <tr><td>networth</td><td>8087</td><td>profiling</td><td>8095</td><td>rm-advisor</td><td>8089</td></tr>
+      <tr><td>rebalancing</td><td>8083</td><td>nba-engine</td><td>8082</td><td>feature-store</td><td>8081</td></tr>
+      <tr><td>fundadmin</td><td>8088</td><td>masterdata</td><td>8098</td><td>eod</td><td>8100</td></tr>
+      <tr><td>compliance</td><td>8101</td><td>integration</td><td>8096</td><td>notification</td><td>8110</td></tr>
+      <tr><td>insurance</td><td>8105</td><td colspan="4">bancassurance (polis · premi · klaim)</td></tr>
+      <tr><td>pay</td><td>8106</td><td colspan="4">orkestrasi bayar &amp; rujukan kredit (tanpa lisensi — via mitra)</td></tr>
+      <tr><td>billing</td><td>8107</td><td colspan="4">mesin fee multi-tier, komisi &amp; insentif sales (B2B)</td></tr>
+      <tr><td>ziswaf</td><td>8108</td><td colspan="4">BARU — orkestrasi zakat/infak/wakaf via LAZ mitra (dana tak disentuh)</td></tr>
+      <tr><td>edu</td><td>8111</td><td colspan="4">BARU — akademi literasi: kelas, kuis, sertifikat</td></tr>
+      <tr><td>news</td><td>8112</td><td colspan="4">BARU — berita/riset pasar &amp; kalender corporate action</td></tr>
+      <tr><td colspan="2">infra: Kafka 9092 · Valkey 6379 · PostgreSQL 5432</td><td colspan="4">observability: Prometheus metrics + tracing seluruh service</td></tr>
+    </table>
+  </details>
+</div></section>
+
+<!-- ══════════════ MENU ══════════════ -->
+<section id="menu"><div class="wrap">
+  <div class="kicker">Menu Aplikasi</div>
+  <h2 data-i18n="s51">Dua dunia, dipisah tegas: nasabah &amp; institusi.</h2>
+  <p class="mut" style="margin:10px 0 22px" data-i18n="s52">86 menu terstruktur — 41 untuk aplikasi nasabah (B2C), 45 untuk konsol internal (B2B).</p>
+  <div class="seg">
+    <button class="on" onclick="tabMenu(this,'mb2c')" data-i18n="s53">📱 App Nasabah (B2C)</button>
+    <button onclick="tabMenu(this,'mb2b')" data-i18n="s54">🏦 Konsol Internal (B2B)</button>
+  </div>
+  <div class="menu-pane on" id="mb2c"><div class="mgrid">
+    <div class="mcard"><h4>📱 Alur masuk</h4><ul>
+      <li>⚡ Splash screen — logo &amp; tagline, &lt;3 detik</li>
+      <li>🔐 Login — PIN 6 digit / biometrik, OTP perangkat baru</li>
+      <li>🪪 Buka akun — e-KYC → SID → RDN → profil risiko</li></ul></div>
+    <div class="mcard"><h4>🏠 Tab 1 · Beranda</h4><ul>
+      <li>💎 Kartu Kekayaan Bersih<small data-i18n="s55">total aset − liabilitas, real-time</small></li>
+      <li>✨ Saran Hari Ini (NBA)<small data-i18n="s56">rekomendasi personal harian</small></li>
+      <li>💱 Strip Kurs &amp; Harga<small data-i18n="s57">valas, emas, saham pantauan</small></li>
+      <li>⏰ Status Bursa<small data-i18n="s58">sesi IDX I 09:00–12:00 · II 13:30–16:00</small></li></ul></div>
+    <div class="mcard"><h4>💼 Tab 2 · Investasi</h4><ul>
+      <li>📈 Saham · 🏦 Reksa Dana · 📜 Obligasi &amp; SBN</li>
+      <li>🥇 Emas &amp; Kripto · 🏧 Deposito · 💱 Valas</li>
+      <li>🎯 Tujuan Finansial<small data-i18n="s59"><b>baru</b> — planner setoran &amp; alokasi</small></li>
+      <li>⭐ Pantauan &amp; Alert<small data-i18n="s60"><b>baru</b> — watchlist + ambang harga</small></li></ul></div>
+    <div class="mcard"><h4>📊 Tab 3 · Portofolio</h4><ul>
+      <li>💎 Konsolidasi Kekayaan</li>
+      <li>🌍 Rekening Multi-Mata Uang</li>
+      <li>🧾 Kepemilikan per Produk</li>
+      <li>🎁 Hak Saya (dividen / rights)</li></ul></div>
+    <div class="mcard"><h4>🤖 Tab 4 · Otomatis</h4><ul>
+      <li>🔁 Rencana Auto-Invest</li>
+      <li>⚖️ Rebalancing</li>
+      <li>💧 Saran Sweep Kas</li>
+      <li>💰 Proyeksi Kupon SBN</li></ul></div>
+    <div class="mcard"><h4>👤 Tab 5 · Profil</h4><ul>
+      <li>🚀 Status Onboarding · 🎯 Profil Risiko (CHP)</li>
+      <li>🧾 Anggaran Bulanan · 🕓 Riwayat Transaksi</li>
+      <li>📬 Inbox &amp; Unduh E-Statement PDF<small data-i18n="s61">pesan aman, laporan bulanan</small></li></ul></div>
+  </div></div>
+  <div class="menu-pane" id="mb2b"><div class="mgrid">
+    <div class="mcard"><h4>🧑‍💼 Konsol RM — Relationship Manager</h4><ul>
+      <li>👥 Book of Client · 📑 Proposal Investasi</li>
+      <li>🛡️ Cek Suitability · 📋 Review CHP Nasabah</li>
+      <li>⚖️ Approval Rebalancing ≥ Rp 100 juta</li>
+      <li>💎 Potret Kekayaan Nasabah</li></ul></div>
+    <div class="mcard"><h4>🏢 Konsol Operasional &amp; Back Office</h4><ul>
+      <li>🏗️ Fund Administration · 🔢 NAV Harian</li>
+      <li>📤 Laporan Regulator · 🗂️ Master Instrumen</li>
+      <li>⚙️ Parameter Sistem · 📅 Kalender &amp; Settlement</li>
+      <li>🌙 Pipeline EOD · 🛡️ Kepatuhan APU-PPT &amp; PDP</li></ul></div>
+    <div class="mcard"><h4>🖥️ Konsol Infrastruktur &amp; IT</h4><ul>
+      <li>🩺 Pemantauan Sistem Eksternal · 📞 Uji Konektor</li>
+      <li>⚙️ Workflow Engine (BPMN) · 🎨 Editor BPMN Visual</li>
+      <li>🔗 Direktori Endpoint · 🧾 Audit Log Integrasi</li>
+      <li>📊 Feature Store</li></ul></div>
+    <div class="mcard"><h4>📈 Konsol Manajemen — <b style="color:#7BE3BB">baru</b></h4><ul>
+      <li>📊 Dashboard BI — KPI lintas layanan &amp; status sumber data</li>
+      <li>📚 Dokumentasi API terkumpul (/docs.html)</li>
+      <li>🎨 Design System — token &amp; komponen UI (/design-system.html)</li></ul></div>
+  </div></div>
+</div></section>
+
+<!-- ══════════════ FORM DEMO ══════════════ -->
+<section class="alt" id="demo"><div class="wrap">
+  <div class="kicker">Coba Langsung</div>
+  <h2 data-i18n="s62">Empat form inti — persis seperti di aplikasi.</h2>
+  <p class="mut" style="margin:10px 0 30px" data-i18n="s63">Demo interaktif dengan parameter modul asli Nara (rumus anuitas, biaya pasar modal Indonesia). Data tidak dikirim ke mana pun.</p>
+  <div class="fgrid">
+
+    <!-- 1. e-KYC -->
+    <div class="form"><h3 data-i18n="s64">🪪 1 · Buka akun — e-KYC</h3><div class="d" data-i18n="d1">Verifikasi Dukcapil → SID KSEI → RDN</div>
+      <label data-i18n="s65">NAMA LENGKAP (SESUAI KTP)</label><input id="kNama" value="Radian Adhicandra">
+      <label data-i18n="s66">NIK 16 DIGIT</label><input id="kNik" value="3210XXXXXXXX0004" maxlength="16">
+      <div class="orow" style="margin-top:10px"><div class="drop">🪪 Foto KTP</div><div class="drop">🤳 Selfie</div></div>
+      <label data-i18n="s67">PROFIL RISIKO (CHP)</label>
+      <select id="kBand"><option value="1">Band 1 · Konservatif</option><option value="2">Band 2</option><option value="3">Band 3</option><option value="4" selected>Band 4 · Moderat-Agresif</option><option value="5">Band 5</option><option value="6">Band 6 · Agresif</option></select>
+      <button class="btn big" style="margin-top:14px" onclick="kyc()" data-i18n="s68">Verifikasi e-KYC</button>
+      <div class="res" id="kRes"><b id="kJudul"></b><span id="kDetail"></span></div>
+    </div>
+
+    <!-- 2. Order saham -->
+    <div class="form"><h3 data-i18n="s69">📈 2 · Order saham</h3><div class="d" data-i18n="d2">Sesi IDX · lot 100 lembar · validitas hari ini</div>
+      <div class="orow">
+        <select id="oSisi"><option>BELI</option><option>JUAL</option></select>
+        <select id="oTicker"><option>BBCA — Rp 12.650</option><option>BBRI — Rp 4.210</option><option>TLKM — Rp 3.120</option></select>
+      </div>
+      <div class="orow" style="margin-top:10px">
+        <div><label data-i18n="s70">LOT (1 LOT = 100)</label><input id="oLot" type="number" value="10" min="1"></div>
+        <div><label data-i18n="s71">HARGA / LEMBAR</label><input id="oHarga" type="number" value="12650" min="50"></div>
+      </div>
+      <div class="calc" id="oCalc"></div>
+    </div>
+
+    <!-- 3. Tujuan finansial -->
+    <div class="form"><h3 data-i18n="s72">🎯 3 · Tujuan finansial</h3><div class="d" data-i18n="d3">Rumus anuitas modul goal — sama dengan aplikasi</div>
+      <div class="orow">
+        <div><label data-i18n="s73">TARGET (RP)</label><input id="gTarget" type="number" value="200000000" min="100000"></div>
+        <div><label data-i18n="s74">JANGKA (TAHUN)</label><input id="gTahun" type="number" value="5" min="1" max="40"></div>
+      </div>
+      <div class="orow" style="margin-top:10px">
+        <div><label data-i18n="s75">ASET AWAL (RP, 0 BILA BELUM ADA)</label><input id="gP0" type="number" value="10000000" min="0"></div>
+        <div><label data-i18n="s76">PROFIL RISIKO</label><select id="gBand"><option value="4.5">Band 1 · 4,5% p.a.</option><option value="5.5">Band 2 · 5,5% p.a.</option><option value="6.5">Band 3 · 6,5% p.a.</option><option value="8" selected>Band 4 · 8% p.a.</option><option value="9.5">Band 5 · 9,5% p.a.</option><option value="11">Band 6 · 11% p.a.</option></select></div>
+      </div>
+      <button class="btn big" style="margin-top:14px" onclick="goal()" data-i18n="s77">Hitung rencananya</button>
+      <div class="calc" id="gCalc"></div>
+    </div>
+
+    <!-- 4. Price alert -->
+    <div class="form"><h3 data-i18n="s78">⭐ 4 · Alert harga</h3><div class="d" data-i18n="d4">Sekali-picu — ABOVE terpicu saat harga ≥ ambang, BELOW saat ≤</div>
+      <div class="orow">
+        <select id="aTicker"><option value="12650">BBCA — kini 12.650</option><option value="3120">TLKM — kini 3.120</option><option value="1490000000">BTC_IDR — kini 1,49 M</option></select>
+        <select id="aKond"><option>ABOVE</option><option>BELOW</option></select>
+      </div>
+      <label data-i18n="s79">AMBANG (RP)</label><input id="aTh" type="number" value="13000" min="1">
+      <button class="btn big" style="margin-top:14px" onclick="alertUji()" data-i18n="s80">Uji evaluasi</button>
+      <div class="res" id="aRes"><b id="aJudul"></b><span id="aDetail"></span></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- ══════════════ REFERENSI ══════════════ -->
+<section id="referensi"><div class="wrap">
+  <div class="kicker">Referensi Industri</div>
+  <h2 data-i18n="s81">Belajar dari yang terbaik — Indonesia &amp; dunia.</h2>
+  <p class="mut" style="margin:10px 0 26px" data-i18n="s82">Pola produk yang menginspirasi modul Nara. Semua merek dagang milik pemiliknya masing-masing — referensi pola, bukan afiliasi.</p>
+  <div class="rtab">
+    <div class="ref"><h4>🇮🇩 Indonesia — banking &amp; investasi digital</h4><table>
+      <tr><td>Stockbit</td><td><em>Sosial trading saham IDX</em>Watchlist komunitas, alert harga, riset terpadu</td><td><span>⭐ watchlist &amp; alert harga</span></td></tr>
+      <tr><td>Bibit</td><td><em>Robo-advisor reksa dana</em>Profil risiko → portofolio dikelola, setoran rutin</td><td><span>🎯 profil CHP + auto-invest</span></td></tr>
+      <tr><td>Ajaib</td><td><em>Broker digital onboarding cepat</em>Buka rekening via aplikasi dalam menit</td><td><span>🪪 e-KYC → RDN 5 menit</span></td></tr>
+      <tr><td>Bareksa</td><td><em>Marketplace reksa dana &amp; SBN</em>Satu akun banyak MI, beli SBN ritel glorifikasi</td><td><span>🏦 6 kelas aset satu app</span></td></tr>
+      <tr><td>Mirae Asset (HOTS)</td><td><em>Trading saham profesional</em>Order cepat, validitas, pengalaman pro</td><td><span>📈 order + ARA/ARB guard</span></td></tr>
+      <tr><td>Pluang</td><td><em>Emas &amp; kripto terdaftar</em>Logam mulia digital, kripto lewat PFAK</td><td><span>🥇 emas &amp; kripto modul</span></td></tr>
+      <tr><td>Mandiri Sekuritas (e-SIP)</td><td><em>Broker milik bank besar</em>RDN terintegrasi bank, settlement mulus</td><td><span>🏛️ RDN + settlement T+2</span></td></tr>
+      <tr><td>Jenius / bank digital</td><td><em>Banking tanpa cabang</em>UX mobile-first, insight pengeluaran</td><td><span>💎 kartu kekayaan + anggaran</span></td></tr>
+    </table></div>
+    <div class="ref"><h4>🌍 Dunia — wealth management global</h4><table>
+      <tr><td>Robinhood</td><td><em>AS · broker komisi nol</em>UX order satu-layanan, fraksional saham <span style="color:var(--green);font-weight:800">✓ fraksional DITUTUP (equity v2)</span></td><td><span>📈 kesederhanaan order</span></td></tr>
+      <tr><td>Betterment</td><td><em>AS · robo-advisor</em>Goal-based investing dengan timeline tiap tujuan</td><td><span>🎯 goal planner anuitas</span></td></tr>
+      <tr><td>Wealthfront</td><td><em>AS · robo-advisor</em>Auto-rebalance &amp; perencanaan (planning) jangka panjang</td><td><span>⚖️ rebalancing + proyeksi</span></td></tr>
+      <tr><td>Charles Schwab</td><td><em>AS · full-service broker</em>Riset menyeluruh + bimbingan penasihat</td><td><span>🧑‍💼 konsol RM advisor</span></td></tr>
+      <tr><td>Fidelity</td><td><em>AS · wealth management</em>Kualitas data pasar &amp; riset institusional</td><td><span>🗂️ masterdata + pipeline EOD</span></td></tr>
+      <tr><td>Vanguard</td><td><em>AS · indeks jangka panjang</em>Biaya rendah, disiplin alokasi konservatif</td><td><span>📜 SBN/obligasi band 1–3</span></td></tr>
+      <tr><td>StashAway</td><td><em>SEA · robo-advisor ERAA</em>Alokasi berbasis risiko ekonomi</td><td><span>🎯 alokasi per band CHP</span></td></tr>
+      <tr><td>Endowus</td><td><em>SG · dana pensiun &amp; wealth</em>Fee transparan, agregasi rekening terbatas (CPF/SRS)</td><td><span>🧾 rincian biaya transparan</span></td></tr>
+      <tr><td>Syfe</td><td><em>SG · wealth platform</em>Tema investasi &amp; reksa dana global</td><td><span>🌐 multi kelas aset</span></td></tr>
+      <tr><td>Revolut</td><td><em>Global · super-app finansial</em>Satu app: tabungan, investasi, valas, kartu</td><td><span>💡 konsep wealth super-app</span></td></tr>
+    </table></div>
+  </div>
+  <div style="margin-top:20px" class="mut" >Kombinasi yang jarang dimiliki satu platform: <b style="color:var(--navy)">robo-advisor</b> ala Betterment/StashAway + <b style="color:var(--navy)">trading</b> ala Stockbit/Mirae + <b style="color:var(--navy)">super-app</b> ala Revolut — dengan kepatuhan khas Indonesia (SID KSEI, RDN, APU-PPT, UU PDP).</div>
+</div></section>
+
+<!-- ══════════════ ANALISIS GAP ══════════════ -->
+<section class="alt" id="gap"><div class="wrap">
+  <div class="kicker">Analisis Kesenjangan</div>
+  <h2 data-i18n="s83">Yang <u>ada</u> di aplikasi lain — tapi <u>belum</u> ada di Nara.</h2>
+  <p class="mut" style="margin:10px 0 26px" data-i18n="s84">Demi keterbukaan kami petakan fitur dari lima acuan industri (Avantrade Wealth Management Suite, Medallion, WELMA, Livin' by Mandiri, BRImo) yang <b>tidak dimiliki Nara</b> — ditelaah empat dimensi: <b>fitur, modul, menu, dan form</b>. Profil Medallion digeneralisasikan dari kelas platform wealth premium; koreksi kami bila maksud Anda platform lain. <b>Perbarui rilis:</b> <b style="color:var(--green)">seluruh 18 form gap kini hijau (18/18)</b> — total dua puluh satu gap telah <b style="color:var(--green)">ditutup</b> — <b>asuransi/bancassurance</b> lewat <code>nara-insurance :8105</code> · <b>autodebet bank</b> lewat <code>autoinvest v2 :8086</code> · <b>analitik + laporan multi-format</b> lewat <code>networth v2 :8087</code> · <b>emas fisik</b> lewat <code>altasset v2 :8085</code> · dan <b>QRIS, transfer antarbank, tagihan &amp; pajak, paylater/kartu kredit</b> tanpa lisensi bank/PJP lewat <code>nara-pay :8106</code> (orkestrasi + rujukan mitra berlisensi). Terbaru: <b>adapter sandbox mitra</b> (konektor SANDBOX, skenario uji) lewat <code>integration v3 :8096</code> · <b>akademi literasi ber-sertifikat</b> lewat <code>nara-edu :8111</code> · <b>berita &amp; riset pasar</b> lewat <code>nara-news :8112</code> · <b>onboarding massal korporasi</b> (B2B) lewat <code>onboarding v3 :8099</code>; sebelumnya <b>produk pensiun DPLK via konektor API mitra</b> + <b>5 fitur lanjutan</b> — mass-switching &amp; penutupan produk (fundadmin v2), kinerja tim &amp; insentif RM (billing v2), deposit/penarikan RDN real-time, tarik-tanpa-kartu &amp; QRIS merchant, ekosistem kredit KPR/KKB/KMG (pay v2); sebelumnya <b>ziswaf</b> via LAZ mitra lewat <code>nara-ziswaf :8108</code>; sebelumnya <b>kit pajak SPT</b> — rekap dividen &amp; capital gain ber-tarif final — lewat <code>networth v3 :8087</code>; sebelumnya <b>saham fraksional</b> — beli per nominal Rp 10 rb, unit 4 desimal — lewat <code>equity v2 :8093</code>; sebelumnya <b>mesin biaya multi-tier, komisi &amp; insentif sales</b> (B2B) lewat <code>nara-billing :8107</code>; sebelumnya <b>akun gabungan &amp; kado investasi</b> lewat <code>onboarding v2 :8099</code> — kuorum AND/OR &amp; KYC NIK penerima; sebelumnya <b>penempatan obligasi primer</b> — langganan ritel FCFS &amp; book-building dealer cutoff-yield — lewat <code>bond v2 :8091</code>; lalu <b>vault dokumen &amp; janji temu RM</b> (Medallion) lewat <code>rm-advisor v2 :8089</code> — sidik jari SHA-256 &amp; catatan rapat wajib.</p>
+
+  <div class="apps">
+    <div class="app"><h4>Avantrade Wealth Management Suite <small data-i18n="s85">suite institusi (Firium) — modul unit trust, fixed income, bancassurance, RM Assist</small></h4><ul>
+      <li><b>Bancassurance</b> — modul polis asuransi: premi, klaim, mirroring data mitra asuransi <span style="color:var(--green);font-weight:800">✓ DITUTUP (rilis :8105)</span></li>
+      <li>Distribusi <b>obligasi pasar primer</b> + bentuk dealership/inventori <span style="color:var(--green);font-weight:800">✓ DITUTUP (bond v2)</span></li>
+      <li><b>Multi-tingkat biaya</b> &amp; biaya khusus + pelacakan <b>komisi &amp; insentif sales</b> <span style="color:var(--green);font-weight:800">✓ DITUTUP (nara-billing)</span></li>
+      <li><b>Akun gabungan (joint account)</b> — individual &amp; joint <span style="color:var(--green);font-weight:800">✓ DITUTUP (onboarding v2)</span></li>
+      <li>Corporate action dana massal: <i>mass switching</i>, penutupan produk <span style="color:var(--green);font-weight:800">✓ DITUTUP (fundadmin v2)</span></li>
+      <li>Monitoring kinerja penjualan tim &amp; kalkulasi insentif RM <span style="color:var(--green);font-weight:800">✓ DITUTUP (billing v2)</span></li></ul></div>
+    <div class="app"><h4>Medallion <small data-i18n="s86">platform wealth premium — profil fitur digeneralisasikan</small></h4><ul>
+      <li><b>Analitik kinerja mendalam</b> — atribusi kinerja vs benchmark/index <span style="color:var(--green);font-weight:800">✓ DITUTUP (networth v2)</span></li>
+      <li>Laporan konsolidasi <b>multi-format</b> (PDF/Excel/CSV) <span style="color:var(--green);font-weight:800">✓ DITUTUP (networth v2)</span> · multi-entitas &amp; 12+ jenis: menyusul</li>
+      <li><b>Vault dokumen</b> aman + catatan rapat per klien <span style="color:var(--green);font-weight:800">✓ DITUTUP (rm-advisor v2)</span></li>
+      <li>Penjadwalan <b>janji temu advisor/RM</b> dari aplikasi <span style="color:var(--green);font-weight:800">✓ DITUTUP (rm-advisor v2)</span></li></ul></div>
+    <div class="app"><h4>WELMA <small data-i18n="s87">wealth management BCA — reksa dana, obligasi, SBN, asuransi</small></h4><ul>
+      <li><b>Produk asuransi</b> + edukasi proteksi (bancassurance ritel) <span style="color:var(--green);font-weight:800">✓ DITUTUP</span></li>
+      <li>Setoran investasi <b>otomatis dari rekening bank yang sama</b> (ekosistem BCA) <span style="color:var(--green);font-weight:800">✓ DITUTUP (autoinvest v2)</span></li>
+      <li><span style="color:var(--green);font-weight:800">✓</span> <i>SID online, auto-subscription, switching — di Nara sudah ada</i></li></ul></div>
+    <div class="app"><h4>Livin' by Mandiri <small data-i18n="s88">super-app bank — pembayaran harian + Livin' Investasi (saham via Growin')</small></h4><ul>
+      <li><b>Pembayaran harian</b>: QRIS, transfer antarbank, tagihan listrik/BPJS/PDAM, pulsa, pajak <span style="color:var(--green);font-weight:800">✓ DITUTUP (nara-pay — orkestrasi)</span></li>
+      <li><b>Paylater &amp; kartu kredit</b> — cicilan &amp; plafon <span style="color:var(--green);font-weight:800">✓ DITUTUP (nara-pay — rujukan mitra berlisensi)</span></li>
+      <li>Pembelian <b>asuransi</b> dari aplikasi <span style="color:var(--green);font-weight:800">✓ DITUTUP</span></li>
+      <li><i>Deposit/penarikan real-time ke rekening bank</i> — Nara berbasis RDN <span style="color:var(--green);font-weight:800">✓ DITUTUP (pay v2)</span></li></ul></div>
+    <div class="app"><h4>BRImo <small data-i18n="s89">super-app BRI — investasi emas via Pegadaian + banking harian</small></h4><ul>
+      <li><b>Emas fisik</b> — cetak batangan/ambil di kantor mitra pilihan <span style="color:var(--green);font-weight:800">✓ DITUTUP (altasset v2)</span></li>
+      <li><b>Autodebet dari rekening bank</b> untuk menabung emas/investasi rutin <span style="color:var(--green);font-weight:800">✓ DITUTUP (autoinvest v2)</span></li>
+      <li><b>Penarikan tanpa kartu</b> &amp; QRIS merchant <span style="color:var(--green);font-weight:800">✓ DITUTUP (pay v2)</span></li>
+      <li>Ekosistem kredit (pengajuan fasilitas) dari aplikasi</li></ul></div>
+  </div>
+
+  <h3 style="margin:6px 0 12px" data-i18n="s90">Matriks kesenjangan → kandidat modul baru</h3>
+  <div style="overflow-x:auto">
+  <table class="gapm">
+    <tr><th data-i18n="s91">FITUR</th><th data-i18n="s92">AVANTRADE</th><th data-i18n="s93">MEDALLION</th><th data-i18n="s94">WELMA</th><th data-i18n="s95">LIVIN'</th><th data-i18n="s96">BRIMO</th><th data-i18n="s97">NARA</th><th data-i18n="s98">KANDIDAT MODUL</th></tr>
+    <tr><td>Asuransi &amp; bancassurance (polis, premi, klaim)</td><td class="y">●</td><td class="p">○</td><td class="y">●</td><td class="y">●</td><td class="p">○</td><td class="y">✓</td><td>nara-insurance :8105 — <b>RILIS ✔</b></td></tr>
+    <tr><td>Emas fisik — cetak/antar/ambil di mitra</td><td class="n">–</td><td class="n">–</td><td class="n">–</td><td class="n">–</td><td class="y">●</td><td class="y">✓</td><td>altasset v2 :8085 — <b>RILIS ✔</b> (5 cabang, refund gram)</td></tr>
+    <tr><td>Autodebet investasi dari rekening bank</td><td class="p">○</td><td class="p">○</td><td class="y">●</td><td class="y">●</td><td class="y">●</td><td class="y">✓</td><td>autoinvest v2 :8086 — <b>RILIS ✔</b></td></tr>
+    <tr><td>Pembayaran harian (QRIS, transfer, tagihan)</td><td class="n">–</td><td class="n">–</td><td class="p">○</td><td class="y">●</td><td class="y">●</td><td class="y">✓</td><td>nara-pay :8106 <b>RILIS ✔</b> — orkestrasi via PSP/biller berlisensi, dana tak disentuh</td></tr>
+    <tr><td>Paylater / kartu kredit / pinjaman digital</td><td class="n">–</td><td class="n">–</td><td class="n">–</td><td class="y">●</td><td class="y">●</td><td class="y">✓</td><td>nara-pay :8106 <b>RILIS ✔</b> — rujukan berkonsent PDP ke multifinance/bank; keputusan milik mitra</td></tr>
+    <tr><td>Mesin biaya, komisi &amp; insentif sales (B2B)</td><td class="y">●</td><td class="p">○</td><td class="n">–</td><td class="n">–</td><td class="n">–</td><td class="y">✓</td><td>nara-billing :8107 <b>RILIS ✔</b> (fee multi-tier progresif + komisi &amp; insentif sales)</td></tr>
+    <tr><td>Akun gabungan (joint account)</td><td class="y">●</td><td class="p">○</td><td class="n">–</td><td class="p">○</td><td class="n">–</td><td class="y">✓</td><td>onboarding v2 :8099 <b>RILIS ✔</b> (dua pemegang, kuorum AND/OR + kado investasi ber-KYC NIK)</td></tr>
+    <tr><td>Penempatan obligasi primer + inventori dealer</td><td class="y">●</td><td class="n">–</td><td class="p">○</td><td class="n">–</td><td class="n">–</td><td class="y">✓</td><td>bond v2 :8091 <b>RILIS ✔</b> (langganan ritel FCFS &amp; book-building dealer cutoff-yield)</td></tr>
+    <tr><td>Dana pensiun / proteksi pensiun (DPLK)</td><td class="p">○</td><td class="p">○</td><td class="p">○</td><td class="p">○</td><td class="p">○</td><td class="n">✗</td><td>kemitraan DPLK — produk band 1–2 untuk goal pensiun</td></tr>
+    <tr><td>Analitik vs benchmark, laporan multi-format · vault dokumen &amp; temu RM</td><td class="y">●</td><td class="y">●</td><td class="n">–</td><td class="n">–</td><td class="n">–</td><td class="y">✓</td><td>networth v2 <b>RILIS ✔</b> + rm-advisor v2 <b>RILIS ✔</b> (vault SHA-256 &amp; catatan rapat wajib)</td></tr>
+  </table>
+  </div>
+  <p class="mut" style="font-size:12px;margin-top:12px" data-i18n="s99">● lengkap · ○ parsial/sebagian segmen · – tidak ditawarkan. Sebagian gap sengaja di luar cakupan: Nara adalah <b>platform investasi murni</b> — fitur pembayaran/pinjaman menuntut lisensi keuangan yang berbeda (bank/PJP/multifinance). Yang paling realistis lewat <b>kemitraan</b>: asuransi (bancassurance), emas fisik (logam mulia), autodebet bank, dan DPLK.</p>
+
+  <h3 style="margin:30px 0 10px" data-i18n="s100">Telaah menu &amp; form — apa saja layar yang belum ada di Nara</h3>
+  <div style="overflow-x:auto">
+  <table class="gapm">
+    <tr><th data-i18n="s101">APLIKASI</th><th data-i18n="s102">MENU YANG TIDAK ADA DI NARA</th><th data-i18n="s103">FORM / LAYAR KUNCINYA</th><th data-i18n="s104">KANDIDAT DI NARA</th></tr>
+    <tr><td><b>Avantrade WMS</b><br><small data-i18n="s105">institusi</small></td><td>Bancassurance · Fixed Income Primer · Fee &amp; Komisi · Insentif Sales</td><td>Registrasi polis · penempatan obligasi primer · konfigurasi tier biaya · rekap insentif</td><td>insurance :8105 <b>RILIS ✔</b> · nara-billing v2 :8107 <b>RILIS ✔</b> · fundadmin v2 :8088 <b>RILIS ✔</b> · integration v2 :8096 <b>RILIS ✔</b> · bond v2 :8091 <b>RILIS ✔</b> · onboarding v2 :8099 <b>RILIS ✔</b></td></tr>
+    <tr><td><b>Medallion</b><br><small data-i18n="s106">premium</small></td><td>Analitik Kinerja · Laporan Konsolidasi · Vault Dokumen · Janji Temu</td><td>Filter laporan multi-entitas · unduh 12+ format (PDF/Excel/CSV) · upload dokumen · jadwal temu RM</td><td>networth v2 <b>RILIS ✔</b> (analitik + PDF/CSV/JSON) · rm-advisor v2 <b>RILIS ✔</b> (vault SHA-256, janji temu, catatan rapat)</td></tr>
+    <tr><td><b>WELMA</b><br><small data-i18n="s107">BCA</small></td><td>Asuransi &amp; proteksi <br><small style="color:var(--green);font-weight:700" data-i18n="s108">✓ SID online &amp; auto-subscription: di nara sudah ada · asuransi: RILIS :8105</small></td><td>Pengajuan polis · klaim asuransi · edukasi proteksi</td><td>nara-insurance <b>:8105 — RILIS ✔</b></td></tr>
+    <tr><td><b>Livin' by Mandiri</b></td><td>QRIS · Transfer antarbank · Tagihan &amp; pajak · Paylater/Kartu Kredit</td><td>Scan &amp; bayar QRIS · bayar tagihan · pengajuan paylater · aktivasi kartu virtual</td><td>nara-pay <b>:8106 RILIS ✔</b> — intent + webhook mitra &amp; rujukan kredit (tanpa lisensi)</td></tr>
+    <tr><td><b>BRImo</b><br><small data-i18n="s109">BRI</small></td><td>Tabungan Emas Pegadaian · Tarik tunai tanpa kartu · autodebet emas</td><td>Buka tabungan emas (pilih cabang) · beli emas Rp/gram · pengaturan autodebet <small style="color:var(--green);font-weight:700" data-i18n="s110">✓ autodebet &amp; fisik: rilis v2</small></td><td>altasset v2 <b>RILIS ✔</b> (emas fisik) · autoinvest v2 <b>RILIS ✔</b></td></tr>
+  </table>
+  </div>
+
+  <h3 style="margin:28px 0 12px" data-i18n="s111">Pratinjau form — gaya layar mereka, belum ada di Nara</h3>
+  <p class="mut" style="margin:0 0 18px;font-size:13px" data-i18n="s112">Tujuh belas contoh form khas aplikasi acuan (statis, tidak mengirim data) — <b>form klaim kini hidup</b>, meniru aturan modul :8105. Tombol menampilkan posisi Nara terhadap fitur tersebut.</p>
+  <div class="fgrid">
+    <div class="form gapform"><span class="badge b-g flag">✓ ADA DI NARA — :8106</span><h3 data-i18n="s113">📱 Bayar QRIS</h3><div class="d" data-i18n="d5">ditenaga nara-pay — intent ke PSP mitra berlisensi, Nara tak memegang dana</div>
+      <div style="height:110px;border:1.5px dashed #9DB8D6;border-radius:12px;display:flex;align-items:center;justify-content:center;background:#FBFDFF;font-size:52px">▦</div>
+      <label data-i18n="s114">NOMINAL (RP 10 RIBU – 25 JT)</label><input id="qAmt" type="number" value="250000" min="10000">
+      <button class="btn big" style="margin-top:12px" onclick="qrisUji()" data-i18n="s115">Bayar via QRIS</button>
+      <div class="res" id="qRes"><b id="qJudul"></b><span id="qDetail"></span></div>
+      <div class="src">Modul: nara-pay :8106 · POST /intents → /webhook SETTLED (idempoten) · acuan: Livin' · BRImo</div></div>
+    <div class="form gapform"><span class="badge b-g flag">✓ ADA DI NARA — RILIS :8105</span><h3 data-i18n="s116">🛡️ Klaim asuransi</h3><div class="d" data-i18n="d6">ditenaga modul nara-insurance — aturan sama persis dengan backend</div>
+      <label data-i18n="s117">POLIS (KATALOG MITRA ASURANSI)</label>
+      <select id="iPol"><option value="500000000">PROT-KLG · Perlindungan Keluarga — pertangguhan Rp 500 jt</option><option value="300000000">PROT-PDK · Pendidikan Anak — Rp 300 jt</option><option value="150000000">PROT-SHT · Rawat Inap — Rp 150 jt</option><option value="600000000">PROT-PNS · Pensiun Berjangka — Rp 600 jt</option></select>
+      <div class="orow" style="margin-top:10px"><div><label data-i18n="s118">JENIS</label><select id="iJenis"><option>RAWAT_INAP</option><option>PENDIDIKAN</option><option>PENYAKIT_KRITIS</option></select></div><div><label data-i18n="s119">NOMINAL (RP)</label><input id="iAmt" type="number" value="100000000" min="1"></div></div>
+      <button class="btn big" style="margin-top:12px" onclick="klaimUji()" data-i18n="s120">Ajukan klaim</button>
+      <div class="res" id="iRes"><b id="iJudul"></b><span id="iDetail"></span></div>
+      <div class="src">Modul: nara-insurance :8105 · POST /v1/insurance/claims → /decide · acuan: WELMA (BCA) · Avantrade</div></div>
+    <div class="form gapform"><span class="badge b-g flag">✓ ADA DI NARA — V2 RILIS</span><h3 data-i18n="s121">🥇 Penuangan emas fisik</h3><div class="d" data-i18n="d7">ditenaga altasset v2 :8085 — saldo demo 10,8303 gram · fee cetak Rp 25.000/gram</div>
+      <div class="orow"><div><label data-i18n="s122">GRAM (MIN 1)</label><input id="mGram" type="number" value="3" step="0.1" min="1"></div><div><label data-i18n="s123">CABANG MITRA</label><select id="mCab"><option>Kantor Pusat</option><option>Cab. Jakarta Pusat</option><option>Cab. Bandung</option><option>Cab. Surabaya</option><option>Cab. Medan</option></select></div></div>
+      <button class="btn big" style="margin-top:12px" onclick="emasUji()" data-i18n="s124">Ajukan penuangan</button>
+      <div class="res" id="mRes"><b id="mJudul"></b><span id="mDetail"></span></div>
+      <div class="src">Modul: altasset v2 :8085 · POST /gold/{id}/redeem → /ready → /take · acuan: BRImo (BRI × Pegadaian)</div></div>
+    <div class="form gapform"><span class="badge b-g flag">✓ ADA DI NARA — V2 RILIS</span><h3 data-i18n="s125">📅 Janji temu RM</h3><div class="d" data-i18n="d8">ditenaga rm-advisor v2 :8089 — hanya masa depan, catatan rapat wajib saat selesai</div>
+      <div class="orow"><div><label data-i18n="s126">TANGGAL & WAKTU</label><input id="jWaktu" value="2026-09-10 10:00 WIB" readonly></div><div><label data-i18n="s127">METODE</label><select id="jMetode"><option>VIDEO_CALL</option><option>KANTOR</option><option>TELEPON</option></select></div></div>
+      <label data-i18n="s128">TOPIK</label><select id="jTopik"><option>REVIEW_PORTOFOLIO</option><option>RENCANA_INVESTASI</option><option>PROPOSAL_BARU</option><option>LAINNYA</option></select>
+      <label data-i18n="s129">CATATAN RAPAT (WAJIB SAAT SELESAI)</label><textarea id="jNotes" rows="2" style="width:100%;border:1px solid #CBD5E1;border-radius:10px;padding:9px 12px;font-size:13px;font-family:inherit" placeholder="mis. klien setuju alokasi SBN 30%"></textarea>
+      <div class="orow" style="margin-top:10px"><button class="btn" style="flex:1" onclick="janjiBook()" data-i18n="s130">📅 Pesan jadwal</button><button class="btn green" style="flex:1" onclick="janjiDone()" data-i18n="s131">✓ Rapat selesai</button></div>
+      <div class="res" id="jRes"><b id="jJudul"></b><span id="jDetail"></span></div>
+      <div class="src">Modul: rm-advisor v2 :8089 · POST /meetings → /reschedule → /done · acuan: Medallion (digeneralisasikan)</div></div>
+    <div class="form gapform"><span class="badge b-g flag">✓ ADA DI NARA — V2 RILIS</span><h3 data-i18n="s132">📜 Penempatan obligasi primer</h3><div class="d" data-i18n="d9">ditenaga bond v2 :8091 — ritel FCFS dalam kuota · book-building dealer cutoff-yield</div>
+      <div class="orow"><div><label data-i18n="s133">MODE PASAR</label><select id="obMode"><option>RITEL — SBN SR026T6 · kuota Rp 20 jt</option><option>LELANG — FR0098P · kuota Rp 50 jt</option></select></div><div><label data-i18n="s134">NOMINAL (KELIPATAN RP 1 JT)</label><input id="obNom" type="number" value="12000000"></div></div>
+      <label data-i18n="s135">YIELD BID DEALER % (MODE LELANG; CUTOFF 6,75%)</label><input id="obYield" type="number" value="6.625" step="0.125">
+      <button class="btn big" style="margin-top:12px" onclick="obligasiUji()" data-i18n="s136">Tempatkan</button>
+      <div class="res" id="obRes"><b id="obJudul"></b><span id="obDetail"></span></div>
+      <div class="src">Modul: bond v2 :8091 · POST /series → /subscriptions | /bids → /cutoff · acuan: Avantrade fixed income primer</div></div>
+    <div class="form gapform"><span class="badge b-g flag">✓ ADA DI NARA — :8106</span><h3 data-i18n="s137">💳 Ajukan paylater</h3><div class="d" data-i18n="d10">rujukan ke mitra multifinance berlisensi — keputusan milik mitra, bukan Nara</div>
+      <div class="orow"><div><label data-i18n="s138">PLAFON DITAWARKAN</label><input value="Rp 50.000.000" readonly></div><div><label data-i18n="s139">TENOR</label><select id="pTenor"><option>3 bulan</option><option selected>6 bulan</option><option>12 bulan</option></select></div></div>
+      <label data-i18n="s140">NOMINAL PENGAJUAN (RP 500 RB – 50 JT)</label><input id="pAmt" type="number" value="5000000">
+      <label style="display:flex;gap:8px;align-items:center;font-size:12px;color:#334155;font-weight:600;cursor:pointer"><input type="checkbox" id="pConsent" style="width:auto"> Saya setuju data saya diproses mitra (UU PDP)</label>
+      <button class="btn big" style="margin-top:12px" onclick="paylaterUji()" data-i18n="s141">Ajukan ke mitra</button>
+      <div class="res" id="pRes"><b id="pJudul"></b><span id="pDetail"></span></div>
+      <div class="src">Modul: nara-pay :8106 · /credit-referrals → /partner-decision → /activate · acuan: Livin'</div></div>
+    <div class="form gapform"><span class="badge b-g flag">✓ ADA DI NARA — :8106</span><h3 data-i18n="s142">⚡ Bayar tagihan</h3><div class="d" data-i18n="d11">via biller aggregator mitra berlisensi — nomor pelanggan tersimpan termasked</div>
+      <div class="orow"><div><label data-i18n="s143">JENIS</label><select id="tBiller"><option>PLN</option><option>BPJS</option><option>PDAM</option><option>PBB</option><option>PAJAK-KENDARAAN</option></select></div><div><label data-i18n="s144">NOMOR PELANGGAN (5–20 DIGIT)</label><input id="tNo" value="54321123456"></div></div>
+      <button class="btn big" style="margin-top:12px" onclick="tagihanUji()" data-i18n="s145">Bayar tagihan</button>
+      <div class="res" id="tRes"><b id="tJudul"></b><span id="tDetail"></span></div>
+      <div class="src">Modul: nara-pay :8106 · jenis TAGIHAN/PAJAK → webhook biller · acuan: Livin' · BRImo</div></div>
+    <div class="form gapform"><span class="badge b-g flag">✓ ADA DI NARA — V2 RILIS</span><h3 data-i18n="s146">🏦 Autodebet dari rekening bank</h3><div class="d" data-i18n="d12">ditenaga autoinvest v2 :8086 — masking, idempoten per periode, suspend 3x gagal</div>
+      <div class="orow"><div><label data-i18n="s147">BANK MITRA</label><select id="dBank"><option>BCA</option><option>MANDIRI</option><option>BRI</option><option>BNI</option><option>BTN</option><option>CIMB</option><option>PERMATA</option><option>DANAMON</option></select></div><div><label data-i18n="s148">NO. REKENING (8–18 DIGIT)</label><input id="dNo" value="9876501234"></div></div>
+      <div class="orow" style="margin-top:10px"><div><label data-i18n="s149">NOMINAL/BLN</label><input value="Rp 500.000 → reksa dana" readonly></div><div><label data-i18n="s150">SIMULASI BANK</label><select id="dSim"><option value="OK">Saldo cukup</option><option value="INSUFFICIENT">Saldo tidak cukup</option></select></div></div>
+      <button class="btn big" style="margin-top:12px" onclick="debitUji()" data-i18n="s151">Jalankan debit periode ini</button>
+      <div class="res" id="dRes"><b id="dJudul"></b><span id="dDetail"></span></div>
+      <div class="src">Modul: autoinvest v2 :8086 · POST /debit-mandates → /execute · acuan: WELMA · BRImo</div></div>
+    <div class="form gapform"><span class="badge b-g flag">✓ ADA DI NARA — V2 RILIS</span><h3 data-i18n="s152">📊 Laporan konsolidasi multi-format</h3><div class="d" data-i18n="d13">ditenaga networth v2 :8087 — komposisi + kinerja vs benchmark dari snapshot sungguhan</div>
+      <div class="orow"><div><label data-i18n="s153">FORMAT</label><select id="rFmt"><option>PDF</option><option>CSV (Excel)</option><option>JSON</option></select></div><div><label data-i18n="s154">PERIODE</label><select id="rPrd"><option>2026-09</option><option>2026-08</option><option>2026-Q3</option></select></div></div>
+      <button class="btn big" style="margin-top:12px" onclick="laporUji()" data-i18n="s155">Unduh pratinjau laporan</button>
+      <div class="res" id="rRes"><b id="rJudul"></b><span id="rDetail"></span></div>
+      <div class="src">Modul: networth v2 :8087 · GET /statement?format=pdf|csv|json · acuan: Medallion</div></div>
+    <div class="form gapform"><span class="badge b-g flag">✓ ADA DI NARA — V2 RILIS</span><h3 data-i18n="s156">📁 Vault dokumen</h3><div class="d" data-i18n="d14">ditenaga rm-advisor v2 :8089 — sidik jari SHA-256 diverifikasi ulang tiap unduh · maks 2 MB</div>
+      <div class="orow"><div><label data-i18n="s157">JENIS DOKUMEN</label><select id="vJenis"><option>SPPT_PBB</option><option>IDENTITAS</option><option>LEGAL_USAHA</option><option>POLIS</option><option>LAPORAN_LUAR</option><option>LAINNYA</option></select></div><div><label data-i18n="s158">NAMA BERKAS</label><input id="vNama" value="sppt-2026.pdf"></div></div>
+      <div class="drop" style="margin-top:10px">📄 Demo: isi berkas disimulasikan dari nama berkas</div>
+      <button class="btn big" style="margin-top:12px" onclick="vaultUji()" data-i18n="s159">Unggah ke vault</button>
+      <div class="res" id="vRes"><b id="vJudul"></b><span id="vDetail"></span></div>
+      <div class="src">Modul: rm-advisor v2 :8089 · POST /documents → /download (verifikasi SHA-256) · acuan: Medallion (digeneralisasikan)</div></div>
+    <div class="form gapform"><span class="badge b-g flag">✓ ADA DI NARA — :8107</span><h3 data-i18n="s160">💰 Tier biaya, komisi &amp; insentif sales</h3><div class="d" data-i18n="d15">ditenaga nara-billing :8107 — fee tangga progresif + floor · komisi bps · bonus bila target tercapai</div>
+      <div class="orow"><div><label data-i18n="s161">PRODUK</label><select id="blProduk"><option>REKSA_DANA</option><option>EMAS</option><option>OBLIGASI</option><option>SBN</option></select></div><div><label data-i18n="s162">NOMINAL TRANSAKSI (RP)</label><input id="blNom" type="number" value="80000000"></div></div>
+      <label data-i18n="s163">KODE AGENT (KOMISI 500 BPS · TARGET FEE Rp 300 RB/BLN)</label><input id="blAgent" value="A-01">
+      <div class="orow" style="margin-top:10px"><button class="btn" style="flex:1" onclick="billingUji()" data-i18n="s164">💰 Book fee</button><button class="btn green" style="flex:1" onclick="billingRekap()" data-i18n="s165">📊 Rekap insentif</button></div>
+      <div class="res" id="blRes"><b id="blJudul"></b><span id="blDetail"></span></div>
+      <div class="src">Modul: nara-billing :8107 · POST /v1/billing/fee-events → /partners/{id}/insentif · acuan: Avantrade fee engine (digeneralisasikan)</div></div>
+    <div class="form gapform"><span class="badge b-g flag">✓ ADA DI NARA — V2 RILIS</span><h3 data-i18n="s166">👥 Buka akun gabungan (joint)</h3><div class="d" data-i18n="d16">ditenaga onboarding v2 :8099 — dua pemegang; debet butuh kuorum: AND = keduanya, OR = salah satu; penolakan = final</div>
+      <div class="orow"><div><label data-i18n="s167">PEMEGANG</label><input value="Radian A. &amp; Ananda (undangan diterima)" readonly></div><div><label data-i18n="s168">RULE PENARIKAN</label><select id="jtMode"><option>AND — perlu keduanya</option><option>OR — salah satu cukup</option></select></div></div>
+      <label data-i18n="s169">NOMINAL PENGAJUAN DEBET (RP)</label><input id="jtNom" type="number" value="5000000">
+      <button class="btn big" style="margin-top:12px" onclick="jointUji()" data-i18n="s170">Ajukan / setujui debet</button>
+      <div class="res" id="jtRes"><b id="jtJudul"></b><span id="jtDetail"></span></div>
+      <div class="src">Modul: onboarding v2 :8099 · POST /v1/onboarding/v2/joint-accounts → /debits → /approve · acuan: Avantrade joint accounts</div></div>
+    <div class="form gapform"><span class="badge b-g flag">✓ ADA DI NARA — V3 RILIS (VIA KONEKTOR + SANDBOX)</span><h3 data-i18n="s171">🎓 Daftar DPLK — produk pensiun</h3><div class="d" data-i18n="d17">ditenaga integration v3 :8096 — <b>adapter sandbox mitra</b>: konektor mode SANDBOX mensimulasikan keputusan lembaga (OK/DITOLAK/TIMEOUT, nomor peserta SBX-) tanpa menyentuh mitra produksi — pengajuan diteruskan <b>via konektor API mitra</b> yang terdaftar di setting parameter; kredensial hanya tersimpan tersamarkan · keputusan keanggotaan milik lembaga pensiun</div>
+      <div class="orow"><div><label data-i18n="s172">PROGRAM PENSIUN</label><select id="dpProgram"><option>KONTRIBUSI_TETAP</option><option>INSENTIF</option></select></div><div><label data-i18n="s173">LEMBAGA MITRA (VIA KONEKTOR)</label><select id="dpLembaga"><option value="DPLK-01">DPLK-01 · Mitra Sejahtera</option><option value="DPLK-02">DPLK-02 · BRI Manajemen</option></select></div></div>
+      <label data-i18n="s174">KONTRIBUSI/BULAN (RP 100 RB – 50 JT)</label><input id="dpKontribusi" type="number" value="1500000">
+      <label data-i18n="s175">PENERIMA MANFAAT</label><input id="dpPenerima" value="Pasangan · 100%">
+      <div class="orow" style="margin-top:10px"><button class="btn" style="flex:1" onclick="dpDaftar()" data-i18n="s176">🎓 Daftar program</button><button class="btn green" style="flex:1" onclick="dpKonfirm()" data-i18n="s177">✓ Konfirmasi lembaga</button><button class="btn" style="flex:1" onclick="dpSandbox()" data-i18n="s178">🧪 Uji sandbox (TIMEOUT)</button></div>
+      <div class="res" id="dpRes"><b id="dpJudul"></b><span id="dpDetail"></span></div>
+      <div class="src">Modul: integration v3 :8096 · POST /connectors/{code}/pensiun → /pensiun/{id}/confirm · sandbox: /sandbox/{code}/invoke·skenario·riwayat (V4)</div></div>
+
+    <div class="form gapform"><span class="badge b-g flag">✓ ADA DI NARA — V2 RILIS</span><h3 data-i18n="s179">🍰 Beli saham fraksional</h3><div class="d" data-i18n="d18">ditenaga equity v2 :8093 — unit 4 desimal (HALF_DOWN), avg cost &amp; P/L terealisasi · ledger Nara, backing kustodian mitra</div>
+      <div class="orow"><div><label data-i18n="s180">SAHAM</label><select id="frSaham"><option value="12650">BBCA — Rp 12.650/lembar</option><option value="3620">TLKM — Rp 3.620/lembar</option><option value="5075">ASII — Rp 5.075/lembar</option></select></div><div><label data-i18n="s181">NOMINAL BELI (RP 10 RB – 100 JT)</label><input id="frNom" type="number" value="50000"></div></div>
+      <div class="orow" style="margin-top:10px"><button class="btn" style="flex:1" onclick="frBeli()" data-i18n="s182">🍰 Beli fraksional</button><button class="btn green" style="flex:1" onclick="frJual()" data-i18n="s183">💸 Jual 2 unit</button></div>
+      <div class="res" id="frRes"><b id="frJudul"></b><span id="frDetail"></span></div>
+      <div class="src">Modul: equity v2 :8093 · POST /v1/equity/fractional/clients/{id}/orders (header Idempotency-Key) · acuan: Robinhood fractional shares</div></div>
+    <div class="form gapform"><span class="badge b-g flag">✓ ADA DI NARA — :8108</span><h3 data-i18n="s184">🤲 Ziswaf dari hasil investasi</h3><div class="d" data-i18n="d19">ditenaga nara-ziswaf :8108 — nisab Rp 117.725.000 (85 g emas) · zakat 2,5% · dana tak disentuh Nara, dikonfirmasi webhook LAZ</div>
+      <div class="orow"><div><label data-i18n="s185">JENIS</label><select id="zwJenis"><option value="GAIN">Zakat penghasilan/gain — 2,5%</option><option value="HARTA">Zakat harta — 2,5% (wajib nisab)</option><option value="INFAK">Infak — min Rp 10 rb</option><option value="WAKAF">Wakaf — min Rp 100 rb</option></select></div><div><label data-i18n="s186">LAZ MITRA</label><select id="zwLaz"><option>LAZ-01</option><option>LAZ-02</option><option>LAZ-03</option></select></div></div>
+      <label data-i18n="s187">BASIS (HARTA / REALIZED GAIN / NOMINAL, RP)</label><input id="zwBasis" type="number" value="15000000">
+      <div class="orow" style="margin-top:10px"><button class="btn" style="flex:1" onclick="ziswafUji()" data-i18n="s188">🤲 Hitung &amp; ajukan</button><button class="btn green" style="flex:1" onclick="ziswafWebhook()" data-i18n="s189">✓ Webhook LAZ</button></div>
+      <div class="res" id="zwRes"><b id="zwJudul"></b><span id="zwDetail"></span></div>
+      <div class="src">Modul: nara-ziswaf :8108 · POST /v1/ziswaf/intents → /webhook → /clients/{id}/rekap · acuan: aplikasi investasi syariah Indonesia</div></div>
+    <div class="form gapform"><span class="badge b-g flag">✓ ADA DI NARA — V3 RILIS</span><h3 data-i18n="s190">🧾 Kit pajak investasi (SPT)</h3><div class="d" data-i18n="d20">ditenaga networth v3 :8087 — dividen bebas Rp 100 jt/thn (UU HPP), tarif final per sumber, ref unik anti-duplikat</div>
+      <div class="orow"><div><label data-i18n="s191">TAHUN PAJAK</label><select id="pjTahun"><option>2026</option><option>2025</option></select></div><div><label data-i18n="s192">JENIS PENGHASILAN</label><select id="pjJenis"><option value="0.10">DIVIDEN — bebas 100 jt, sisanya 10%</option><option value="5">BUNGA SBN — 5% final</option><option value="10">BUNGA OBLIGASI — 10% final</option><option value="20">BUNGA DEPOSITO — 20% final</option><option value="0.1">CAPITAL GAIN SAHAM — 0,1% × nilai jual</option></select></div></div>
+      <label data-i18n="s193">NOMINAL (BRUTO / NILAI JUAL, RP)</label><input id="pjNom" type="number" value="60000000">
+      <button class="btn big" style="margin-top:12px" onclick="pajakUji()" data-i18n="s194">🧾 Catat ke kit pajak</button>
+      <div class="res" id="pjRes"><b id="pjJudul"></b><span id="pjDetail"></span></div>
+      <div class="src">Modul: networth v3 :8087 · POST /v1/networth/tax/clients/{id}/items → /rekap?tahun= · acuan: Betterment/Fidelity tax reporting</div></div>
+    <div class="form gapform"><span class="badge b-g flag">✓ ADA DI NARA — V2 RILIS</span><h3 data-i18n="s195">🎁 Kado investasi</h3><div class="d" data-i18n="d21">ditenaga onboarding v2 :8099 — penebusan butuh kecocokan NIK penerima (KYC minimal); NIK tersimpan terenkripsi</div>
+      <div class="orow"><div><label data-i18n="s196">PRODUK</label><select id="kdProduk"><option>PASAR_UANG</option><option>EMAS</option><option>SBN</option><option>CAMPURAN</option></select></div><div><label data-i18n="s197">NOMINAL (MIN RP 100 RB)</label><input id="kdNom" type="number" value="1000000"></div></div>
+      <label data-i18n="s198">NIK PENERIMA (16 DIGIT)</label><input id="kdNik" value="3201012345670004">
+      <div class="orow" style="margin-top:10px"><button class="btn" style="flex:1" onclick="kadoKirim()" data-i18n="s199">🎁 Kirim kado</button><button class="btn green" style="flex:1" onclick="kadoTebus('COCOK')" data-i18n="s200">✓ Tebus (NIK cocok)</button><button class="btn" style="flex:1" onclick="kadoTebus('BEDA')" data-i18n="s201">✗ Tebus (NIK beda)</button></div>
+      <div class="res" id="kdRes"><b id="kdJudul"></b><span id="kdDetail"></span></div>
+      <div class="src">Modul: onboarding v2 :8099 · POST /v1/onboarding/v2/gifts → /redeem · kado emas fisik via altasset :8085</div></div>
+    <div class="form gapform"><span class="badge b-g flag">✓ ADA DI NARA — V3 RILIS</span><h3 data-i18n="s202">📥 Onboarding massal korporasi (B2B)</h3><div class="d" data-i18n="d22">ditenaga onboarding v3 :8099 — batch hingga 500 peserta, NIK wajib 16 digit, dedup global hash SHA-256 (NIK tersimpan terenkripsi), submit sekali-putus</div>
+      <label data-i18n="s203">KORPORASI</label><input id="bkKorp" value="PT Sentosa Makmur">
+      <div class="orow"><div><label data-i18n="s204">PESERTA 1 — NAMA | NIK</label><input id="bkP1" value="Andi Pratama|3175012345670001"></div><div><label data-i18n="s205">PESERTA 2 — NAMA | NIK</label><input id="bkP2" value="Budi Santoso|3175012345670002"></div></div>
+      <label data-i18n="s206">PESERTA 3 — NAMA | NIK (uji penolakan)</label><input id="bkP3" value="Cici Lestari|31750123">
+      <div class="orow" style="margin-top:10px"><button class="btn" style="flex:1" onclick="bkBuat()" data-i18n="s207">📥 Buat batch</button><button class="btn green" style="flex:1" onclick="bkSubmit()" data-i18n="s208">🚀 Submit batch</button></div>
+      <div class="res" id="bkRes"><b id="bkJudul"></b><span id="bkDetail"></span></div>
+      <div class="src">Modul: onboarding v3 :8099 · POST /v1/onboarding/bulk → /{batchNo}/submit · acuan: bulk onboarding korporasi (Avantrade)</div></div>
+    <div class="form gapform"><span class="badge b-g flag">✓ FITUR LANJUTAN — FUNDADMIN V2</span><h3 data-i18n="s209">🔁 Corporate action dana massal</h3><div class="d" data-i18n="d23">fundadmin v2 :8088 — mass switching antar produk &amp; penutupan produk, ref unik idempoten</div>
+      <div class="orow"><div><label data-i18n="s210">JENIS AKSI</label><select id="maJenis"><option>SWITCHING — pindah produk</option><option>CLOSURE — tutup produk</option></select></div><div><label data-i18n="s211">PRODUK ASAL</label><select id="maAsal"><option>RDPU-Amanah</option><option>RDCP-Syariah</option></select></div></div>
+      <button class="btn big" style="margin-top:12px" onclick="maUji()" data-i18n="s212">Jalankan aksi massal</button>
+      <div class="res" id="maRes"><b id="maJudul"></b><span id="maDetail"></span></div>
+      <div class="src">Modul: fundadmin v2 :8088 · POST /v1/fundadmin/mass-actions · acuan: Avantrade corporate actions</div></div>
+    <div class="form gapform"><span class="badge b-g flag">✓ FITUR LANJUTAN — BILLING V2</span><h3 data-i18n="s213">🏆 Kinerja tim &amp; insentif RM</h3><div class="d" data-i18n="d24">billing v2 :8107 — leaderboard agent per bulan + agregat per tim penjualan</div>
+      <div class="orow"><div><label data-i18n="s214">TIM</label><select id="lbTim"><option>JAKARTA</option><option>BANDUNG</option></select></div><div><label data-i18n="s215">FEE DIBAWA/BLN (RP)</label><input id="lbFee" type="number" value="450000"></div></div>
+      <button class="btn big" style="margin-top:12px" onclick="lbUji()" data-i18n="s216">Lihat leaderboard</button>
+      <div class="res" id="lbRes"><b id="lbJudul"></b><span id="lbDetail"></span></div>
+      <div class="src">Modul: billing v2 :8107 · GET /v1/billing/partners/{id}/leaderboard?bulan= · acuan: Avantrade sales monitoring</div></div>
+    <div class="form gapform"><span class="badge b-g flag">✓ FITUR LANJUTAN — PAY V2</span><h3 data-i18n="s217">🏦 Deposit/penarikan RDN real-time</h3><div class="d" data-i18n="d25">pay v2 :8106 — setor/tarik RDN↔rekening bank via mitra interbank, webhook SETTLED</div>
+      <div class="orow"><div><label data-i18n="s218">ARAH</label><select id="rdArah"><option>DEPOSIT_RDN — bank → RDN</option><option>WITHDRAW_RDN — RDN → bank</option></select></div><div><label data-i18n="s219">NOMINAL (RP 10 RB–25 JT)</label><input id="rdNom" type="number" value="2000000"></div></div>
+      <button class="btn big" style="margin-top:12px" onclick="rdUji()" data-i18n="s220">Proses real-time</button>
+      <div class="res" id="rdRes"><b id="rdJudul"></b><span id="rdDetail"></span></div>
+      <div class="src">Modul: pay v2 :8106 · POST /v1/pay/intents {jenis DEPOSIT_RDN|WITHDRAW_RDN} → /webhook · Nara berbasis RDN</div></div>
+    <div class="form gapform"><span class="badge b-g flag">✓ FITUR LANJUTAN — PAY V2</span><h3 data-i18n="s221">📲 Tarik tanpa kartu &amp; QRIS merchant</h3><div class="d" data-i18n="d26">pay v2 :8106 — token 6 digit (15 menit, sekali tebus) · QR dinamis merchant (10 menit, nominal wajib sama)</div>
+      <div class="orow" style="margin-top:10px"><button class="btn" style="flex:1" onclick="cwBuat()" data-i18n="s222">🏧 Buat token tarik 500 rb</button><button class="btn green" style="flex:1" onclick="cwTebus()" data-i18n="s223">Tebus di ATM</button></div>
+      <div class="orow" style="margin-top:8px"><button class="btn" style="flex:1" onclick="qrBuat()" data-i18n="s224">🧾 Buat QR merchant 35 rb</button><button class="btn green" style="flex:1" onclick="qrBayar()" data-i18n="s225">Scan &amp; bayar</button></div>
+      <div class="res" id="cqrRes"><b id="cqrJudul"></b><span id="cqrDetail"></span></div>
+      <div class="src">Modul: pay v2 :8106 · /v1/pay/cardless → /redeem · /v1/pay/merchant-qr → /pay · acuan: BRImo</div></div>
+    <div class="form gapform"><span class="badge b-g flag">✓ FITUR LANJUTAN — PAY V2</span><h3 data-i18n="s226">💼 Ekosistem kredit (pengajuan fasilitas)</h3><div class="d" data-i18n="d27">pay v2 :8106 — PAYLATER · KARTU_KREDIT · KMG · KKB · KPR, batas per produk, consent UU PDP wajib, keputusan milik mitra berlisensi</div>
+      <div class="orow"><div><label data-i18n="s227">FASILITAS</label><select id="krProduk"><option value="500000-50000000">PAYLATER (500 rb–50 jt)</option><option value="500000-50000000">KARTU_KREDIT (500 rb–50 jt)</option><option value="10000000-200000000">KMG multiguna (10–200 jt)</option><option value="50000000-500000000">KKB kendaraan (50–500 jt)</option><option value="100000000-5000000000">KPR rumah (100 jt–5 M)</option></select></div><div><label data-i18n="s228">NOMINAL (RP)</label><input id="krNom" type="number" value="150000000"></div></div>
+      <button class="btn big" style="margin-top:12px" onclick="krUji()" data-i18n="s229">Ajukan fasilitas</button>
+      <div class="res" id="krRes"><b id="krJudul"></b><span id="krDetail"></span></div>
+      <div class="src">Modul: pay v2 :8106 · POST /v1/pay/credit-referrals → /partner-decision → /activate · consent UU PDP</div></div>
+  </div>
+
+  <h3 style="margin:32px 0 10px" data-i18n="s230">Inventaris lengkap gap per dimensi — klik tabnya</h3>
+  <div class="seg" style="margin-bottom:18px">
+    <button class="on" onclick="tabGap(this,'gfitur')" data-i18n="s231">✨ Fitur (21)</button>
+    <button onclick="tabGap(this,'gmodul')" data-i18n="s232">🧩 Modul kandidat (13)</button>
+    <button onclick="tabGap(this,'gmenu')" data-i18n="s233">📋 Menu kandidat</button>
+    <button onclick="tabGap(this,'gform')" data-i18n="s234">📝 Indeks form (17)</button>
+  </div>
+  <div id="gapInv">
+  <div class="menu-pane on" id="gfitur"><div style="overflow-x:auto">
+    <table class="gapm"><tr><th data-i18n="s235">FITUR YANG TIDAK ADA DI NARA</th><th data-i18n="s236">DIPIRKAN DARI</th><th data-i18n="s237">KANDIDAT DI NARA</th></tr>
+      <tr><td>Asuransi &amp; bancassurance — polis, premi, klaim</td><td>Avantrade · WELMA · Livin'</td><td>nara-insurance :8105 <b style="color:var(--green)">✔ DITUTUP</b></td></tr>
+      <tr><td>Emas fisik — cetak batangan, antar/ambil di mitra</td><td>BRImo × Pegadaian</td><td>altasset v2 :8085 <b style="color:var(--green)">✔ DITUTUP</b></td></tr>
+      <tr><td>Autodebet investasi dari rekening bank lain</td><td>WELMA · Livin' · BRImo</td><td>autoinvest v2 :8086 <b style="color:var(--green)">✔ DITUTUP</b></td></tr>
+      <tr><td>QRIS &amp; transfer antarbank</td><td>Livin' · BRImo</td><td>nara-pay :8106 <b style="color:var(--green)">✔ DITUTUP</b> (orkestrasi)</td></tr>
+      <tr><td>Tagihan listrik/BPJS/PDAM/pajak</td><td>Livin' · BRImo</td><td>nara-pay :8106 <b style="color:var(--green)">✔ DITUTUP</b> (biller mitra)</td></tr>
+      <tr><td>Paylater &amp; kartu kredit virtual</td><td>Livin' · BRImo</td><td>nara-pay :8106 <b style="color:var(--green)">✔ DITUTUP</b> (rujukan mitra berlisensi)</td></tr>
+      <tr><td>Tarik tunai tanpa kartu &amp; top-up e-wallet</td><td>BRImo · Livin'</td><td>pay v2 :8106 <b style="color:var(--green)">✔ DITUTUP</b> (token 6 digit, 15 menit)</td></tr>
+      <tr><td>Saham fraksional (beli Rp 50 rb sebagian BBCA)</td><td>Robinhood</td><td>equity v2 :8093 <b style="color:var(--green)">✔ DITUTUP</b> — ledger fraksional, backing kustodian mitra</td></tr>
+      <tr><td>Antrian order di luar sesi bursa (pre/post-market)</td><td>Robinhood</td><td>equity v2</td></tr>
+      <tr><td>Tax-loss harvesting otomatis</td><td>Betterment · Wealthfront</td><td>networth v2</td></tr>
+      <tr><td>Atribusi kinerja vs benchmark (σ, max drawdown, CAGR)</td><td>Medallion · Avendus</td><td>networth v2 :8087 <b style="color:var(--green)">✔ DITUTUP</b></td></tr>
+      <tr><td>Laporan konsolidasi multi-format (PDF/Excel-CSV/JSON)</td><td>Medallion</td><td>networth v2 :8087 <b style="color:var(--green)">✔ DITUTUP</b> · multi-entitas: menyusul</td></tr>
+      <tr><td>Vault dokumen &amp; catatan rapat klien</td><td>Medallion</td><td>rm-advisor v2 :8089 <b style="color:var(--green)">✔ DITUTUP</b></td></tr>
+      <tr><td>Penjadwalan janji temu advisor/RM</td><td>Medallion</td><td>rm-advisor v2 :8089 <b style="color:var(--green)">✔ DITUTUP</b></td></tr>
+      <tr><td>Akun gabungan (joint account)</td><td>Avantrade</td><td>onboarding v2 :8099 <b style="color:var(--green)">✔ DITUTUP</b></td></tr>
+      <tr><td>Onboarding massal karyawan korporasi (B2B)</td><td>Avantrade</td><td>onboarding v3 :8099 <b style="color:var(--green)">✔ DITUTUP</b> — batch ≤ 500, NIK dedup hash SHA-256</td></tr>
+      <tr><td>DPLK — dana pensiun lembaga keuangan</td><td>bank umum</td><td>kemitraan DPLK</td></tr>
+      <tr><td>Akademi/edukasi investasi &amp; kuis</td><td>WELMA · Stockbit</td><td>nara-edu :8111 <b style="color:var(--green)">✔ DITUTUP</b> — kuis lulus ≥ 70 → sertifikat</td></tr>
+      <tr><td>Feed riset, breaking news &amp; insight analis</td><td>Stockbit · Avendus Eye</td><td>nara-news :8112 <b style="color:var(--green)">✔ DITUTUP</b> — headline, pencarian, kalender</td></tr>
+      <tr><td>Kado investasi (emas/reksa dana untuk orang lain)</td><td>aplikasi emas</td><td>onboarding v2 :8099 + altasset v2 <b style="color:var(--green)">✔ DITUTUP</b></td></tr>
+      <tr><td>Ziswaf otomatis dari realized gain</td><td>aplikasi syariah</td><td>nara-ziswaf :8108 <b style="color:var(--green)">✔ DITUTUP</b> — orkestrasi LAZ berlisensi (nisab 85 g emas, 2,5%)</td></tr>
+      <tr><td>Kit pajak — rekap SPT dividen &amp; capital gain</td><td>Betterment · Fidelity</td><td>networth v3 :8087 <b style="color:var(--green)">✔ DITUTUP</b> (UU HPP: BES dividen 100 jt, final per sumber)</td></tr>
+    </table></div></div>
+
+  <div class="menu-pane" id="gmodul"><div class="mods">
+    <div class="mod"><b>nara-insurance :8105</b><small data-i18n="s238">RILIS — katalog 4 produk, polis, klaim sekali-putus + metric (Avantrade/WELMA)</small></div>
+    <div class="mod"><b>nara-billing :8107</b><small data-i18n="s239">RILIS — fee tangga progresif + floor, komisi bps per agent (clientRef unik), rekap insentif bulanan ber-target (Avantrade)</small></div>
+    <div class="mod"><b>altasset v2 :8085</b><small data-i18n="s240">RILIS (emas fisik) — penuangan mulai 1 gram, fee Rp 25 rb/gram, 5 cabang, refund saat batal · kado: kandidat</small></div>
+    <div class="mod"><b>autoinvest v2 :8086</b><small data-i18n="s241">RILIS — mandat bank termasked, idempoten per periode, auto-suspend 3x gagal + metric (WELMA/BRImo)</small></div>
+    <div class="mod"><b>bond v2 :8091</b><small data-i18n="s242">RILIS — langganan ritel FCFS (model SBN ritel) &amp; book-building dealer cutoff-yield, inventori dealer (Avantrade)</small></div>
+    <div class="mod"><b>onboarding v2 :8099</b><small data-i18n="s243">RILIS — akun gabungan kuorum AND/OR &amp; kado investasi ber-KYC NIK (terenkripsi AES-256-GCM) · kado emas via altasset</small></div>
+    <div class="mod"><b>networth v2/v3 :8087</b><small data-i18n="s244">RILIS — analitik σ/MDD/CAGR + laporan PDF·CSV·JSON (Medallion) · <b>v3 kit pajak SPT</b>: dividen bebas Rp 100 jt/thn (UU HPP) &amp; tarif final per instrumen</small></div>
+    <div class="mod"><b>rm-advisor v2 :8089</b><small data-i18n="s245">RILIS — vault dokumen (SHA-256, maks 2 MB), janji temu BOOKED→DONE dengan catatan wajib (Medallion)</small></div>
+    <div class="mod"><b>equity v2 :8093</b><small data-i18n="s246">RILIS — fraksional: beli per nominal Rp 10 rb–100 jt, unit 4 dp (HALF_DOWN), avg cost &amp; P/L terealisasi, idempoten Idempotency-Key (Robinhood) · antrian luar sesi: menyusul</small></div>
+    <div class="mod"><b>nara-edu :8111</b><small data-i18n="s247">RILIS — katalog artikel/kelas/video, progres tak-mundur, kuis lulus ≥ 70 → sertifikat EDU-YYYY-##### (WELMA/Stockbit Academy)</small></div>
+    <div class="mod"><b>nara-news :8112</b><small data-i18n="s248">RILIS — headline 5 terbaru, feed per kategori/simbol, pencarian, kalender corporate action (Stockbit/Avendus Eye)</small></div>
+    <div class="mod cand"><b>kemitraan DPLK</b><small data-i18n="s249">dana pensiun untuk goal "pensiun" band 1–2</small></div>
+    <div class="mod"><b>nara-ziswaf :8108</b><small data-i18n="s250">RILIS — kalkulator zakat (nisab Rp 117,725 jt = 85 g emas; 2,5%), infak/wakaf, intent + webhook LAZ idempoten, rekap tahunan (aplikasi syariah)</small></div>
+  </div>
+  <p class="mut" style="font-size:12px;margin-top:10px" data-i18n="s251">Kartu bergaris putus = <b style="color:#B45309">rancangan</b> — belum ada di 33 modul layanan (pom: 35 module = 33 layanan + 2 pustaka). <b style="color:var(--green)">15 modul rilis: nara-insurance :8105 · autoinvest v2 :8086 · networth v2/v3 :8087 · altasset v2 :8085 · nara-pay v2 :8106 · rm-advisor v2 :8089 · bond v2 :8091 · onboarding v2/v3 :8099 · nara-billing v2 :8107 · equity v2 :8093 · nara-ziswaf :8108 · fundadmin v2 :8088 · integration v2/v3 :8096 · nara-edu :8111 · nara-news :8112</b>.</p></div>
+
+  <div class="menu-pane" id="gmenu"><div class="mgrid">
+    <div class="mcard"><h4>📱 Kandidat menu B2C</h4><ul>
+      <li>🛡️ Asuransi Saya<small data-i18n="s252">polis, premi, ajukan klaim — ✓ rilis :8105</small></li>
+      <li>🎓 Akademi Nara<small data-i18n="s253">edukasi &amp; kuis literasi</small></li>
+      <li>📰 Kabar Pasar<small data-i18n="s254">riset &amp; breaking news</small></li>
+      <li>🍰 Fraksional<small data-i18n="s255">beli saham dari Rp 10 rb — ✓ rilis v2</small></li>
+      <li>👴 DPLK Pensiun<small data-i18n="s256">kontribusi &amp; proyeksi manfaat</small></li>
+      <li>🧾 Pajak Saya<small data-i18n="s257">kit rekap SPT tahunan — ✓ rilis v3</small></li>
+      <li>🤲 Ziswaf<small data-i18n="s258">zakat dari return investasi — ✓ rilis</small></li>
+      <li>🎁 Kado Investasi<small data-i18n="s259">kirim emas/reksa dana</small></li>
+      <li>👥 Akun Joint<small data-i18n="s260">pemegang ganda</small></li></ul></div>
+    <div class="mcard"><h4>🏦 Kandidat menu B2B</h4><ul>
+      <li>💰 Mesin Biaya &amp; Komisi<small data-i18n="s261">fee-tier per produk &amp; AUM</small></li>
+      <li>🏆 Insentif Sales<small data-i18n="s262">rekap bonus RM per periode</small></li>
+      <li>📜 Penempatan Primer<small data-i18n="s263">kuota &amp; book-building obligasi</small></li>
+      <li>📅 Janji Temu RM<small data-i18n="s264">agenda + catatan wajib — ✓ rilis v2</small></li>
+      <li>📁 Vault Dokumen Klien<small data-i18n="s265">SHA-256 + at-rest — ✓ rilis v2</small></li>
+      <li>📊 Laporan Multi-Entitas<small data-i18n="s266">format PDF/Excel-CSV/JSON — ✓ rilis v2 (multi-entitas menyusul)</small></li></ul></div>
+    <div class="mcard"><h4>🔄 Kini via orkestrasi mitra — <b style="color:#7BE3BB">nara-pay :8106</b></h4><ul>
+      <li>📱 QRIS · Transfer antarbank<small data-i18n="s267">intent → webhook PSP/bank mitra berlisensi (idempoten)</small></li>
+      <li>⚡ Tagihan &amp; Pajak<small data-i18n="s268">PLN/BPJS/PDAM/PBB via biller aggregator berlisensi</small></li>
+      <li>💳 Paylater · Kartu Kredit<small data-i18n="s269">rujukan berkonsent UU PDP → mitra multifinance; keputusan milik mitra</small></li>
+      <li>⛔ Tarik tunai tanpa kartu · Poin/cashback<small data-i18n="s270">tetap di luar posisi — butuh lisensi bank</small></li></ul></div>
+  </div></div>
+
+  <div class="menu-pane" id="gform"><div style="overflow-x:auto">
+    <table class="gapm"><tr><th>#</th><th data-i18n="s271">FORM (SEMUA BERBADGE MERAH DI ATAS)</th><th data-i18n="s272">GAYA/ASAL</th><th data-i18n="s273">KANDIDAT</th></tr>
+      <tr><td>1</td><td>📱 Bayar QRIS</td><td>Livin' · BRImo</td><td>nara-pay <b style="color:var(--green)">✔</b></td></tr>
+      <tr><td>2</td><td>🛡️ Klaim asuransi</td><td>WELMA · Avantrade</td><td>nara-insurance :8105 <b style="color:var(--green)">✔</b></td></tr>
+      <tr><td>3</td><td>🥇 Tabungan emas fisik</td><td>BRImo × Pegadaian</td><td>altasset v2 <b style="color:var(--green)">✔</b></td></tr>
+      <tr><td>4</td><td>📅 Janji temu RM</td><td>Medallion</td><td>rm-advisor v2 :8089 <b style="color:var(--green)">✔ DITUTUP</b></td></tr>
+      <tr><td>5</td><td>📜 Obligasi primer</td><td>Avantrade</td><td>bond v2 :8091 <b style="color:var(--green)">✔</b></td></tr>
+      <tr><td>6</td><td>💳 Paylater</td><td>Livin' · BRImo</td><td>nara-pay <b style="color:var(--green)">✔</b></td></tr>
+      <tr><td>7</td><td>⚡ Tagihan</td><td>Livin' · BRImo</td><td>nara-pay <b style="color:var(--green)">✔</b></td></tr>
+      <tr><td>8</td><td>🏦 Autodebet bank</td><td>WELMA · BRImo</td><td>autoinvest v2 <b style="color:var(--green)">✔</b></td></tr>
+      <tr><td>9</td><td>📊 Laporan multi-format</td><td>Medallion</td><td>networth v2 <b style="color:var(--green)">✔</b></td></tr>
+      <tr><td>10</td><td>📁 Vault dokumen</td><td>Medallion</td><td>rm-advisor v2 :8089 <b style="color:var(--green)">✔ DITUTUP</b></td></tr>
+      <tr><td>11</td><td>💰 Fee/komisi/insentif</td><td>Avantrade</td><td>nara-billing :8107 <b style="color:var(--green)">✔</b></td></tr>
+      <tr><td>12</td><td>👥 Akun joint</td><td>Avantrade</td><td>onboarding v2 :8099 <b style="color:var(--green)">✔</b></td></tr>
+      <tr><td>13</td><td>🎓 DPLK pensiun</td><td>bank umum</td><td>konektor API lembaga pensiun <b style="color:var(--green)">✔ integration v2 :8096</b></td></tr>
+      <tr><td>14</td><td>🍰 Saham fraksional</td><td>Robinhood</td><td>equity v2 :8093 <b style="color:var(--green)">✔</b></td></tr>
+      <tr><td>15</td><td>🤲 Ziswaf investasi</td><td>aplikasi syariah</td><td>nara-ziswaf :8108 <b style="color:var(--green)">✔</b></td></tr>
+      <tr><td>16</td><td>🧾 Kit pajak SPT</td><td>Betterment · Fidelity</td><td>networth v3 :8087 <b style="color:var(--green)">✔</b></td></tr>
+      <tr><td>17</td><td>🎁 Kado investasi</td><td>aplikasi emas</td><td>onboarding v2 :8099 + altasset v2 <b style="color:var(--green)">✔</b></td></tr>
+    </table>
+    <table class="gapm" style="margin-top:14px"><tr><th>#</th><th data-i18n="s274">FITUR LANJUTAN (RILIS V2/V3)</th><th data-i18n="s275">ASAL</th><th data-i18n="s276">MODUL</th></tr>
+      <tr><td>18</td><td>🎓 Produk pensiun DPLK via konektor API mitra</td><td>Avantrade · Livin'</td><td>integration v2 :8096 <b style="color:var(--green)">✔</b></td></tr>
+      <tr><td>19</td><td>🔁 Corporate action dana massal (mass switching &amp; penutupan)</td><td>Avantrade</td><td>fundadmin v2 :8088 <b style="color:var(--green)">✔</b></td></tr>
+      <tr><td>20</td><td>🏆 Kinerja penjualan tim &amp; insentif RM</td><td>Avantrade</td><td>billing v2 :8107 <b style="color:var(--green)">✔</b></td></tr>
+      <tr><td>21</td><td>🏦 Deposit/penarikan RDN real-time</td><td>Livin'</td><td>pay v2 :8106 <b style="color:var(--green)">✔</b></td></tr>
+      <tr><td>22</td><td>📲 Tarik tanpa kartu &amp; QRIS merchant</td><td>BRImo</td><td>pay v2 :8106 <b style="color:var(--green)">✔</b></td></tr>
+      <tr><td>23</td><td>💼 Ekosistem kredit (pengajuan fasilitas)</td><td>Livin' · BRImo</td><td>pay v2 :8106 <b style="color:var(--green)">✔</b></td></tr>
+    </table></div></div>
+  </div>
+</div></section>
+
+<!-- ══════════════ KEPATUHAN ══════════════ -->
+<section class="dark"><div class="wrap" style="text-align:center">
+  <div class="kicker" style="color:var(--ice)">Keamanan &amp; Kepatuhan</div>
+  <h2 data-i18n="s277">Dibangun mengikuti aturan main Indonesia.</h2>
+  <div class="strip" style="margin-top:26px">
+    <span>OJK — regulasi pasar modal</span><span>IDX — bursa &amp; sesi perdagangan</span><span>KSEI — SID &amp; RDN</span><span>KPEI — kliring</span><span>PFAK — emas &amp; kripto</span><span>APU-PPT — anti pencucian uang</span><span>UU PDP — privasi &amp; consent</span><span>PPATK — pelaporan transaksi</span><span>Secret vault — tanpa plaintext</span><span>Audit trail penuh</span>
+  </div>
+  <p class="mut" style="margin-top:24px;font-size:12.5px" data-i18n="s278">Enkripsi at-rest, idempotensi transaksi, circuit breaker mitra, load test, dan DR/backup — tuntas diuji di level platform.</p>
+</div></section>
+
+<!-- ══════════════ CTA + FOOTER ══════════════ -->
+<section style="text-align:center"><div class="wrap">
+  <h2 data-i18n="s279">Mulai hari ini.<br>Gratis biaya admin tahun pertama.</h2>
+  <p class="mut" style="margin:14px 0 26px" data-i18n="s280">e-KYC 5 menit · mulai Rp 10.000 · tanpa minimum saldo</p>
+  <a class="btn green" href="#demo" style="padding:13px 32px">🚀 Coba simulasi buka akun</a>
+</div></section>
+
+<footer><div class="wrap">
+  <div class="fgrid2">
+    <div>
+      <h5>nara</h5>
+      <p>Wealth super-app konsep — menyatukan enam pintu investasi Indonesia dalam satu platform microservices Java 21 + Spring Boot.</p>
+    </div>
+    <div><h5>Produk</h5><a href="#fitur">Fitur</a><a href="#modul">Modul Layanan</a><a href="#menu">Menu Aplikasi</a><a href="#demo">Form Demo</a></div>
+    <div><h5>Untuk Institusi</h5><a href="#menu">Konsol B2B</a><a href="#modul">Dashboard BI</a><a href="#referensi">Referensi Industri</a></div>
+  </div>
+  <div class="disc">
+    <b>Disclaimer.</b> Halaman ini adalah materi ilustratif untuk konsep platform <i>nara</i> dan <u>bukan merupakan penawaran atau ajakan membeli efek</u> dalam arti seluas-luasnya UU Pasar Modal Indonesia. Kinerja masa lalu/investasi tidak menjamin kinerja masa depan; angka pada demo dihitung dari parameter ilustratif modul terkait (anuitas, PPh final saham 0,1%, dsb.) dan bukan janji hasil. Informasi produk investasi sebelum bertransaksi wajib membaca prospektus/ringkasan informasi produk. <br>
+    Seluruh nama dagang pihak ketiga (Stockbit, Bibit, Ajaib, Bareksa, Mirae Asset, Pluang, Mandiri Sekuritas, Jenius, Avantrade/Firium, WELMA/BCA, Livin’ by Mandiri/Bank Mandiri, BRImo/BRI, Medallion, Robinhood, Betterment, Wealthfront, Charles Schwab, Fidelity, Vanguard, StashAway, Endowus, Syfe, Revolut) adalah merek dagang milik pemiliknya masing-masing, digunakan semata sebagai referensi pola produk — tidak ada afiliasi, kemitraan, atau endorsemen. © 2026 nara — konsep platform.
+  </div>
+</div></footer>
+
+<script>
+/* ---------- SPLASH ---------- */
+var splashTutup=false;
+function tutupSplash(){if(splashTutup)return;splashTutup=true;var s=document.getElementById('splash');s.classList.add('out');document.body.style.overflow='';setTimeout(function(){s.style.display='none'},600);}
+document.body.style.overflow='hidden';
+setTimeout(tutupSplash,2900);
+
+/* ---------- NAVIGASI FORM ---------- */
+var fmt=new Intl.NumberFormat('id-ID');
+function rp(n){return 'Rp '+fmt.format(Math.round(n))}
+
+/* 1. e-KYC */
+function kyc(){
+  var n=document.getElementById('kNama').value.trim(),nik=document.getElementById('kNik').value.trim();
+  var r=document.getElementById('kRes'),j=document.getElementById('kJudul'),d=document.getElementById('kDetail');
+  if(n.length<3||nik.length<16){
+    j.textContent=L("✗ Data belum lengkap");
+    d.textContent=L("Nama minimal 3 huruf & NIK 16 digit — di app nyata diverifikasi ke Dukcapil.");
+    r.className='res err';r.style.display='block';return;
+  }
+  var sid='SID'+String(Math.floor(1e9+Math.random()*8e9));
+  var rdn='RDN'+String(Math.floor(1e8+Math.random()*8e8));
+  j.textContent=L("✓ MATCH — verifikasi berhasil");
+  d.textContent=n.split(' ')[0]+' terverifikasi · '+sid+' · '+rdn+' · band '+document.getElementById('kBand').value+' — siap berinvestasi.';
+  r.className='res';r.style.display='block';
+}
+
+/* 2. Order saham */
+function hitungOrder(){
+  var lot=Math.max(0,+document.getElementById('oLot').value||0),harga=Math.max(0,+document.getElementById('oHarga').value||0);
+  var nilai=lot*100*harga,fee=nilai*0.0015,sisi=document.getElementById('oSisi').value;
+  var pph=(sisi==='JUAL')?nilai*0.001:0,total=sisi==='JUAL'?nilai-fee-pph:nilai+fee;
+  document.getElementById('oCalc').innerHTML=
+    '<div class="r"><span>Nilai transaksi ('+lot+' lot × 100 × '+fmt.format(harga)+')</span><b>'+rp(nilai)+'</b></div>'+
+    '<div class="r"><span>Biaya eksekusi 0,15%</span><b>'+rp(fee)+'</b></div>'+
+    (sisi==='JUAL'?'<div class="r"><span>PPh final 0,1% (penjualan)</span><b>'+rp(pph)+'</b></div>':'')+
+    '<div class="r t"><span>'+(sisi==='JUAL'?'Diterima di RDN':'Dibayar dari RDN')+'</span><b>'+rp(total)+'</b></div>';
+}
+['oLot','oHarga','oSisi','oTicker'].forEach(function(id){document.getElementById(id).addEventListener('input',hitungOrder);document.getElementById(id).addEventListener('change',hitungOrder);});
+hitungOrder();
+
+/* 3. Tujuan finansial — rumus anuitas modul nara-goal */
+function goal(){
+  var FV=+document.getElementById('gTarget').value||0,tahun=+document.getElementById('gTahun').value||0;
+  var P0=+document.getElementById('gP0').value||0,r=+document.getElementById('gBand').value/100;
+  var c=document.getElementById('gCalc');
+  if(FV<=0){c.innerHTML='<div class="r t"><span>Isi dulu targetnya</span><b></b></div><div class="r"><span>Target (Rp) harus lebih dari nol.</span></div>';return;}
+  if(tahun<1){tahun=1;document.getElementById('gTahun').value=1;}
+  var i=Math.pow(1+r,1/12)-1,n=Math.round(tahun*12);
+  var bertumbuh=P0*Math.pow(1+i,n),pmt=(FV-bertumbuh)*i/(Math.pow(1+i,n)-1);
+  if(pmt<=0){c.innerHTML='<div class="r t"><span>🎉 TERCAPAI TANPA SETORAN</span><b></b></div><div class="r"><span>Aset awalmu sudah cukup pada '+String(r*100).replace('.',',')+'% p.a. dalam '+tahun+' tahun ('+rp(bertumbuh)+')</span></div>';return;}
+  c.innerHTML='<div class="r"><span>Setoran dibutuhkan</span><b style="color:var(--sky)">'+rp(pmt)+' / bulan</b></div>'+
+    '<div class="r"><span>Aset awal ('+rp(P0)+') tumbuh menjadi</span><b>'+rp(bertumbuh)+'</b></div>'+
+    '<div class="r"><span>Durasi × imbal hasil band</span><b>'+n+' bln × '+String(r*100).replace('.',',')+'% p.a.</b></div>'+
+    '<div class="r t"><span>Proyeksi total di akhir periode</span><b>'+rp(pmt*n+bertumbuh)+'</b></div>';
+}
+['gTarget','gTahun','gP0','gBand'].forEach(function(id){document.getElementById(id).addEventListener('input',goal);document.getElementById(id).addEventListener('change',goal);});
+goal();
+
+/* 4. Alert harga */
+function alertUji(){
+  var harga=+document.getElementById('aTicker').value,th=+document.getElementById('aTh').value||0;
+  var kond=document.getElementById('aKond').value,tk=document.getElementById('aTicker').selectedOptions[0].text.split('—')[0].trim();
+  var r=document.getElementById('aRes');
+  if(th<=0){
+    document.getElementById('aJudul').textContent=L("✗ Ambang tidak valid");
+    document.getElementById('aDetail').textContent=L("Modul asli menolak ambang ≤ 0 dengan HTTP 400.");
+    r.className='res err';r.style.display='block';return;}
+  var picu=(kond==='ABOVE')?harga>=th:harga<=th;
+  document.getElementById('aJudul').textContent=picu?'🔥 TERPICU — '+tk+' '+(kond==='ABOVE'?'≥':'≤')+' '+fmt.format(th):'⏳ Aktif — menunggu';
+  document.getElementById('aDetail').textContent=L("Harga kini ")+fmt.format(harga)+' · evaluasi modul asli: '+
+    (picu?'alert berubah status TRIGGERED (sekali-picu, tidak menggema dua kali) dan mengirim notifikasi.':'belum memenuhi kondisi — status tetap ACTIVE.');
+  r.className='res '+(picu?'':'info');r.style.display='block';
+}
+
+/* ---------- FORM GAP ---------- */
+function gapBtn(btn,msg){
+  var r=btn.closest('.form').querySelector('.res');
+  r.innerHTML='<b>Posisi Nara: belum ada</b>'+msg;
+  r.className='res';r.style.display='block';
+}
+
+/* ---------- DEMO KLAIM :8105 ---------- */
+function klaimUji(){
+  var cov=+document.getElementById('iPol').value, amt=Math.max(0,+document.getElementById('iAmt').value||0);
+  var jenis=document.getElementById('iJenis').value;
+  var r=document.getElementById('iRes'), j=document.getElementById('iJudul'), d=document.getElementById('iDetail');
+  if(amt<=0){j.textContent=L("✗ Nominal tidak valid");d.textContent=L("Nominal klaim harus lebih dari nol.");r.className='res err';r.style.display='block';return;}
+  if(amt>cov){j.textContent=L("✗ Melebihi pertangguhan");d.textContent=L("Modul asli menolak dengan HTTP 400 — pertangguhan polis ini ")+rp(cov)+'.';r.className='res err';r.style.display='block';return;}
+  var no='KL-2026-'+String(Math.floor(10000+Math.random()*89999));
+  j.textContent=L("✓ SUBMITTED → APPROVED (alur asli :8105)");
+  d.textContent=L("No. ")+no+' · '+jenis+' · '+rp(amt)+' ≤ pertangguhan '+rp(cov)+' · screening APU-PPT lolos · polis menjadi CLAIMED (keputusan final).';
+  r.className='res';r.style.display='block';
+}
+
+/* ---------- DEMO AUTODEBET :8086 ---------- */
+var debitStreak=0;
+function debitUji(){
+  var no=(document.getElementById('dNo').value||'').replace(/\D/g,'');
+  var r=document.getElementById('dRes'),j=document.getElementById('dJudul'),d=document.getElementById('dDetail');
+  if(no.length<8||no.length>18){j.textContent=L("✗ Nomor rekening tidak valid");d.textContent=L("Harus 8–18 digit — modul asli menolak dengan HTTP 400.");r.className='res err';r.style.display='block';return;}
+  var bank=document.getElementById('dBank').value,mask='•••• '+no.slice(-4);
+  var gagal=document.getElementById('dSim').value==='INSUFFICIENT';
+  if(gagal){debitStreak++;
+    if(debitStreak>=3){j.textContent=L("✗ SUSPENDED otomatis");d.textContent=bank+' '+mask+' · 3 gagal berturut-turut — mandat ditangguhkan; resume setelah verifikasi bank (aturan asli :8086).';r.className='res err';}
+    else{j.textContent=L("✗ FAILED — saldo tidak cukup");d.textContent=bank+' '+mask+' · percobaan gagal ke-'+debitStreak+' dari 3 · mandat masih ACTIVE.';r.className='res err';}
+  } else {debitStreak=0;
+    j.textContent=L("✓ SUCCESS — debit tercatat");
+    d.textContent=bank+' '+mask+' · ref AUTH-'+Math.random().toString(16).slice(2,10).toUpperCase()+' · idempoten per periode (maks 1× sukses) · pembelian reksa dana ikut dieksekusi.';
+    r.className='res';}
+  r.style.display='block';
+}
+
+/* ---------- DEMO LAPORAN :8087 ---------- */
+function laporUji(){
+  var fmt=document.getElementById('rFmt').value, prd=document.getElementById('rPrd').value;
+  var r=document.getElementById('rRes'), j=document.getElementById('rJudul'), d=document.getElementById('rDetail');
+  var nama='laporan-konsolidasi-cl-0001-'+prd+(fmt.startsWith('PDF')?'.pdf':fmt.startsWith('CSV')?'.csv':'.json');
+  j.textContent=L("✓ ")+nama+' siap ('+(fmt.startsWith('PDF')?'1 halaman · 14,9 KB':fmt.startsWith('CSV')?'BOM + pemisah ; · 24 baris':'objek penuh')+')';
+  d.textContent=L("Isi: komposisi 4 kategori aset (CASH 35,93% · SAHAM 31,55% · RD 23,30% · EMAS 9,22%) · liabilitas KPR · kekayaan bersih Rp 125.400.000 · kinerja 12 bulan +32% vs benchmark +11% (outperform +21 p.p.) · σ 3,09% · MDD 2,56% · CAGR 35,37%.");
+  r.className='res';r.style.display='block';
+}
+
+/* ---------- DEMO EMAS FISIK :8085 ---------- */
+var emasSaldo=10.8303;
+function emasUji(){
+  var g=parseFloat(document.getElementById('mGram').value), cab=document.getElementById('mCab').value;
+  var r=document.getElementById('mRes'), j=document.getElementById('mJudul'), d=document.getElementById('mDetail');
+  var kode='RDMP-'+Math.random().toString(16).slice(2,8).toUpperCase();
+  if(!g||g<1){j.textContent=L("✗ Di bawah minimum");d.textContent=L("Penuangan fisik mulai 1 gram — modul asli menolak dengan HTTP 400.");r.className='res err';r.style.display='block';return;}
+  if(g>emasSaldo){j.textContent=L("✗ Saldo emas tidak cukup");d.textContent=L("Saldo demo ")+emasSaldo.toFixed(4).replace('.',',')+' gram — kurang '+(g-emasSaldo).toFixed(4).replace('.',',')+' gram (HTTP 400 di modul asli).';r.className='res err';r.style.display='block';return;}
+  var fee=g*25000;
+  j.textContent=L("✓ ")+kode+' — PENDING (menunggu mitra)';
+  d.textContent=g.toLocaleString('id-ID',{maximumFractionDigits:3})+' gram @ '+cab+' · biaya cetak Rp '+fee.toLocaleString('id-ID')+' · saldo digital terpotong '+g.toLocaleString('id-ID',{maximumFractionDigits:3})+' gram · alur asli: siapkan (READY) → ambil di cabang (TAKEN), batal = gram kembali.';
+  emasSaldo=Math.round((emasSaldo-g)*1e4)/1e4;
+  r.className='res';r.style.display='block';
+}
+
+/* ---------- DEMO NARA-PAY :8106 ---------- */
+function qrisUji(){
+  var a=+document.getElementById('qAmt').value||0;
+  var r=document.getElementById('qRes'),j=document.getElementById('qJudul'),d=document.getElementById('qDetail');
+  if(a<10000||a>25000000){j.textContent=L("✗ Nominal di luar batas");d.textContent=L("Intent ditolak (HTTP 400) — batas Rp 10.000 – Rp 25.000.000 per transaksi.");r.className='res err';r.style.display='block';return;}
+  j.textContent=L("✓ SETTLED — pembayaran berhasil di PSP mitra");
+  d.textContent=L("Intent PENDING → webhook SETTLED · RRN ")+Math.random().toString(16).slice(2,12).toUpperCase()+' · Rp '+a.toLocaleString('id-ID')+' langsung ke merchant via PSP berlisensi — dana tidak menyentuh Nara · webhook ulang ditolak (idempoten).';
+  r.className='res';r.style.display='block';
+}
+function tagihanUji(){
+  var no=(document.getElementById('tNo').value||'').replace(/\D/g,'');
+  var b=document.getElementById('tBiller').value;
+  var r=document.getElementById('tRes'),j=document.getElementById('tJudul'),d=document.getElementById('tDetail');
+  if(no.length<5||no.length>20){j.textContent=L("✗ Nomor pelanggan tidak valid");d.textContent=L("Harus 5–20 digit (HTTP 400) — tersimpan hanya sebagai •••• ")+no.slice(-4)+'.';r.className='res err';r.style.display='block';return;}
+  j.textContent=L("✓ SETTLED — tagihan ")+b+' terbayar';
+  d.textContent=L("Pelanggan •••• ")+no.slice(-4)+' · intent TAGIHAN via biller aggregator berlisensi (MITRA-BILLER-01) · bukti: RRN '+Math.random().toString(16).slice(2,12).toUpperCase()+'.';
+  r.className='res';r.style.display='block';
+}
+function paylaterUji(){
+  var a=+document.getElementById('pAmt').value||0, tenor=document.getElementById('pTenor').value;
+  var ok=document.getElementById('pConsent').checked;
+  var r=document.getElementById('pRes'),j=document.getElementById('pJudul'),d=document.getElementById('pDetail');
+  if(!ok){j.textContent=L("✗ Persetujuan UU PDP wajib");d.textContent=L("Tanpa consent, pengajuan TIDAK boleh diteruskan ke mitra (HTTP 400) — prinsip privasi UU PDP.");r.className='res err';r.style.display='block';return;}
+  if(a<500000||a>50000000){j.textContent=L("✗ Nominal di luar batas");d.textContent=L("Pengajuan Rp 500.000 – Rp 50.000.000 (HTTP 400).");r.className='res err';r.style.display='block';return;}
+  var plafon=Math.min(a,Math.round(a*0.8));
+  j.textContent=L("✓ REFERRED → APPROVED_BY_PARTNER → ACTIVATED");
+  d.textContent=L("Rujukan ")+tenor+' · Rp '+a.toLocaleString('id-ID')+' → mitra MITRA-MF-01 (multifinance berlisensi) memutuskan: plafon Rp '+plafon.toLocaleString('id-ID')+' · fasilitas aktif di sisi mitra — Nara tidak memutuskan & tidak mencairkan kredit.';
+  r.className='res';r.style.display='block';
+}
+
+/* ---------- DEMO RM-ADVISOR V2 :8089 ---------- */
+var janjiStatus='KOSONG';
+function janjiBook(){
+  var r=document.getElementById('jRes'),j=document.getElementById('jJudul'),d=document.getElementById('jDetail');
+  j.textContent=L("✓ BOOKED — jadwal tersimpan");
+  d.textContent=document.getElementById('jTopik').value+' · '+document.getElementById('jMetode').value+' · '+document.getElementById('jWaktu').value+' · kode '+Math.random().toString(16).slice(2,8).toUpperCase()+' — hanya masa depan yang boleh dibook (HTTP 400 bila lampau); bisa di-reschedule sampai selesai.';
+  janjiStatus='BOOKED';r.className='res';r.style.display='block';
+}
+function janjiDone(){
+  var r=document.getElementById('jRes'),j=document.getElementById('jJudul'),d=document.getElementById('jDetail');
+  var catatan=(document.getElementById('jNotes').value||'').trim();
+  if(janjiStatus!=='BOOKED'){j.textContent=L("✗ Belum ada jadwal");d.textContent=L("Pesan dulu jadwalnya — status bergerak BOOKED → DONE.");r.className='res err';r.style.display='block';return;}
+  if(!catatan){j.textContent=L("✗ Catatan rapat wajib");d.textContent=L("Menyelesaikan janji temu tanpa catatan ditolak (HTTP 400) — disiplin meeting notes ala premium.");r.className='res err';r.style.display='block';return;}
+  j.textContent=L("✓ DONE — rapat tercatat");
+  d.textContent=L("Catatan tersimpan: \"")+catatan+'" · status DONE final (tidak bisa dibatalkan/direschedule).';
+  janjiStatus='DONE';r.className='res';r.style.display='block';
+}
+async function vaultUji(){
+  var nama=(document.getElementById('vNama').value||'').trim();
+  var jenis=document.getElementById('vJenis').value;
+  var r=document.getElementById('vRes'),j=document.getElementById('vJudul'),d=document.getElementById('vDetail');
+  if(!nama){j.textContent=L("✗ Nama berkas wajib");d.textContent=L("Vault menolak unggahan tanpa nama berkas (HTTP 400).");r.className='res err';r.style.display='block';return;}
+  var isi=new TextEncoder().encode('NARA-DEMO:'+jenis+':'+nama);
+  var hex;
+  try{ var dig=await crypto.subtle.digest('SHA-256',isi); hex=[...new Uint8Array(dig)].map(b=>b.toString(16).padStart(2,'0')).join(''); }
+  catch(e){ hex=Array.from(isi).reduce((a,b)=>((a<<5)-a+b)|0,0).toString(16).padStart(12,'0').repeat(6).slice(0,64); }
+  j.textContent=L("✓ Tersimpan di vault — ")+jenis;
+  d.textContent=nama+' · '+isi.length+' byte · SHA-256 '+hex.slice(0,24)+'… · tiap unduh diverifikasi ulang (berkas korup diblokir) · enkripsi at-rest di infrastruktur.';
+  r.className='res';r.style.display='block';
+}
+
+/* ---------- DEMO BOND V2 :8091 ---------- */
+function obligasiUji(){
+  var r=document.getElementById('obRes'),j=document.getElementById('obJudul'),d=document.getElementById('obDetail');
+  var lelang=document.getElementById('obMode').selectedIndex===1;
+  var nom=Number(document.getElementById('obNom').value||0);
+  var yieldBid=Number(document.getElementById('obYield').value||0);
+  if(nom<=0||nom%1000000!==0){j.textContent=L("✗ Nominal tidak valid");d.textContent=L("Wajib kelipatan Rp 1.000.000 (aturan lot pasar primer) — HTTP 400.");r.className='res err';r.style.display='block';return;}
+  if(lelang){
+    if(nom>50000000){j.textContent=L("✗ Melebihi kuota lelang");d.textContent=L("Kuota FR0098P Rp 50 jt — bid tetap tercatat berstatus REJECTED (KUOTA_TIDAK_CUKUP).");r.className='res err';r.style.display='block';return;}
+    if(yieldBid<=6.75){j.textContent=L("✓ BID DIALOKASIKAN — ")+yieldBid.toFixed(3)+'% ≤ cutoff 6,75%';
+      d.textContent=L("Rp ")+nom.toLocaleString('id-ID')+' dialokasikan — book-building mengurutkan yield menanjak sampai kuota habis; kupon 6,625%, jatuh tempo 15 Jun 2033. Cutoff sekali-putus, bid setelahnya ditolak (HTTP 400).';
+    } else {j.textContent=L("✗ BID DITOLAK — ")+yieldBid.toFixed(3)+'% di atas cutoff 6,75%';
+      d.textContent=L("Dealer dengan yield di atas cutoff tidak mendapat andil (model lelang SBN konvensional); inventori dealer hanya berisi bid ALLOCATED.");}
+  } else {
+    if(nom>20000000){j.textContent=L("✗ REJECTED — KUOTA_TIDAK_CUKUP");
+      d.textContent=L("Sisa kuota SR026T6 Rp 20 jt — langganan tetap tercatat REJECTED (audit trail), kuota tak tergerus. Ulangi dengan nominal lebih kecil.");
+    } else {j.textContent=L("✓ ALLOCATED — FCFS dalam kuota");
+      d.textContent=L("Rp ")+nom.toLocaleString('id-ID')+' SR026T6 · harga terbit 100% · kupon 6,75% · jatuh tempo 15 Jun 2033 · sisa kuota Rp '+(20000000-nom).toLocaleString('id-ID')+' — first-come-first-served model SBN ritel.';}
+  }
+  r.className='res';r.style.display='block';
+}
+
+/* ---------- DEMO ONBOARDING V2 :8099 ---------- */
+var jtStatus='BARU';
+function jointUji(){
+  var r=document.getElementById('jtRes'),j=document.getElementById('jtJudul'),d=document.getElementById('jtDetail');
+  var mode=document.getElementById('jtMode').selectedIndex===0?'AND':'OR';
+  var nom=Number(document.getElementById('jtNom').value||0);
+  var kuorum=mode==='AND'?'2/2':'1/1';
+  if(jtStatus==='SELESAI'){jtStatus='BARU';}
+  if(nom<=0){j.textContent=L("✗ Nominal tidak valid");d.textContent=L("Nominal debet harus positif — HTTP 400.");r.className='res err';r.style.display='block';return;}
+  if(jtStatus==='BARU'){
+    j.textContent=L("✓ AKUN JOINT ACTIVE — debet PENDING (0/")+kuorum+')';
+    d.textContent=L("Rp ")+nom.toLocaleString('id-ID')+' diajukan · mode '+mode+' — debet menunggu kuorum persetujuan pemegang (setiap pemegang hanya bisa menyetujui satu kali; penolakan pemegang = final REJECTED).';
+    jtStatus=mode==='AND'?'AND1':'SELESAI';
+  } else if(jtStatus==='AND1'){
+    j.textContent=L("✓ EXECUTED — kuorum 2/2 terpenuhi (wewenang ganda)");
+    d.textContent=L("Rp ")+nom.toLocaleString('id-ID')+' dieksekusi dari rekening gabungan. Di mode AND, debet hanya jalan setelah KEDUA pemegang menyetujui — audit trail lengkap per pemegang.';
+    jtStatus='SELESAI';
+  } else {
+    j.textContent=L("✓ EXECUTED — salah satu pemegang cukup (mode OR)");
+    d.textContent=L("Rp ")+nom.toLocaleString('id-ID')+' dieksekusi — mode OR memberi wewenang penuh pada masing-masing pemegang.';
+    jtStatus='SELESAI';
+  }
+  r.className='res';r.style.display='block';
+}
+var kdStatus='BARU',kdKode='';
+function kadoKirim(){
+  var r=document.getElementById('kdRes'),j=document.getElementById('kdJudul'),d=document.getElementById('kdDetail');
+  var nik=(document.getElementById('kdNik').value||'').trim();
+  var nom=Number(document.getElementById('kdNom').value||0);
+  var produk=document.getElementById('kdProduk').value;
+  if(!/^\d{16}$/.test(nik)){j.textContent=L("✗ NIK tidak valid");d.textContent=L("NIK penerima wajib 16 digit — HTTP 400 (KYC minimal di saat tebus).");r.className='res err';r.style.display='block';return;}
+  if(nom<100000){j.textContent=L("✗ Nominal di bawah minimum");d.textContent=L("Kado investasi minimal Rp 100.000 — HTTP 400.");r.className='res err';r.style.display='block';return;}
+  kdKode='GIFT-'+Math.random().toString(36).slice(2,8).toUpperCase();
+  j.textContent=L("✓ Kado dibuat — ")+kdKode+' ('+produk+')';
+  d.textContent=L("Rp ")+nom.toLocaleString('id-ID')+' · NIK penerima '+nik.slice(0,4)+'••••••••'+nik.slice(12)+' (disamarkan; tersimpan terenkripsi AES-256-GCM) · status CREATED — menunggu penebusan oleh penerima.';
+  kdStatus='CREATED';r.className='res';r.style.display='block';
+}
+function kadoTebus(hasil){
+  var r=document.getElementById('kdRes'),j=document.getElementById('kdJudul'),d=document.getElementById('kdDetail');
+  if(kdStatus!=='CREATED'){j.textContent=L("✗ Belum ada kado");d.textContent=L("Kirim dulu kadonya — penebusan hanya untuk kado berstatus CREATED.");r.className='res err';r.style.display='block';return;}
+  if(hasil==='BEDA'){j.textContent=L("✗ KYC gagal — NIK tidak cocok");d.textContent=L("Penebusan ditolak (HTTP 400), kado tetap CREATED — meter GIFT{result=KYC_GAGAL} naik. Penerima hanya bisa menebus dengan NIK yang persis sama.");r.className='res err';r.style.display='block';return;}
+  j.textContent=L("✓ REDEEMED — kado diterima penerima");
+  d.textContent=L("NIK cocok (KYC minimal) → aset ")+kdKode+' masuk rekening penerima; sekali tebus (tebus ulang ditolak HTTP 400) · meter GIFT{result=REDEEMED}.';
+  kdStatus='REDEEMED';r.className='res';r.style.display='block';
+}
+
+/* ---------- DEMO SANDBOX MITRA (integration v3) :8099 ---------- */
+function dpSandbox(){
+  var r=document.getElementById('dpRes'),j=document.getElementById('dpJudul'),d=document.getElementById('dpDetail');
+  var lembaga=document.getElementById('dpLembaga').value;
+  j.textContent=L("🧪 Invoke sandbox ")+lembaga+' — skenario TIMEOUT';
+  d.textContent=L("Panggilan: POST /v1/integration/sandbox → /")+lembaga+'/invoke → hasil TIMEOUT (melewati timeoutMs, simulasi) · pensiun yang dikonfirmasi saat ini tetap REFERRED dan dapat diulang setelah skenario dikembalikan ke OK · seluruh panggilan tercatat di sandbox_logs (V4) · konektor mode PRODUCTION menolak simulasi (HTTP 400).';
+  r.className='res';r.style.display='block';
+}
+
+/* ---------- DEMO ONBOARDING BULK (B2B) :8099 ---------- */
+var bkBatch=null;
+function bkParse(i){
+  var v=(document.getElementById('bkP'+i).value||'').trim();
+  var k=v.indexOf('|');
+  if(k<0)return{nama:v,nik:'',err:'format NAMA|NIK'};
+  return{nama:v.slice(0,k).trim(),nik:v.slice(k+1).replace(/\s/g,'')};
+}
+function bkStatus(p){
+  if(!p.nama)return'DATA_TIDAK_LENGKAP';
+  if(!/^\d{16}$/.test(p.nik))return'NIK_TIDAK_VALID';
+  return null;
+}
+function bkBuat(){
+  var r=document.getElementById('bkRes'),j=document.getElementById('bkJudul'),d=document.getElementById('bkDetail');
+  var korp=(document.getElementById('bkKorp').value||'').trim();
+  if(!korp){j.textContent=L("✗ Korporasi kosong");d.textContent=L("Nama korporasi wajib — HTTP 400.");r.className='res err';r.style.display='block';return;}
+  var ps=[bkParse(1),bkParse(2),bkParse(3)],hasil=[],valid=0,hash={};
+  for(var i=0;i<ps.length;i++){
+    var p=ps[i],st=bkStatus(p);
+    if(!st){if(hash[p.nik]){st='DUPLIKAT_BATCH';}else{hash[p.nik]=1;}}
+    if(!st)valid++;
+    hasil.push(p.nama+' → '+(st?'DITOLAK ('+st+')':'VALID'));
+  }
+  bkBatch={no:'BULK-'+new Date().getFullYear()+'-%05d'.replace('%05d','00042'),valid:valid,total:ps.length,kirim:0};
+  bkBatch.no='BULK-'+new Date().getFullYear()+'-00042';
+  j.textContent=L("✓ Batch dibuat — ")+bkBatch.no+' ('+korp+')';
+  d.textContent=L("Total ")+ps.length+' peserta · '+valid+' VALID · '+(ps.length-valid)+' DITOLAK (alasan per item: '+hasil.join('; ')+') · NIK VALID akan tersimpan terenkripsi, dedup via hash SHA-256 — status DRAF, tunggu submit.';
+  r.className=valid?'res':'res err';r.style.display='block';
+}
+function bkSubmit(){
+  var r=document.getElementById('bkRes'),j=document.getElementById('bkJudul'),d=document.getElementById('bkDetail');
+  if(!bkBatch){j.textContent=L("✗ Belum ada batch");d.textContent=L("Buat batch dulu — submit hanya untuk batch berstatus DRAF.");r.className='res err';r.style.display='block';return;}
+  if(bkBatch.kirim){j.textContent=L("✗ Submit ditolak");d.textContent=L("Batch ")+bkBatch.no+' sudah DISUBMIT — sekali-putus (submit ulang → HTTP 400).';r.className='res err';r.style.display='block';return;}
+  bkBatch.kirim=bkBatch.valid;
+  j.textContent=L("✓ DISUBMIT — ")+bkBatch.kirim+'/'+bkBatch.total+' peserta terkirim';
+  d.textContent=L("Seluruh peserta VALID → TERKIRIM ke pipeline e-KYC (:8099) · meter nara_onboarding_bulk{result=SUBMIT} naik · item DITOLAK tidak ikut. Proses per peserta lanjut di modul onboarding reguler.");
+  r.className='res';r.style.display='block';
+}
+
+/* ---------- DEMO NARA-BILLING :8107 ---------- */
+var blTotal=0;
+function blTarif(nom){
+  var s1=Math.min(nom,50000000), s2=nom-s1;
+  var murni=Math.round(s1*0.01)+Math.round(s2*0.0075);
+  var floor=murni<50000;
+  return {fee:floor?50000:murni, floor:floor};
+}
+function billingUji(){
+  var r=document.getElementById('blRes'),j=document.getElementById('blJudul'),d=document.getElementById('blDetail');
+  var nom=Number(document.getElementById('blNom').value||0);
+  var produk=document.getElementById('blProduk').value;
+  var agent=(document.getElementById('blAgent').value||'').trim()||'—';
+  if(nom<=0){j.textContent=L("✗ Nominal tidak valid");d.textContent=L("Nominal transaksi wajib positif — HTTP 400.");r.className='res err';r.style.display='block';return;}
+  var t=blTarif(nom), komisi=Math.round(t.fee*0.05);
+  blTotal+=t.fee;
+  j.textContent=L("✓ FEE TERBOOK — Rp ")+t.fee.toLocaleString('id-ID')+(t.floor?' (floor minimum)':'');
+  d.textContent=produk+' · Rp '+nom.toLocaleString('id-ID')+' → tier progresif (≤Rp 50 jt × 1%, sisanya × 0,75%'+(t.floor?' + floor Rp 50 rb':'')+') · bps efektif '+(t.fee/nom*10000).toFixed(2)+' · komisi agent '+agent+' (500 bps) Rp '+komisi.toLocaleString('id-ID')+' · clientRef unik — transaksi ganda ditolak (HTTP 400).';
+  r.className='res';r.style.display='block';
+}
+function billingRekap(){
+  var r=document.getElementById('blRes'),j=document.getElementById('blJudul'),d=document.getElementById('blDetail');
+  var tercapai=blTotal>=300000;
+  var bonus=tercapai?Math.round(blTotal*0.01):0;
+  j.textContent=tercapai?'✓ ACHIEVED — target fee terlampaui':'○ BELOW — belum capai target';
+  d.textContent=L("Total fee dibawa bulan ini Rp ")+blTotal.toLocaleString('id-ID')+' vs target Rp 300.000 · bonus insentif '+(tercapai?'100 bps × fee = Rp '+bonus.toLocaleString('id-ID'):'Rp 0 — bonus hanya bila target tercapai')+' · rekap per agent via GET /partners/{id}/insentif?bulan=YYYY-MM.';
+  r.className=tercapai?'res':'res err';r.style.display='block';
+}
+
+/* ---------- DEMO EQUITY V2 :8093 ---------- */
+var frUnits=0;
+function frPilih(){var s=document.getElementById('frSaham');return {h:Number(s.value), t:s.options[s.selectedIndex].text.split(' —')[0]};}
+function frTampil(cls,j,d){var r=document.getElementById('frRes');document.getElementById('frJudul').textContent=j;document.getElementById('frDetail').textContent=d;r.className=cls;r.style.display='block';}
+function frBeli(){
+  var p=frPilih(), nom=Number(document.getElementById('frNom').value||0);
+  if(nom<10000){frTampil('res err','✗ Nominal minimal Rp 10.000','HTTP 400 — batas bawah pembelian fraksional.');return;}
+  if(nom>100000000){frTampil('res err','✗ Nominal maksimal Rp 100.000.000','HTTP 400 — di atas itu gunakan order penuh 1 lot di menu saham biasa.');return;}
+  var unit=Math.floor(nom/p.h*10000)/10000; // presisi 4 dp HALF_DOWN
+  var nilai=Math.round(unit*p.h*100)/100;
+  frUnits+=unit;
+  frTampil('res','✓ TERISI — '+unit.toFixed(4)+' unit '+p.t,
+    'Rp '+nom.toLocaleString('id-ID')+' ÷ Rp '+p.h.toLocaleString('id-ID')+' → '+unit.toFixed(4)+' unit (4 desimal) · nilai Rp '+nilai.toLocaleString('id-ID')+' · total kepemilikan '+frUnits.toFixed(4)+' unit · order idempoten via header Idempotency-Key — kirim ulang = replay, bukan eksekusi ganda.');
+}
+function frJual(){
+  if(frUnits<=0){frTampil('res err','✗ Belum ada kepemilikan','Beli dulu fraksionalnya — jual hanya boleh ≤ unit yang dipegang (HTTP 400 bila lebih).');return;}
+  var p=frPilih(), jual=Math.min(2,frUnits), proceeds=Math.round(jual*p.h*100)/100;
+  frUnits-=jual;
+  frTampil('res','✓ TERJUAL — '+jual.toFixed(4)+' unit '+p.t,
+    'Proceeds Rp '+proceeds.toLocaleString('id-ID')+' · P/L terealisasi Rp 0 (harga jual = avg cost demo; P/L tercatat otomatis bila harga bergerak) · sisa '+frUnits.toFixed(4)+' unit.');
+}
+
+/* ---------- DEMO NETWORTH V3 :8087 KIT PAJAK ---------- */
+var pjDividen=0, pjBruto=0, pjPajak=0, pjBebas=100000000;
+function pajakUji(){
+  var r=document.getElementById('pjRes'),j=document.getElementById('pjJudul'),d=document.getElementById('pjDetail');
+  var nom=Number(document.getElementById('pjNom').value||0);
+  var sel=document.getElementById('pjJenis'), tarif=Number(sel.value), jenis=sel.options[sel.selectedIndex].text.split(' —')[0];
+  if(nom<=0){j.textContent=L("✗ Nominal tidak valid");d.textContent=L("Nominal wajib positif — HTTP 400.");r.className='res err';r.style.display='block';return;}
+  var pajak, status;
+  if(tarif===0.10){
+    var sisaBebas=Math.max(0,pjBebas-pjDividen), bebas=Math.min(nom,sisaBebas), lebih=nom-bebas;
+    pajak=Math.round(lebih*0.10); status=lebih===0?'DIBEBASKAN (UU HPP, ≤Rp 100 jt/thn)':'10% × kelebihan Rp '+lebih.toLocaleString('id-ID');
+    pjDividen+=nom;
+  } else { pajak=Math.round(nom*tarif/100); status=tarif+'% FINAL — DIPOTONG DI SUMBER'; }
+  pjBruto+=nom; pjPajak+=pajak;
+  j.textContent=L("✓ TERCATAT — pajak Rp ")+pajak.toLocaleString('id-ID')+' ('+jenis+')';
+  d.textContent=status+' · kumulatif tahun ini: bruto Rp '+pjBruto.toLocaleString('id-ID')+' · total pajak final Rp '+pjPajak.toLocaleString('id-ID')+' · efektif '+(pjBruto?(pjPajak/pjBruto*100).toFixed(2):'0.00')+'% · kuota bebas dividen tersisa Rp '+Math.max(0,pjBebas-pjDividen).toLocaleString('id-ID')+' — ref unik, item ganda ditolak (HTTP 400).';
+  r.className='res';r.style.display='block';
+}
+
+/* ---------- DEMO NARA-ZISWAF :8108 ---------- */
+var zwStatus='BARU', zwTotal=0, zwNominal=0;
+function ziswafUji(){
+  var r=document.getElementById('zwRes'),j=document.getElementById('zwJudul'),d=document.getElementById('zwDetail');
+  var jenis=document.getElementById('zwJenis').value;
+  var laz=document.getElementById('zwLaz').value;
+  var basis=Number(document.getElementById('zwBasis').value||0);
+  var NISAB=117725000;
+  if(basis<=0){j.textContent=L("✗ Nominal tidak valid");d.textContent=L("Basis wajib positif — HTTP 400.");r.className='res err';r.style.display='block';return;}
+  var nominal;
+  if(jenis==='HARTA'&&basis<NISAB){j.textContent=L("✗ Belum nisab");d.textContent=L("Zakat harta wajib jika harta ≥ nisab Rp 117.725.000 (85 g emas × Rp 1.385.000) — HTTP 400. Coba mode penghasilan/gain.");r.className='res err';r.style.display='block';return;}
+  if(jenis==='HARTA'||jenis==='GAIN') nominal=Math.round(basis*0.025);
+  else { if(jenis==='INFAK'&&basis<10000){j.textContent=L("✗ Infak minimal Rp 10.000");d.textContent=L("HTTP 400 — batas bawah infak.");r.className='res err';r.style.display='block';return;} if(jenis==='WAKAF'&&basis<100000){j.textContent=L("✗ Wakaf minimal Rp 100.000");d.textContent=L("HTTP 400 — batas bawah wakaf.");r.className='res err';r.style.display='block';return;} nominal=basis; }
+  zwNominal=nominal; zwStatus='PENDING';
+  j.textContent=L("✓ INTENT PENDING — Rp ")+nominal.toLocaleString('id-ID')+' ke '+laz;
+  d.textContent=(jenis==='HARTA'||jenis==='GAIN'?'2,5% × Rp '+basis.toLocaleString('id-ID'):'nominal langsung')+' · dana TIDAK disentuh Nara — intent diteruskan ke LAZ mitra berlisensi; tekan \"Webhook LAZ\" untuk simulasi konfirmasi (idempoten — webhook kedua ditolak HTTP 400).';
+  r.className='res';r.style.display='block';
+}
+function ziswafWebhook(){
+  var r=document.getElementById('zwRes'),j=document.getElementById('zwJudul'),d=document.getElementById('zwDetail');
+  if(zwStatus!=='PENDING'){j.textContent=L("✗ Tidak ada intent pending");d.textContent=L("Ajukan dulu intentnya — webhook hanya berlaku untuk intent PENDING (idempoten).");r.className='res err';r.style.display='block';return;}
+  zwStatus='CONFIRMED'; zwTotal+=zwNominal;
+  j.textContent=L("✓ CONFIRMED oleh LAZ — ref LAZ-TRX-")+Math.floor(Math.random()*900+100);
+  d.textContent=L("Penunaian tercatat · total tertunaikan tahun ini Rp ")+zwTotal.toLocaleString('id-ID')+' — muncul di rekap bukti penunaian GET /clients/{id}/rekap?tahun=.';
+  r.className='res';r.style.display='block';
+}
+
+/* ---------- DEMO RILIS V2/V3 (T53) ---------- */
+var dpStatus='BARU';
+function dpTampil(cls,j,d){var r=document.getElementById('dpRes');document.getElementById('dpJudul').textContent=j;document.getElementById('dpDetail').textContent=d;r.className=cls;r.style.display='block';}
+function dpDaftar(){
+  var kon=Number(document.getElementById('dpKontribusi').value||0);
+  if(kon<100000||kon>50000000){dpTampil('res err','✗ Kontribusi di luar batas','Kontribusi bulanan harus Rp 100.000 – Rp 50.000.000 — HTTP 400.');return;}
+  dpStatus='REFERRED';
+  dpTampil('res','✓ PENGAJUAN TERKIRIM — REFERRED via '+document.getElementById('dpLembaga').value,
+    'Program '+document.getElementById('dpProgram').value+' · Rp '+kon.toLocaleString('id-ID')+'/bln · penerima manfaat: '+document.getElementById('dpPenerima').value+' — diteruskan ke lembaga pensiun berlisensi lewat konektor API yang terdaftar di setting parameter mitra (integration v2 :8096; kredensial tersamarkan sec••••••45). Keputusan milik lembaga — tekan \"Konfirmasi lembaga\" untuk sim jawaban.');
+}
+function dpKonfirm(){
+  if(dpStatus!=='REFERRED'){dpTampil('res err','✗ Belum ada pengajuan','Daftar dulu programnya — konfirmasi hanya untuk pengajuan berstatus REFERRED (idempoten).');return;}
+  dpStatus='ENROLLED';
+  dpTampil('res','✓ ENROLLED — peserta DPLK-2026-'+String(Math.floor(Math.random()*90000)+10000),
+    'Keanggotaan produk pensiun aktif · nomor peserta diberikan lembaga via konektor · kontribusi bulanan terjadwal — konfirmasi ulang ditolak (HTTP 400).');
+}
+function maUji(){
+  var r=document.getElementById('maRes');
+  var sw=document.getElementById('maJenis').selectedIndex===0;
+  var asal=document.getElementById('maAsal').value;
+  var j=document.getElementById('maJudul'),d=document.getElementById('maDetail');
+  if(sw){j.textContent=L("✓ SWITCHING EXECUTED — ")+asal+' → RDPU-Cicil';
+    d.textContent=L("Seluruh posisi ")+asal+' dipindah ke RDPU-Cicil · nilai batch & jumlah klien terkena dihitung dari riwayat transaksi produk asal · ref unik — aksi ganda ditolak (HTTP 400).';}
+  else {j.textContent=L("✓ CLOSURE EXECUTED — ")+asal+' ditutup';
+    d.textContent=L("Semua posisi ditebus penuh dan produk tak bisa ditransaksi lagi · tercatat sebagai audit trail corporate action (fundadmin v2).");}
+  r.className='res';r.style.display='block';
+}
+function lbUji(){
+  var fee=Number(document.getElementById('lbFee').value||0);
+  var tim=document.getElementById('lbTim').value;
+  var r=document.getElementById('lbRes'),j=document.getElementById('lbJudul'),d=document.getElementById('lbDetail');
+  var target=300000, tercapai=fee>=target;
+  var komisi=Math.round(fee*0.05), bonus=tercapai?Math.round(fee*0.01):0;
+  j.textContent=(tercapai?'✓ #1 ':'○ #2 ')+tim+' — fee Rp '+fee.toLocaleString('id-ID');
+  d.textContent=L("Komisi (500 bps) Rp ")+komisi.toLocaleString('id-ID')+' · '+(tercapai?'target tercapai — bonus insentif 100 bps Rp '+bonus.toLocaleString('id-ID')+' · ':'belum capai target Rp 300 rb — bonus Rp 0 · ')+'leaderboard lengkap (peringkat semua agent + agregat per tim) via GET /leaderboard?bulan=YYYY-MM.';
+  r.className=tercapai?'res':'res err';r.style.display='block';
+}
+function rdUji(){
+  var nom=Number(document.getElementById('rdNom').value||0);
+  var arah=document.getElementById('rdArah').value;
+  var r=document.getElementById('rdRes'),j=document.getElementById('rdJudul'),d=document.getElementById('rdDetail');
+  if(nom<10000||nom>25000000){j.textContent=L("✗ Nominal di luar batas");d.textContent=L("Nominal harus Rp 10.000–25.000.000 — HTTP 400.");r.className='res err';r.style.display='block';return;}
+  j.textContent=L("✓ ")+arah+' SETTLED (webhook mitra) — Rp '+nom.toLocaleString('id-ID');
+  d.textContent=L("Intent PENDING → mitra interbank berlisensi (MITRA-BANK-01) → webhook SETTLED · rekening tujuan tersamarkan •••• 7890 · dana berpindah langsung antar rekening, Nara tak memegang dana (Nara berbasis RDN).");
+  r.className='res';r.style.display='block';
+}
+var cwStatus='BARU', cwToken='';
+function cwTampil(j,d,ok){var r=document.getElementById('cqrRes');document.getElementById('cqrJudul').textContent=j;document.getElementById('cqrDetail').textContent=d;r.className=ok?'res':'res err';r.style.display='block';}
+function cwBuat(){cwToken=String(Math.floor(Math.random()*900000)+100000);cwStatus='AKTIF';
+  cwTampil('✓ TOKEN AKTIF — '+cwToken,'Penarikan Rp 500.000 di ATM mitra (MANDIRI) · berlaku 15 menit · sekali tebus · tebus ulang/kedaluwarsa → HTTP 400.',true);}
+function cwTebus(){
+  if(cwStatus!=='AKTIF'){cwTampil('✗ Tidak ada token aktif','Buat dulu token tarik tunainya.',false);return;}
+  cwStatus='TERPAKAI';
+  cwTampil('✓ TERPAKAI — Rp 500.000 ditarik','Token '+cwToken+' dipakai sekali di ATM mitra · meter nara_pay_cardless{result=REDEEMED}.',true);}
+var qrStatus='BARU', qrRef='';
+function qrBuat(){qrRef='QR-'+Math.floor(Math.random()*9000+1000);qrStatus='AKTIF';
+  cwTampil('✓ QR MERCHANT AKTIF — '+qrRef,'KOPINARA · Rp 35.000 · payload 00020101021226660014ID.CO.NARA.WWW… · berlaku 10 menit · nominal bayar wajib sama, sekali bayar.',true);}
+function qrBayar(){
+  if(qrStatus!=='AKTIF'){cwTampil('✗ Tidak ada QR aktif','Buat dulu QR merchantnya.',false);return;}
+  qrStatus='DIBAYAR';
+  cwTampil('✓ DIBAYAR — Rp 35.000 masuk merchant','Simulasi pembeli scan (jaringan QRIS mitra) · meter nara_pay_merchant{result=PAID} · bayar ulang → HTTP 400.',true);}
+function krUji(){
+  var sel=document.getElementById('krProduk');
+  var batas=sel.value.split('-'), produk=sel.options[sel.selectedIndex].text.split(' ')[0];
+  var nom=Number(document.getElementById('krNom').value||0);
+  var r=document.getElementById('krRes'),j=document.getElementById('krJudul'),d=document.getElementById('krDetail');
+  if(nom<Number(batas[0])||nom>Number(batas[1])){j.textContent=L("✗ Di luar batas ")+produk;d.textContent=L("Pengajuan ")+produk+' harus Rp '+Number(batas[0]).toLocaleString('id-ID')+' – Rp '+Number(batas[1]).toLocaleString('id-ID')+' — HTTP 400.';r.className='res err';r.style.display='block';return;}
+  j.textContent=L("✓ REFERRED — diteruskan ke mitra berlisensi (consent UU PDP ✓)");
+  d.textContent=produk+' Rp '+nom.toLocaleString('id-ID')+' → keputusan milik mitra (sekali-putus: APPROVED_BY_PARTNER/REJECTED) → aktivasi fasilitas dari APPROVED saja · Nara tidak ikut memutuskan kredit.';
+  r.className='res';r.style.display='block';
+}
+
+/* ---------- TAB GAP ---------- */
+function tabGap(btn,id){
+  btn.parentNode.querySelectorAll('button').forEach(function(b){b.classList.remove('on')});
+  btn.classList.add('on');
+  document.querySelectorAll('#gapInv .menu-pane').forEach(function(p){p.classList.remove('on')});
+  document.getElementById(id).classList.add('on');
+}
+
+/* ---------- TAB MENU ---------- */
+function tabMenu(btn,id){
+  document.querySelectorAll('.seg button').forEach(function(b){b.classList.remove('on')});
+  btn.classList.add('on');
+  document.querySelectorAll('.menu-pane').forEach(function(p){p.classList.remove('on')});
+  document.getElementById(id).classList.add('on');
+}
+</script>
+
+<!-- ═══ MESIN DWIBAHASA ID/EN (T64) — teks ID asli tetap di DOM; EN dari kamus ═══ -->
+<button id="btnLang" onclick="toggleLang()" title="Ganti bahasa / Switch language"
+  style="position:fixed;top:12px;right:12px;z-index:9999;background:#0F2B46;color:#fff;border:1px solid #8FC4F2;
+  border-radius:999px;padding:7px 16px;font-weight:700;font-size:.85rem;cursor:pointer;box-shadow:0 3px 10px rgba(15,43,70,.3)">🇬🇧 EN</button>
+<script>
+var EN_T = {"s1": "SKIP", "s2": "Stocks, SBN, gold, to forex. One app.", "s3": "DOWNLOAD ON", "s4": "GET IT ON", "s5": "SERVICE MODULES", "s6": "ASSET CLASSES", "s7": "B2C + B2B MENUS", "s8": "E-KYC → RDN", "s9": "TOTAL NET WORTH", "s10": "Everything a world-class wealth app has — in one Indonesian-language app.", "s11": "Every feature is powered by a dedicated service module that can be audited, tested, and scaled independently.", "s12": "5-minute e-KYC → SID & RDN automatic", "s13": "6 asset classes, one portfolio", "s14": "Goal-based investing", "s15": "Watchlist & price alert", "s16": "Auto-invest, rebalancing & sweep", "s17": "NBA — daily smart advice", "s18": "Consolidated net worth & e-statement", "s19": "Bank-grade security", "s20": "Management BI dashboard", "s21": "33 service modules behind one app.", "s22": "Java 21 + Spring Boot microservices — the same pattern used by major banks. Every module ships tests, health checks, and can be deployed independently (Docker/Kubernetes).", "s23": "Dukcapil e-KYC → KSEI SID → RDN", "s24": "IDX stock orders, ARA/ARB, T+2 settlement", "s25": "subscribe/redeem/switch, daily NAV", "s26": "dirty price, coupon, yield", "s27": "SR/ORI/ST series, coupon & tenor", "s28": "gram ledger, PFAK, safe speculation", "s29": "tenor, interest, automatic cash sweep", "s30": "rate board, cross-currency conversion", "s31": "9-currency accounts + revaluation", "s32": "recurring plans + v2: partner bank auto-debit (new)", "s33": "consolidation + v2: benchmark analytics & 3-format reports (new)", "s34": "CHP questionnaire 5–25 → band 1–6", "s35": "annuity goal planner + allocation", "s36": "monitoring + one-shot price thresholds", "s37": "bancassurance — policies, premiums, claims (new)", "s38": "cross-service management aggregation", "s39": "client book, proposals, suitability", "s40": "drift vs target + tiered approval", "s41": "next-best-action recommendations", "s42": "unit NAV, mutual fund transactions", "s43": "100+ instruments, parameters, holidays", "s44": "9-step daily book closing", "s45": "APU-PPT, consent, PII masking", "s46": "8 external partners, circuit breaker", "s47": "BPMN 2.0 + Flowable 7 embedded", "s48": "recommendation model features", "s49": "email, inbox, WhatsApp-stub", "s50": "single edge, rate limit, docs.html", "s51": "Two worlds, firmly separated: retail & institution.", "s52": "86 structured menus — 41 for the mobile app (B2C), 45 for the internal console (B2B).", "s53": "📱 Retail App (B2C)", "s54": "🏦 Internal Console (B2B)", "s55": "assets − liabilities, real-time", "s56": "daily personal recommendations", "s57": "forex, gold, watched stocks", "s58": "IDX sessions I 09:00–12:00 · II 13:30–16:00", "s59": "new — deposit planner & allocation", "s60": "new — watchlist + price thresholds", "s61": "secure messages, monthly statements", "s62": "Four core forms — exactly like in the app.", "s63": "Interactive demo with Nara's real module parameters (annuity formula, Indonesian capital-market fees). No data is sent anywhere.", "s64": "🪪 1 · Open account — e-KYC", "s65": "FULL NAME (AS ON ID CARD)", "s66": "16-DIGIT NIK", "s67": "RISK PROFILE (CHP)", "s68": "Verify e-KYC", "s69": "📈 2 · Stock order", "s70": "LOTS (1 LOT = 100)", "s71": "PRICE / SHARE", "s72": "🎯 3 · Financial goal", "s73": "TARGET (IDR)", "s74": "HORIZON (YEARS)", "s75": "INITIAL ASSETS (IDR, 0 IF NONE)", "s76": "RISK PROFILE", "s77": "Compute the plan", "s78": "⭐ 4 · Price alert", "s79": "THRESHOLD (IDR)", "s80": "Run evaluation", "s81": "Learning from the best — Indonesia & the world.", "s82": "Product patterns that inspired Nara's modules. All trademarks belong to their respective owners — pattern reference, not affiliation.", "s83": "What other apps have — but Nara doesn't (yet).", "s84": "For transparency we mapped features from five industry benchmarks (Avantrade Wealth Management Suite, Medallion, WELMA, Livin' by Mandiri, BRImo) that Nara does not have — examined across four dimensions: features, modules, menus, and forms. The Medallion profile is generalized from the premium wealth-platform class; corrections welcome. <b>Release update:</b> <b style=\"color:var(--green)\">all 18 gap forms are now green (18/18)</b> — twenty-one gaps have been <b style=\"color:var(--green)\">closed</b> — <b>insurance/bancassurance</b> via <code>nara-insurance :8105</code> · <b>bank auto-debit</b> via <code>autoinvest v2 :8086</code> · <b>analytics + multi-format reports</b> via <code>networth v2 :8087</code> · <b>physical gold</b> via <code>altasset v2 :8085</code> · and <b>QRIS, interbank transfer, bills &amp; taxes, paylater/credit card</b> without a bank/PSP license via <code>nara-pay :8106</code> (orchestration + licensed-partner referral). Latest: <b>partner sandbox adapter</b> (SANDBOX connectors, test scenarios) via <code>integration v3 :8096</code> · <b>certified literacy academy</b> via <code>nara-edu :8111</code> · <b>market news &amp; research</b> via <code>nara-news :8112</code> · <b>corporate bulk onboarding</b> (B2B) via <code>onboarding v3 :8099</code>; earlier <b>DPLK pension product via partner API connector</b> + <b>5 advanced features</b> — mass switching &amp; product closure (fundadmin v2), team performance &amp; RM incentives (billing v2), real-time RDN deposit/withdrawal, cardless withdrawal &amp; merchant QRIS, KPR/KKB/KMG credit ecosystem (pay v2); earlier <b>ziswaf</b> via licensed LAZ on <code>nara-ziswaf :8108</code>; earlier the <b>SPT tax kit</b> — dividend &amp; capital-gain recap at final rates — on <code>networth v3 :8087</code>; earlier <b>fractional stocks</b> — buy from IDR 10K, 4-decimal units — on <code>equity v2 :8093</code>; earlier the <b>multi-tier fee engine, commission &amp; sales incentives</b> (B2B) on <code>nara-billing :8107</code>; earlier <b>joint accounts &amp; investment gifts</b> on <code>onboarding v2 :8099</code>; earlier <b>primary bond placement</b> — retail FCFS &amp; dealer book-building — on <code>bond v2 :8091</code>; then <b>document vault &amp; RM meetings</b> (Medallion) on <code>rm-advisor v2 :8089</code>.", "s85": "institution suite (Firium) — unit trust, fixed income, bancassurance, RM Assist modules", "s86": "premium wealth platform — feature profile generalized", "s87": "BCA wealth management — mutual funds, bonds, SBN, insurance", "s88": "bank super-app — daily payments + Livin' Investing (stocks via Growin')", "s89": "BRI super-app — gold investing via Pegadaian + daily banking", "s90": "Gap matrix → candidate modules", "s91": "FEATURE", "s92": "AVANTRADE", "s93": "MEDALLION", "s94": "WELMA", "s95": "LIVIN'", "s96": "BRIMO", "s97": "NARA", "s98": "CANDIDATE MODULE", "s99": "● full · ○ partial/segment · – not offered. Some gaps are intentionally out of scope: Nara is a pure investment platform — deposit/lending features require a banking license and stay with licensed partners.", "s100": "Menu & form study — which screens Nara still lacks", "s101": "APP", "s102": "MENUS NOT IN NARA", "s103": "KEY FORM / SCREEN", "s104": "NARA CANDIDATE", "s105": "institution", "s106": "premium", "s107": "BCA", "s108": "✓ online SID & auto-subscription: already in Nara · insurance: RELEASED :8105", "s109": "BRI", "s110": "✓ auto-debit & physical gold: v2 released", "s111": "Form preview — their screen style, not yet in Nara", "s112": "Seventeen sample forms typical of the benchmark apps (static, sends no data) — the claim form is now live, mirroring module :8105 rules. Buttons show the real outcome.", "s113": "📱 Pay with QRIS", "s114": "AMOUNT (IDR 10K – 25M)", "s115": "Pay via QRIS", "s116": "🛡️ Insurance claim", "s117": "POLICY (INSURER PARTNER CATALOG)", "s118": "TYPE", "s119": "AMOUNT (IDR)", "s120": "File claim", "s121": "🥇 Physical gold withdrawal", "s122": "GRAMS (MIN 1)", "s123": "PARTNER BRANCH", "s124": "Request withdrawal", "s125": "📅 RM appointment", "s126": "DATE & TIME", "s127": "METHOD", "s128": "TOPIC", "s129": "MEETING NOTES (REQUIRED ON COMPLETION)", "s130": "📅 Book schedule", "s131": "✓ Meeting done", "s132": "📜 Primary bond placement", "s133": "MARKET MODE", "s134": "AMOUNT (MULTIPLES OF IDR 1M)", "s135": "DEALER BID YIELD % (AUCTION MODE; CUTOFF 6.75%)", "s136": "Place", "s137": "💳 Apply for paylater", "s138": "OFFERED LIMIT", "s139": "TENOR", "s140": "APPLICATION AMOUNT (IDR 500K – 50M)", "s141": "Submit to partner", "s142": "⚡ Pay bills", "s143": "TYPE", "s144": "CUSTOMER NO. (5–20 DIGITS)", "s145": "Pay bill", "s146": "🏦 Auto-debit from bank account", "s147": "PARTNER BANK", "s148": "ACCOUNT NO. (8–18 DIGITS)", "s149": "AMOUNT/MO", "s150": "BANK SIMULATION", "s151": "Run this period's debit", "s152": "📊 Multi-format consolidated report", "s153": "FORMAT", "s154": "PERIOD", "s155": "Download report preview", "s156": "📁 Document vault", "s157": "DOCUMENT TYPE", "s158": "FILE NAME", "s159": "Upload to vault", "s160": "💰 Fee tiers, commission & sales incentive", "s161": "PRODUCT", "s162": "TRANSACTION AMOUNT (IDR)", "s163": "AGENT CODE (COMMISSION 500 BPS · FEE TARGET IDR 300K/MO)", "s164": "💰 Book fee", "s165": "📊 Incentive recap", "s166": "👥 Open joint account", "s167": "HOLDER", "s168": "WITHDRAWAL RULE", "s169": "DEBIT REQUEST AMOUNT (IDR)", "s170": "Request / approve debit", "s171": "🎓 Enroll DPLK — pension product", "s172": "PENSION PROGRAM", "s173": "PARTNER INSTITUTION (VIA CONNECTOR)", "s174": "CONTRIBUTION/MO (IDR 100K – 50M)", "s175": "BENEFICIARY", "s176": "🎓 Enroll program", "s177": "✓ Institution confirm", "s178": "🧪 Sandbox test (TIMEOUT)", "s179": "🍰 Buy fractional stock", "s180": "STOCK", "s181": "BUY AMOUNT (IDR 10K – 100M)", "s182": "🍰 Buy fractional", "s183": "💸 Sell 2 units", "s184": "🤲 Ziswaf from investment returns", "s185": "TYPE", "s186": "PARTNER LAZ", "s187": "BASIS (ASSETS / REALIZED GAIN / AMOUNT, IDR)", "s188": "🤲 Calculate & submit", "s189": "✓ LAZ webhook", "s190": "🧾 Investment tax kit (SPT)", "s191": "TAX YEAR", "s192": "INCOME TYPE", "s193": "AMOUNT (GROSS / SALE VALUE, IDR)", "s194": "🧾 Record to tax kit", "s195": "🎁 Investment gift", "s196": "PRODUCT", "s197": "AMOUNT (MIN IDR 100K)", "s198": "RECIPIENT NIK (16 DIGITS)", "s199": "🎁 Send gift", "s200": "✓ Redeem (NIK matches)", "s201": "✗ Redeem (NIK differs)", "s202": "📥 Corporate bulk onboarding (B2B)", "s203": "CORPORATION", "s204": "PARTICIPANT 1 — NAME | NIK", "s205": "PARTICIPANT 2 — NAME | NIK", "s206": "PARTICIPANT 3 — NAME | NIK (rejection test)", "s207": "📥 Create batch", "s208": "🚀 Submit batch", "s209": "🔁 Fund corporate action", "s210": "ACTION TYPE", "s211": "SOURCE PRODUCT", "s212": "Run mass action", "s213": "🏆 Team performance & RM incentive", "s214": "TEAM", "s215": "FEE BOOKED/MO (IDR)", "s216": "View leaderboard", "s217": "🏦 Real-time RDN deposit/withdrawal", "s218": "DIRECTION", "s219": "AMOUNT (IDR 10K–25M)", "s220": "Process real-time", "s221": "📲 Cardless withdrawal & merchant QRIS", "s222": "🏧 Create 500K withdraw token", "s223": "Redeem at ATM", "s224": "🧾 Create merchant QR 35K", "s225": "Scan & pay", "s226": "💼 Credit ecosystem (facility application)", "s227": "FACILITY", "s228": "AMOUNT (IDR)", "s229": "Apply for facility", "s230": "Full gap inventory per dimension — click a tab", "s231": "✨ Features (21)", "s232": "🧩 Candidate modules (13)", "s233": "📋 Candidate menus", "s234": "📝 Form index (17)", "s235": "FEATURES NOT IN NARA", "s236": "INSPIRED FROM", "s237": "NARA CANDIDATE", "s238": "RELEASED — catalog of 4 products, policies, one-shot claims + metric (Avantrade/WELMA)", "s239": "RELEASED — progressive tiered fee + floor, bps commission per agent (unique clientRef), targeted monthly incentive recap (Avantrade)", "s240": "RELEASED (physical gold) — withdrawal from 1 gram, IDR 25K/gram fee, 5 branches, refund on cancel · gift: candidate", "s241": "RELEASED — masked bank mandates, idempotent per period, auto-suspend after 3 failures + metric (WELMA/BRImo)", "s242": "RELEASED — retail FCFS subscription (retail SBN model) & dealer book-building with cutoff yield, dealer inventory (Avantrade)", "s243": "RELEASED — joint accounts with AND/OR quorum & NIK-KYC'd investment gifts (AES-256-GCM encrypted) · gold gift via altasset", "s244": "RELEASED — σ/MDD/CAGR analytics + PDF·CSV·JSON reports (Medallion) · v3 SPT tax kit: dividend exemption IDR 100M/yr (HPP law) & final rates per instrument", "s245": "RELEASED — document vault (SHA-256, max 2 MB), BOOKED→DONE meetings with mandatory notes (Medallion)", "s246": "RELEASED — fractional: buy by amount IDR 10K–100M, 4-dp units (HALF_DOWN), avg cost & realized P/L, Idempotency-Key (Robinhood) · off-session queue: to follow", "s247": "RELEASED — article/class/video catalog, non-regressing progress, quiz pass ≥ 70 → EDU-YYYY-##### certificate (WELMA/Stockbit Academy)", "s248": "RELEASED — top-5 headlines, feed by category/symbol, search, corporate-action calendar (Stockbit/Avendus Eye)", "s249": "pension fund for \"retirement\" goals, band 1–2", "s250": "RELEASED — zakat calculator (nisab IDR 117.725M = 85 g gold; 2.5%), infak/wakaf, intent + idempotent LAZ webhook, annual recap (sharia app)", "s251": "Dashed cards = <b style=\"color:#B45309\">designs</b> — not yet among the 33 service modules (pom: 35 modules = 33 services + 2 libraries). <b style=\"color:var(--green)\">15 released modules: nara-insurance :8105 · autoinvest v2 :8086 · networth v2/v3 :8087 · altasset v2 :8085 · nara-pay v2 :8106 · rm-advisor v2 :8089 · bond v2 :8091 · onboarding v2/v3 :8099 · nara-billing v2 :8107 · equity v2 :8093 · nara-ziswaf :8108 · fundadmin v2 :8088 · integration v2/v3 :8096 · nara-edu :8111 · nara-news :8112</b>.", "s252": "policy, premium, file claim — ✓ released :8105", "s253": "literacy education & quizzes", "s254": "research & breaking news", "s255": "buy stocks from IDR 10K — ✓ v2 released", "s256": "contribution & benefit projection", "s257": "annual SPT recap kit — ✓ v3 released", "s258": "zakat from investment returns — ✓ released", "s259": "send gold/mutual funds", "s260": "joint holders", "s261": "fee-tier per product & AUM", "s262": "RM bonus recap per period", "s263": "bond quota & book-building", "s264": "agenda + mandatory notes — ✓ v2 released", "s265": "SHA-256 + at-rest — ✓ v2 released", "s266": "PDF/Excel-CSV/JSON formats — ✓ v2 released (multi-entity to follow)", "s267": "intent → webhook to licensed PSP/bank partners (idempotent)", "s268": "PLN/BPJS/PDAM/PBB via licensed biller aggregator", "s269": "PDP-law consented referral → multifinance partner; decision is the partner's", "s270": "deliberately out of position — requires a banking license", "s271": "FORMS (ALL BADGED RED ABOVE)", "s272": "STYLE/SOURCE", "s273": "CANDIDATE", "s274": "ADVANCED FEATURES (V2/V3 RELEASED)", "s275": "SOURCE", "s276": "MODULE", "s277": "Built to Indonesia's rulebook.", "s278": "At-rest encryption, transaction idempotency, partner circuit breakers, load testing, and DR/backup — fully tested at platform level.", "s279": "Start today. Zero admin fee for the first year.", "s280": "5-minute e-KYC · start from IDR 10,000 · no minimum balance", "d1": "Dukcapil verification → KSEI SID → RDN", "d2": "IDX session · 100-share lots · valid for today", "d3": "Goal module's annuity formula — same as the app", "d4": "One-shot — ABOVE fires when price ≥ threshold, BELOW when ≤", "d5": "powered by nara-pay — intent to a licensed PSP partner; Nara never holds funds", "d6": "powered by the nara-insurance module — rules identical to the backend", "d7": "powered by altasset v2 :8085 — demo balance 10.8303 g · minting fee IDR 25,000/gram", "d8": "powered by rm-advisor v2 :8089 — future dates only; meeting notes required on completion", "d9": "powered by bond v2 :8091 — retail FCFS within quota · dealer book-building with cutoff yield", "d10": "referral to a licensed multifinance partner — the decision is the partner's, not Nara's", "d11": "via a licensed biller aggregator — customer number stored masked", "d12": "powered by autoinvest v2 :8086 — masking, idempotent per period, suspend after 3 failures", "d13": "powered by networth v2 :8087 — composition + performance vs benchmark from real snapshots", "d14": "powered by rm-advisor v2 :8089 — SHA-256 fingerprint re-verified on every download · max 2 MB", "d15": "powered by nara-billing :8107 — progressive tiered fee + floor · bps commission · bonus on target", "d16": "powered by onboarding v2 :8099 — two holders; debits need quorum: AND = both, OR = either; rejection is final", "d17": "powered by integration v3 :8096 — partner sandbox adapter: SANDBOX-mode connectors simulate institution decisions (OK/REJECTED/TIMEOUT, SBX- participant numbers) without touching production partners — applications are forwarded via the partner API connector registered in settings; credentials stored masked only · membership decisions belong to the pension institution", "d18": "powered by equity v2 :8093 — 4-decimal units (HALF_DOWN), avg cost & realized P/L · Nara ledger, custodian-backed by partners", "d19": "powered by nara-ziswaf :8108 — nisab IDR 117,725,000 (85 g gold) · 2.5% zakat · funds never touched by Nara, confirmed via LAZ webhook", "d20": "powered by networth v3 :8087 — dividend exemption IDR 100M/yr (HPP law), final rates per source, unique anti-duplicate ref", "d21": "powered by onboarding v2 :8099 — redemption requires the recipient's NIK match (minimal KYC); NIK stored encrypted", "d22": "powered by onboarding v3 :8099 — batches up to 500 participants, 16-digit NIK required, SHA-256 hash global dedup (NIK stored encrypted), one-shot submit", "d23": "fundadmin v2 :8088 — mass switching between products & product closure, unique idempotent ref", "d24": "billing v2 :8107 — monthly agent leaderboard + sales-team aggregates", "d25": "pay v2 :8106 — RDN↔bank account deposit/withdrawal via interbank partner, SETTLED webhook", "d26": "pay v2 :8106 — 6-digit token (15 min, single redemption) · dynamic merchant QR (10 min, exact amount)", "d27": "pay v2 :8106 — PAYLATER · CREDIT_CARD · KMG · KKB · KPR, per-product limits, mandatory PDP consent, decision by the licensed partner"};
+var EN_J = {"Ajukan dulu intentnya — webhook hanya berlaku untuk intent PENDING (idempoten).": "Submit the intent first — the webhook only applies to PENDING intents (idempotent).", "Basis wajib positif — HTTP 400.": "Basis must be positive — HTTP 400.", "Batch ": "Batch ", "Buat batch dulu — submit hanya untuk batch berstatus DRAF.": "Create a batch first — submit only applies to DRAF batches.", "Catatan tersimpan: \"": "Notes saved: \"", "Dealer dengan yield di atas cutoff tidak mendapat andil (model lelang SBN konvensional); inventori dealer hanya berisi bid ALLOCATED.": "Dealers bidding above the cutoff receive no allocation (conventional SBN auction model); dealer inventory only holds bids ≤ cutoff.", "HTTP 400 — batas bawah infak.": "HTTP 400 — infak minimum not met.", "HTTP 400 — batas bawah wakaf.": "HTTP 400 — wakaf minimum not met.", "Harga kini ": "Price now ", "Harus 5–20 digit (HTTP 400) — tersimpan hanya sebagai •••• ": "Must be 5–20 digits (HTTP 400) — stored masked as •••• ", "Harus 8–18 digit — modul asli menolak dengan HTTP 400.": "Must be 8–18 digits — the real module rejects with HTTP 400.", "Intent PENDING → mitra interbank berlisensi (MITRA-BANK-01) → webhook SETTLED · rekening tujuan tersamarkan •••• 7890 · dana berpindah langsung antar rekening, Nara tak memegang dana (Nara berbasis RDN).": "PENDING intent → licensed interbank partner (MITRA-BANK-01) → SETTLED webhook · destination account masked ••••", "Intent PENDING → webhook SETTLED · RRN ": "PENDING intent → SETTLED webhook · RRN ", "Intent ditolak (HTTP 400) — batas Rp 10.000 – Rp 25.000.000 per transaksi.": "Intent rejected (HTTP 400) — limit IDR 10,000 – 25,000,000 per transaction.", "Isi: komposisi 4 kategori aset (CASH 35,93% · SAHAM 31,55% · RD 23,30% · EMAS 9,22%) · liabilitas KPR · kekayaan bersih Rp 125.400.000 · kinerja 12 bulan +32% vs benchmark +11% (outperform +21 p.p.) · σ 3,09% · MDD 2,56% · CAGR 35,37%.": "Contents: 4-asset-class composition (CASH 35.93% · EQUITY 31.55% · MF 23.30% · GOLD 9.22%) · KPR liability · net worth Rp 125,400,000 · 12-month performance +32% vs benchmark +11% (outperformance +21 p.p.) · σ 3.09% · MDD 2.56% · CAGR 35.37%.", "Kado investasi minimal Rp 100.000 — HTTP 400.": "Minimum investment gift is IDR 100,000 — HTTP 400.", "Kirim dulu kadonya — penebusan hanya untuk kado berstatus CREATED.": "Send the gift first — redemption only applies to CREATED gifts.", "Komisi (500 bps) Rp ": "Commission (500 bps) IDR ", "Kuota FR0098P Rp 50 jt — bid tetap tercatat berstatus REJECTED (KUOTA_TIDAK_CUKUP).": "FR0098P quota IDR 50M — the bid is still recorded as REJECTED (QUOTA_INSUFFICIENT).", "Menyelesaikan janji temu tanpa catatan ditolak (HTTP 400) — disiplin meeting notes ala premium.": "Completing an appointment without notes is rejected (HTTP 400) — premium-style meeting-notes discipline.", "Modul asli menolak ambang ≤ 0 dengan HTTP 400.": "The real module rejects thresholds ≤ 0 with HTTP 400.", "Modul asli menolak dengan HTTP 400 — pertangguhan polis ini ": "The real module rejects with HTTP 400 — this policy's grace period ", "NIK cocok (KYC minimal) → aset ": "NIK matches (minimal KYC) → asset ", "NIK penerima wajib 16 digit — HTTP 400 (KYC minimal di saat tebus).": "Recipient NIK must be 16 digits — HTTP 400 (minimal KYC at redemption).", "Nama korporasi wajib — HTTP 400.": "Corporation name is required — HTTP 400.", "Nama minimal 3 huruf & NIK 16 digit — di app nyata diverifikasi ke Dukcapil.": "Name min 3 letters & NIK 16 digits — verified against Dukcapil in the real app.", "No. ": "No. ", "Nominal debet harus positif — HTTP 400.": "Debit amount must be positive — HTTP 400.", "Nominal harus Rp 10.000–25.000.000 — HTTP 400.": "Amount must be IDR 10,000–25,000,000 — HTTP 400.", "Nominal klaim harus lebih dari nol.": "Claim amount must be greater than zero.", "Nominal transaksi wajib positif — HTTP 400.": "Transaction amount must be positive — HTTP 400.", "Nominal wajib positif — HTTP 400.": "Amount must be positive — HTTP 400.", "Panggilan: POST /v1/integration/sandbox → /": "Call: POST /v1/integration/sandbox → /", "Pelanggan •••• ": "Customer •••• ", "Penebusan ditolak (HTTP 400), kado tetap CREATED — meter GIFT{result=KYC_GAGAL} naik. Penerima hanya bisa menebus dengan NIK yang persis sama.": "Redemption rejected (HTTP 400), gift stays CREATED — the GIFT{result=KYC_GAGAL} meter rises. The recipient can only redeem with the exact same NIK.", "Pengajuan ": "Application ", "Pengajuan Rp 500.000 – Rp 50.000.000 (HTTP 400).": "Applications are IDR 500,000 – 50,000,000 (HTTP 400).", "Penuangan fisik mulai 1 gram — modul asli menolak dengan HTTP 400.": "Physical withdrawal starts at 1 gram — the real module rejects with HTTP 400.", "Penunaian tercatat · total tertunaikan tahun ini Rp ": "Disbursement recorded · total disbursed this year IDR ", "Pesan dulu jadwalnya — status bergerak BOOKED → DONE.": "Book the schedule first — status moves BOOKED → DONE.", "Rp ": "IDR ", "Rujukan ": "Referral ", "Saldo demo ": "Demo balance ", "Seluruh peserta VALID → TERKIRIM ke pipeline e-KYC (:8099) · meter nara_onboarding_bulk{result=SUBMIT} naik · item DITOLAK tidak ikut. Proses per peserta lanjut di modul onboarding reguler.": "All VALID participants → SENT to the e-KYC pipeline (:8099) · the nara_onboarding_bulk{result=SUBMIT} meter rises · rejected items are excluded. Per-participant processing continues in the regular onboarding module.", "Seluruh posisi ": "All positions ", "Semua posisi ditebus penuh dan produk tak bisa ditransaksi lagi · tercatat sebagai audit trail corporate action (fundadmin v2).": "All positions fully redeemed and the product can no longer be traded · recorded as a corporate-action audit trail (fundadmin v2).", "Sisa kuota SR026T6 Rp 20 jt — langganan tetap tercatat REJECTED (audit trail), kuota tak tergerus. Ulangi dengan nominal lebih kecil.": "SR026T6 quota IDR 20M remaining — the subscription is still recorded as REJECTED (audit trail), quota untouched. Retry within the quota.", "Tanpa consent, pengajuan TIDAK boleh diteruskan ke mitra (HTTP 400) — prinsip privasi UU PDP.": "Without consent the application MUST NOT be forwarded to the partner (HTTP 400) — PDP-law privacy principle.", "Total ": "Total ", "Total fee dibawa bulan ini Rp ": "Total fee booked this month IDR ", "Vault menolak unggahan tanpa nama berkas (HTTP 400).": "Vault rejects uploads without a file name (HTTP 400).", "Wajib kelipatan Rp 1.000.000 (aturan lot pasar primer) — HTTP 400.": "Must be a multiple of IDR 1,000,000 (primary-market lot rule) — HTTP 400.", "Zakat harta wajib jika harta ≥ nisab Rp 117.725.000 (85 g emas × Rp 1.385.000) — HTTP 400. Coba mode penghasilan/gain.": "Asset zakat applies when assets ≥ nisab IDR 117,725,000 (85 g gold × IDR 1,385,000) — HTTP 400. Try income/gain mode.", "✓ ": "✓ ", "✓ AKUN JOINT ACTIVE — debet PENDING (0/": "✓ JOINT ACCOUNT ACTIVE — debit PENDING (0/", "✓ ALLOCATED — FCFS dalam kuota": "✓ ALLOCATED — FCFS within quota", "✓ BID DIALOKASIKAN — ": "✓ BID ALLOCATED — ", "✓ BOOKED — jadwal tersimpan": "✓ BOOKED — schedule saved", "✓ Batch dibuat — ": "✓ Batch created — ", "✓ CLOSURE EXECUTED — ": "✓ CLOSURE EXECUTED — ", "✓ CONFIRMED oleh LAZ — ref LAZ-TRX-": "✓ CONFIRMED by LAZ — ref LAZ-TRX-", "✓ DISUBMIT — ": "✓ SUBMITTED — ", "✓ DONE — rapat tercatat": "✓ DONE — meeting recorded", "✓ EXECUTED — kuorum 2/2 terpenuhi (wewenang ganda)": "✓ EXECUTED — quorum 2/2 met (dual authority)", "✓ EXECUTED — salah satu pemegang cukup (mode OR)": "✓ EXECUTED — one holder suffices (OR mode)", "✓ FEE TERBOOK — Rp ": "✓ FEE BOOKED — IDR ", "✓ INTENT PENDING — Rp ": "✓ INTENT PENDING — IDR ", "✓ Kado dibuat — ": "✓ Gift created — ", "✓ MATCH — verifikasi berhasil": "✓ MATCH — verification passed", "✓ REDEEMED — kado diterima penerima": "✓ REDEEMED — gift received by the recipient", "✓ REFERRED — diteruskan ke mitra berlisensi (consent UU PDP ✓)": "✓ REFERRED — forwarded to the licensed partner (PDP consent ✓)", "✓ REFERRED → APPROVED_BY_PARTNER → ACTIVATED": "✓ REFERRED → APPROVED_BY_PARTNER → ACTIVATED", "✓ SETTLED — pembayaran berhasil di PSP mitra": "✓ SETTLED — payment succeeded at the partner PSP", "✓ SETTLED — tagihan ": "✓ SETTLED — bill ", "✓ SUBMITTED → APPROVED (alur asli :8105)": "✓ SUBMITTED → APPROVED (real :8105 flow)", "✓ SUCCESS — debit tercatat": "✓ SUCCESS — debit recorded", "✓ SWITCHING EXECUTED — ": "✓ SWITCHING EXECUTED — ", "✓ TERCATAT — pajak Rp ": "✓ RECORDED — tax IDR ", "✓ Tersimpan di vault — ": "✓ Saved to vault — ", "✗ Ambang tidak valid": "✗ Invalid threshold", "✗ BID DITOLAK — ": "✗ BID REJECTED — ", "✗ Belum ada batch": "✗ No batch yet", "✗ Belum ada jadwal": "✗ No schedule yet", "✗ Belum ada kado": "✗ No gift yet", "✗ Belum nisab": "✗ Below nisab", "✗ Catatan rapat wajib": "✗ Meeting notes required", "✗ Data belum lengkap": "✗ Data incomplete", "✗ Di bawah minimum": "✗ Below minimum", "✗ Di luar batas ": "✗ Out of bounds ", "✗ FAILED — saldo tidak cukup": "✗ FAILED — insufficient balance", "✗ Infak minimal Rp 10.000": "✗ Infak minimum IDR 10,000", "✗ KYC gagal — NIK tidak cocok": "✗ KYC failed — NIK mismatch", "✗ Korporasi kosong": "✗ Corporation is empty", "✗ Melebihi kuota lelang": "✗ Exceeds auction quota", "✗ Melebihi pertangguhan": "✗ Exceeds grace period", "✗ NIK tidak valid": "✗ Invalid NIK", "✗ Nama berkas wajib": "✗ File name required", "✗ Nominal di bawah minimum": "✗ Amount below minimum", "✗ Nominal di luar batas": "✗ Amount out of bounds", "✗ Nominal tidak valid": "✗ Invalid amount", "✗ Nomor pelanggan tidak valid": "✗ Invalid customer number", "✗ Nomor rekening tidak valid": "✗ Invalid account number", "✗ Persetujuan UU PDP wajib": "✗ PDP-law consent required", "✗ REJECTED — KUOTA_TIDAK_CUKUP": "✗ REJECTED — QUOTA_INSUFFICIENT", "✗ SUSPENDED otomatis": "✗ Auto-suspended", "✗ Saldo emas tidak cukup": "✗ Insufficient gold balance", "✗ Submit ditolak": "✗ Submit rejected", "✗ Tidak ada intent pending": "✗ No pending intent", "✗ Wakaf minimal Rp 100.000": "✗ Wakaf minimum IDR 100,000", "🧪 Invoke sandbox ": "🧪 Sandbox invoke "};
+var LANG = 'id', ASLI = {};
+function L(k){ return (LANG === 'en' && EN_J[k] !== undefined) ? EN_J[k] : k; }
+function terapkanBahasa(){
+  var els = document.querySelectorAll('[data-i18n]');
+  for (var i = 0; i < els.length; i++){
+    var el = els[i], k = el.getAttribute('data-i18n');
+    if (ASLI[k] === undefined) ASLI[k] = el.innerHTML;
+    el.innerHTML = (LANG === 'en' && EN_T[k] !== undefined) ? EN_T[k] : ASLI[k];
+  }
+  var b = document.getElementById('btnLang');
+  if (b) b.innerHTML = (LANG === 'id') ? '🇬🇧 EN' : '🇮🇩 ID';
+}
+function toggleLang(){
+  LANG = (LANG === 'id') ? 'en' : 'id';
+  try { localStorage.setItem('nara-lang', LANG); } catch(e){}
+  document.documentElement.lang = (LANG === 'en') ? 'en' : 'id';
+  terapkanBahasa();
+}
+document.addEventListener('DOMContentLoaded', function(){
+  var simpan = null;
+  try { simpan = localStorage.getItem('nara-lang'); } catch(e){}
+  if (simpan === 'en') toggleLang();
+});
+</script>
+</body></html>

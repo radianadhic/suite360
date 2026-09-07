@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NARA Web Marketing Builder (ID/EN)</title>
+<style>
+:root{--navy:#0b1f3a;--blue:#2563eb;--gold:#f59e0b;--gold2:#fbbf24;--bg:#0f172a;--card:#1e293b;--card2:#172033;--line:#334155;--text:#e2e8f0;--muted:#94a3b8}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);height:100vh;display:flex;flex-direction:column;overflow:hidden}
+header{background:linear-gradient(135deg,var(--navy),var(--blue));padding:12px 20px;display:flex;align-items:center;gap:12px;flex-shrink:0;flex-wrap:wrap}
+header .lg{font-size:19px;font-weight:800}header .lg span{color:var(--gold2)}
+header .sub{font-size:12px;color:#cbd5e1}
+header .sp{flex:1}
+.btn{padding:9px 15px;border:none;border-radius:9px;font-weight:700;cursor:pointer;font-size:13px}
+.btn-gold{background:linear-gradient(90deg,var(--gold),var(--gold2));color:#3b2700}
+.btn-blue{background:linear-gradient(90deg,var(--blue),var(--navy));color:#fff}
+.btn-lang{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.25)}
+.btn:hover{opacity:.9}
+.wrap{flex:1;display:grid;grid-template-columns:300px 1fr;overflow:hidden}
+.side{background:var(--card2);border-right:1px solid var(--line);padding:16px;overflow-y:auto}
+.side h4{font-size:11px;color:var(--muted);letter-spacing:.6px;text-transform:uppercase;margin:16px 0 8px}
+.side h4:first-child{margin-top:0}
+.item{display:flex;align-items:center;gap:9px;padding:9px 11px;background:var(--card);border:1px solid var(--line);border-radius:9px;margin-bottom:7px;font-size:12.5px;cursor:pointer}
+.item input{width:15px;height:15px;accent-color:var(--gold)}
+.field{margin-bottom:11px}.field label{display:block;font-size:11.5px;color:var(--muted);margin-bottom:5px;font-weight:700}
+.field input,.field select,.field textarea{width:100%;padding:10px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:#fff;font-size:13px}
+.preview{overflow-y:auto;padding:22px;background:#0a1020}
+/* landing */
+.land{background:#fff;color:#0f172a;border-radius:14px;max-width:920px;margin:0 auto;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.4)}
+.land .hero{background:linear-gradient(135deg,#0b1f3a 0%,#1d3f8c 55%,#2563eb 100%);color:#fff;padding:54px 40px;text-align:center}
+.land .hero h1{font-size:34px;line-height:1.2;margin-bottom:12px}
+.land .hero p{font-size:16px;color:#dbe6f7;max-width:660px;margin:0 auto 22px}
+.land .cta{display:inline-block;background:linear-gradient(90deg,var(--gold),var(--gold2));color:#3b2700;font-weight:800;padding:14px 32px;border-radius:11px;text-decoration:none;font-size:15px}
+.land .kpi{display:flex;justify-content:center;gap:28px;margin-top:30px;flex-wrap:wrap}
+.land .kpi div b{font-size:26px;display:block;color:var(--gold2)}.land .kpi div span{font-size:12px;color:#cbd5e1}
+.land .sec{padding:44px 40px}.land .sec.alt{background:#f8fafc}
+.land .sec h2{font-size:24px;color:var(--navy);margin-bottom:6px;text-align:center}
+.land .sec .ss{text-align:center;color:#64748b;font-size:14px;margin-bottom:28px}
+.land .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.land .f{background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:20px;transition:.2s}
+.land .f:hover{transform:translateY(-4px);box-shadow:0 14px 30px rgba(15,23,42,.1);border-color:var(--gold)}
+.land .f .ic{font-size:28px;display:block;margin-bottom:10px}
+.land .f h3{font-size:15px;color:var(--navy);margin-bottom:6px}.land .f p{font-size:12.5px;color:#64748b;line-height:1.6}
+.land .role{border-left:4px solid var(--gold);background:#fffdf5;border-radius:0 12px 12px 0;padding:18px 22px;margin-bottom:18px}
+.land .role h3{color:var(--navy);font-size:17px;margin-bottom:6px}
+.land .role ul{margin-left:18px;color:#475569;font-size:13.5px;line-height:1.8}
+.land .band{background:linear-gradient(135deg,rgba(37,99,235,.06),rgba(245,158,11,.08));border:1px solid #e2e8f0;border-radius:16px;padding:26px;text-align:center}
+.land .band h2{color:var(--navy);margin-bottom:14px}
+.land .trust{display:flex;justify-content:center;gap:22px;flex-wrap:wrap;margin-top:20px;font-size:12.5px;color:#475569}
+.land footer{background:var(--navy);color:#94a3b8;padding:26px 40px;font-size:12px;line-height:1.7;text-align:center}.land footer b{color:#fff}
+.tag{display:inline-block;font-size:10px;font-weight:800;padding:2px 8px;border-radius:6px;margin-left:6px}
+.tag.agen{background:rgba(37,99,235,.16);color:#1d4ed8}.tag.admin{background:rgba(245,158,11,.2);color:#b45309}
+/* perbandingan vs kompetitor */
+.vs table{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:8px}
+.vs th,.vs td{padding:9px 10px;border-bottom:1px solid #e2e8f0;text-align:left}
+.vs thead th{background:#0b1f3a;color:#fff;font-size:11.5px}
+.vs tbody th{color:var(--navy);font-weight:700}
+.vs .yes{color:#15803d;font-weight:800;text-align:center}
+.vs .no{color:#b91c1c;font-weight:800;text-align:center}
+.vs .partial{color:#b45309;font-weight:700;text-align:center}
+.vs td.name{text-align:center;font-size:11px;color:#64748b}
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <div class="lg">🧩 NARA <span>Web Marketing Builder</span></div>
+    <div class="sub" data-i18n="sub">Generator brosur &amp; landing page</div>
+  </div>
+  <div class="sp"></div>
+  <button class="btn btn-blue" id="btnCust" onclick="openDemo('customer')">📱 Nasabah</button>
+  <button class="btn btn-blue" id="btnAdmin" onclick="openDemo('admin')">🛠️ Admin Console</button>
+  <button class="btn btn-lang" id="langBtn" onclick="toggleLang()">🌐 EN</button>
+  <button class="btn btn-blue" id="selAllBtn" onclick="toggleAll()">Pilih Semua</button>
+  <button class="btn btn-gold" id="dlBtn" onclick="downloadMarketing()">⤓ Unduh</button>
+</header>
+
+<div class="wrap">
+  <div class="side">
+    <h4 data-i18n="branding">Konten &amp; Branding</h4>
+    <div class="field"><label data-i18n="lbrand">Nama Produk</label><input id="brand" value="NARA PRO 360°"></div>
+    <div class="field"><label data-i18n="ltag">Tagline</label><input id="tagline" data-k="tagline"></div>
+    <div class="field"><label data-i18n="lhero">Tajuk Hero</label><textarea id="hero" rows="2" data-k="hero"></textarea></div>
+    <div class="field"><label data-i18n="lcta">Tombol CTA</label><input id="cta" data-k="cta"></div>
+    <h4 style="color:var(--gold2)" data-i18n="hcust">SISI NASABAH / CUSTOMER</h4>
+    <div id="chks-customer"></div>
+    <h4 style="color:#60a5fa" data-i18n="hagent">SISI AGEN / TENAGA PEMASAR</h4>
+    <div id="chks-agent"></div>
+    <h4 style="color:var(--gold)" data-i18n="hadmin">SISI ADMIN / MANAJEMEN</h4>
+    <div id="chks-admin"></div>
+    <h4 style="color:var(--gold2)" data-i18n="htrust">Kepatuhan &amp; Keamanan</h4>
+    <div id="chks-trust"></div>
+  </div>
+  <div class="preview">
+    <p style="text-align:center;color:var(--muted);font-size:12px;margin-bottom:12px" data-i18n="preview">⬇ Pratinjau — hasil unduhan identik (self-contained)</p>
+    <div class="land" id="land"></div>
+  </div>
+</div>
+
+<script>
+/* ============ i18n UI ============ */
+var I18N={
+  id:{ sub:'Generator brosur & landing page', branding:'Konten & Branding', lbrand:'Nama Produk', ltag:'Tagline',
+    lhero:'Tajuk Hero', lcta:'Tombol CTA', hcust:'SISI NASABAH / CUSTOMER', hagent:'SISI AGEN / TENAGA PEMASAR',
+    hadmin:'SISI ADMIN / MANAJEMEN', htrust:'Kepatuhan & Keamanan', preview:'⬇ Pratinjau — hasil unduhan identik (self-contained)',
+    selAll:'Pilih Semua', clear:'Kosongkan', dl:'⤓ Unduh web-marketing.html', btnCust:'Lihat Tampilan Nasabah', btnAdmin:'Lihat Admin Console',
+    defaults:{ tagline:'Menata Kekayaan, Mengawal Masa Depan',
+      hero:'Satu Super-App untuk Semua Kebutuhan Finansial Anda', cta:'Mulai Sekarang' },
+    kpiEco:'Ekosisistem', kpiFeat:'Fitur & Modul', kpiGw:'Gerbang LJK', kpiRole:'Peran Pengguna',
+    heroSub:'Investasi, Asuransi, Pembiayaan, & Perbankan dalam satu aplikasi.',
+    custTitle:'Untuk Anda sebagai Nasabah', custSub:'Kelola kekayaan & perlindungan secara mandiri dari genggaman.',
+    agentTitle:'Satu Platform untuk Semua Pengguna', agentSub:'Nasabah, agen, dan manajemen — masing-masing punya peran & modulnya.',
+    roleAgent:'Untuk Agen / Tenaga Pemasar', roleAdmin:'Untuk Admin / Manajemen', ag:'AGEN', adm:'ADMIN',
+    trustTitle:'Aman & Sesuai Regulasi', trustSub:'Perlindungan data dan kepatuhan sebagai fondasi.',
+    advTitle:'Kelebihan dibanding Aplikasi Lain', advSub:'Bandingkan: kebanyakan aplikasi pasar hanya punya satu ekosisistem.',
+    colCapability:'Kapabilitas', colRobo:'Robo/APERD', colInsur:'Insurtech', colMulti:'Multifinance', colLaku:'Laku Pandai', colCrm:'CRM Umum', colNara:'NARA PRO 360°',
+    advRows:[
+      ['Empat ekosisistem dalam satu aplikasi','no','no','no','no','partial','yes'],
+      ['Onboarding e-KYC + suitability (CDD)','partial','yes','partial','yes','no','yes'],
+      ['Transaksi asinkron 202 + idempoten (anti double)','no','partial','no','partial','no','yes'],
+      ['Simulator finansial 4 skenario','partial','partial','no','no','no','yes'],
+      ['Pencairan komisi & BI-FAST dengan OTP','no','partial','no','yes','no','yes'],
+      ['Report Designer drag-and-drop','no','no','no','no','partial(berbayar)','yes'],
+      ['Workflow approval BPMN 2.0 (bercabang)','no','no','no','no','partial','yes'],
+      ['12 gerbang koneksi API/sFTP LJK','partial','partial','partial','no','no','yes'],
+      ['Enkripsi PII + 2FA + audit trail otomatis','partial','partial','partial','partial','partial','yes'],
+      ['Siap skala 10.000+ TPS (Kafka/K8s)','partial','partial','partial','partial','partial','yes']
+    ],
+    closeTitle:'Mulai perjalanan finansial Anda hari ini', closeSub:'Unduh aplikasi atau daftar sebagai agen. Tersedia di Android & iOS.',
+    tAes:'Enkripsi AES-256', tOtp:'2FA & OTP', tAudit:'Audit Trail', tLjk:'LJK Berizin OJK/Bank',
+    footer1:'— Platform Keagenan Finansial (Fintech Agency, Bukan Bank).',
+    footer2:'Produk investasi/asuransi/pembiayaan/perbankan diterbitkan oleh Lembaga Jasa Keuangan berizin. Nama mitra adalah merek masing-masing.',
+    footer3:'Investasi tidak mengandung jaminan imbal hasil. Baca prospektus & ketentuan sebelum bertransaksi.',
+    done:'web-marketing.html berhasil dibuat ✓',
+    modules:{
+      customer:[
+        ['🙋','Portal Nasabah 360°','Ringkasan aset, proteksi, dan tujuan finansial dalam satu layar.'],
+        ['📈','Portofolio & Investasi','Reksadana, SBN, dan Unit Penyertaan dengan nilai & return real-time.'],
+        ['🛡️','Asuransi & e-Polis','Beli polis, unduh e-Polis, dan lihat manfaat/UP kapan saja.'],
+        ['📑','Pengajuan & Status Klaim','Ajukan klaim, unggah dokumen, pantau DIAJUKAN → DIPROSES → DIBAYAR.'],
+        ['💳','Top-Up & Pembayaran','e-Money (GoPay/OVO/DANA), transfer, dan tagihan via BI-FAST.'],
+        ['🎯','Target & Simulasi','Dana pendidikan, pensiun, darurat dengan simulasi setoran bulanan.'],
+        ['🗂️','e-Document & Statement','Kontrak, polis, konfirmasi unit, dan laporan berkala.'],
+        ['🔐','Keamanan Akun','2FA/TOTP, OTP via email, PIN, reset kata sandi, dan biometrik.'],
+        ['👆','Login Biometrik','Sidik jari & Face ID (Android/iOS) serta WebAuthn di browser.'],
+        ['🔔','Notifikasi Push','Info transaksi, klaim, dan pengumuman langsung ke perangkat.']],
+      agent:[
+        ['🪪','Onboarding e-KYC','Wizard 5 langkah: identitas, kontak, pekerjaan, kepatuhan, dokumen + validasi NIK/NPWP.'],
+        ['📚','Katalog Multi-Produk','4 ekosisistem: investasi, asuransi, pembiayaan, perbankan — multi-quote.'],
+        ['🧮','Simulator Finansial','4 kalkulator (pendidikan, pensiun, darurat, aset) dengan konversi ke transaksi.'],
+        ['🧾','Transaksi & e-Polis (202)','Pengajuan asinkron anti double-submit, idempoten, sumber dana dari gerbang LJK.'],
+        ['👥','CRM Nasabah','Profil 360°, pipeline, suitability, dan riwayat interaksi.'],
+        ['💬','Follow-up WhatsApp','Template pesan follow-up & reminder polis yang siap kirim.'],
+        ['💰','Komisi & E-Wallet','Mutasi komisi, pajak NPPN, pencairan BI-FAST dengan OTP.'],
+        ['🏦','Layanan Laku Pandai','Setor/tarik tunai & transfer atas nama bank (BRILink/BNI46).'],
+        ['🎓','Akademi & LMS','Ujian sertifikasi, materi pemasaran, dan sertifikat digital.'],
+        ['🏛️','Master LJK & Referensi','Penerbit produk dikelola sebagai data master sesuai ekosisistem.']],
+      admin:[
+        ['🌐','Gerbang Koneksi (12 LJK)','API mTLS atau sFTP/FTP (host, port, kredensial) dengan ping & circuit breaker.'],
+        ['🧩','Report Designer','Rancang laporan drag-and-drop dari kolom semua modul lalu pratinjau.'],
+        ['🔀','Workflow BPMN 2.0','Susun proses approval dengan exclusive gateway (YA/TIDAK) & ekspor .bpmn20.xml.'],
+        ['⚙️','Parameter Sistem','Pengaturan limit, bunga, gateway, dan aturan aplikasi.'],
+        ['📊','Laporan CQRS','Agregat transaksi harian O(1) dari read-model (tidak membebani sistem).'],
+        ['📑','Audit & Kepatuhan','Jejak audit otomatis (AOP), AML/DTTOT, PEP, suitability gate.'],
+        ['🔐','Pusat Keamanan','RBAC 7 peran, 2FA/TOTP, refresh token, rate-limit, enkripsi PII.'],
+        ['🧱','Infra Skala Besar','Docker/Kubernetes, HPA/KEDA, Kafka, multi-region — siap 10.000+ TPS.'],
+        ['📡','Observability','Prometheus, Grafana, Loki, Tempo + alerting & health probes.'],
+        ['🛡️','DevSecOps','Semgrep, SpotBugs/FindSecBugs, OWASP Dependency-Check, Trivy, Dependabot.']],
+      trust:[
+        ['✅','Sesuai Regulasi','POJK 1/2022 (Laku Pandai), APERD OJK, Asuransi (BUSB/AAJI), SNAP BI, PDP UU No.27/2022.'],
+        ['🔒','Enkripsi Berlapis','Data pribadi dienkripsi AES-256-GCM at-rest, mTLS/TLS in-transit.'],
+        ['🏦','Dana Ditanggung LJK','NARA adalah fintech keagenan (bukan bank); produk & dana nasabah dijamin lembaga penerbit berizin.']]
+    }
+  },
+  en:{ sub:'Marketing brochure & landing page generator', branding:'Content & Branding', lbrand:'Product Name', ltag:'Tagline',
+    lhero:'Hero Headline', lcta:'CTA Button', hcust:'CUSTOMER SIDE', hagent:'AGENT / SALES SIDE',
+    hadmin:'ADMIN / MANAGEMENT SIDE', htrust:'Compliance & Security', preview:'⬇ Preview — exported file is identical & self-contained',
+    selAll:'Select All', clear:'Clear All', dl:'⤓ Download web-marketing.html', btnCust:'View Customer App', btnAdmin:'View Admin Console',
+    defaults:{ tagline:'Organizing Your Wealth, Securing Your Future',
+      hero:'One Super-App for All Your Financial Needs', cta:'Get Started' },
+    kpiEco:'Ecosystems', kpiFeat:'Features & Modules', kpiGw:'LJK Gateways', kpiRole:'User Roles',
+    heroSub:'Investment, Insurance, Financing, & Banking in one app.',
+    custTitle:'For You as a Customer', custSub:'Manage your wealth & protection independently from your palm.',
+    agentTitle:'One Platform for Every User', agentSub:'Customers, agents, and management — each with their own roles & modules.',
+    roleAgent:'For Agents / Sales Force', roleAdmin:'For Admin / Management', ag:'AGENT', adm:'ADMIN',
+    trustTitle:'Secure & Regulatory-Ready', trustSub:'Data protection and compliance as the foundation.',
+    advTitle:'Advantages vs Other Apps', advSub:'Compare: most market apps serve only one ecosystem.',
+    colCapability:'Capability', colRobo:'Robo/APERD', colInsur:'Insurtech', colMulti:'Multifinance', colLaku:'Branchless Bank', colCrm:'Generic CRM', colNara:'NARA PRO 360°',
+    advRows:[
+      ['Four ecosystems in one app','no','no','no','no','partial','yes'],
+      ['e-KYC onboarding + suitability (CDD)','partial','yes','partial','yes','no','yes'],
+      ['Async 202 transactions + idempotency (no double-charge)','no','partial','no','partial','no','yes'],
+      ['4-scenario financial simulators','partial','partial','no','no','no','yes'],
+      ['Commission payout & BI-FAST with OTP','no','partial','no','yes','no','yes'],
+      ['Drag-and-drop Report Designer','no','no','no','no','partial(paid)','yes'],
+      ['BPMN 2.0 branching approval workflow','no','no','no','no','partial','yes'],
+      ['12 LJK API/sFTP connection gateways','partial','partial','partial','no','no','yes'],
+      ['PII encryption + 2FA + automatic audit trail','partial','partial','partial','partial','partial','yes'],
+      ['Ready for 10,000+ TPS (Kafka/K8s)','partial','partial','partial','partial','partial','yes']
+    ],
+    closeTitle:'Start your financial journey today', closeSub:'Download the app or register as an agent. Available on Android & iOS.',
+    tAes:'AES-256 Encryption', tOtp:'2FA & OTP', tAudit:'Audit Trail', tLjk:'Licensed OJK/Bank Partners',
+    footer1:'— Financial Agency Platform (Fintech Agency, Not a Bank).',
+    footer2:'Investment/insurance/financing/banking products are issued by licensed Financial Institutions. Partner names are trademarks of their respective owners.',
+    footer3:'Investments do not guarantee returns. Read the prospectus & terms before transacting.',
+    done:'web-marketing.html created ✓',
+    modules:{
+      customer:[
+        ['🙋','360° Customer Portal','Assets, protection, and financial goals summary in one screen.'],
+        ['📈','Portfolio & Investment','Mutual funds, SBN, and units with real-time value & return.'],
+        ['🛡️','Insurance & e-Policy','Buy policies, download e-policies, view benefits/sum assured anytime.'],
+        ['📑','Claims Submission & Status','File claims, upload documents, track SUBMITTED → PROCESSING → PAID.'],
+        ['💳','Top-Up & Payments','e-Money (GoPay/OVO/DANA), transfers, and bills via BI-FAST.'],
+        ['🎯','Goals & Simulation','Education, retirement, emergency funds with monthly savings simulator.'],
+        ['🗂️','e-Documents & Statements','Contracts, policies, unit confirmations, and periodic reports.'],
+        ['🔐','Account Security','2FA/TOTP, email OTP, PIN, password reset, and biometrics.'],
+        ['👆','Biometric Login','Fingerprint & Face ID (Android/iOS) plus WebAuthn in browsers.'],
+        ['🔔','Push Notifications','Transaction, claim, and announcement alerts straight to your device.']],
+      agent:[
+        ['🪪','e-KYC Onboarding','5-step wizard: identity, contact, occupation, compliance, documents + NIK/NPWP validation.'],
+        ['📚','Multi-Product Catalog','4 ecosystems: investment, insurance, financing, banking — multi-quote.'],
+        ['🧮','Financial Simulators','4 calculators (education, retirement, emergency, assets) with one-tap conversion to transaction.'],
+        ['🧾','Transactions & e-Policy (202)','Async anti double-submit, idempotent, funding source from LJK gateways.'],
+        ['👥','Customer CRM','360° profile, pipeline, suitability, and interaction history.'],
+        ['💬','WhatsApp Follow-up','Ready-to-send follow-up & policy reminder templates.'],
+        ['💰','Commission & E-Wallet','Commission ledger, NPPN tax, BI-FAST payout with OTP.'],
+        ['🏦','Branchless Banking (Laku Pandai)','Cash deposit/withdrawal & transfers on behalf of banks (BRILink/BNI46).'],
+        ['🎓','Academy & LMS','Certification exams, marketing material, and digital certificates.'],
+        ['🏛️','LJK & Reference Master','Product issuers managed as master data per ecosystem.']],
+      admin:[
+        ['🌐','Connection Gateways (12 LJK)','mTLS API or sFTP/FTP (host, port, credentials) with ping & circuit breaker.'],
+        ['🧩','Report Designer','Build reports drag-and-drop from every module’s columns, then preview.'],
+        ['🔀','BPMN 2.0 Workflow','Design approval processes with exclusive gateways (YES/NO) & export .bpmn20.xml.'],
+        ['⚙️','System Parameters','Limits, rates, gateways, and application rules.'],
+        ['📊','CQRS Reports','Daily transaction aggregates O(1) from read-model (no system load).'],
+        ['📑','Audit & Compliance','Automatic audit trail (AOP), AML/DTTOT, PEP, suitability gate.'],
+        ['🔐','Security Center','RBAC 7 roles, 2FA/TOTP, refresh token, rate-limit, PII encryption.'],
+        ['🧱','Large-Scale Infra','Docker/Kubernetes, HPA/KEDA, Kafka, multi-region — ready for 10,000+ TPS.'],
+        ['📡','Observability','Prometheus, Grafana, Loki, Tempo + alerting & health probes.'],
+        ['🛡️','DevSecOps','Semgrep, SpotBugs/FindSecBugs, OWASP Dependency-Check, Trivy, Dependabot.']],
+      trust:[
+        ['✅','Regulation-Ready','POJK 1/2022 (Laku Pandai), OJK APERD, Insurance (BUSB/AAJI), SNAP BI, PDP Law No.27/2022.'],
+        ['🔒','Layered Encryption','Personal data encrypted AES-256-GCM at-rest, mTLS/TLS in-transit.'],
+        ['🏦','Funds Backed by LJK','NARA is an agency fintech (not a bank); customer funds & products are guaranteed by licensed issuers.']]
+    }
+  }
+};
+function openDemo(which){
+  var url = which==='customer' ? 'customer-mobile.html' : 'app.html';
+  window.open(url,'_blank');
+}
+var LANG='id';
+function T(k){ return I18N[LANG][k]; }
+var MODULES=null;
+
+function toggleLang(){
+  LANG = LANG==='id'?'en':'id';
+  document.documentElement.lang=LANG;
+  // isi ulang field teks default sesuai bahasa bila belum diubah pengguna (pakai data-k)
+  ['tagline','hero','cta'].forEach(function(k){
+    var el=document.getElementById(k);
+    if(el) el.value=T('defaults')[k];
+  });
+  applyI18n(); renderChecks(); render();
+}
+function applyI18n(){
+  document.querySelectorAll('[data-i18n]').forEach(function(el){
+    var k=el.getAttribute('data-i18n'); var v=T(k); if(v) el.textContent=v;
+  });
+  document.getElementById('langBtn').textContent = LANG==='id'?'🌐 EN':'🌐 ID';
+  document.getElementById('selAllBtn').textContent=T('selAll');
+  document.getElementById('dlBtn').textContent=T('dl');
+}
+
+/* bangun struktur MODULES dari i18n (on default true) */
+function buildModules(){
+  var m={}; var src=T('modules');
+  ['customer','agent','admin','trust'].forEach(function(g){
+    m[g]=src[g].map(function(row){ return {on:true,ic:row[0],t:row[1],d:row[2]}; });
+  });
+  return m;
+}
+function renderChecks(){
+  MODULES=buildModules();
+  // pertahankan status on bila sebelumnya ada (simpan global)
+  ['customer','agent','admin','trust'].forEach(function(g){
+    var box=document.getElementById('chks-'+g);
+    box.innerHTML=MODULES[g].map(function(f,i){
+      return '<label class="item"><input type="checkbox" '+(f.on?'checked':'')+' onchange="toggle(\''+g+'\','+i+',this.checked)"> <span>'+f.ic+' '+f.t+'</span></label>';
+    }).join('');
+  });
+}
+function toggle(g,i,v){ MODULES[g][i].on=v; render(); }
+function toggleAll(){
+  var all=true; MODULES && ['customer','agent','admin','trust'].forEach(function(g){MODULES[g].forEach(function(f){if(!f.on)all=false;});});
+  ['customer','agent','admin','trust'].forEach(function(g){MODULES[g].forEach(function(f){f.on=!all;});});
+  renderChecks(); render();
+}
+
+function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function render(){
+  MODULES = MODULES || buildModules();
+  var brand=document.getElementById('brand').value;
+  var tagline=document.getElementById('tagline').value;
+  var hero=document.getElementById('hero').value;
+  var cta=document.getElementById('cta').value;
+  var total=MODULES.customer.filter(x=>x.on).length+MODULES.agent.filter(x=>x.on).length+MODULES.admin.filter(x=>x.on).length;
+
+  var h='<div class="hero"><div style="font-size:15px;font-weight:800;letter-spacing:2px;margin-bottom:14px">🛡️ '+esc(brand)+'</div>';
+  h+='<h1>'+esc(hero).replace(/\n/g,'<br>')+'</h1>';
+  h+='<p><i>'+esc(tagline)+'</i> — '+T('heroSub')+'</p>';
+  h+='<a class="cta" href="#">'+esc(cta)+' →</a>';
+  h+='<div class="kpi"><div><b>4</b><span>'+T('kpiEco')+'</span></div><div><b>'+total+'+</b><span>'+T('kpiFeat')+'</span></div><div><b>12</b><span>'+T('kpiGw')+'</span></div><div><b>7</b><span>'+T('kpiRole')+'</span></div></div></div>';
+
+  h+=section(T('custTitle'),T('custSub'),MODULES.customer.filter(f=>f.on),true);
+
+  var role='<div class="sec"><h2>'+T('agentTitle')+'</h2><p class="ss">'+T('agentSub')+'</p>';
+  role+='<div class="role"><h3>🧑‍💼 '+T('roleAgent')+' <span class="tag agen">'+T('ag')+'</span></h3><ul>'+
+    MODULES.agent.filter(f=>f.on).map(f=>'<li><b>'+f.t+'</b> — '+f.d+'</li>').join('')+'</ul></div>';
+  role+='<div class="role"><h3>🛠️ '+T('roleAdmin')+' <span class="tag admin">'+T('adm')+'</span></h3><ul>'+
+    MODULES.admin.filter(f=>f.on).map(f=>'<li><b>'+f.t+'</b> — '+f.d+'</li>').join('')+'</ul></div></div>';
+  h+=role;
+
+  h+=section(T('trustTitle'),T('trustSub'),MODULES.trust.filter(f=>f.on),true);
+
+  // ===== KELEBIHAN vs KOMPETITOR =====
+  h+='<div class="sec vs"><h2>'+T('advTitle')+'</h2><p class="ss">'+T('advSub')+'</p>';
+  h+='<div style="overflow-x:auto"><table><thead><tr><th>'+T('colCapability')+'</th>'
+     +'<th class="name">'+T('colRobo')+'</th><th class="name">'+T('colInsur')+'</th>'
+     +'<th class="name">'+T('colMulti')+'</th><th class="name">'+T('colLaku')+'</th>'
+     +'<th class="name">'+T('colCrm')+'</th><th class="name" style="background:#f59e0b;color:#3b2700">'+T('colNara')+'</th></tr></thead><tbody>';
+  T('advRows').forEach(function(r){
+    h+='<tr><th>'+r[0]+'</th>';
+    for(var c=1;c<r.length;c++){
+      var v=r[c], cls='no', sym='✕';
+      if(v==='yes'){cls='yes';sym='✓';} else if(v==='no'){cls='no';sym='✕';} else {cls='partial';sym='~';}
+      h+='<td class="'+cls+(c===r.length-1?' yes':'')+'" style="'+(c===r.length-1?'background:#fffbeb;font-weight:800':'')+'">'+sym+'</td>';
+    }
+    h+='</tr>';
+  });
+  h+='</tbody></table></div>';
+  h+='<p class="ss" style="margin-top:14px;text-align:left"><b style="color:#15803d">✓</b> lengkap &nbsp; <b style="color:#b45309">~</b> sebagian &nbsp; <b style="color:#b91c1c">✕</b> tidak ada</p>';
+  h+='<div style="text-align:center;margin-top:22px">';
+  h+='<button onclick="window.open(\'customer-mobile.html\',\'_blank\')" style="background:#2563eb;color:#fff;border:none;padding:12px 22px;border-radius:10px;font-weight:800;cursor:pointer;margin:4px;font-size:14px">📱 '+T('btnCust')+'</button> ';
+  h+='<button onclick="window.open(\'app.html\',\'_blank\')" style="background:#0b1f3a;color:#fff;border:none;padding:12px 22px;border-radius:10px;font-weight:800;cursor:pointer;margin:4px;font-size:14px">🛠️ '+T('btnAdmin')+'</button>';
+  h+='</div></div>';
+
+  h+='<div class="sec"><div class="band"><h2>'+T('closeTitle')+'</h2><p style="color:#475569;margin-bottom:18px">'+T('closeSub')+'</p>'+
+     '<a class="cta" href="#">'+esc(cta)+' →</a>'+
+     '<div class="trust"><span>✓ '+T('tAes')+'</span><span>✓ '+T('tOtp')+'</span><span>✓ '+T('tAudit')+'</span><span>✓ '+T('tLjk')+'</span></div></div></div>';
+
+  h+='<footer><b>'+esc(brand)+'</b> '+T('footer1')+'<br>'+T('footer2')+'<br>'+T('footer3')+'</footer>';
+  document.getElementById('land').innerHTML=h;
+}
+function section(title,sub,cards,alt){
+  if(!cards.length) return '';
+  var h='<div class="sec'+(alt?' alt':'')+'"><h2>'+title+'</h2><p class="ss">'+sub+'</p><div class="grid">';
+  h+=cards.map(f=>'<div class="f"><span class="ic">'+f.ic+'</span><h3>'+esc(f.t)+'</h3><p>'+esc(f.d)+'</p></div>').join('');
+  return h+'</div></div>';
+}
+function downloadMarketing(){
+  var inner=document.getElementById('land').innerHTML;
+  var html='<!DOCTYPE html><html lang="'+LANG+'"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">'+
+    '<title>'+esc(document.getElementById('brand').value)+' — Marketing</title><style>'+
+    document.querySelector('style').textContent+'body{background:#0a1020!important;padding:24px!important;height:auto!important;overflow:auto!important}.land{margin:auto!important}</style></head>'+
+    '<body style="background:#0a1020;padding:24px"><div class="land">'+inner+'</div></body></html>';
+  var blob=new Blob([html],{type:'text/html'});
+  var a=document.createElement('a');a.href=URL.createObjectURL(blob);
+  a.download = LANG==='id'?'web-marketing-id.html':'web-marketing-en.html';a.click();
+  toast(T('done'));
+}
+function toast(m){var t=document.createElement('div');t.textContent=m;t.style.cssText='position:fixed;bottom:24px;right:24px;background:#0b1f3a;border:1px solid #f59e0b;color:#fff;padding:12px 20px;border-radius:10px;font-weight:700;z-index:99';document.body.appendChild(t);setTimeout(()=>t.remove(),2500);}
+
+['brand','tagline','hero','cta'].forEach(function(id){document.getElementById(id).addEventListener('input',render);});
+applyI18n();
+// isi default konten sesuai bahasa awal
+['tagline','hero','cta'].forEach(function(k){document.getElementById(k).value=T('defaults')[k];});
+renderChecks(); render();
+</script>
+</body>
+</html>

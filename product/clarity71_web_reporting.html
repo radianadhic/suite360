@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clarity71 — Platform CKPN (PSAK 71 / IFRS 9)</title>
+  <meta name="description" content="Clarity71 — platform kerugian kredit ekspektasian (ECL) sesuai PSAK 71 / IFRS 9: dari model, workflow persetujuan, sampai jurnal & laporan keuangan + template OJK." />
+  <meta name="theme-color" content="#0b1b33" />
+  <link rel="icon" href="/assets/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: { extend: {
+        colors: {
+          brand: {50:'#f4f7fa',100:'#e9eef5',200:'#cfdce9',300:'#a9bfd6',400:'#7a9bbd',
+                  500:'#537aa4',600:'#3a5f8c',700:'#2c4b72',800:'#223a59',900:'#182c46',950:'#0b1b33'},
+          emas: {100:'#f4ebd9',200:'#e9dbb8',300:'#dbc795',400:'#ceb27a',500:'#c6a15b',600:'#a68540',700:'#876b30'}
+        },
+        fontFamily: { sans:['Inter','ui-sans-serif','system-ui','Segoe UI','sans-serif'] }
+      }}
+    };
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    html { scroll-behavior: smooth; }
+    body { font-family:'Inter',ui-sans-serif,system-ui,'Segoe UI',sans-serif; }
+    ::selection { background:#c6a15b; color:#0b1b33; }
+    /* ============ SPLASH (embedded) ============ */
+    #splash {
+      position: fixed; inset:0; z-index:90; display:flex; align-items:center; justify-content:center;
+      background:
+        radial-gradient(1100px 520px at 18% -10%, rgba(60,95,140,.55), transparent 60%),
+        radial-gradient(900px 500px at 88% 110%, rgba(198,161,91,.16), transparent 55%),
+        linear-gradient(160deg, #1d3c6e 0%, #0b1b33 45%, #0a1626 100%);
+      transition: opacity .65s ease, visibility .65s ease;
+    }
+    #splash.hidden { opacity:0; visibility:hidden; pointer-events:none; }
+    #splash .sp-word { letter-spacing:.34em; font-weight:700; }
+    #splash .sp-71 { color:#c6a15b; font-weight:800; letter-spacing:.08em; }
+    #splash .hairline { width:0; height:1px; background:linear-gradient(90deg, transparent, #dbc795, transparent);
+      transition: width 1.15s ease .35s; }
+    #splash.loaded .hairline { width:min(340px,70vw); }
+    #splash .bar { width:0; transition: width 1.9s cubic-bezier(.25,.8,.3,1) .25s; }
+    #splash.loaded .bar { width:168px; }
+    /* ============ UI umum ============ */
+    .chip { display:inline-flex; align-items:center; gap:6px; border-radius:6px; border:1px solid #e2e8f0; background:#fff;
+      padding:2px 8px; font-size:11px; font-family:ui-monospace,SFMono-Regular,Menlo,monospace; color:#475569; }
+    .glass { background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.09); }
+    .card-glow { box-shadow:0 18px 50px -22px rgba(11,27,51,.5); }
+    .reveal { opacity:0; transform:translateY(18px); transition:opacity .7s ease, transform .7s ease; }
+    .reveal.on { opacity:1; transform:none; }
+    .gold-text { background:linear-gradient(100deg,#e9dbb8 0%,#c6a15b 45%,#dbc795 80%); -webkit-background-clip:text; background-clip:text; color:transparent; }
+    .num { font-variant-numeric:tabular-nums; }
+    .step-line { position:relative; }
+    .step-line::before { content:""; position:absolute; left:19px; top:52px; bottom:-14px; width:1px;
+      background:linear-gradient(180deg,#c6a15b55,#3a5f8c22); }
+    .step-line:last-child::before { display:none; }
+  </style>
+</head>
+<body class="bg-white text-slate-800 antialiased">
+
+<!-- ================= SPLASH SCREEN (terintegrasi di halaman) ================= -->
+<div id="splash" aria-hidden="true">
+  <div class="flex flex-col items-center gap-5 px-6">
+    <img src="/assets/logo-lite.png" alt="Clarity71" class="h-14 w-14 drop-shadow-[0_6px_18px_rgba(198,161,91,.35)] opacity-0"
+         onload="this.classList.add('opacity-100','transition-all','duration-700')" />
+    <div class="text-center select-none">
+      <p class="sp-word text-white text-2xl sm:text-3xl">CLARITY<span class="sp-71 pl-1">71</span></p>
+      <p class="mt-2 text-[13px] tracking-[.26em] uppercase text-slate-300/80">Midnight Navy · Champagne</p>
+    </div>
+    <div class="hairline"></div>
+    <p class="text-sm text-slate-300/90 max-w-xs text-center leading-relaxed">Kejelasan CKPN —<br class="sm:hidden"/> dari model sampai laporan keuangan</p>
+    <div class="mt-1 h-[2px] w-44 overflow-hidden rounded-full bg-white/10">
+      <div class="bar h-full rounded-full bg-gradient-to-r from-[#a68540] via-[#c6a15b] to-[#e9dbb8]"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= HEADER ================= -->
+<header class="sticky top-0 z-40 bg-[#0b1b33]/92 backdrop-blur border-b border-white/8">
+  <div class="max-w-6xl mx-auto px-5 sm:px-6 h-16 flex items-center justify-between gap-4">
+    <a href="#beranda" class="flex items-center gap-2.5 shrink-0">
+      <img src="/assets/logo-lite.png" alt="" class="h-8 w-8" />
+      <span class="text-[17px] font-bold tracking-wide text-white">CLARITY<span class="text-[#c6a15b]">71</span></span>
+    </a>
+    <nav class="hidden md:flex items-center gap-7 text-[13.5px] text-slate-300">
+      <a href="#fitur" class="hover:text-white transition">Fitur</a>
+      <a href="#arsitektur" class="hover:text-white transition">Arsitektur</a>
+      <a href="#alur-bukti" class="hover:text-white transition">Alur &amp; Bukti</a>
+      <a href="#performa" class="hover:text-white transition">Performa</a>
+    </nav>
+    <a href="/index.html" class="inline-flex items-center gap-2 rounded-lg bg-[#c6a15b] px-4 py-2 text-[13px] font-semibold text-[#0b1b33] hover:bg-[#dbc795] transition">
+      Masuk Aplikasi
+      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12l-7.5 7.5M21 12H3"/></svg>
+    </a>
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<section id="beranda" class="relative overflow-hidden bg-[#0b1b33]">
+  <div class="absolute inset-0 pointer-events-none" style="background:
+      radial-gradient(1000px 460px at 12% 0%, rgba(60,95,140,.5), transparent 60%),
+      radial-gradient(760px 420px at 92% 18%, rgba(198,161,91,.14), transparent 55%);"></div>
+  <div class="relative max-w-6xl mx-auto px-5 sm:px-6 pt-16 pb-14 sm:pt-24 sm:pb-20 text-center">
+    <p class="inline-flex items-center gap-2 rounded-full border border-[#c6a15b]/40 bg-[#c6a15b]/10 px-4 py-1.5 text-[12px] font-semibold tracking-wide text-[#e9dbb8] uppercase">
+      <span class="h-1.5 w-1.5 rounded-full bg-[#c6a15b] animate-pulse"></span> PSAK 71 / IFRS 9 · Kerugian Kredit Ekspektasian
+    </p>
+    <h1 class="mt-7 text-4xl sm:text-6xl font-extrabold text-white leading-[1.08] tracking-tight">
+      Kejelasan CKPN,<br/>
+      <span class="gold-text">dari model sampai LK</span>
+    </h1>
+    <p class="mx-auto mt-6 max-w-2xl text-[15.5px] sm:text-lg text-slate-300/90 leading-relaxed">
+      Clarity71 menghitung ECL tiga stage, menjalankan persetujuan multi-level dengan
+      tanda tangan elektronik, lalu meneruskan hasilnya menjadi jurnal, saldo GL, laporan
+      keuangan — hingga CSV template OJK. Satu alur, satu jejak audit, tanpa kopi-paste antar sistem.
+    </p>
+    <div class="mt-9 flex flex-wrap items-center justify-center gap-3">
+      <a href="#alur-bukti" class="rounded-lg bg-[#c6a15b] px-6 py-3 text-sm font-semibold text-[#0b1b33] hover:bg-[#dbc795] transition shadow-lg shadow-[#c6a15b]/20">Lihat alur bukti</a>
+      <a href="#fitur" class="rounded-lg border border-white/25 bg-white/5 px-6 py-3 text-sm font-semibold text-white hover:bg-white/10 transition">Jelajahi 18 modul</a>
+    </div>
+    <dl class="mx-auto mt-14 grid max-w-4xl grid-cols-2 gap-3 sm:grid-cols-4">
+      <div class="glass rounded-xl px-4 py-5"><dt class="text-[11px] uppercase tracking-wider text-slate-400">Arsitektur</dt><dd class="mt-1 text-2xl font-bold text-white num">10</dd><dd class="text-[12px] text-slate-400">microservice Java 21</dd></div>
+      <div class="glass rounded-xl px-4 py-5"><dt class="text-[11px] uppercase tracking-wider text-slate-400">Kapasitas</dt><dd class="mt-1 text-2xl font-bold text-white num">100 jt <span class="text-base">rekord</span></dd><dd class="text-[12px] text-slate-400">diproses ± 5 menit</dd></div>
+      <div class="glass rounded-xl px-4 py-5"><dt class="text-[11px] uppercase tracking-wider text-slate-400">Cakupan ECL</dt><dd class="mt-1 text-2xl font-bold text-white num">3 <span class="text-base">stage</span></dd><dd class="text-[12px] text-slate-400">12M · SICR · lifetime</dd></div>
+      <div class="glass rounded-xl px-4 py-5"><dt class="text-[11px] uppercase tracking-wider text-slate-400">Output akhir</dt><dd class="mt-1 text-2xl font-bold text-white num">LK + OJK</dd><dd class="text-[12px] text-slate-400">neraca · laba-rugi · CSV</dd></div>
+    </dl>
+  </div>
+</section>
+
+<!-- ================= FITUR UTAMA ================= -->
+<section id="fitur" class="bg-[#f4f7fa] py-16 sm:py-20">
+  <div class="max-w-6xl mx-auto px-5 sm:px-6">
+    <div class="max-w-2xl">
+      <p class="text-[12px] font-bold uppercase tracking-[.2em] text-[#a68540]">Delapan belas modul · satu disiplin</p>
+      <h2 class="mt-3 text-3xl sm:text-4xl font-extrabold text-[#0b1b33] tracking-tight">Sembilan kemampuan baru, menyatu dengan engine ECL</h2>
+      <p class="mt-4 text-[15px] text-slate-600 leading-relaxed">
+        Ditambahkan di atas engine paralel yang telah ada: setiap modul adalah service
+        mandiri dengan REST API dan skema PostgreSQL sendiri — dapat diuji, diganti, atau
+        dipakai berdiri sendiri.
+      </p>
+    </div>
+
+    <div class="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+      <!-- 1 Akuntansi -->
+      <article class="reveal card-glow rounded-2xl border border-slate-200 bg-white p-6 hover:border-[#c6a15b]/50 transition">
+        <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-[#0b1b33] text-[#c6a15b]">
+          <svg class="h-5.5 w-5.5" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h18M3 12h18M3 18h18" stroke-linecap="round"/><path d="M7 4v4M17 4v4M7 10v4M17 10v4M7 16v4M17 16v4" stroke-linecap="round"/></svg>
+        </div>
+        <h3 class="mt-5 text-[17px] font-bold text-[#0b1b33]">Jurnal, GL &amp; Laporan Keuangan</h3>
+        <p class="mt-2 text-[13.5px] leading-relaxed text-slate-600">Hasil ECL otomatis menjadi jurnal CKPN (debit beban / kredit cadangan). Posting dua sisi, saldo per periode, neraca seimbang, laba-rugi, disclosure CKPN per bucket — plus template CSV OJK.</p>
+        <div class="mt-4 flex flex-wrap gap-1.5"><span class="chip">POST /gl/post/{jurnalId}</span><span class="chip">GET /lk/neraca</span><span class="chip">/ojk/ckpn.csv</span></div>
+      </article>
+
+      <!-- 2 Integrasi -->
+      <article class="reveal card-glow rounded-2xl border border-slate-200 bg-white p-6 hover:border-[#c6a15b]/50 transition" style="transition-delay:.05s">
+        <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-[#0b1b33] text-[#c6a15b]">
+          <svg class="w-5.5 h-5.5" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="6" cy="6" r="2.6"/><circle cx="18" cy="6" r="2.6"/><circle cx="12" cy="18" r="2.6"/><path d="M8.4 7.4 10.6 15.8M15.6 7.4 13.4 15.8M8.6 6h6.8" stroke-linecap="round"/></svg>
+        </div>
+        <h3 class="mt-5 text-[17px] font-bold text-[#0b1b33]">Integrasi Core Banking / DWH / Objek</h3>
+        <p class="mt-2 text-[13.5px] leading-relaxed text-slate-600">Daftarkan sumber data (core banking, warehouse, object storage) beserta jadwal, lalu uji koneksi langsung — mendukung URL JDBC maupun host:port. Siap dijalankan sebagai alur transfer data.</p>
+        <div class="mt-4 flex flex-wrap gap-1.5"><span class="chip">etl_integrasi</span><span class="chip">POST /{id}/test</span><span class="chip">/{id}/sinkronisasi</span></div>
+      </article>
+
+      <!-- 3 Model lanjutan -->
+      <article class="reveal card-glow rounded-2xl border border-slate-200 bg-white p-6 hover:border-[#c6a15b]/50 transition" style="transition-delay:.1s">
+        <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-[#0b1b33] text-[#c6a15b]">
+          <svg class="w-5.5 h-5.5" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 17c4-8 6 2 9-4 2.4-4.8 6-1 9-6" stroke-linecap="round"/><path d="M4 21h16" stroke-linecap="round"/></svg>
+        </div>
+        <h3 class="mt-5 text-[17px] font-bold text-[#0b1b33]">Model Lanjutan: Regresi, Backtest, Stress</h3>
+        <p class="mt-2 text-[13.5px] leading-relaxed text-slate-600">Regresi OLS otomatis, kurva PD lifetime per segmen, dan validasi: PD prediksi dibandingkan default aktual — hasilnya keputusan <em>VALID</em> atau <em>KALIBRASI_DIPERLUKAN</em>. Stress test cepat memakai pengali PD12 per skenario.</p>
+        <div class="mt-4 flex flex-wrap gap-1.5"><span class="chip">md_backtest_run</span><span class="chip">/regresi/auto</span><span class="chip">/stress/uji-cepat</span></div>
+      </article>
+
+      <!-- 4 Workflow -->
+      <article class="reveal card-glow rounded-2xl border border-slate-200 bg-white p-6 hover:border-[#c6a15b]/50 transition" style="transition-delay:.05s">
+        <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-[#0b1b33] text-[#c6a15b]">
+          <svg class="w-5.5 h-5.5" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 8h14M5 16h14" stroke-linecap="round"/><path d="m8.5 5.5-2 2.5-2-2.5M8.5 13.5l-2 2.5-2-2.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="18" cy="6" r="1.6"/><circle cx="18" cy="14" r="1.6"/></svg>
+        </div>
+        <h3 class="mt-5 text-[17px] font-bold text-[#0b1b33]">Workflow Multi-Level + E-Signature</h3>
+        <p class="mt-2 text-[13.5px] leading-relaxed text-slate-600">Alur persetujuan berjenjang (analis → pejabat → komite) dengan tingkat dan peran yang dapat dikonfigurasi. Setiap keputusan menghasilkan ringkasan yang di-hash SHA-256 sebagai tanda tangan elektronik, disimpan bersama gambar TTD.</p>
+        <div class="mt-4 flex flex-wrap gap-1.5"><span class="chip">wf_alur · wf_riwayat</span><span class="chip">sha256 ttd_hash</span></div>
+      </article>
+
+      <!-- 5 Instrumen -->
+      <article class="reveal card-glow rounded-2xl border border-slate-200 bg-white p-6 hover:border-[#c6a15b]/50 transition" style="transition-delay:.1s">
+        <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-[#0b1b33] text-[#c6a15b]">
+          <svg class="w-5.5 h-5.5" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16v10H4z" rx="1.5"/><path d="M8 10v4M12 10v4M16 10v4" stroke-linecap="round"/></svg>
+        </div>
+        <h3 class="mt-5 text-[17px] font-bold text-[#0b1b33]">CASA/giro, Surat Utang &amp; Arus Kas</h3>
+        <p class="mt-2 text-[13.5px] leading-relaxed text-slate-600">Instrumen PINJAMAN, CASA/giro, dan surat utang dengan pricing (kupon + margin), biaya transaksi, premium/diskon, dan kolateral dinamis (nilai wajar + LTV). Skedul arus kas per sisa tenor — ANGSURAN, ANUITAS, BULET — dan EIR presisi via NPV = 0.</p>
+        <div class="mt-4 flex flex-wrap gap-1.5"><span class="chip">arus_kas_skedul</span><span class="chip">POST /{id}/eir</span><span class="chip">/{id}/kolateral</span></div>
+      </article>
+
+      <!-- 6 Otorisasi -->
+      <article class="reveal card-glow rounded-2xl border border-slate-200 bg-white p-6 hover:border-[#c6a15b]/50 transition" style="transition-delay:.15s">
+        <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-[#0b1b33] text-[#c6a15b]">
+          <svg class="w-5.5 h-5.5" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8.5 10V7.5a3.5 3.5 0 0 1 7 0V10" stroke-linecap="round"/><circle cx="12" cy="15" r="1.6"/></svg>
+        </div>
+        <h3 class="mt-5 text-[17px] font-bold text-[#0b1b33]">Otorisasi Berbasis Portofolio</h3>
+        <p class="mt-2 text-[13.5px] leading-relaxed text-slate-600">Hak akses per pengguna dibatasi ke kode portofolio tertentu (KPR, UMKM, KORPORASI, …) atau menyeluruh lewat <code class="text-[#a68540] font-semibold">*</code>. Cek izin tersedia sebagai endpoint sehingga halaman dan API dapat menerapkan filter yang sama.</p>
+        <div class="mt-4 flex flex-wrap gap-1.5"><span class="chip">user_portofolio</span><span class="chip">/portofolio/izinkan/{kode}</span></div>
+      </article>
+      <!-- 7 Monte Carlo -->
+      <article class="reveal card-glow rounded-2xl border border-slate-200 bg-white p-6 hover:border-[#c6a15b]/50 transition" style="transition-delay:.05s">
+        <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-[#0b1b33] text-[#c6a15b]">
+          <svg class="w-5.5 h-5.5" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3.5" y="3.5" width="17" height="17" rx="3"/><circle cx="8.5" cy="8.5" r="1.4"/><circle cx="15.5" cy="8.5" r="1.4"/><circle cx="8.5" cy="15.5" r="1.4"/><circle cx="15.5" cy="15.5" r="1.4"/><path d="M12 4v16" stroke-dasharray="1.8 2.6"/><path d="M4 12h16" stroke-dasharray="1.8 2.6"/></svg>
+        </div>
+        <h3 class="mt-5 text-[17px] font-bold text-[#0b1b33]">Monte Carlo — Distribusi CKPN</h3>
+        <p class="mt-2 text-[13.5px] leading-relaxed text-slate-600">Simulasi hingga ribuan iterasi guncangan makro di atas hasil ECL: rata-rata, deviasi, VaR &amp; CVaR per segmen. Seed direkam sehingga hasil dapat direproduksi persis untuk validasi model &amp; audit.</p>
+        <div class="mt-4 flex flex-wrap gap-1.5"><span class="chip">mc_iterasi · mc_run</span><span class="chip">p01–p99 · cvar99</span><span class="chip">seed deterministik</span></div>
+      </article>
+
+      <!-- 8 Modul Pintar -->
+      <article class="reveal card-glow rounded-2xl border border-slate-200 bg-white p-6 hover:border-[#c6a15b]/50 transition" style="transition-delay:.1s">
+        <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-[#0b1b33] text-[#c6a15b]">
+          <svg class="w-5.5 h-5.5" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 15c2.5-6 5-1.5 8-6s5 4 8-1.5" stroke-linecap="round"/><path d="M4 19c2.5-5.5 5.5-1 8-5s5 4 8-1" stroke-linecap="round" opacity=".55"/><circle cx="20" cy="7" r="1.5" fill="currentColor" stroke="none"/></svg>
+        </div>
+        <h3 class="mt-5 text-[17px] font-bold text-[#0b1b33]">Early Warning &amp; Health Check</h3>
+        <p class="mt-2 text-[13.5px] leading-relaxed text-slate-600">Skor peringatan dini per kontrak dari fitur PD/DPD/forbearance, health check portofolio menyeluruh, dan ringkasan naratif otomatis — pendukung pengawasan kredit harian sebelum eksposur memburuk.</p>
+        <div class="mt-4 flex flex-wrap gap-1.5"><span class="chip">/smart/ews/run</span><span class="chip">/smart/health/run</span><span class="chip">ews_skor · narasi</span></div>
+      </article>
+
+      <!-- 9 Jadwal & ETL -->
+      <article class="reveal card-glow rounded-2xl border border-slate-200 bg-white p-6 hover:border-[#c6a15b]/50 transition" style="transition-delay:.15s">
+        <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-[#0b1b33] text-[#c6a15b]">
+          <svg class="w-5.5 h-5.5" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3.4 2" stroke-linecap="round"/><path d="M5 3.5 3 5.5M19 3.5l2 2" stroke-linecap="round"/></svg>
+        </div>
+        <h3 class="mt-5 text-[17px] font-bold text-[#0b1b33]">Jadwal, Notifikasi, Arsip &amp; ETL</h3>
+        <p class="mt-2 text-[13.5px] leading-relaxed text-slate-600">Jadwal batch/laporan berbasis cron yang divalidasi saat disimpan, pusat notifikasi &amp; arsip dokumen (kebijakan/SK/berita acara), plus pengaturan alur Apache NiFi dengan generator flow CSV → PostgreSQL siap impor.</p>
+        <div class="mt-4 flex flex-wrap gap-1.5"><span class="chip">jadwal_tugas · cron valid</span><span class="chip">notifikasi · arsip</span><span class="chip">flow NiFi 2.x</span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ARSITEKTUR ================= -->
+<section id="arsitektur" class="relative overflow-hidden bg-[#0b1b33] py-16 sm:py-20">
+  <div class="absolute inset-0 pointer-events-none" style="background:radial-gradient(900px 420px at 85% 0%, rgba(60,95,140,.35), transparent 55%);"></div>
+  <div class="relative max-w-6xl mx-auto px-5 sm:px-6">
+    <div class="max-w-2xl">
+      <p class="text-[12px] font-bold uppercase tracking-[.2em] text-[#c6a15b]">Arsitektur</p>
+      <h2 class="mt-3 text-3xl sm:text-4xl font-extrabold text-white tracking-tight">Microservice yang bisa dipecah, data satu sumber</h2>
+      <p class="mt-4 text-[15px] text-slate-300/90 leading-relaxed">Java 21 · Spring Boot · PostgreSQL. Semua service berbicara REST lewat satu gateway; skema SQL dibawa oleh service pemiliknya (schema-per-service) sehingga tidak ada race migrasi.</p>
+    </div>
+
+    <div class="mt-10 grid gap-3 lg:grid-cols-4">
+      <div class="glass rounded-2xl p-5">
+        <p class="text-[11px] uppercase tracking-widest text-[#c6a15b] font-bold">01 · Sumber &amp; Model</p>
+        <ul class="mt-3 space-y-2 text-[13px] text-slate-300">
+          <li class="flex items-center gap-2"><span class="h-1.5 w-1.5 rounded-full bg-[#c6a15b]"></span>auth-service — pengguna, peran, scope portofolio</li>
+          <li class="flex items-center gap-2"><span class="h-1.5 w-1.5 rounded-full bg-[#c6a15b]"></span>master-service — portofolio, staging, workflow</li>
+          <li class="flex items-center gap-2"><span class="h-1.5 w-1.5 rounded-full bg-[#c6a15b]"></span>model-service — PD, kurva, regresi, backtest</li>
+          <li class="flex items-center gap-2"><span class="h-1.5 w-1.5 rounded-full bg-[#c6a15b]"></span>data-service — eksposur &amp; instrumen keuangan</li>
+        </ul>
+      </div>
+      <div class="glass rounded-2xl p-5">
+        <p class="text-[11px] uppercase tracking-widest text-[#c6a15b] font-bold">02 · Komputasi ECL</p>
+        <ul class="mt-3 space-y-2 text-[13px] text-slate-300">
+          <li class="flex items-center gap-2"><span class="h-1.5 w-1.5 rounded-full bg-[#c6a15b]"></span>engine-service — partisi paralel, 100 jt rekord ± 5 menit</li>
+          <li class="flex items-center gap-2"><span class="h-1.5 w-1.5 rounded-full bg-[#c6a15b]"></span>snapshot parameter per run (deterministik)</li>
+          <li class="flex items-center gap-2"><span class="h-1.5 w-1.5 rounded-full bg-[#c6a15b]"></span>hasil_ecl per eksposur + mutasi stage</li>
+        </ul>
+      </div>
+      <div class="glass rounded-2xl p-5">
+        <p class="text-[11px] uppercase tracking-widest text-[#c6a15b] font-bold">03 · Keputusan &amp; Audit</p>
+        <ul class="mt-3 space-y-2 text-[13px] text-slate-300">
+          <li class="flex items-center gap-2"><span class="h-1.5 w-1.5 rounded-full bg-[#c6a15b]"></span>workflow multi-level + SHA-256 signature</li>
+          <li class="flex items-center gap-2"><span class="h-1.5 w-1.5 rounded-full bg-[#c6a15b]"></span>riwayat keputusan, gambar TTD, jejak lengkap</li>
+          <li class="flex items-center gap-2"><span class="h-1.5 w-1.5 rounded-full bg-[#c6a15b]"></span>smart-service — EWS &amp; health check portofolio</li>
+        </ul>
+      </div>
+      <div class="glass rounded-2xl p-5">
+        <p class="text-[11px] uppercase tracking-widest text-[#c6a15b] font-bold">04 · Laporan &amp; Keluar</p>
+        <ul class="mt-3 space-y-2 text-[13px] text-slate-300">
+          <li class="flex items-center gap-2"><span class="h-1.5 w-1.5 rounded-full bg-[#c6a15b]"></span>accounting-service — jurnal, GL, LK, template OJK</li>
+          <li class="flex items-center gap-2"><span class="h-1.5 w-1.5 rounded-full bg-[#c6a15b]"></span>reporting-service — ringkasan &amp; ekspor CSV</li>
+          <li class="flex items-center gap-2"><span class="h-1.5 w-1.5 rounded-full bg-[#c6a15b]"></span>nifi-service — integrasi core/DWH/object storage</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ALUR BUKTI ================= -->
+<section id="alur-bukti" class="bg-[#f4f7fa] py-16 sm:py-20">
+  <div class="max-w-6xl mx-auto px-5 sm:px-6">
+    <div class="max-w-2xl">
+      <p class="text-[12px] font-bold uppercase tracking-[.2em] text-[#a68540]">Satu alur, bisa diaudit</p>
+      <h2 class="mt-3 text-3xl sm:text-4xl font-extrabold text-[#0b1b33] tracking-tight">Dari data mentah ke neraca — tanpa jeda</h2>
+    </div>
+
+    <ol class="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+      <li class="step-line flex gap-4 rounded-2xl border border-slate-200 bg-white p-5">
+        <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#0b1b33] text-sm font-bold text-[#c6a15b] num">1</span>
+        <div><h3 class="font-bold text-[#0b1b33] text-[15px]">Eksposur masuk</h3><p class="mt-1 text-[13px] text-slate-600 leading-relaxed">Upload massal CSV sampai jutaan rekord, dengan validasi batch &amp; pratinjau — sumber bisa juga dari integrasi core/DWH.</p></div>
+      </li>
+      <li class="step-line flex gap-4 rounded-2xl border border-slate-200 bg-white p-5">
+        <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#0b1b33] text-sm font-bold text-[#c6a15b] num">2</span>
+        <div><h3 class="font-bold text-[#0b1b33] text-[15px]">Engine ECL paralel</h3><p class="mt-1 text-[13px] text-slate-600 leading-relaxed">Stage 1/2/3, ECL 12 bulan &amp; lifetime, skenario terbobot — parameter di-snapshot per run supaya hasil bisa direproduksi.</p></div>
+      </li>
+      <li class="step-line flex gap-4 rounded-2xl border border-slate-200 bg-white p-5">
+        <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#0b1b33] text-sm font-bold text-[#c6a15b] num">3</span>
+        <div><h3 class="font-bold text-[#0b1b33] text-[15px]">Validasi &amp; persetujuan</h3><p class="mt-1 text-[13px] text-slate-600 leading-relaxed">Hasil direview per bucket; angka CKPN melewati alur multi-level. Tiap tanda tangan = hash SHA-256 yang tersimpan sebagai bukti.</p></div>
+      </li>
+      <li class="step-line flex gap-4 rounded-2xl border border-slate-200 bg-white p-5">
+        <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#0b1b33] text-sm font-bold text-[#c6a15b] num">4</span>
+        <div><h3 class="font-bold text-[#0b1b33] text-[15px]">Jurnal otomatis</h3><p class="mt-1 text-[13px] text-slate-600 leading-relaxed">CKPN yang disetujui dibentuk menjadi jurnal (dr. beban CKPN / cr. cadangan CKPN) lalu diposting ke GL — debit selalu = kredit.</p></div>
+      </li>
+      <li class="step-line flex gap-4 rounded-2xl border border-slate-200 bg-white p-5">
+        <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#0b1b33] text-sm font-bold text-[#c6a15b] num">5</span>
+        <div><h3 class="font-bold text-[#0b1b33] text-[15px]">LK &amp; disclosure</h3><p class="mt-1 text-[13px] text-slate-600 leading-relaxed">Neraca yang seimbang, laba-rugi, dan disclosure CKPN per stage/portofolio — kontra-aset disajikan sebagai pengurang kredit.</p></div>
+      </li>
+      <li class="step-line flex gap-4 rounded-2xl border border-slate-200 bg-white p-5">
+        <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#0b1b33] text-sm font-bold text-[#c6a15b] num">6</span>
+        <div><h3 class="font-bold text-[#0b1b33] text-[15px]">Template OJK</h3><p class="mt-1 text-[13px] text-slate-600 leading-relaxed">Ekspor CSV template Laporan Keuangan &amp; CKPN OJK langsung dari aplikasi — siap diisi ke pelaporan regulator.</p></div>
+      </li>
+    </ol>
+
+    <!-- bukti hasil demo -->
+    <div class="mt-10 rounded-2xl border border-[#c6a15b]/30 bg-white p-6 sm:p-8">
+      <div class="flex flex-wrap items-center justify-between gap-3">
+        <div>
+          <p class="text-[11px] font-bold uppercase tracking-[.18em] text-[#a68540]">Bukti dari dataset demo (run terverifikasi)</p>
+          <h3 class="mt-1 text-lg font-bold text-[#0b1b33]">Dari run ECL ke LK — satu perintah</h3>
+        </div>
+        <span class="chip !border-emerald-200 !bg-emerald-50 !text-emerald-700 !font-sans !text-[12px] font-semibold">✓ 12/12 smoke test hijau</span>
+      </div>
+      <div class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div class="rounded-xl bg-[#f4f7fa] border border-slate-200 p-4"><p class="text-[11px] uppercase tracking-wide text-slate-500">CKPN stage 1</p><p class="mt-1 text-xl font-extrabold text-[#0b1b33] num">4.884.709,68</p><p class="text-[11.5px] text-slate-500">eksposur 1,271 M · ECL 12-bulan</p></div>
+        <div class="rounded-xl bg-[#f4f7fa] border border-slate-200 p-4"><p class="text-[11px] uppercase tracking-wide text-slate-500">CKPN stage 2</p><p class="mt-1 text-xl font-extrabold text-[#0b1b33] num">16.107.860,13</p><p class="text-[11.5px] text-slate-500">eksposur 2,447 M · lifetime</p></div>
+        <div class="rounded-xl bg-[#f4f7fa] border border-slate-200 p-4"><p class="text-[11px] uppercase tracking-wide text-slate-500">Jurnal #1 (posting)</p><p class="mt-1 text-xl font-extrabold text-[#0b1b33] num">20.992.569,81</p><p class="text-[11.5px] text-slate-500">debit = kredit · 2026-09</p></div>
+        <div class="rounded-xl bg-[#f4f7fa] border border-slate-200 p-4"><p class="text-[11px] uppercase tracking-wide text-slate-500">Neraca</p><p class="mt-1 text-xl font-extrabold text-[#0b1b33] num">seimbang</p><p class="text-[11.5px] text-slate-500">selisih 0 · laba −20.992.569,81</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PERFORMA ================= -->
+<section id="performa" class="bg-white py-16 sm:py-20">
+  <div class="max-w-6xl mx-auto px-5 sm:px-6 grid items-center gap-10 lg:grid-cols-2">
+    <div>
+      <p class="text-[12px] font-bold uppercase tracking-[.2em] text-[#a68540]">Performa</p>
+      <h2 class="mt-3 text-3xl sm:text-4xl font-extrabold text-[#0b1b33] tracking-tight">100 juta rekord ± 5 menit</h2>
+      <p class="mt-4 text-[15px] text-slate-600 leading-relaxed">Engine membagi eksposur menjadi partisi yang diproses paralel lalu menggabungkan hasil secara deterministik — arsitektur yang sama dipakai untuk batch bulanan, komitmen &amp; CCF, hingga skenario makro berganda.</p>
+      <ul class="mt-6 space-y-3 text-[14px] text-slate-700">
+        <li class="flex gap-3"><span class="mt-0.5 text-[#a68540] font-bold">✓</span>Partisi paralel per portofolio/segmen dengan agregasi konsisten</li>
+        <li class="flex gap-3"><span class="mt-0.5 text-[#a68540] font-bold">✓</span>Snapshot parameter per run — hasil dapat direproduksi &amp; diaudit</li>
+        <li class="flex gap-3"><span class="mt-0.5 text-[#a68540] font-bold">✓</span>REST API untuk setiap tahap: upload, run, review, posting, laporan</li>
+        <li class="flex gap-3"><span class="mt-0.5 text-[#a68540] font-bold">✓</span>PostgreSQL sebagai sumber tunggal: skema per service, tanpa duplikasi</li>
+      </ul>
+      <div class="mt-7 rounded-xl border border-emerald-200 bg-emerald-50/60 p-4">
+        <p class="text-[11px] font-bold uppercase tracking-[.18em] text-emerald-700">Kesiapan produksi — hardening aktif</p>
+        <ul class="mt-2.5 space-y-2 text-[13px] text-slate-700">
+          <li class="flex gap-2.5"><span class="mt-0.5 text-emerald-600 font-bold">✓</span>Tanpa rahasia bawaan: JWT/DB/password admin wajib env — aplikasi menolak start bila kosong/contoh (vault/secret ops)</li>
+          <li class="flex gap-2.5"><span class="mt-0.5 text-emerald-600 font-bold">✓</span>Password PBKDF2-HMAC-SHA256 210.000 iterasi; hash lama dimigrasikan otomatis saat login</li>
+          <li class="flex gap-2.5"><span class="mt-0.5 text-emerald-600 font-bold">✓</span>Kunci akun sementara setelah 5 login gagal (HTTP 429) + log percobaan</li>
+          <li class="flex gap-2.5"><span class="mt-0.5 text-emerald-600 font-bold">✓</span>Pemulihan run ECL saat restart, healthcheck per service, skrip backup &amp; runbook produksi</li>
+        </ul>
+      </div>
+    </div>
+    <div class="rounded-2xl border border-slate-200 bg-[#f4f7fa] p-6 sm:p-8">
+      <p class="text-[11px] font-bold uppercase tracking-[.18em] text-[#a68540]">Tumpukan teknologi</p>
+      <div class="mt-4 grid grid-cols-2 gap-3 text-[13.5px]">
+        <div class="rounded-xl border border-slate-200 bg-white p-4"><p class="font-bold text-[#0b1b33]">Java 21</p><p class="text-slate-500">Spring Boot 3</p></div>
+        <div class="rounded-xl border border-slate-200 bg-white p-4"><p class="font-bold text-[#0b1b33]">PostgreSQL</p><p class="text-slate-500">skema per service</p></div>
+        <div class="rounded-xl border border-slate-200 bg-white p-4"><p class="font-bold text-[#0b1b33]">REST Gateway</p><p class="text-slate-500">10 microservice</p></div>
+        <div class="rounded-xl border border-slate-200 bg-white p-4"><p class="font-bold text-[#0b1b33]">HTML5 + Tailwind</p><p class="text-slate-500">frontend ringan</p></div>
+      </div>
+      <div class="mt-5 rounded-xl bg-[#0b1b33] p-5 text-center">
+        <p class="text-[12px] uppercase tracking-[.22em] text-[#c6a15b]">Live demo berjalan</p>
+        <p class="mt-1 text-slate-300 text-[13px]">sandbox/uji: <code class="text-white font-semibold">admin / Clarity71-DemoAdmin-2026!</code> · gateway :8080 · produksi via SSO (OIDC)</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CTA ================= -->
+<section class="bg-[#0b1b33] py-16">
+  <div class="max-w-6xl mx-auto px-5 sm:px-6 flex flex-col items-center text-center">
+    <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">Lihat sendiri dari model sampai neraca</h2>
+    <p class="mt-4 max-w-xl text-[15px] text-slate-300/90 leading-relaxed">Dataset demo sudah terpasang: jalankan ECL, setujui lewat workflow, posting jurnal, dan unduh CSV template OJK — semua dari satu aplikasi.</p>
+    <div class="mt-8 flex flex-wrap justify-center gap-3">
+      <a href="/index.html" class="rounded-lg bg-[#c6a15b] px-7 py-3.5 text-sm font-bold text-[#0b1b33] hover:bg-[#dbc795] transition shadow-lg shadow-[#c6a15b]/20">Buka aplikasi →</a>
+      <a href="#fitur" class="rounded-lg border border-white/25 bg-white/5 px-7 py-3.5 text-sm font-semibold text-white hover:bg-white/10 transition">Kembali ke fitur</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer class="border-t border-white/8 bg-[#0a1626] py-10">
+  <div class="max-w-6xl mx-auto px-5 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-5">
+    <div class="flex items-center gap-2.5">
+      <img src="/assets/logo-lite.png" alt="" class="h-7 w-7" />
+      <span class="text-[15px] font-bold text-white">CLARITY<span class="text-[#c6a15b]">71</span></span>
+      <span class="hidden sm:inline text-[12px] text-slate-500">— platform CKPN PSAK 71 / IFRS 9</span>
+    </div>
+    <p class="text-[12px] text-slate-500 text-center">© 2026 Clarity71 · v1.0.0 · Java 21 · Spring Boot · PostgreSQL · Tema Midnight Navy &amp; Champagne</p>
+  </div>
+</footer>
+
+<script>
+  // ---------- SPLASH ----------
+  (function () {
+    var sp = document.getElementById('splash');
+    requestAnimationFrame(function () { sp.classList.add('loaded'); });
+    var dur = 2300; // tampilkan splash ± 2,3 detik
+    var t = setTimeout(function () {
+      sp.classList.add('hidden');
+      document.body.style.overflow = '';
+    }, dur);
+    sp.addEventListener('click', function () { clearTimeout(t); sp.classList.add('hidden'); });
+    document.body.style.overflow = 'hidden';
+  })();
+
+  // ---------- REVEAL ON SCROLL ----------
+  var io = new IntersectionObserver(function (es) {
+    es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+</script>
+</body>
+</html>

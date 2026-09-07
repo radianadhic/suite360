@@ -1,0 +1,1787 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bariva FRM — Deteksi fraud real-time untuk perbankan</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='112' fill='%230b1a3a'/%3E%3Cpath d='M256 178 L36 92 L36 268 Z' fill='%2322d3ee' opacity='.55'/%3E%3Cpath d='M256 178 L476 92 L476 268 Z' fill='%2322d3ee' opacity='.55'/%3E%3Cpath d='M212 408 L300 408 L287 214 L225 214 Z' fill='%23eaf2ff'/%3E%3Crect x='228' y='150' width='56' height='52' rx='9' fill='%2322d3ee'/%3E%3Ccircle cx='256' cy='176' r='13' fill='%23fff'/%3E%3Crect x='184' y='402' width='144' height='18' rx='9' fill='%2322d3ee'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="apple-touch-icon-180.png">
+<meta property="og:title" content="Bariva FRM — Deteksi fraud real-time untuk perbankan">
+<meta property="og:description" content="Perbandingan jujur dengan sepuluh produk fraud yang dipakai bank hari ini.">
+<meta property="og:image" content="bariva-og-image-1200x630.png">
+<meta name="description" content="Bariva FRM: penilaian transaksi real-time, antrean alert, manajemen kasus, kepatuhan & AML, tata kelola model, ETL NiFi, dan pelaporan regulator. Perbandingan jujur dengan sepuluh produk fraud lain.">
+<style>
+/* ─────────────────────────────────────────────────────────────────────────
+   Bariva FRM — laman pemasaran dua bahasa.
+   Seluruh gaya, ikon, dan skrip menyatu pada berkas ini: laman ini harus
+   tetap utuh bila dibuka tanpa jaringan.
+   ───────────────────────────────────────────────────────────────────────── */
+:root{
+  --navy:#0b1a3a; --navy2:#16305f; --navy3:#0e2550; --deep:#071326;
+  --cyan:#22d3ee; --cyan-soft:#7de9f7;
+  --ink:#0f172a; --muted:#5b6b85; --line:#e2e8f0; --bg:#f8fafc; --abu:#f1f5f9;
+  --hijau:#0f9d58; --kuning:#b7791f; --abu2:#94a3b8;
+  --shadow:0 1px 2px rgba(11,26,58,.05), 0 8px 24px rgba(11,26,58,.06);
+  --radius:14px;
+  --font:"Inter","Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0; background:var(--bg); color:var(--ink); font-family:var(--font);
+     font-size:16px; line-height:1.65; -webkit-font-smoothing:antialiased}
+a{color:#0e7490}
+img,svg{max-width:100%}
+.wrap{max-width:1160px; margin:0 auto; padding:0 20px}
+
+/* ── lapisan bahasa ───────────────────────────────────────────────────── */
+html[lang="id"] [data-lang="en"],
+html[lang="en"] [data-lang="id"]{display:none !important}
+
+/* ── splash ───────────────────────────────────────────────────────────── */
+#splash{position:fixed; inset:0; z-index:9999; display:flex; align-items:center;
+  justify-content:center; text-align:center;
+  background:radial-gradient(1200px 600px at 50% -10%,#16305f 0%,var(--deep) 60%,#040d1a 100%);
+  color:#eaf6ff; transition:opacity .55s ease, visibility .55s ease}
+#splash.selesai{opacity:0; visibility:hidden}
+body.splash-aktif{overflow:hidden}
+.splash-isi{width:min(560px,88vw); animation:naik .7s ease both}
+@keyframes naik{from{opacity:0; transform:translateY(14px)} to{opacity:1; transform:none}}
+.splash-merek{display:flex; align-items:center; justify-content:center; gap:14px;
+  margin:0 0 6px}
+.splash-merek b{font-size:38px; letter-spacing:.16em; font-weight:800}
+.splash-merek b span{color:var(--cyan)}
+.splash-tag{font-size:12px; letter-spacing:.34em; text-transform:uppercase;
+  color:var(--cyan); margin:0 0 26px}
+.splash-slogan{font-size:16px; color:#b9cbe4; margin:0 0 30px; line-height:1.7}
+.splash-pilih{display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-bottom:26px}
+.splash-pilih button{font:inherit; font-size:15px; font-weight:600; cursor:pointer;
+  padding:12px 26px; border-radius:999px; border:1px solid rgba(125,233,247,.35);
+  background:rgba(125,233,247,.08); color:#eaf6ff; transition:.18s}
+.splash-pilih button:hover,.splash-pilih button:focus-visible{
+  background:var(--cyan); color:#04202c; border-color:var(--cyan); outline:none}
+.splash-pilih button small{display:block; font-size:11px; font-weight:400; opacity:.75}
+.splash-maju{height:3px; width:180px; margin:0 auto; border-radius:3px;
+  background:rgba(255,255,255,.12); overflow:hidden}
+.splash-maju i{display:block; height:100%; width:40%; border-radius:3px;
+  background:linear-gradient(90deg,transparent,var(--cyan),transparent);
+  animation:geser 1.6s linear infinite}
+@keyframes geser{from{transform:translateX(-120%)} to{transform:translateX(320%)}}
+.splash-lompat{margin-top:20px; font:inherit; font-size:13px; cursor:pointer;
+  background:none; border:0; color:#7f93b3; text-decoration:underline; padding:6px}
+.splash-lompat:hover{color:#eaf6ff}
+@media (prefers-reduced-motion:reduce){
+  .splash-isi,.splash-maju i{animation:none}
+}
+
+/* ── isi: masuk setelah splash ────────────────────────────────────────── */
+#isi{opacity:0; transition:opacity .5s ease}
+body.siap #isi{opacity:1}
+
+/* ── navigasi ─────────────────────────────────────────────────────────── */
+nav{position:sticky; top:0; z-index:50; background:rgba(11,26,58,.96);
+  backdrop-filter:blur(8px); border-bottom:1px solid rgba(255,255,255,.08)}
+nav .wrap{display:flex; align-items:center; gap:22px; height:62px}
+nav .merek{display:flex; align-items:center; gap:10px; color:#fff;
+  font-weight:800; letter-spacing:.12em; text-decoration:none; font-size:15px}
+nav .merek span{color:var(--cyan)}
+nav .tautan{display:flex; gap:20px; margin-left:auto; align-items:center}
+nav .tautan a{color:#c7d6ea; text-decoration:none; font-size:13.5px; font-weight:500}
+nav .tautan a:hover{color:#fff}
+.ganti-bahasa{display:flex; border:1px solid rgba(255,255,255,.22); border-radius:999px;
+  overflow:hidden}
+.ganti-bahasa button{font:inherit; font-size:12px; font-weight:700; cursor:pointer;
+  padding:6px 14px; background:none; border:0; color:#9fb4d0}
+.ganti-bahasa button[aria-pressed="true"]{background:var(--cyan); color:#04202c}
+@media (max-width:900px){nav .tautan a{display:none}}
+
+/* ── hero ─────────────────────────────────────────────────────────────── */
+header.hero{background:linear-gradient(160deg,var(--navy) 0%,var(--navy2) 55%,#1c3f78 100%);
+  color:#eaf2ff; padding:78px 0 60px}
+header.hero h1{font-size:clamp(30px,4.6vw,50px); line-height:1.14; margin:12px 0 18px;
+  letter-spacing:-.02em; max-width:20ch}
+header.hero h1 em{font-style:normal; color:var(--cyan)}
+header.hero p.utama{font-size:17px; color:#c3d5ee; max-width:62ch; margin:0 0 28px}
+.mata{text-transform:uppercase; letter-spacing:.16em; font-size:11.5px; font-weight:700;
+  color:var(--cyan)}
+.aksi{display:flex; gap:14px; flex-wrap:wrap; margin-bottom:44px}
+.tombol{display:inline-block; padding:13px 26px; border-radius:10px; font-weight:700;
+  font-size:14.5px; text-decoration:none; border:1px solid transparent}
+.tombol-utama{background:linear-gradient(135deg,#7cf0ff,var(--cyan) 55%,#12b6d4); color:#04202c}
+.tombol-garis{border-color:rgba(255,255,255,.4); color:#eaf2ff}
+.strip{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:2px;
+  background:rgba(255,255,255,.14); border-radius:12px; overflow:hidden; margin-top:8px}
+.strip div{background:var(--navy); padding:18px 16px}
+.strip b{display:block; font-size:25px; color:var(--cyan-soft); line-height:1.2}
+.strip span{font-size:12.5px; color:#a9bdd8}
+
+/* ── bagian ───────────────────────────────────────────────────────────── */
+section{padding:70px 0}
+section.abu{background:var(--abu)}
+section.gelap{background:var(--navy); color:#dbe7f7}
+.judul-bagian{max-width:74ch; margin-bottom:34px}
+.judul-bagian h2{font-size:clamp(24px,3vw,34px); line-height:1.22; margin:10px 0 12px;
+  letter-spacing:-.01em}
+.judul-bagian p{color:var(--muted); margin:0; font-size:15.5px}
+section.gelap .judul-bagian p{color:#a9bedb}
+.grid{display:grid; gap:16px; grid-template-columns:repeat(auto-fit,minmax(270px,1fr))}
+.grid3{display:grid; gap:14px; grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.kartu{background:#fff; border:1px solid var(--line); border-radius:var(--radius);
+  padding:20px 22px; box-shadow:var(--shadow)}
+.kartu h3{margin:0 0 8px; font-size:16.5px}
+.kartu p{margin:0; color:var(--muted); font-size:14.3px; line-height:1.62}
+.kartu p b{color:var(--ink)}
+
+/* ── arsitektur ───────────────────────────────────────────────────────── */
+.alur{display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:12px}
+.alur .langkah{background:#fff; border:1px solid var(--line); border-radius:12px; padding:18px}
+.alur .langkah b{display:block; font-size:13px; color:#0e7490; margin-bottom:4px}
+.alur .langkah span{font-size:13.6px; color:var(--muted)}
+
+/* ── perbandingan ─────────────────────────────────────────────────────── */
+.penjual{display:grid; gap:14px; grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  margin-bottom:28px}
+.penjual .kartu{border-left:3px solid var(--cyan)}
+.penjual .kartu h3{font-size:15px; margin-bottom:6px}
+.penjual .kartu p{font-size:13.2px}
+.legend{display:flex; gap:18px; flex-wrap:wrap; align-items:center; font-size:13px;
+  color:var(--muted); margin:22px 0 14px}
+.legend .dot{font-size:15px}
+.dot-p{color:var(--hijau)} .dot-s{color:var(--kuning)} .dot-n{color:var(--abu2)}
+.tab{display:flex; gap:6px; flex-wrap:wrap; border-bottom:1px solid var(--line);
+  margin-bottom:20px}
+.tab button{font:inherit; font-size:14px; font-weight:600; cursor:pointer; padding:10px 18px;
+  border:0; background:none; color:var(--muted); border-bottom:2px solid transparent;
+  margin-bottom:-1px}
+.tab button[aria-selected="true"]{color:var(--navy); border-bottom-color:var(--cyan)}
+.gulir{overflow:auto; max-height:74vh; border:1px solid var(--line); border-radius:12px;
+  background:#fff; box-shadow:var(--shadow)}
+table{border-collapse:separate; border-spacing:0; width:max-content; min-width:100%;
+  font-size:13px}
+table th,table td{border-bottom:1px solid var(--line); padding:8px 10px;
+  vertical-align:middle; text-align:center}
+table thead th{position:sticky; top:0; z-index:3; background:var(--navy); color:#eaf2ff;
+  font-size:11.5px; letter-spacing:.02em; white-space:nowrap}
+table thead th:first-child{left:0; z-index:4; text-align:left}
+table th:first-child,table td:first-child{position:sticky; left:0; z-index:2;
+  background:#fff; text-align:left; min-width:230px; font-weight:600}
+table td.kiri,table th.kiri{text-align:left; min-width:250px; font-weight:400;
+  color:var(--muted); font-size:12.4px}
+table tbody tr:nth-child(even) td{background:#fbfdff}
+table tbody tr:nth-child(even) td:first-child{background:#fbfdff}
+table tbody tr:hover td{background:#f0fbff}
+table td.bariva{background:#f0fdff !important; box-shadow:inset 1px 0 0 #bdeaf5,
+  inset -1px 0 0 #bdeaf5}
+.tanda{font-size:15px; line-height:1}
+.seruan{margin-top:26px; background:#fff; border:1px solid var(--line);
+  border-left:4px solid var(--cyan); border-radius:12px; padding:22px 24px}
+.seruan .t{font-weight:800; font-size:17px; margin-bottom:8px}
+.seruan p{color:var(--muted); font-size:14.6px; margin:0 0 10px}
+.seruan p:last-child{margin-bottom:0}
+.seruan b{color:var(--ink)}
+.note{font-size:12.5px; color:var(--muted); margin-top:22px}
+.note sup{color:#0e7490; font-weight:700}
+ol.sumber{font-size:12.8px; color:var(--muted); padding-left:22px}
+ol.sumber li{margin-bottom:5px}
+
+/* ── angka ────────────────────────────────────────────────────────────── */
+.tabel-angka{width:100%; border-collapse:separate; border-spacing:0; font-size:14px}
+.tabel-angka th,.tabel-angka td{border-bottom:1px solid var(--line); padding:11px 12px;
+  text-align:left; vertical-align:top}
+.tabel-angka thead th{position:static; background:var(--navy); color:#eaf2ff; font-size:12px}
+.tabel-angka td.n{font-weight:700; color:#0e7490; white-space:nowrap}
+.tabel-angka td:first-child{position:static; background:none; min-width:0; font-weight:400}
+
+/* ── kontak & kaki ────────────────────────────────────────────────────── */
+footer{background:var(--deep); color:#93a8c4; padding:44px 0; font-size:13.4px}
+footer a{color:#9fe4f2}
+footer .wrap{display:flex; gap:20px; flex-wrap:wrap; justify-content:space-between;
+  align-items:flex-start}
+footer b{color:#eaf2ff}
+@media (max-width:640px){
+  section{padding:52px 0}
+  .aksi .tombol{width:100%; text-align:center}
+}
+</style>
+</head>
+<body class="splash-aktif">
+
+<!-- Tanda merek Bariva: menara suar. Disematkan sekali dan dipakai berulang
+     lewat <use>, supaya laman ini tetap utuh tanpa berkas luar. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <linearGradient id="mgTower" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="0.55" stop-color="#eaf2ff"/>
+      <stop offset="1" stop-color="#b9cbe8"/>
+    </linearGradient>
+    <linearGradient id="mgBeamL" x1="1" y1="0" x2="0" y2="0">
+      <stop offset="0" stop-color="#22d3ee" stop-opacity="0.85"/>
+      <stop offset="1" stop-color="#22d3ee" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="mgBeamR" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#22d3ee" stop-opacity="0.85"/>
+      <stop offset="1" stop-color="#22d3ee" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="mgGlow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#7de9f7" stop-opacity="0.95"/>
+      <stop offset="0.45" stop-color="#22d3ee" stop-opacity="0.45"/>
+      <stop offset="1" stop-color="#22d3ee" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="mgLamp" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#eafcff"/>
+      <stop offset="1" stop-color="#22d3ee"/>
+    </linearGradient>
+    <symbol id="merekSuar" viewBox="0 0 512 512">
+      <path d="M256 178 L36 92 L36 268 Z" fill="url(#mgBeamL)"/>
+      <path d="M256 178 L476 92 L476 268 Z" fill="url(#mgBeamR)"/>
+      <circle cx="256" cy="178" r="86" fill="url(#mgGlow)"/>
+      <path d="M212 408 L300 408 L287 214 L225 214 Z" fill="url(#mgTower)"/>
+      <path d="M218 330 L294 330 L291 292 L221 292 Z" fill="#22d3ee"/>
+      <path d="M210 214 L302 214 L302 200 L210 200 Z" fill="#dbe7f7"/>
+      <rect x="228" y="150" width="56" height="52" rx="9" fill="url(#mgLamp)"/>
+      <path d="M218 152 L294 152 L256 112 Z" fill="#e8f1ff"/>
+      <circle cx="256" cy="176" r="13" fill="#ffffff"/>
+      <rect x="184" y="402" width="144" height="18" rx="9" fill="#22d3ee" opacity="0.9"/>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     SPLASH
+     ══════════════════════════════════════════════════════════════════════ -->
+<div id="splash" role="dialog" aria-label="Pilih bahasa / Choose language">
+  <div class="splash-isi">
+    <div class="splash-merek">
+      <svg width="54" height="54" viewBox="0 0 512 512" aria-hidden="true"><use href="#merekSuar"/></svg>
+      <b>BARIVA<span>FRM</span></b>
+    </div>
+    <p class="splash-tag">Fraud Risk Management</p>
+    <p class="splash-slogan" data-lang="id">Satu konsol untuk mendeteksi, menilai,
+      dan mempertanggungjawabkan setiap keputusan fraud.</p>
+    <p class="splash-slogan" data-lang="en">One console to detect, decide, and defend
+      every fraud decision.</p>
+    <div class="splash-pilih">
+      <button type="button" data-pilih="id">Bahasa Indonesia<small>ID</small></button>
+      <button type="button" data-pilih="en">English<small>EN</small></button>
+    </div>
+    <div class="splash-maju" aria-hidden="true"><i></i></div>
+    <button type="button" class="splash-lompat" data-lompat>
+      <span data-lang="id">Lewati</span><span data-lang="en">Skip</span>
+    </button>
+  </div>
+</div>
+
+<div id="isi">
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     NAVIGASI
+     ══════════════════════════════════════════════════════════════════════ -->
+<nav>
+  <div class="wrap">
+    <a class="merek" href="#atas">
+      <svg width="26" height="26" viewBox="0 0 512 512" aria-hidden="true"><use href="#merekSuar"/></svg>
+      BARIVA<span>FRM</span>
+    </a>
+    <div class="tautan">
+      <a href="#kemampuan"><span data-lang="id">Kemampuan</span><span data-lang="en">Capabilities</span></a>
+      <a href="#perbandingan"><span data-lang="id">Perbandingan</span><span data-lang="en">Comparison</span></a>
+      <a href="#arsitektur"><span data-lang="id">Arsitektur</span><span data-lang="en">Architecture</span></a>
+      <a href="#angka"><span data-lang="id">Angka</span><span data-lang="en">Numbers</span></a>
+      <a href="#keamanan"><span data-lang="id">Keamanan</span><span data-lang="en">Security</span></a>
+      <a href="#kontak"><span data-lang="id">Kontak</span><span data-lang="en">Contact</span></a>
+      <span class="ganti-bahasa">
+        <button type="button" data-pilih="id" aria-pressed="true">ID</button>
+        <button type="button" data-pilih="en" aria-pressed="false">EN</button>
+      </span>
+    </div>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     HERO
+     ══════════════════════════════════════════════════════════════════════ -->
+<header class="hero" id="atas">
+  <div class="wrap">
+    <span class="mata" data-lang="id">Deteksi fraud real-time untuk perbankan</span>
+    <span class="mata" data-lang="en">Real-time fraud detection for banks</span>
+    <h1 data-lang="id">Penipuan tidak menunggu <em>laporan bulanan</em> Anda.</h1>
+    <h1 data-lang="en">Fraud does not wait for your <em>monthly report</em>.</h1>
+    <p class="utama" data-lang="id">Bariva menilai setiap transaksi, memberi keputusan
+      dalam hitungan milidetik, mencatat setiap tindakan pada jejak audit yang tidak
+      dapat dihapus, dan mengawasi modelnya sendiri agar tidak diam-diam menjadi buta.</p>
+    <p class="utama" data-lang="en">Bariva scores every transaction, decides in
+      milliseconds, records every action on an audit trail that cannot be erased, and
+      watches its own model so it does not quietly go blind.</p>
+    <div class="aksi">
+      <a class="tombol tombol-utama" href="#kontak" data-lang="id">Minta demonstrasi</a>
+      <a class="tombol tombol-utama" href="#kontak" data-lang="en">Request a demo</a>
+      <a class="tombol tombol-garis" href="#perbandingan" data-lang="id">Lihat perbandingan</a>
+      <a class="tombol tombol-garis" href="#perbandingan" data-lang="en">See the comparison</a>
+    </div>
+    <div class="strip">
+      <div><b>759</b><span data-lang="id">TPS berotentikasi per instans</span>
+        <span data-lang="en">authenticated TPS per instance</span></div>
+      <div><b>1,54 ms</b><span data-lang="id">CPU per keputusan</span>
+        <span data-lang="en">CPU per decision</span></div>
+      <div><b>910</b><span data-lang="id">pemeriksaan otomatis lulus</span>
+        <span data-lang="en">automated checks passing</span></div>
+      <div><b>0</b><span data-lang="id">kegagalan</span>
+        <span data-lang="en">failures</span></div>
+    </div>
+  </div>
+</header>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     MENGAPA SEKARANG
+     ══════════════════════════════════════════════════════════════════════ -->
+<section id="kenapa">
+  <div class="wrap">
+    <div class="judul-bagian">
+      <span class="mata" data-lang="id">Mengapa sekarang</span>
+      <span class="mata" data-lang="en">Why now</span>
+      <h2 data-lang="id">Tiga pergeseran terjadi bersamaan</h2>
+      <h2 data-lang="en">Three shifts are happening at once</h2>
+      <p data-lang="id">Ambang statis tidak mengejar ketiganya. Yang dibutuhkan bukan
+        lebih banyak aturan, melainkan aturan yang dapat diubah hari ini juga dan
+        model yang diawasi penyimpangannya.</p>
+      <p data-lang="en">Static thresholds do not chase any of them. What is needed is
+        not more rules but rules that can change today, and a model whose drift is
+        watched.</p>
+    </div>
+    <div class="grid" id="kartuKenapa"></div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     KEMAMPUAN
+     ══════════════════════════════════════════════════════════════════════ -->
+<section id="kemampuan" class="abu">
+  <div class="wrap">
+    <div class="judul-bagian">
+      <span class="mata" data-lang="id">Kemampuan</span>
+      <span class="mata" data-lang="en">Capabilities</span>
+      <h2 data-lang="id">Satu konsol, dari deteksi sampai penanganan kasus</h2>
+      <h2 data-lang="en">One console, from detection to case closure</h2>
+      <p data-lang="id">Bukan hanya penilaian. Bariva mencatat alasan keputusan,
+        mengantrekan peringatan, mengelola investigasi, dan menyimpan jejak audit
+        untuk kepatuhan.</p>
+      <p data-lang="en">Not just scoring. Bariva records the reason for a decision,
+        queues alerts, manages investigations, and keeps an audit trail for
+        compliance.</p>
+    </div>
+    <div class="grid" id="kartuKemampuan"></div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     PERBANDINGAN
+     ══════════════════════════════════════════════════════════════════════ -->
+<section id="perbandingan">
+  <div class="wrap">
+    <div class="judul-bagian">
+      <span class="mata" data-lang="id">Posisi di pasar</span>
+      <span class="mata" data-lang="en">Market position</span>
+      <h2 data-lang="id">Bariva berhadapan dengan sepuluh produk yang dipakai bank hari ini</h2>
+      <h2 data-lang="en">Bariva against ten products banks actually run today</h2>
+      <p data-lang="id">Perbandingan ini menyebut nama produk, bukan kelas samar. Kami
+        menilai dari dokumentasi publik dan siaran pers masing-masing pemasok.
+        Penilaian bersifat <b>keberadaan fungsi yang setara</b>, bukan peringkat
+        kematangan: pada banyak baris, kepunyaan mereka jauh lebih dalam daripada
+        kepunyaan kami — dan kami sebutkan yang mana.</p>
+      <p data-lang="en">This comparison names products, not vague categories. We
+        assess from public documentation and each vendor's own press releases. The
+        judgement is about <b>the existence of an equivalent function</b>, not a
+        maturity ranking: on many rows what they have runs far deeper than ours —
+        and we say which.</p>
+    </div>
+
+    <div class="penjual" id="kartuPenjual"></div>
+
+    <div class="legend">
+      <span><span class="dot dot-p">●</span> <span data-lang="id">tersedia</span><span data-lang="en">available</span></span>
+      <span><span class="dot dot-s">◐</span> <span data-lang="id">sebagian, perlu modul tambahan, atau kedalaman berbeda</span><span data-lang="en">partial, extra module needed, or different depth</span></span>
+      <span><span class="dot dot-n">○</span> <span data-lang="id">tidak tersedia</span><span data-lang="en">not available</span></span>
+    </div>
+
+    <div class="tab" role="tablist">
+      <button type="button" role="tab" data-tabel="fitur" aria-selected="true">
+        <span data-lang="id">Fitur &amp; modul</span><span data-lang="en">Features &amp; modules</span></button>
+      <button type="button" role="tab" data-tabel="menu" aria-selected="false">
+        <span data-lang="id">Menu</span><span data-lang="en">Menus</span></button>
+      <button type="button" role="tab" data-tabel="form" aria-selected="false">
+        <span data-lang="id">Formulir</span><span data-lang="en">Forms</span></button>
+      <button type="button" role="tab" data-tabel="gap" aria-selected="false">
+        <span data-lang="id">Kesenjangan</span><span data-lang="en">Gaps</span></button>
+    </div>
+
+    <div id="wadahTabel"></div>
+
+    <div id="seruanPerbandingan"></div>
+
+    <p class="note">
+      <span data-lang="id">Sumber penilaian tercantum pada bagian </span>
+      <span data-lang="en">Assessment sources are listed in the </span>
+      <a href="#sumber"><span data-lang="id">Sumber</span><span data-lang="en">Sources</span></a>
+      <span data-lang="id"> di bawah. Baris yang menyangkut penempatan di Indonesia
+        (regulator, bahasa, pusat data) dinilai dari dokumen publik pemasok dan
+        peraturan yang berlaku.</span>
+      <span data-lang="en"> section below. Rows concerning Indonesian deployment
+        (regulator, language, data centre) are judged from vendors' public documents
+        and applicable regulation.</span>
+    </p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     ARSITEKTUR
+     ══════════════════════════════════════════════════════════════════════ -->
+<section id="arsitektur" class="abu">
+  <div class="wrap">
+    <div class="judul-bagian">
+      <span class="mata" data-lang="id">Arsitektur</span>
+      <span class="mata" data-lang="en">Architecture</span>
+      <h2 data-lang="id">Jalur keputusan yang dijaga waktunya</h2>
+      <h2 data-lang="en">A decision path with a time budget</h2>
+      <p data-lang="id">Fitur dibaca dari Valkey agar tidak membebani basis data,
+        keputusan dijaga oleh anggaran waktu, dan penulisan berjalan asinkron lewat
+        antrean pesan.</p>
+      <p data-lang="en">Features are read from Valkey so the database is not on the
+        critical path, decisions are kept inside a time budget, and writes run
+        asynchronously through a message queue.</p>
+    </div>
+    <div class="alur" id="kartuArsitektur"></div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     ANGKA
+     ══════════════════════════════════════════════════════════════════════ -->
+<section id="angka">
+  <div class="wrap">
+    <div class="judul-bagian">
+      <span class="mata" data-lang="id">Angka terukur</span>
+      <span class="mata" data-lang="en">Measured numbers</span>
+      <h2 data-lang="id">Diukur pada aplikasi yang berjalan, bukan pada brosur</h2>
+      <h2 data-lang="en">Measured on the running application, not in a brochure</h2>
+      <p data-lang="id">Setiap angka di bawah diukur dengan autentikasi aktif, lalu
+        diukur ulang setelah setiap perbaikan.</p>
+      <p data-lang="en">Every figure below was measured with authentication on, then
+        re-measured after each fix.</p>
+    </div>
+    <div id="tabelAngka"></div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     KEAMANAN
+     ══════════════════════════════════════════════════════════════════════ -->
+<section id="keamanan" class="gelap">
+  <div class="wrap">
+    <div class="judul-bagian">
+      <span class="mata" data-lang="id">Keamanan &amp; kepatuhan</span>
+      <span class="mata" data-lang="en">Security &amp; compliance</span>
+      <h2 data-lang="id">Berdiri di pusat data bank sendiri</h2>
+      <h2 data-lang="en">It stands up in the bank's own data centre</h2>
+      <p data-lang="id">Bagi UU PDP No. 27/2022, data keuangan penduduk Indonesia
+        wajib berada di wilayah Indonesia. Itu bukan pilihan gaya bagi Bariva —
+        satu berkas terpasang, tumpukan terbuka, tanpa lisensi per modul.</p>
+      <p data-lang="en">Under Law No. 27/2022 on personal data protection, the
+        financial data of Indonesian residents must stay in Indonesia. For Bariva
+        that is not a stylistic choice: one deployable artefact, an open stack, no
+        per-module licensing.</p>
+    </div>
+    <div class="grid" id="kartuKeamanan"></div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     KONTAK
+     ══════════════════════════════════════════════════════════════════════ -->
+<section id="kontak">
+  <div class="wrap">
+    <div class="judul-bagian">
+      <span class="mata" data-lang="id">Langkah berikut</span>
+      <span class="mata" data-lang="en">Next step</span>
+      <h2 data-lang="id">Uji pada data Anda, bukan pada janji kami</h2>
+      <h2 data-lang="en">Test it on your data, not on our promises</h2>
+      <p data-lang="id">Bila dua hal pada bagian kesenjangan adalah syarat mutlak bagi
+        Anda, katakan di awal — kami akan mengatakannya terus terang bahwa kami
+        bukan pilihan yang tepat.</p>
+      <p data-lang="en">If two of the items in the gaps section are hard requirements
+        for you, say so up front — we would rather tell you plainly that we are not
+        the right choice.</p>
+    </div>
+    <div class="grid" id="kartuKontak"></div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     SUMBER
+     ══════════════════════════════════════════════════════════════════════ -->
+<section id="sumber" class="abu">
+  <div class="wrap">
+    <div class="judul-bagian">
+      <span class="mata" data-lang="id">Sumber</span>
+      <span class="mata" data-lang="en">Sources</span>
+      <h2 data-lang="id">Dari mana penilaian ini diambil</h2>
+      <h2 data-lang="en">Where this assessment comes from</h2>
+    </div>
+    <ol class="sumber" id="daftarSumber"></ol>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <b>BARIVA<span style="color:#22d3ee">FRM</span></b>
+      <p style="margin:6px 0 0; max-width:52ch">
+        <span data-lang="id">Sistem manajemen risiko fraud untuk perbankan: penilaian
+          transaksi waktu nyata, antrean alert, manajemen kasus, kepatuhan &amp; AML,
+          tata kelola model, alur kerja BPMN 2.0, pelaporan regulator, dan ETL
+          berbasis NiFi.</span>
+        <span data-lang="en">Fraud risk management for banks: real-time transaction
+          scoring, alert queues, case management, compliance &amp; AML, model
+          governance, BPMN 2.0 workflow, regulatory reporting, and NiFi-based
+          ETL.</span>
+      </p>
+    </div>
+    <div style="text-align:right">
+      <span data-lang="id">Perbandingan diperbarui 4 September 2026.</span>
+      <span data-lang="en">Comparison updated 4 September 2026.</span><br>
+      <a href="#atas"><span data-lang="id">Kembali ke atas</span>
+        <span data-lang="en">Back to top</span></a>
+    </div>
+  </div>
+</footer>
+
+</div><!-- /#isi -->
+
+<script>
+/* ═════════════════════════════════════════════════════════════════════════
+   Bahasa
+   ═════════════════════════════════════════════════════════════════════════ */
+var BAHASA = "id";
+var SIMPAN = "bariva.bahasa";
+
+function pasangBahasa(b) {
+  BAHASA = (b === "en") ? "en" : "id";
+  document.documentElement.lang = BAHASA;
+  var tombol = document.querySelectorAll("[data-pilih]");
+  for (var i = 0; i < tombol.length; i++) {
+    var aktif = tombol[i].getAttribute("data-pilih") === BAHASA;
+    if (tombol[i].hasAttribute("aria-pressed")) {
+      tombol[i].setAttribute("aria-pressed", aktif ? "true" : "false");
+    }
+  }
+  try { localStorage.setItem(SIMPAN, BAHASA); } catch (e) {}
+  gambarUlang();
+}
+
+/* ═════════════════════════════════════════════════════════════════════════
+   Data
+   ═════════════════════════════════════════════════════════════════════════ */
+/* ═════════════════════════════════════════════════════════════════════════
+   DATA — satu-satunya sumber untuk kedua bahasa.
+   Menambah baris atau vendor cukup di sini; kedua bahasa ikut, dan
+   karenanya tidak mungkin tidak seimbang.
+   Penanda: 3 = ● tersedia, 2 = ◐ sebagian, 1 = ○ tidak tersedia.
+   ═════════════════════════════════════════════════════════════════════════ */
+
+var VENDOR = [
+  { n: { id: "Bariva FRM", en: "Bariva FRM" },
+    s: { id: "Bariva", en: "Bariva" },
+    d: { id: "Satu berkas terpasang: penilaian, kasus, kepatuhan, tata kelola model, "
+           + "alur kerja BPMN 2.0, pelaporan regulator, dan ETL NiFi pada konsol yang "
+           + "sama. Terbuka, tanpa lisensi per modul. <b>910 pemeriksaan otomatis lulus, "
+           + "nol gagal.</b> Yang tidak dimilikinya disebut sendiri pada bagian "
+           + "kesenjangan.",
+         en: "One deployable artefact: scoring, cases, compliance, model governance, "
+           + "BPMN 2.0 workflow, regulatory reporting and NiFi ETL on the same console. "
+           + "Open, with no per-module licensing. <b>910 automated checks passing, zero "
+           + "failing.</b> What it does not have, it says itself in the gaps section." } },
+
+  { n: { id: "FICO Falcon Fraud Manager", en: "FICO Falcon Fraud Manager" },
+    s: { id: "FICO Falcon", en: "FICO Falcon" },
+    d: { id: "Mesin penilaian pembayaran dan kartu yang sudah lama mapan: model saraf "
+           + "tiruan dan <i>Falcon Intelligence Network</i> yang menghimpun data dari "
+           + "lebih 9.000 institusi. Sisi kejahatan finansial dan AML datang dari "
+           + "TONBELLER yang diakuisisi FICO. Tersedia juga sebagai SaaS.",
+         en: "A long-established payment and card scoring engine: neural-network models "
+           + "and the <i>Falcon Intelligence Network</i>, which aggregates data from more "
+           + "than 9,000 institutions. The financial-crimes and AML side comes from "
+           + "TONBELLER, which FICO acquired. Also available as SaaS." } },
+
+  { n: { id: "SAS Fraud Management", en: "SAS Fraud Management" },
+    s: { id: "SAS FM", en: "SAS FM" },
+    d: { id: "Penilaian waktu nyata dengan skenario, model, dan pelatihan ulang pada "
+           + "SAS Viya. Kekuatannya justru pada keluasan estate analitik: model, ML, "
+           + "visualisasi, dan tata kelola berada pada satu pemasok.",
+         en: "Real-time scoring with scenarios, models and retraining on SAS Viya. Its "
+           + "strength is precisely the breadth of the analytics estate: models, ML, "
+           + "visualisation and governance from one vendor." } },
+
+  { n: { id: "NICE Actimize (X-Sight)", en: "NICE Actimize (X-Sight)" },
+    s: { id: "Actimize", en: "Actimize" },
+    d: { id: "Platform kejahatan finansial terpadu: fraud, AML, kepatuhan, dan "
+           + "pengawasan pasar pada satu rumah. Kedalaman pada sisi kepatuhan dan "
+           + "surveillance masih jauh di atas Bariva.",
+         en: "An integrated financial-crime platform: fraud, AML, compliance and market "
+           + "surveillance under one roof. Its depth on the compliance and surveillance "
+           + "side remains far ahead of Bariva." } },
+
+  { n: { id: "Feedzai", en: "Feedzai" },
+    s: { id: "Feedzai", en: "Feedzai" },
+    d: { id: "Produk yang lahir di awan dan mengutamakan ML, dengan penyusun aturan "
+           + "tanpa kode dan penekanan pada penjelasan keputusan. Disebut "
+           + "<i>Category Leader</i> 2026 oleh Chartis Research.",
+         en: "A cloud-native, ML-first product with a no-code rule builder and a strong "
+           + "emphasis on decision explainability. Named a 2026 <i>Category Leader</i> by "
+           + "Chartis Research." } },
+
+  { n: { id: "Clari5 (CustomerXPs)", en: "Clari5 (CustomerXPs)" },
+    s: { id: "Clari5", en: "Clari5" },
+    d: { id: "EFRM dan AML lintas kanal waktu nyata asal Bengaluru, diakuisisi Perfios "
+           + "pada Februari 2025. Disebut memproses lebih dari 10 miliar transaksi per "
+           + "bulan, mengelola lebih dari 1 miliar rekening, dan beroperasi di 15 "
+           + "negara. Penandanya: <i>customer-looped alert</i> — peringatan dikirim "
+           + "kepada nasabah untuk dikonfirmasi.",
+         en: "Real-time cross-channel EFRM and AML from Bengaluru, acquired by Perfios in "
+           + "February 2025. Reported to process more than 10 billion transactions a "
+           + "month, manage over 1 billion accounts and operate across 15 countries. Its "
+           + "marker: <i>customer-looped alerts</i> — alerts sent to the customer for "
+           + "confirmation." } },
+
+  { n: { id: "SAS Fraud &amp; Financial Crimes — penempatan bank KBMI 4",
+         en: "SAS Fraud &amp; Financial Crimes — KBMI 4 bank deployment" },
+    s: { id: "SAS KBMI 4", en: "SAS KBMI 4" },
+    d: { id: "<b>Produk yang sama dengan kolom SAS, disebut terpisah karena penempatannya "
+           + "berbeda:</b> pada bank KBMI 4 ia lazimnya berdiri di pusat data bank "
+           + "sendiri, dilokalkan untuk pelaporan PPATK/BI/OJK, dan dipasang oleh mitra "
+           + "integrator lokal. Kami tidak dapat menyebut nama bank mana pun dari sumber "
+           + "publik, jadi kolom ini adalah penempatan, bukan rujukan pelanggan.",
+         en: "<b>The same product as the SAS column, listed separately because the "
+           + "deployment differs:</b> in a KBMI 4 bank it typically stands up in the "
+           + "bank's own data centre, is localised for PPATK/BI/OJK reporting, and is "
+           + "installed by a local integration partner. We cannot name any specific bank "
+           + "from public sources, so this column is a deployment, not a customer "
+           + "reference." } },
+
+  { n: { id: "FICO Falcon via Multipolar Technology",
+         en: "FICO Falcon via Multipolar Technology" },
+    s: { id: "FICO/MLPT", en: "FICO/MLPT" },
+    d: { id: "<b>Kolom ini mengikuti penyebutan Anda, dan kejujuran menuntut catatan:</b> "
+           + "dari sumber publik yang kami temukan, mitra implementasi FICO yang "
+           + "terdokumentasi di Indonesia adalah Astra Graphia Information Technology "
+           + "(AGIT) pada Bank Permata tahun 2011, sedangkan PT Multipolar Technology "
+           + "Tbk (MLPT) mempublikasikan penangkal fraudnya sendiri, yaitu "
+           + "VisionAnalytics dan Fraud Detection System. Bila maksud Anda adalah "
+           + "penyaluran Falcon oleh integrator Indonesia, baris ini tepat; bila bukan, "
+           + "kolom ini sebaiknya diganti nama pengantarnya.",
+         en: "<b>This column follows your naming, and honesty requires a note:</b> in the "
+           + "public sources we found, the documented FICO implementation partner in "
+           + "Indonesia is Astra Graphia Information Technology (AGIT) at Bank Permata in "
+           + "2011, while PT Multipolar Technology Tbk (MLPT) publishes its own "
+           + "anti-fraud offering, VisionAnalytics and Fraud Detection System. If you "
+           + "meant Falcon delivered through an Indonesian integrator, this row is right; "
+           + "if not, the reseller's name should be corrected." } },
+
+  { n: { id: "ALTO Fraud Detection System (FDS)", en: "ALTO Fraud Detection System (FDS)" },
+    s: { id: "ALTO FDS", en: "ALTO FDS" },
+    d: { id: "Pesaing Indonesia yang sesungguhnya — dan yang posisinya berbeda dari "
+           + "semua nama di atas. ALTO Network adalah Penyelenggara Infrastruktur "
+           + "Pembayaran, jadi FDS-nya duduk pada lapisan jaringan: pemantauan 24 jam, "
+           + "mesin aturan dengan ambang yang dapat diatur, manajemen kasus, pustaka "
+           + "fraud beserta <i>sandbox</i> untuk menguji aturan sebelum dipakai, dan ML. "
+           + "Sebagai jaringan switching, <b>ia melihat transaksi lintas bank secara "
+           + "alami</b> dan ia mengoperasikan layanannya sendiri sepanjang waktu.",
+         en: "A genuinely Indonesian competitor — and one positioned differently from "
+           + "every name above. ALTO Network is a payment infrastructure provider, so "
+           + "its FDS sits at the network layer: round-the-clock monitoring, a rule "
+           + "engine with configurable thresholds, case management, a fraud library with "
+           + "a <i>sandbox</i> for testing rules before use, and ML. As a switching "
+           + "network it <b>sees cross-bank transactions naturally</b>, and it operates "
+           + "its own service around the clock." } },
+
+  { n: { id: "BANKiQ (Pulse &amp; FRM)", en: "BANKiQ (Pulse &amp; FRM)" },
+    s: { id: "BANKiQ", en: "BANKiQ" },
+    d: { id: "FRC untuk <i>issuer</i> dan <i>acquirer</i> dalam satu platform dan satu "
+           + "lintasan, respons di bawah 100 ms, dengan PULSE (SaaS), EWS, Money Mule, "
+           + "dan IAML. Yang belum kami tiru: sambungan intelijennya ke I4C, DoT-FRI, "
+           + "MNRL, dan NPCI Fed-AI, serta QRVT untuk verifikasi lewat IVR, WhatsApp, "
+           + "SMS, dan surel.",
+         en: "FRC for <i>issuers</i> and <i>acquirers</i> on a single platform and a "
+           + "single pass, responding in under 100 ms, with PULSE (SaaS), EWS, Money Mule "
+           + "and IAML. What we have not matched: its intelligence connections to I4C, "
+           + "DoT-FRI, MNRL and NPCI Fed-AI, and QRVT for verification by IVR, WhatsApp, "
+           + "SMS and email." } },
+
+  { n: { id: "M2P Fraud Management System", en: "M2P Fraud Management System" },
+    s: { id: "M2P FMS", en: "M2P FMS" },
+    d: { id: "FRM dan AML sebagai bagian dari tumpukan <i>banking-as-a-service</i> yang "
+           + "jauh lebih luas: penilaian milidetik lintas kartu, UPI, dompet, dan "
+           + "rekening, dengan korelasi sinyal lintas produk, <i>maker-checker</i>, "
+           + "laporan kinerja aturan, dan penilaian risiko nasabah.",
+         en: "FRM and AML as part of a far broader <i>banking-as-a-service</i> stack: "
+           + "millisecond scoring across card, UPI, wallet and account, with cross-product "
+           + "signal correlation, <i>maker-checker</i>, rule performance reports and "
+           + "customer risk rating." } }
+];
+
+/* ── mengapa sekarang ──────────────────────────────────────────────────── */
+var KENAPA = [
+  { j: { id: "Skalanya sudah nasional", en: "The scale is national" },
+    i: { id: "Volume transaksi perbankan Indonesia tumbuh jauh melampaui yang mampu "
+             + "diperiksa manusia. Satu jam keterlambatan dalam mengubah ambang "
+             + "berarti satu jam transaksi yang lolos dengan aturan yang sudah usang.",
+         en: "Indonesian banking transaction volume has grown far beyond what people can "
+             + "review. An hour of delay in changing a threshold is an hour of "
+             + "transactions passing under a rule that is already stale." } },
+  { j: { id: "Modusnya memakai AI", en: "The attacks now use AI" },
+    i: { id: "Tiruan suara dan <i>deepfake</i> sudah dipakai untuk melewati verifikasi "
+             + "yang mengandalkan suara dan wajah. Deteksi yang hanya mengandalkan "
+             + "atribut nasabah akan kalah dari rekaman yang semakin baik.",
+         en: "Voice clones and <i>deepfakes</i> are already used to defeat verification "
+             + "that relies on voice and face. Detection that leans only on customer "
+             + "attributes will lose to recordings that keep improving." } },
+  { j: { id: "Aturan statis tertinggal", en: "Static rules fall behind" },
+    i: { id: "Aturan yang tidak pernah dievaluasi menjadi kebisingan yang mahal: "
+             + "analis memeriksa seribu peringatan untuk menemukan tiga yang benar. "
+             + "Kinerja setiap aturan harus terlihat, bukan dirasakan.",
+         en: "Rules that are never evaluated become expensive noise: an analyst reviews a "
+             + "thousand alerts to find three that matter. The performance of each rule "
+             + "has to be visible, not merely felt." } }
+];
+
+/* ── kemampuan ─────────────────────────────────────────────────────────── */
+var KEMAMPUAN = [
+  { j: { id: "Penilaian real-time", en: "Real-time scoring" },
+    i: { id: "23 fitur dihitung per transaksi: kecepatan, perilaku perangkat, jaringan "
+             + "penerima, anomali lokasi, dan profil historis nasabah. Setiap keputusan "
+             + "membawa alasannya sendiri, bukan sekadar angka.",
+         en: "23 features computed per transaction: velocity, device behaviour, "
+             + "beneficiary network, location anomaly and the customer's historical "
+             + "profile. Every decision carries its own reason, not merely a number." } },
+  { j: { id: "Mesin aturan", en: "Rules engine" },
+    i: { id: "Aturan dapat diubah dari antarmuka, langsung berlaku, tanpa proses rilis. "
+             + "Setiap aturan yang menyala ikut tercantum dalam alasan keputusan, jadi "
+             + "analis tidak perlu menebak dari mana skor itu datang.",
+         en: "Rules are edited in the interface and take effect at once, with no release "
+             + "process. Every rule that fires is listed in the decision reason, so an "
+             + "analyst never has to guess where a score came from." } },
+  { j: { id: "Model &amp; pengawasan penyimpangan", en: "Model &amp; drift monitoring" },
+    i: { id: "RandomForest bawaan, dilatih pada data berlabel bank, dengan pelatihan "
+             + "ulang terjadwal dan perbandingan metrik sebelum promosi. PSI beserta "
+             + "rincian per keranjang ditampilkan pada layar tata kelola.",
+         en: "A built-in Random Forest trained on the bank's labelled data, with "
+             + "scheduled retraining and metric comparison before promotion. PSI and its "
+             + "per-bucket breakdown sit on the governance screen." } },
+  { j: { id: "Manajemen kasus &amp; triase", en: "Case management &amp; triage" },
+    i: { id: "Antrean peringatan, penugasan analis, eskalasi, dan tindakan massal atas "
+             + "ratusan alert sekaligus dengan satu alasan yang tercatat. Umpan balik "
+             + "analis langsung menjadi label pelatihan berikutnya.",
+         en: "Alert queues, analyst assignment, escalation, and bulk action over hundreds "
+             + "of alerts at once with a single recorded reason. Analyst feedback becomes "
+             + "the next training label directly." } },
+  { j: { id: "Jaringan &amp; rekening penampung", en: "Network &amp; mule analytics" },
+    i: { id: "Penelusuran hubungan rekening, perangkat, dan penerima untuk memetakan "
+             + "jaringan penampungan dana. Skor penampung dijelaskan sinyal demi sinyal, "
+             + "sehingga dapat dibantah.",
+         en: "Trace relationships between accounts, devices and beneficiaries to map mule "
+             + "networks. The mule score is explained signal by signal, so it can be "
+             + "challenged." } },
+  { j: { id: "Fraud kartu", en: "Card fraud" },
+    i: { id: "Tujuh sinyal khusus kartu: penerima daftar hitam, perjalanan mustahil, "
+             + "perangkat baru dan perangkat bersama, pola pengujian menjelang penarikan "
+             + "besar, jam tidak lazim, serta kecepatan transaksi.",
+         en: "Seven card-specific signals: blacklisted beneficiary, impossible travel, "
+             + "new and shared devices, test patterns before a large withdrawal, unusual "
+             + "hours, and transaction velocity." } },
+  { j: { id: "Kepatuhan &amp; AML", en: "Compliance &amp; AML" },
+    i: { id: "Pemantauan AML, penapisan terhadap daftar pengawasan, penyusunan laporan "
+             + "regulator, dan jejak audit yang tidak dapat diubah untuk setiap "
+             + "keputusan, perubahan aturan, dan tindakan analis.",
+         en: "AML monitoring, watchlist screening, assembly of regulatory reports, and an "
+             + "immutable audit trail for every decision, rule change and analyst "
+             + "action." } },
+  { j: { id: "Penyusun laporan tanpa SQL", en: "Report builder, no SQL" },
+    i: { id: "Analis merakit laporan sendiri dari katalog kolom: kolom hanya boleh "
+             + "datang dari katalog, nilai saringan selalu terikat parameter. Ekspor CSV "
+             + "mengebiri rumus.",
+         en: "Analysts assemble their own reports from a column catalogue: columns may "
+             + "only come from the catalogue, filter values are always bound parameters. "
+             + "CSV export neutralises formula injection." } },
+  { j: { id: "Integrasi data bawaan", en: "Built-in data integration" },
+    i: { id: "ETL memakai Apache NiFi dan dikendalikan dari dalam aplikasi: unggah cetak "
+             + "biru, uji kueri sumber, nyalakan dan hentikan aliran, pantau kegagalan.",
+         en: "ETL runs on Apache NiFi and is driven from inside the application: upload a "
+             + "blueprint, test a source query, start and stop flows, watch failures." } },
+  { j: { id: "Alur kerja BPMN 2.0", en: "BPMN 2.0 workflow" },
+    i: { id: "Alur investigasi digambar sebagai BPMN 2.0, diterapkan pada mesin alur "
+             + "kerja bawaan, lengkap dengan penugasan tugas, riwayat proses, dan "
+             + "formulir yang melekat pada setiap langkah.",
+         en: "Investigation flows are drawn as BPMN 2.0 and run on the built-in workflow "
+             + "engine, with task assignment, process history and a form attached to "
+             + "every step." } },
+  { j: { id: "Konsorsium lintas bank", en: "Cross-bank consortium" },
+    i: { id: "<b>Baru.</b> Bertukar penanda dengan bank lain dalam bentuk pencacah "
+             + "SHA-256 — bukan nomor rekening, bukan nama, bukan alamat IP. Yang kami "
+             + "sebut terus terang: mesinnya sudah diuji, <b>pesertanya masih nol</b>.",
+         en: "<b>New.</b> Exchange indicators with other banks as SHA-256 digests — not "
+             + "account numbers, not names, not IP addresses. We say this plainly: the "
+             + "engine is tested, <b>the member count is still zero</b>." } },
+  { j: { id: "Operasi 24×7", en: "24×7 operations" },
+    i: { id: "<b>Baru.</b> Serah terima shift yang baru selesai setelah operator "
+             + "penerima mengonfirmasinya, jadwal piket berurutan eskalasi, buku jalankan "
+             + "yang setiap langkahnya tercatat, dan empat pemeriksaan yang menjawab satu "
+             + "pertanyaan: apakah kita sedang buta? Yang tidak kami sediakan: "
+             + "<b>orangnya</b>.",
+         en: "<b>New.</b> Shift handover that is only complete once the incoming operator "
+             + "confirms it, a duty roster with an escalation order, runbooks whose every "
+             + "step is recorded, and four checks answering one question: are we blind "
+             + "right now? What we do not supply: <b>the people</b>." } },
+  { j: { id: "Observabilitas", en: "Observability" },
+    i: { id: "Metrik Prometheus siap pakai, ID pelacakan per permintaan, dasbor latensi "
+             + "dan tingkat kegagalan, serta layar kesehatan antrean yang menagih apa "
+             + "yang menumpuk tanpa pemilik.",
+         en: "Prometheus metrics out of the box, a trace ID per request, latency and "
+             + "failure-rate dashboards, and a queue-health screen that bills whatever "
+             + "piles up without an owner." } },
+  { j: { id: "Dua bahasa", en: "Bilingual" },
+    i: { id: "Antarmuka dan seluruh keterangannya tersedia dalam bahasa Indonesia dan "
+             + "Inggris sejak awal — bukan hasil penerjemahan belakangan.",
+         en: "The interface and every explanation in it ship in Indonesian and English "
+             + "from the outset — not translated afterwards." } },
+  { j: { id: "Deteksi kompromi (titik belanja bersama)",
+         en: "Compromise detection (common point of purchase)" },
+    i: { id: "<b>Baru.</b> Menjawab pertanyaan yang tidak dijawab daftar transaksi "
+             + "mencurigakan: <i>kartu mana lagi yang sudah ikut terbakar?</i> Bariva "
+             + "mencari satu penerima yang disinggahi beberapa rekening berstatus fraud "
+             + "dalam jendela yang sama, lalu menyebut semua rekening lain yang lewat "
+             + "titik itu — termasuk yang sudah terbukti fraud, yang tetap dicantumkan "
+             + "dengan tanda. Pemindaian wajib menyebut pemicunya, dan keputusannya "
+             + "<b>tidak memblokir rekening</b>.",
+         en: "<b>New.</b> It answers the question a list of suspicious transactions never "
+             + "answers: <i>which other cards are already burnt?</i> Bariva finds one "
+             + "merchant visited by several accounts with confirmed fraud inside the same "
+             + "window, then lists every other account that passed through — including "
+             + "the ones already proven fraudulent, which are flagged, not hidden. A scan "
+             + "must record its trigger, and its decisions <b>do not block accounts</b>." } },
+  { j: { id: "Penilaian risiko nasabah", en: "Customer risk rating" },
+    i: { id: "<b>Baru.</b> Sepuluh faktor berbobot, tiap faktor dapat dijelaskan per "
+             + "rekening, bobotnya dapat diubah penyelia tanpa menyentuh kode. Setiap "
+             + "penilaian punya tanggal kedaluwarsa dan antrean uji ulang; pemicu "
+             + "tertentu menetapkan tingkat minimum, sehingga rekening yang pernah "
+             + "diblokir dan dua kali terbukti fraud tidak berakhir sebagai RENDAH.",
+         en: "<b>New.</b> Ten weighted factors, each explainable per account, with "
+             + "weights a supervisor can change without touching code. Every rating "
+             + "carries an expiry date and a re-rating queue; certain triggers set a "
+             + "minimum level, so an account that has been blocked and twice proven "
+             + "fraudulent does not end up reported as LOW." } },
+  { j: { id: "Umpan intelijen eksternal", en: "External intelligence feed" },
+    i: { id: "<b>Baru.</b> Daftar rekening kuli dan penanda dari regulator serta "
+             + "asosiasi masuk tanpa menunggu bank lain ikut konsorsium. Sumber baru "
+             + "selalu belum dipercaya; penandanya tetap dipakai dan ditandai pada "
+             + "setiap keputusan. Kecocokan <b>tidak memblokir rekening dan tidak "
+             + "mengubah skor</b>.",
+         en: "<b>New.</b> Mule-account lists and indicators from regulators and "
+             + "associations come in without waiting for other banks to join a "
+             + "consortium. A new source always starts untrusted; its indicators are "
+             + "still used and marked on every decision. A match <b>does not block an "
+             + "account and does not change a score</b>." } },
+  { j: { id: "Kerugian &amp; pemulihan", en: "Loss &amp; recovery" },
+    i: { id: "<b>Baru.</b> Berapa yang hilang, berapa yang ditarik kembali, dan berapa "
+             + "yang tertahan sebelum keluar — dicatat terpisah. Pemulihan yang melebihi "
+             + "kerugian dilaporkan sebagai keanehan, bukan diterima diam-diam.",
+         en: "<b>New.</b> How much was lost, how much was clawed back, and how much was "
+             + "stopped before it left — recorded separately. Recovery exceeding the "
+             + "reported loss is reported as an anomaly rather than quietly accepted." } },
+  { j: { id: "Keterhubungan LOS/LMS", en: "LOS/LMS link" },
+    i: { id: "<b>Baru.</b> Berkas permohonan masuk dari LOS/LMS, lalu disaring terhadap "
+             + "daftar pengawasan, keputusan rekening penampung, paparan kompromi, "
+             + "penilaian risiko nasabah, penanda intelijen, dan <b>permohonan ganda atas "
+             + "identitas yang sama</b>. Hasilnya anjuran pada antrean kerja — bukan "
+             + "keputusan kredit. Bariva <b>tidak menilai kelayakan, tidak menyetujui, dan "
+             + "tidak menolak pinjaman</b>, dan kata “SETUJU” sengaja tidak tersedia. Nomor "
+             + "identitas hanya tersimpan sebagai pencacah SHA-256.",
+         en: "<b>New.</b> Application files arrive from LOS/LMS and are screened against "
+             + "watchlists, mule decisions, open compromise exposure, customer risk "
+             + "ratings, intelligence indicators and <b>duplicate applications on the same "
+             + "identity</b>. The output is a suggestion on a work queue, not a credit "
+             + "decision. Bariva <b>does not assess creditworthiness, does not approve and "
+             + "does not reject a loan</b> — the word “APPROVE” is deliberately absent. "
+             + "Identity numbers are stored only as a SHA-256 digest." } },
+
+  { j: { id: "Kinerja aturan &amp; celah tipologi",
+         en: "Rule performance &amp; typology gaps" },
+    i: { id: "<b>Baru.</b> Presisi per aturan dihitung hanya dari alert yang sudah "
+             + "diputus, sehingga aturan yang belum teruji tidak dilaporkan sebagai "
+             + "gagal. Pustaka tipologi PPATK, BI, OJK, dan FATF dipetakan ke aturan "
+             + "yang berjalan; yang belum terpetakan <b>disebut namanya</b>.",
+         en: "<b>New.</b> Per-rule precision is computed only from alerts an analyst has "
+             + "actually decided, so a rule that has not been tested is not reported as "
+             + "having failed. A typology library drawn from PPATK, BI, OJK and FATF is "
+             + "mapped to the rules that actually run; anything unmapped is "
+             + "<b>named</b>." } }
+];
+
+/* ── arsitektur ────────────────────────────────────────────────────────── */
+var ARSITEKTUR = [
+  { j: { id: "Ingesti", en: "Ingestion" },
+    i: { id: "Aliran NiFi diunggah dan dijalankan dari dalam aplikasi; kegagalan "
+             + "terlihat pada konsol yang sama.",
+         en: "NiFi flows are uploaded and run from inside the application; failures are "
+             + "visible on the same console." } },
+  { j: { id: "Fitur", en: "Features" },
+    i: { id: "Fitur dibaca dari Valkey, bukan dari basis data, supaya jalur keputusan "
+             + "tidak menunggu kueri yang mahal.",
+         en: "Features are read from Valkey, not the database, so the decision path never "
+             + "waits on an expensive query." } },
+  { j: { id: "Anggaran waktu", en: "Time budget" },
+    i: { id: "Keputusan dijaga oleh anggaran waktu: bila model tidak menjawab tepat "
+             + "waktu, keputusan diambil oleh aturan, bukan menunggu.",
+         en: "Decisions are kept inside a time budget: if the model does not answer in "
+             + "time, rules decide rather than wait." } },
+  { j: { id: "Aturan + model", en: "Rules + model" },
+    i: { id: "Aturan dan model berjalan bersama; keduanya menyumbang alasan keputusan "
+             + "yang dapat dibaca analis.",
+         en: "Rules and the model run together; both contribute to a decision reason an "
+             + "analyst can read." } },
+  { j: { id: "Penulisan asinkron", en: "Asynchronous writes" },
+    i: { id: "Penulisan berjalan lewat antrean pesan, sehingga lonjakan tidak "
+             + "menghambat respons.",
+         en: "Writes go through a message queue, so a surge never throttles the "
+             + "response." } },
+  { j: { id: "Jejak audit", en: "Audit trail" },
+    i: { id: "Setiap keputusan, perubahan, dan tindakan tercatat dengan pelakunya; "
+             + "jejaknya tidak dapat dihapus atau disunting.",
+         en: "Every decision, change and action is recorded with its actor; the trail "
+             + "cannot be deleted or edited." } }
+];
+
+/* ── keamanan ──────────────────────────────────────────────────────────── */
+var KEAMANAN = [
+  { j: { id: "Empat tingkat wewenang", en: "Four permission levels" },
+    i: { id: "Pemirsa, analis, penyelia, administrator. Mengubah ambang, bobot, dan "
+             + "model setara dengan mengubah keputusan yang diterima nasabah — karena "
+             + "itu hanya penyelia ke atas.",
+         en: "Viewer, analyst, supervisor, administrator. Changing thresholds, weights and "
+             + "models is equivalent to changing the decision a customer receives, so it "
+             + "is restricted to supervisors and above." } },
+  { j: { id: "Jejak audit yang tidak dapat diubah", en: "Immutable audit trail" },
+    i: { id: "Setiap tindakan menyimpan pelaku, waktu, dan rinciannya. Hanya "
+             + "administrator yang dapat membacanya.",
+         en: "Every action stores its actor, time and detail. Only an administrator can "
+             + "read it." } },
+  { j: { id: "Rahasia terenkripsi", en: "Encrypted secrets" },
+    i: { id: "Rahasia integrasi tersimpan terenkripsi dan tidak pernah dikembalikan ke "
+             + "antarmuka; yang tampil hanya penunjuknya.",
+         en: "Integration secrets are stored encrypted and never returned to the "
+             + "interface; only a pointer is shown." } },
+  { j: { id: "Penempatan sendiri", en: "Self-hosted" },
+    i: { id: "Satu berkas terpasang di pusat data bank, tanpa ketergantungan pada awan "
+             + "pihak ketiga — sebagaimana diwajibkan UU PDP No. 27/2022 bagi data "
+             + "keuangan penduduk Indonesia.",
+         en: "One artefact deployed in the bank's own data centre, with no dependency on "
+             + "a third-party cloud — as required by Law No. 27/2022 on personal data "
+             + "protection for Indonesian residents' financial data." } }
+];
+
+/* ── kontak ────────────────────────────────────────────────────────────── */
+var KONTAK = [
+  { j: { id: "Demo langsung", en: "Live demo" },
+    i: { id: "Penilaian transaksi waktu nyata, konsol analis, dan jejak keputusan "
+             + "dijalankan pada peramban Anda, bukan pada tangkapan layar.",
+         en: "Real-time transaction scoring, the analyst console and the decision trail, "
+             + "run in your browser rather than shown in screenshots." } },
+  { j: { id: "Uji beban bersama", en: "Joint load test" },
+    i: { id: "Kami jalankan skenario beban pada infrastruktur Anda dan serahkan "
+             + "angkanya apa adanya, termasuk yang buruk.",
+         en: "We run a load scenario on your infrastructure and hand over the numbers as "
+             + "they are, including the bad ones." } },
+  { j: { id: "Tinjauan arsitektur", en: "Architecture review" },
+    i: { id: "Sesi teknis bersama tim platform: jalur data, anggaran waktu, jejak audit, "
+             + "dan apa yang terjadi bila model tidak menjawab.",
+         en: "A technical session with your platform team: the data path, the time budget, "
+             + "the audit trail, and what happens when the model does not answer." } }
+];
+
+/* ── matriks: fitur & modul ────────────────────────────────────────────── */
+var FITUR = [
+  [ { id: "Penilaian transaksi waktu nyata", en: "Real-time transaction scoring" },
+    [3,3,3,3,3,3,3,3,3,3,3],
+    { id: "&lt; 50 ms pada 759 TPS berotentikasi; BANKiQ mengiklankan &lt; 100 ms",
+      en: "&lt; 50 ms at 759 authenticated TPS; BANKiQ advertises &lt; 100 ms" } ],
+
+  [ { id: "Penyusun aturan tanpa kode untuk analis", en: "No-code rule builder for analysts" },
+    [3,2,2,2,3,3,2,2,2,3,3],
+    { id: "Pada FICO, SAS, dan Actimize, penyuntingan aturan lazimnya lewat tim "
+          + "profesional, bukan analis sendiri",
+      en: "At FICO, SAS and Actimize, rule editing commonly goes through a "
+          + "professional-services team rather than the analyst" } ],
+
+  [ { id: "Model ML internal, latih ulang, promosi", en: "Internal ML, retraining, promotion" },
+    [3,3,3,3,3,3,3,3,2,3,3], null ],
+
+  [ { id: "Alasan keputusan per aturan yang menyala", en: "Per-rule decision reason" },
+    [3,3,3,3,3,3,3,3,2,3,3], null ],
+
+  [ { id: "Antrean alert, penugasan, umur antrean (SLA)", en: "Alert queue, assignment, SLA" },
+    [3,3,3,3,3,3,3,3,3,3,3], null ],
+
+  [ { id: "Manajemen kasus", en: "Case management" },
+    [3,3,3,3,3,3,3,3,3,3,3], null ],
+
+  [ { id: "Alur kerja berstandar BPMN 2.0", en: "Standard BPMN 2.0 workflow" },
+    [3,2,2,2,1,2,2,2,1,2,2],
+    { id: "Semua punya alur kerja; hanya Bariva yang menjalankan berkas BPMN 2.0 standar",
+      en: "Everyone has workflow; only Bariva runs a standard BPMN 2.0 file" } ],
+
+  [ { id: "Analitik jaringan &amp; visualisasi tautan", en: "Network analytics &amp; link visualisation" },
+    [3,2,3,3,2,3,3,2,2,3,2], null ],
+
+  [ { id: "Modul rekening penampung (mule) khusus", en: "Dedicated mule-account module" },
+    [3,2,2,2,2,3,2,2,1,3,2], null ],
+
+  [ { id: "Fraud kartu (debit, kredit, ATM/POS/Ecom)", en: "Card fraud (debit, credit, ATM/POS/e-commerce)" },
+    [3,3,3,3,3,3,3,3,3,3,3], null ],
+
+  [ { id: "Fraud internal (pegawai &amp; cabang)", en: "Internal fraud (staff &amp; branch)" },
+    [3,2,3,3,2,3,3,2,1,3,2], null ],
+
+  [ { id: "Fraud pinjaman &amp; keterhubungan LOS/LMS", en: "Loan fraud &amp; LOS/LMS connectivity" },
+    [2,3,2,2,2,2,2,3,1,3,2],
+    { id: "Bariva menyaring permohonan yang masuk, tetapi tidak menilai kelayakan kredit "
+          + "dan tidak mendeteksi fraud pinjaman secara utuh; BANKiQ menjadikannya modul "
+          + "tersendiri",
+      en: "Bariva screens incoming applications but does not assess creditworthiness and "
+          + "does not detect loan fraud end to end; BANKiQ ships it as its own module" } ],
+
+  [ { id: "Sistem peringatan dini (EWS) ke sistem inti", en: "Early-warning system into core banking" },
+    [2,2,2,2,2,2,2,2,1,3,2], null ],
+
+  [ { id: "Penilaian risiko onboarding (nasabah/merchant)", en: "Onboarding risk scoring" },
+    [3,3,3,3,3,3,3,3,1,3,3], null ],
+
+  [ { id: "Screening sanksi, PEP, media merugikan", en: "Sanctions, PEP and adverse-media screening" },
+    [2,2,3,3,2,3,3,2,1,3,3],
+    { id: "Penyedia screening bawaan Bariva adalah pengganti contoh yang harus "
+          + "disambungkan ke penyedia sungguhan",
+      en: "Bariva's built-in screening provider is a sample stand-in that must be "
+          + "connected to a real provider" } ],
+
+  [ { id: "Pelaporan regulator (draf → muatan → pengajuan)",
+      en: "Regulatory reporting (draft → payload → submission)" },
+    [3,2,3,3,2,3,3,2,2,3,3], null ],
+
+  [ { id: "Penyusun laporan oleh analis, tanpa SQL", en: "Analyst-built reports, no SQL" },
+    [3,2,2,2,2,2,2,2,2,2,2], null ],
+
+  [ { id: "ETL/ingesti bawaan pada produk yang sama", en: "Bundled ETL/ingestion" },
+    [3,1,1,1,1,1,1,2,2,1,1],
+    { id: "ALTO memperoleh data dari jaringannya sendiri; MLPT membawa platform big data "
+          + "VisionAnalytics",
+      en: "ALTO gets its data from its own network; MLPT brings the VisionAnalytics big-"
+          + "data platform" } ],
+
+  [ { id: "Deteksi kompromi / titik belanja bersama", en: "Compromise detection / common point of purchase" },
+    [3,3,2,2,2,2,2,2,2,2,1], null ],
+
+  [ { id: "Penilaian risiko nasabah yang dihitung ulang", en: "Customer risk rating that is re-computed" },
+    [3,3,3,3,2,3,3,3,1,3,3], null ],
+
+  [ { id: "Pelacakan kerugian &amp; pemulihan pada kasus", en: "Loss &amp; recovery tracking on cases" },
+    [3,2,2,2,2,2,2,2,2,2,2], null ],
+
+  [ { id: "Kinerja per aturan (presisi &amp; hasil)", en: "Per-rule performance (precision &amp; yield)" },
+    [3,3,3,3,3,2,3,3,2,3,3], null ],
+
+  [ { id: "Pustaka tipologi &amp; laporan celah cakupan", en: "Typology library &amp; coverage-gap report" },
+    [3,2,3,3,2,3,3,2,1,3,2], null ],
+
+  [ { id: "Sambungan ke registri intelijen nasional", en: "Connection to national intelligence registries" },
+    [2,2,2,2,2,2,2,2,2,3,2],
+    { id: "BANKiQ sudah tersambung ke I4C, DoT-FRI, MNRL, dan NPCI Fed-AI",
+      en: "BANKiQ is already connected to I4C, DoT-FRI, MNRL and NPCI Fed-AI" } ],
+
+  [ { id: "Data konsorsium lintas bank", en: "Cross-bank consortium data" },
+    [2,3,2,2,2,2,2,2,3,2,1],
+    { id: "ALTO melihat lintas bank karena ia jaringan switching; Falcon Intelligence "
+          + "Network menghimpun lebih dari 9.000 institusi",
+      en: "ALTO sees across banks because it is a switching network; the Falcon "
+          + "Intelligence Network aggregates more than 9,000 institutions" } ],
+
+  [ { id: "Jejaring intelijen perangkat global", en: "Global device-intelligence network" },
+    [2,3,2,2,3,2,2,2,1,2,2], null ],
+
+  [ { id: "Konsol operasi untuk layanan 24×7", en: "Operations console for 24×7 service" },
+    [2,2,2,2,2,2,2,2,3,2,2],
+    { id: "ALTO mengoperasikan jaringannya sendiri sepanjang waktu — lengkap dengan "
+          + "orangnya; Bariva hanya menyediakan konsolnya",
+      en: "ALTO operates its own network around the clock, people included; Bariva "
+          + "supplies only the console" } ],
+
+  [ { id: "Seragam kerja untuk operasi bergilir", en: "Runbooks for rotating operations" },
+    [3,1,1,1,1,1,1,1,2,1,1], null ],
+
+  [ { id: "Pemeriksaan “apakah kita sedang buta”", en: "An “are we blind right now?” check" },
+    [3,2,2,2,2,2,2,2,2,1,2], null ],
+
+  [ { id: "Antarmuka dua bahasa (Indonesia · Inggris)", en: "Bilingual interface (Indonesian · English)" },
+    [3,1,1,1,1,1,1,2,2,1,1],
+    { id: "Penempatan lewat mitra Indonesia lazimnya diterjemahkan; ALTO berbahasa "
+          + "Indonesia",
+      en: "Deployments through an Indonesian partner are commonly localised; ALTO is in "
+          + "Indonesian" } ],
+
+  [ { id: "SaaS siap pakai", en: "Ready-made SaaS" },
+    [1,3,3,3,3,3,1,1,2,3,3],
+    { id: "Penempatan bank KBMI 4 dan pengiriman lewat integrator lazimnya di pusat "
+          + "data bank sendiri",
+      en: "KBMI 4 deployments and integrator-delivered projects normally sit in the "
+          + "bank's own data centre" } ],
+
+  [ { id: "Cakupan di luar fraud (inti, kartu, pinjaman)", en: "Coverage beyond fraud (core, cards, lending)" },
+    [1,2,2,2,1,2,2,3,1,1,3],
+    { id: "MLPT menjual platform inti perbankan N3CA; M2P menjual tumpukan BaaS",
+      en: "MLPT sells the N3CA core-banking platform; M2P sells a BaaS stack" } ],
+
+  [ { id: "Dapat berdiri di pusat data bank sendiri", en: "Deployable in the bank's own data centre" },
+    [3,2,2,2,2,2,3,3,2,2,2],
+    { id: "Menentukan bagi UU PDP No. 27/2022 tentang data keuangan penduduk Indonesia",
+      en: "Decisive under Law No. 27/2022 on Indonesian residents' financial data" } ]
+];
+
+/* ── matriks: menu ─────────────────────────────────────────────────────── */
+var MENU = [
+  [ { id: "Ringkasan", en: "Overview" }, [3,3,3,3,3,3,3,3,3,3,3],
+    { id: "Dasbor tersedia di semua produk", en: "Every product ships a dashboard" } ],
+  [ { id: "Pemantauan Transaksi", en: "Transaction Monitoring" }, [3,3,3,3,3,3,3,3,3,3,3], null ],
+  [ { id: "Antrean Alert", en: "Alert Queue" }, [3,3,3,3,3,3,3,3,3,3,3],
+    { id: "BANKiQ menambahkan QRVT (IVR, WhatsApp, SMS, surel); Clari5 memakai "
+          + "peringatan yang diloop ke nasabah",
+      en: "BANKiQ adds QRVT (IVR, WhatsApp, SMS, email); Clari5 loops alerts back to "
+          + "the customer" } ],
+  [ { id: "Manajemen Kasus", en: "Case Management" }, [3,3,3,3,3,3,3,3,3,3,3], null ],
+  [ { id: "Analitik Jaringan", en: "Network Analytics" }, [3,2,3,3,2,3,3,2,2,3,2], null ],
+  [ { id: "Kepatuhan &amp; AML", en: "Compliance &amp; AML" }, [3,2,3,3,2,3,3,2,2,3,3], null ],
+  [ { id: "Integrasi Data (ETL)", en: "Data Integration (ETL)" }, [3,1,1,1,1,1,1,2,2,1,1],
+    { id: "Tidak ada yang menggabungkannya; biasanya proyek tersendiri",
+      en: "Nobody else bundles it; it is normally a separate project" } ],
+  [ { id: "Aturan &amp; Model", en: "Rules &amp; Model" }, [3,3,3,3,3,3,3,3,3,3,3], null ],
+  [ { id: "Laporan", en: "Reports" }, [3,3,3,3,2,3,3,3,2,3,2], null ],
+  [ { id: "Data Master", en: "Master Data" }, [3,3,3,3,3,3,3,3,3,3,3], null ],
+  [ { id: "Pengguna &amp; Wewenang", en: "Users &amp; Permissions" }, [3,3,3,3,3,3,3,3,3,3,3], null ],
+  [ { id: "Alur Kerja (BPMN)", en: "Workflow (BPMN)" }, [3,2,2,2,1,2,2,2,1,2,2], null ],
+  [ { id: "Jejak Audit", en: "Audit Trail" }, [3,3,3,3,3,3,3,3,3,3,3], null ],
+  [ { id: "Deteksi Kompromi", en: "Compromise Detection" }, [3,3,2,2,2,2,2,2,2,2,1],
+    { id: "Yang tidak Bariva lakukan: memblokirnya otomatis",
+      en: "What Bariva does not do: block them automatically" } ],
+  [ { id: "Risiko Nasabah", en: "Customer Risk" }, [3,3,3,3,2,3,3,3,1,3,3],
+    { id: "Penilaian berbobot yang dihitung ulang, bukan kolom statis yang menua",
+      en: "A weighted rating that is re-computed, not a static column left to age" } ],
+  [ { id: "Intelijen Eksternal", en: "External Intelligence" }, [3,2,2,2,2,2,2,2,2,3,2], null ],
+  [ { id: "Operasi 24×7", en: "24×7 Operations" }, [3,2,2,2,2,2,2,2,3,2,2],
+    { id: "Yang tidak Bariva sediakan: orangnya", en: "What Bariva does not supply: the people" } ],
+  [ { id: "Keterhubungan Pinjaman", en: "Loan Link" }, [3,2,2,2,1,2,2,2,1,2,2],
+    { id: "Penyaringan permohonan dari LOS/LMS; bukan keputusan kredit",
+      en: "Screening of applications from LOS/LMS; not a credit decision" } ],
+  [ { id: "Konsorsium", en: "Consortium" }, [3,3,2,2,2,2,2,2,3,2,1],
+    { id: "Mesin Bariva berjalan dan diuji, tetapi pesertanya nol",
+      en: "Bariva's engine runs and is tested, but its member count is zero" } ]
+];
+
+/* ── matriks: formulir ─────────────────────────────────────────────────── */
+var FORM = [
+  [ { id: "Keputusan alert", en: "Alert decision" }, [3,3,3,3,3,3,3,3,3,3,3],
+    { id: "Alasan wajib ≥ 10 karakter, tersimpan atas nama pemeriksa dari sesinya",
+      en: "A reason of at least 10 characters, stored under the reviewer's session identity" } ],
+  [ { id: "Pembukaan &amp; disposisi kasus", en: "Case opening &amp; disposition" },
+    [3,3,3,3,3,3,3,3,3,3,3],
+    { id: "Disposisi menjadi label pelatihan model berikutnya",
+      en: "The disposition becomes the next training label for the model" } ],
+  [ { id: "Penyunting aturan", en: "Rule editor" }, [3,2,2,2,3,3,2,2,2,3,3],
+    { id: "Kondisi dan bobot langsung berlaku; tidak ada rilis",
+      en: "Conditions and weights take effect at once; there is no release" } ],
+  [ { id: "Ambang &amp; bobot", en: "Thresholds &amp; weights" }, [3,2,2,2,2,2,2,2,2,2,2],
+    { id: "Tabel dampak dihitung pada layar yang sama: berapa fraud terlewat andai "
+          + "ambang digeser",
+      en: "The impact table is computed on the same screen: how much fraud would be "
+          + "missed if the threshold moved" } ],
+  [ { id: "Permintaan &amp; persetujuan perubahan", en: "Change request &amp; approval" },
+    [3,2,2,2,2,2,2,2,2,2,3],
+    { id: "Perubahan berat tidak dapat dilakukan sendiri tanpa jejak persetujuan; M2P "
+          + "menjadikan <i>maker-checker</i> fitur yang ditonjolkan",
+      en: "Heavy changes cannot be made alone without an approval trail; M2P promotes "
+          + "<i>maker-checker</i> as a headline feature" } ],
+  [ { id: "Peninjauan rekening penampung", en: "Mule-account review" }, [3,2,2,2,2,3,2,2,1,3,2],
+    { id: "Keputusan dan alasan tersimpan per rekening; peninjauan kedua menimpa, "
+          + "tidak menggandakan",
+      en: "The decision and reason are stored per account; a second review overwrites "
+          + "rather than duplicates" } ],
+  [ { id: "Penyusun laporan", en: "Report builder" }, [3,2,2,2,2,2,2,2,2,2,2],
+    { id: "Kolom hanya boleh dipilih dari katalog; nilai saringan selalu terikat "
+          + "parameter",
+      en: "Columns may only be chosen from the catalogue; filter values are always bound "
+          + "parameters" } ],
+  [ { id: "Unggah berkas BPMN", en: "BPMN file upload" }, [3,1,1,1,1,1,1,1,1,1,1],
+    { id: "Berkas standar BPMN 2.0 dijalankan, bukan dialirkan ke bahasa sendiri",
+      en: "A standard BPMN 2.0 file is executed, not translated into a proprietary "
+          + "language" } ],
+  [ { id: "Pengaturan &amp; rahasia integrasi", en: "Integration settings &amp; secrets" },
+    [3,1,1,1,1,1,1,2,2,1,1],
+    { id: "Rahasia tersimpan terenkripsi; pemantauan aliran ikut pada produk yang sama",
+      en: "Secrets are stored encrypted; flow monitoring ships with the same product" } ],
+  [ { id: "Pemeriksaan daftar pantauan", en: "Watchlist screening" }, [3,2,3,3,2,3,3,2,1,3,3],
+    { id: "Hasilnya masuk antrean keputusan, bukan sekadar daftar cocok",
+      en: "Results land in a decision queue, not merely in a list of matches" } ],
+  [ { id: "Data master", en: "Master data" }, [3,3,3,3,3,3,3,3,3,3,3],
+    { id: "Menambah nama ke daftar sanksi dihitung sekelas dengan mengubah aturan",
+      en: "Adding a name to a sanctions list is treated as seriously as changing a rule" } ],
+  [ { id: "Pengguna, peran, penonaktifan", en: "Users, roles, deactivation" },
+    [3,3,3,3,3,3,3,3,3,3,3],
+    { id: "Akun dinonaktifkan, tidak dihapus — agar jejaknya tidak ikut hilang",
+      en: "Accounts are deactivated, never deleted, so their trail does not vanish" } ],
+  [ { id: "Pemindaian kompromi", en: "Compromise scan" }, [3,3,2,2,2,2,2,2,2,2,1],
+    { id: "Pemicu wajib diisi dan tersimpan: kelak ditanyakan mengapa daftar rekening "
+          + "ini pernah diajukan",
+      en: "The trigger is mandatory and stored: months later it still answers why this "
+          + "list of accounts was ever raised" } ],
+  [ { id: "Penilaian risiko nasabah", en: "Customer risk rating" }, [3,3,3,3,2,3,3,3,1,3,3],
+    { id: "Skor tanpa faktor yang dapat dijelaskan tidak dapat dipertanggungjawabkan",
+      en: "A score without explainable factors cannot be defended" } ],
+  [ { id: "Unggah penanda intelijen", en: "Intelligence indicator upload" },
+    [3,2,2,2,2,2,2,2,2,3,2],
+    { id: "Baris yang tidak dapat dibaca ditolak dan disebutkan; baris ganda tidak "
+          + "menggandakan antrean",
+      en: "Unreadable rows are rejected and named; duplicate rows do not double the "
+          + "queue" } ],
+  [ { id: "Catatan kerugian &amp; pemulihan", en: "Loss &amp; recovery entry" },
+    [3,2,2,2,2,2,2,2,2,2,2],
+    { id: "Pemulihan yang melebihi kerugian diberi peringatan, bukan dibiarkan menjadi "
+          + "tingkat pemulihan di atas 100%",
+      en: "Recovery above the reported loss raises a warning rather than quietly "
+          + "producing a recovery rate above 100%" } ],
+  [ { id: "Bobot &amp; periode uji ulang risiko", en: "Rating weights &amp; re-rating periods" },
+    [3,2,2,2,2,2,2,2,1,2,2],
+    { id: "Hanya penyelia; mengubah bobot setara dengan mengubah model",
+      en: "Supervisors only; changing a weight is equivalent to changing the model" } ],
+  [ { id: "Terima berkas permohonan", en: "Receive application file" }, [3,1,1,1,1,1,1,1,1,1,1],
+    { id: "Baris yang rusak disebutkan satu per satu; nomor yang sama tidak menggandakan "
+          + "antrean; identitas hanya tersimpan sebagai pencacah",
+      en: "Unreadable rows are named one by one; a repeated number does not double the "
+          + "queue; the identity number is stored only as a digest" } ],
+  [ { id: "Keputusan permohonan", en: "Application decision" }, [3,2,2,2,2,2,2,2,1,2,2],
+    { id: "Pilihan tersedia LANJUT, TINJAU_LANJUTAN, BATAL — tidak ada SETUJU atau TOLAK. "
+          + "Alasan wajib; keputusan kedua tidak menimpa yang pertama",
+      en: "Choices are PROCEED, REVIEW_FURTHER, CANCEL — there is no APPROVE or REJECT. "
+          + "A reason is required; a second decision never overwrites the first" } ]
+];
+
+/* ── kesenjangan: dua kolom ────────────────────────────────────────────── */
+var GAP = [
+  [ { id: "Fraud pinjaman baru separuh tertutup. Keterhubungan ke LOS/LMS sudah ada — "
+          + "permohonan masuk, disaring, dan menjadi antrean — tetapi yang kami lakukan "
+          + "adalah <b>penyaringan, bukan penilaian kelayakan</b>. Tidak ada penilaian "
+          + "agunan, tidak ada keputusan kredit, dan tidak ada deteksi fraud pinjaman "
+          + "yang utuh seperti modul EWS dan fraud pinjaman BANKiQ.",
+      en: "Loan fraud is only half closed. The LOS/LMS link exists — applications arrive, "
+          + "are screened and become a queue — but what we do is <b>screening, not "
+          + "creditworthiness assessment</b>. There is no collateral assessment, no credit "
+          + "decision, and no end-to-end loan-fraud detection like BANKiQ's EWS and "
+          + "loan-fraud module." },
+    { id: "ETL bawaan. Pada seluruh produk di atas, jalur data adalah proyek terpisah; "
+          + "di Bariva ia ikut terpasang dan terpantau pada konsol yang sama.",
+      en: "Bundled ETL. For every product above, the data path is a separate project; in "
+          + "Bariva it ships and is monitored from the same console." } ],
+
+  [ { id: "Penanda eksternal kini dapat masuk, tetapi <b>penyambungnya belum ada</b>. "
+          + "Bariva menerima daftar rekening kuli dan penanda dari regulator atau "
+          + "asosiasi, menyimpannya beserta asalnya, dan mencocokkannya dengan "
+          + "portofolio — tetapi berkas itu Anda unggah sendiri. BANKiQ sudah tersambung "
+          + "langsung ke I4C, DoT-FRI, MNRL, dan NPCI Fed-AI.",
+      en: "External indicators can now come in, but <b>the connector does not exist "
+          + "yet</b>. Bariva accepts mule-account lists and indicators from regulators or "
+          + "associations, stores them with their provenance and matches them against the "
+          + "portfolio — but you upload the file yourself. BANKiQ connects directly to "
+          + "I4C, DoT-FRI, MNRL and NPCI Fed-AI." },
+    { id: "Penyimpangan model ditampilkan, bukan disimpan diam-diam. PSI beserta rincian "
+          + "per keranjang ada pada layar tata kelola — bukan pada laporan triwulanan.",
+      en: "Model drift is displayed, not quietly filed away. PSI and its per-bucket "
+          + "breakdown sit on the governance screen, not in a quarterly report." } ],
+
+  [ { id: "Konsorsium hanya berharga kalau ada lawan bicara. Mesin pertukaran Bariva "
+          + "sudah jadi, tetapi jumlah pesertanya nol, sedang FICO menghimpun lebih dari "
+          + "9.000 institusi. ALTO berada pada posisi yang tidak dapat kami tiru: sebagai "
+          + "jaringan switching, lintas bank adalah keadaan alaminya.",
+      en: "A consortium is only worth something if somebody is on the other end. Bariva's "
+          + "exchange engine is finished, but the member count is zero, while FICO "
+          + "aggregates more than 9,000 institutions. ALTO sits in a position we cannot "
+          + "copy: as a switching network, being cross-bank is its natural state." },
+    { id: "Skor rekening penampung dapat dibantah. Setiap poin berasal dari sinyal yang "
+          + "disebutkan satu per satu, bukan dari kotak hitam.",
+      en: "Mule scores can be challenged. Every point comes from a signal named one by "
+          + "one, not from a black box." } ],
+
+  [ { id: "Tidak ada penawaran SaaS. BANKiQ punya PULSE; M2P, Feedzai, Clari5, SAS, dan "
+          + "FICO berjalan di awan mereka sendiri.",
+      en: "No SaaS offering. BANKiQ has PULSE; M2P, Feedzai, Clari5, SAS and FICO run on "
+          + "their own clouds." },
+    { id: "Berdiri di pusat data bank sendiri, yang bagi UU PDP No. 27/2022 bukan pilihan "
+          + "gaya melainkan kewajiban bagi data keuangan penduduk Indonesia.",
+      en: "It stands up in the bank's own data centre, which under Law No. 27/2022 on "
+          + "personal data protection is not a stylistic choice but an obligation for "
+          + "Indonesian residents' financial data." } ],
+
+  [ { id: "Tidak ada aplikasi seluler untuk analis, tidak ada biometrik perilaku, tidak "
+          + "ada pendeteksian <i>deepfake</i> dan tiruan suara — padahal OJK mencatat "
+          + "modus itu sudah marak.",
+      en: "No mobile app for analysts, no behavioural biometrics, no deepfake or "
+          + "voice-clone detection, even though OJK records those methods as already "
+          + "widespread." },
+    { id: "Antarmuka dan keterangan seluruhnya dua bahasa, sejak awal, bukan hasil "
+          + "penerjemahan belakangan.",
+      en: "The interface and every explanation in it are bilingual from the outset, not "
+          + "translated afterwards." } ],
+
+  [ { id: "Konsol operasi 24×7 Bariva memang sudah ada, tetapi ia tidak menyediakan "
+          + "<b>orangnya</b>. ALTO, sebagai operator jaringan pembayaran, menjalankan "
+          + "layanannya sepanjang waktu dengan stafnya sendiri.",
+      en: "Bariva's 24×7 operations console does exist, but it does not supply the "
+          + "<b>people</b>. ALTO, as a payment-network operator, runs its service around "
+          + "the clock with its own staff." },
+    { id: "Satu berkas terpasang, tumpukan terbuka. Tidak ada lisensi per modul yang "
+          + "membuat satu menu tak tersentuh karena belum dibeli.",
+      en: "One deployable artefact, an open stack. There is no per-module licence that "
+          + "leaves a menu untouched because it was never purchased." } ],
+
+  [ { id: "Cakupan sengaja sempit: fraud dan kepatuhan saja. Bila Anda menginginkan satu "
+          + "pemasok untuk inti perbankan, kartu, dan pinjaman, MLPT menawarkan N3CA dan "
+          + "M2P menawarkan tumpukan BaaS yang lebih luas.",
+      en: "The scope is deliberately narrow: fraud and compliance only. If you want one "
+          + "vendor for core banking, cards and lending, MLPT offers N3CA and M2P offers "
+          + "a broader BaaS stack." },
+    { id: "Penyusun laporan dijaga: kolom hanya dari katalog, nilai saringan selalu "
+          + "terikat parameter, dan ekspor CSV mengebiri rumus.",
+      en: "The report builder is guarded: columns only from the catalogue, filter values "
+          + "always bound parameters, and CSV export neutralises formulas." } ],
+
+  [ { id: "Bariva adalah produk muda. Daftar rujukannya belum sepanjang nama-nama yang "
+          + "sudah terpasang di ratusan bank: Clari5 menyebut lebih dari 1 miliar "
+          + "rekening di 15 negara, sedang FICO, SAS, dan Actimize memiliki pengalaman "
+          + "pemasangan berdekade-dekade.",
+      en: "Bariva is a young product. Its reference list is not as long as the names "
+          + "already installed in hundreds of banks: Clari5 reports more than 1 billion "
+          + "accounts across 15 countries, while FICO, SAS and Actimize have decades of "
+          + "installation experience." },
+    { id: "Setiap angka pada laman ini diukur pada aplikasi yang berjalan dan dijumlahkan "
+          + "oleh pelari uji — 910 pemeriksaan, nol gagal, dan dapat diulang sendiri oleh "
+          + "Anda.",
+      en: "Every figure on this page was measured on the running application and summed "
+          + "by its test runner — 910 checks, zero failing, and repeatable by you." } ]
+];
+
+/* ── angka terukur ─────────────────────────────────────────────────────── */
+var ANGKA = [
+  [ { id: "Kapasitas per instans", en: "Capacity per instance" }, "759 TPS",
+    { id: "Keputusan berotentikasi, JVM panas, 2 vCPU. Angka pada JVM dingin 424 TPS.",
+      en: "Authenticated decisions, warm JVM, 2 vCPU. On a cold JVM the figure is 424 TPS." } ],
+  [ { id: "Ongkos CPU per keputusan", en: "CPU cost per decision" }, "1,54 ms",
+    { id: "Median tiga ulangan. Logika aturan dan model sendiri hanya 0,05 ms.",
+      en: "Median of three runs. The rule and model logic alone is just 0.05 ms." } ],
+  [ { id: "Latensi p50 / p95", en: "Latency p50 / p95" }, "16,5 / 30 ms",
+    { id: "Pada 759 TPS dengan konkurensi 16.", en: "At 759 TPS with 16 concurrent clients." } ],
+  [ { id: "Pemeriksaan otomatis", en: "Automated checks" }, "910 lulus · 0 gagal",
+    { id: "16 suite, dijumlahkan oleh pelari uji. Antarmuka 207, penutupan gap 107, "
+          + "triase antrean 78, rekening kuli 64, penyimpangan model 61, operasi 24×7 61.",
+      en: "16 suites, summed by the test runner. Interface 207, vendor-gap closure 107, "
+          + "queue triage 78, mule accounts 64, model drift 61, 24×7 operations 61." } ],
+  [ { id: "Data master: nama ganda", en: "Master data: duplicate names" }, "409 · 10 dari 10",
+    { id: "Nama diseragamkan ke huruf kecil sebelum dibandingkan. Sebelum perbaikan ini, "
+          + "kesepuluh nama contoh justru lolos dan dapat masuk dua kali.",
+      en: "Names are normalised to lower case before comparison. Before this fix, all ten "
+          + "sample names slipped through and could be entered twice." } ],
+  [ { id: "Tahap fitur, sebelum → sesudah", en: "Feature stage, before → after" },
+    "65,8 → 0,61 ms",
+    { id: "Kolam sambungan dan satu pipa pada jalur Valkey.",
+      en: "A connection pool and a single pipeline on the Valkey path." } ]
+];
+
+/* ── catatan penutup ──────────────────────────────────────────────────── */
+var SERUAN = [
+  { j: { id: "Cara membaca tabel ini", en: "How to read these tables" },
+    i: { id: "Penanda menilai <b>keberadaan fungsi yang setara</b>, bukan kematangannya: "
+             + "tanda penuh pada Bariva tidak berarti kami mengalahkan FICO pada baris "
+             + "itu, hanya bahwa fungsinya ada. Dua kolom bukan produk yang berbeda — "
+             + "SAS pada bank KBMI 4 dan FICO lewat integrator Indonesia adalah produk "
+             + "yang sama dengan penempatan berbeda, dan karenanya sengaja dipisah. "
+             + "Apa yang tidak dapat kami verifikasi dari sumber publik kami tulis "
+             + "sebagai ketidaktahuan, bukan sebagai kelemahan pemasok.",
+         en: "The marks assess <b>the existence of an equivalent function</b>, not its "
+             + "maturity: a full mark for Bariva does not mean we beat FICO on that row, "
+             + "only that the function exists. Two columns are not different products — "
+             + "SAS at a KBMI 4 bank and FICO through an Indonesian integrator are the "
+             + "same products with different deployments, which is why they are listed "
+             + "apart. Anything we could not verify from public sources is written as our "
+             + "ignorance, not as a vendor's weakness." } },
+
+  { j: { id: "Di mana Bariva masih kalah — kami sebutkan lebih dulu",
+         en: "Where Bariva still loses — we say it first" },
+    i: { id: "Kami baru saja membangun <b>pertukaran penanda konsorsium</b>, jadi kalimat "
+             + "lama “kami tidak punya konsorsium” kini tidak sepenuhnya tepat — yang "
+             + "lebih tepat: mesinnya ada dan diuji, <b>pesertanya nol</b>. Itu jauh dari "
+             + "<b>data konsorsium</b> yang setara Falcon Intelligence Network, dan lebih "
+             + "jauh lagi dari posisi ALTO yang melihat lintas bank karena ia jaringan "
+             + "switching. Kami tidak punya <b>jejaring intelijen perangkat global</b>. "
+             + "Kami <b>tidak mengoperasikan SOC 24×7</b>: yang Bariva miliki adalah "
+             + "konsolnya, sedang orangnya tetap orang Anda. Penyedia "
+             + "<i>screening</i> bawaan kami adalah <b>pengganti contoh</b>. Kami "
+             + "<b>tidak punya modul fraud pinjaman</b>. Dan Bariva adalah produk muda: "
+             + "daftar rujukannya belum sepanjang nama-nama yang sudah terpasang di "
+             + "ratusan bank. Kalau dua hal pertama adalah syarat mutlak bagi Anda, "
+             + "katakan di awal — kami akan mengatakannya terus terang bahwa kami bukan "
+             + "pilihan yang tepat, bukan menemukannya bersama Anda di akhir masa uji.",
+         en: "We have just built a <b>consortium indicator exchange</b>, so the old line "
+             + "“we have no consortium” is no longer quite accurate — the accurate "
+             + "version is: the engine exists and is tested, <b>the members number "
+             + "zero</b>. That is far from <b>consortium data</b> on the scale of the "
+             + "Falcon Intelligence Network, and further still from ALTO's position of "
+             + "seeing across banks because it is a switching network. We have no "
+             + "<b>global device-intelligence network</b>. We do <b>not operate a 24×7 "
+             + "SOC</b>: what Bariva has is the console, while the people remain yours. "
+             + "Our built-in screening provider is a <b>sample stand-in</b>. We have "
+             + "<b>no loan-fraud module</b>. And Bariva is a young product: its reference "
+             + "list is not as long as the names already installed in hundreds of banks. "
+             + "If the first two are hard requirements for you, say so at the start — we "
+             + "would rather tell you plainly that we are not the right choice than have "
+             + "you discover it at the end of a trial." } },
+
+  { j: { id: "Yang baru saja kami tutup — dan batasnya",
+         en: "What we just closed — and where it stops" },
+    i: { id: "Lima baris pada tabel di atas berubah bukan karena kami mengubah "
+             + "penilaiannya, melainkan karena kami membangunnya. <b>Deteksi kompromi</b> "
+             + "menemukan titik belanja bersama dan menyebut semua rekening yang lewat, "
+             + "tetapi skornya adalah heuristik berbobot yang terbuka — bukan model "
+             + "terlatih. <b>Penilaian risiko nasabah</b> dihitung dari sepuluh faktor dan "
+             + "dapat dijelaskan per rekening; ia tetap bukan penilaian yang divalidasi "
+             + "regulator, dan tidak memblokir apa pun. <b>Umpan intelijen eksternal</b> "
+             + "menerima penanda regulator, tetapi penyambung langsungnya belum ada. "
+             + "<b>Kerugian &amp; pemulihan</b> menjawab “apakah deteksi ini menghemat "
+             + "uang” dengan angka. Dan <b>cakupan tipologi</b> melaporkan celah dengan "
+             + "nama. Kami juga membangun <b>keterhubungan LOS/LMS</b>: berkas permohonan "
+             + "masuk dan disaring terhadap daftar pengawasan, rekening penampung, paparan "
+             + "kompromi, risiko nasabah, penanda intelijen, dan permohonan ganda — tetapi "
+             + "ia <b>tidak menilai kelayakan kredit</b>, dan kata “setujui” sengaja tidak "
+             + "ada. Dan satu hal lagi yang kami perbaiki karena ia sendiri sebuah "
+             + "kebohongan kecil: laporan cakupan tipologi dulu hanya menghitung aturan, "
+             + "sehingga dua tipologi dilaporkan sebagai celah padahal keduanya dijawab "
+             + "pemindaian yang sudah menghasilkan temuan. Kini setiap baris menyebut "
+             + "sumbernya — aturan atau modul — beserta bukti bahwa modulnya hidup, dan "
+             + "modul yang belum pernah berjalan dilaporkan tersendiri, bukan sebagai "
+             + "tercakup.",
+         en: "Five rows in the tables above changed not because we revised our assessment "
+             + "but because we built the thing. <b>Compromise detection</b> finds the "
+             + "common point of purchase and lists every account that passed through it, "
+             + "but its score is an open weighted heuristic, not a trained model. "
+             + "<b>Customer risk rating</b> is computed from ten factors and explainable "
+             + "per account; it is still not a rating validated by a regulator, and it "
+             + "blocks nothing. <b>The external intelligence feed</b> accepts indicators "
+             + "from regulators, but the direct connector does not exist. <b>Loss &amp; "
+             + "recovery</b> answers the question “does this detection save money” with a "
+             + "number. And <b>typology coverage</b> reports its gaps by name — three "
+             + "remain open: merchant-side fraud, internal staff fraud, and loan fraud. "
+             + "We also built the <b>LOS/LMS link</b>: application files arrive and are "
+             + "screened against watchlists, mule decisions, compromise exposure, customer "
+             + "risk, intelligence indicators and duplicate applications — but it <b>does "
+             + "not assess creditworthiness</b>, and the word \u201Capprove\u201D is "
+             + "deliberately absent. And one more thing we fixed because it was itself a "
+             + "small dishonesty: the typology coverage report used to count only rules, "
+             + "so two typologies were reported as gaps when both are answered by scanners "
+             + "that have already produced findings. Every row now names its source — rule "
+             + "or module — with evidence the module is alive, and a module that has never "
+             + "run is reported separately rather than as covered." } }
+];
+
+/* ── sumber ────────────────────────────────────────────────────────────── */
+var SUMBER = [
+  { u: "https://bankiq.co/fraud-risk-compliance/",
+    d: { id: "BANKiQ FRC untuk issuer dan acquirer, satu platform satu lintasan.",
+         en: "BANKiQ FRC for issuers and acquirers, one platform, single pass." } },
+  { u: "https://bankiq.co/fraud-risk-compliance-solution/",
+    d: { id: "Lini produk BANKiQ: FRC, IFRM, PULSE, IAML, Money Mule.",
+         en: "BANKiQ product lines: FRC, IFRM, PULSE, IAML, Money Mule." } },
+  { u: "https://m2pfintech.com/frm-aml/",
+    d: { id: "M2P FRM &amp; AML: penilaian milidetik lintas produk, korelasi sinyal.",
+         en: "M2P FRM &amp; AML: millisecond cross-product scoring, signal correlation." } },
+  { u: "https://m2pfintech.com/blog/all-you-need-to-know-about-building-a-robust-fraud-and-risk-management-frm-system/",
+    d: { id: "M2P: laporan kinerja aturan, maker-checker, penilaian risiko nasabah.",
+         en: "M2P: rule performance reports, maker-checker, customer risk rating." } },
+  { u: "https://www.redbooks.ibm.com/redpapers/pdfs/redp4545.pdf",
+    d: { id: "ACI Proactive Risk Manager: mesin penilaian, model saraf tiruan, riwayat "
+             + "30 hari, deteksi common-point-of-purchase.",
+         en: "ACI Proactive Risk Manager: scoring engine, neural models, 30-day history, "
+             + "common-point-of-purchase detection." } },
+  { u: "https://aciworldwide.com/products-and-services/payments-fraud/case-management/case-manager.aspx",
+    d: { id: "ACI Case Manager berdiri sebagai produk terpisah, dengan pelacakan "
+             + "kerugian dan pemulihan.",
+         en: "ACI Case Manager stands as a separate product, with loss and recovery "
+             + "tracking." } },
+  { u: "https://www.fico.com/en/fico-falcon-intelligence-network",
+    d: { id: "Falcon Intelligence Network: lebih dari 9.000 institusi yang menyumbang "
+             + "data.",
+         en: "Falcon Intelligence Network: more than 9,000 contributing institutions." } },
+  { u: "https://www.sas.com/content/dam/sasdam/documents/20250124/vendor-analysis-enterprise-and-payment-fraud-solutions-2025.pdf",
+    d: { id: "Chartis RiskTech Quadrant 2025 untuk fraud enterprise dan fraud "
+             + "pembayaran.",
+         en: "Chartis RiskTech Quadrant 2025 for enterprise fraud and payment fraud." } },
+  { u: "https://chartis-research.com/financial-crime/7947527/vendor-spotlight-feedzai-fraud-platforms-2026",
+    d: { id: "Feedzai disebut Category Leader 2026 oleh Chartis Research.",
+         en: "Feedzai named a 2026 Category Leader by Chartis Research." } },
+  { u: "https://stage.clari5.com/company/newsroom/",
+    d: { id: "Clari5: diakuisisi Perfios Februari 2025, lebih dari 10 miliar transaksi "
+             + "per bulan, 1 miliar rekening, 15 negara, customer-looped alert.",
+         en: "Clari5: acquired by Perfios in February 2025, over 10 billion transactions "
+             + "a month, 1 billion accounts, 15 countries, customer-looped alerts." } },
+  { u: "https://www.alto.id/alto-update/detail/blog/alto-fraud-detection-system-teknologi-mencegah-dan-meminimalisir-risiko-fraud",
+    d: { id: "ALTO Network: FDS dengan pemantauan 24 jam, mesin aturan dan ambang yang "
+             + "dapat diatur, manajemen kasus, pustaka fraud dan sandbox, machine "
+             + "learning; mengacu pada PBI No. 23/6/PBI/2021.",
+         en: "ALTO Network: FDS with round-the-clock monitoring, a rule engine with "
+             + "configurable thresholds, case management, a fraud library and sandbox, and "
+             + "machine learning; aligned with BI Regulation No. 23/6/PBI/2021." } },
+  { u: "https://www.multipolar.com/kanal-siaran-pers/solusi-visionanalytics-multipolar-technology-mlpt-perkuat-perbankan-tangkal-fraud/",
+    d: { id: "Multipolar Technology (MLPT): VisionAnalytics dan Fraud Detection System, "
+             + "platform big data dengan machine learning atas transaksi fraud lampau.",
+         en: "Multipolar Technology (MLPT): VisionAnalytics and Fraud Detection System, a "
+             + "big-data platform with machine learning over past fraud transactions." } },
+  { u: "https://www.fico.com/en/newsroom/permata-bank-catch-fraud-real-time-fico-falcon-fraud-manager",
+    d: { id: "FICO di Indonesia: Bank Permata 2011, mitra implementasi Astra Graphia "
+             + "Information Technology (AGIT).",
+         en: "FICO in Indonesia: Bank Permata in 2011, implemented with Astra Graphia "
+             + "Information Technology (AGIT)." } },
+  { u: "https://www.multipolar.com/kanal-siaran-pers/",
+    d: { id: "MLPT juga menjual N3CA Banking Platform — inti perbankan, orkestrasi, dan "
+             + "lapisan inovasi dalam satu arsitektur.",
+         en: "MLPT also sells the N3CA Banking Platform — core banking, orchestration and "
+             + "an innovation layer in one architecture." } },
+  { u: "https://ojk.go.id/en/regulasi/Documents/Pages/Circular-Letter-Number-13.28.DPNP/att1_sebi132811_eng.pdf",
+    d: { id: "Strategi anti-fraud perbankan Indonesia: empat pilar — pencegahan, "
+             + "deteksi, investigasi dan pelaporan, serta pemantauan.",
+         en: "Indonesian banking anti-fraud strategy: four pillars — prevention, "
+             + "detection, investigation and reporting, and monitoring." } },
+  { u: "https://fluxforce.ai/jurisdictions/indonesia",
+    d: { id: "STR ke PPATK dalam 3 hari kerja, CTR di atas Rp500 juta dalam 14 hari kerja "
+             + "lewat GRIPS, retensi 5 tahun, dan UU PDP No. 27/2022.",
+         en: "STR to PPATK within 3 working days, CTR above IDR 500 million within 14 "
+             + "working days via GRIPS, five-year retention, and Law No. 27/2022." } },
+  { u: "https://flagright.com/post/fraud-detection-in-indonesias-financial-sector",
+    d: { id: "BI mengawasi pemantauan fraud BI-FAST; bank menjalankan deteksinya "
+             + "sendiri, dengan pelatihan staf triwulanan dan audit independen tahunan.",
+         en: "BI oversees BI-FAST fraud monitoring; banks run their own detection, with "
+             + "quarterly staff training and an annual independent audit." } }
+];
+
+
+/* ═════════════════════════════════════════════════════════════════════════
+   Menggambar
+   ═════════════════════════════════════════════════════════════════════════ */
+function t(teks) { return (teks && teks[BAHASA]) ? teks[BAHASA] : (teks || ""); }
+
+function kartuKe(html) {
+  var d = document.createElement("div");
+  d.className = "kartu";
+  d.innerHTML = html;
+  return d;
+}
+
+function gambarKartu(senarai, idWadah) {
+  var wadah = document.getElementById(idWadah);
+  if (!wadah) return;
+  wadah.innerHTML = "";
+  for (var i = 0; i < senarai.length; i++) {
+    var k = senarai[i];
+    var el = kartuKe("<h3>" + t(k.j) + "</h3><p>" + t(k.i) + "</p>");
+    wadah.appendChild(el);
+  }
+}
+
+var TANDA = ["", "○", "◐", "●"];
+var KELAS = ["", "dot-n", "dot-s", "dot-p"];
+var KATA  = { 1: { id: "tidak tersedia", en: "not available" },
+              2: { id: "sebagian", en: "partial" },
+              3: { id: "tersedia", en: "available" } };
+
+function gambarTabel(namaTabel) {
+  var wadah = document.getElementById("wadahTabel");
+  if (!wadah) return;
+
+  /* Kesenjangan: dua kolom, tidak memakai matriks penanda. */
+  if (namaTabel === "gap") {
+    var h = '<div class="gulir"><table><thead><tr><th>' +
+      t({ id: "Yang belum Bariva miliki", en: "What Bariva lacks" }) +
+      "</th><th>" + t({ id: "Yang Bariva lakukan lebih jauh", en: "What Bariva takes further" }) +
+      "</th></tr></thead><tbody>";
+    for (var g = 0; g < GAP.length; g++) {
+      h += '<tr><td class="kiri" style="color:var(--ink)">' + t(GAP[g][0]) +
+           '</td><td class="kiri" style="color:var(--ink)">' + t(GAP[g][1]) + "</td></tr>";
+    }
+    wadah.innerHTML = h + "</tbody></table></div>";
+    return;
+  }
+
+  var data = (namaTabel === "menu") ? MENU : (namaTabel === "form") ? FORM : FITUR;
+  var h = '<div class="gulir"><table><thead><tr><th>' +
+    t({ id: (namaTabel === "menu" ? "Menu Bariva" : namaTabel === "form" ? "Formulir Bariva" : "Kemampuan"),
+        en: (namaTabel === "menu" ? "Bariva menu" : namaTabel === "form" ? "Bariva form" : "Capability") });
+  for (var v = 0; v < VENDOR.length; v++) {
+    var judul = (VENDOR[v].s && VENDOR[v].s[BAHASA]) ? VENDOR[v].s[BAHASA] : t(VENDOR[v].n);
+    h += '<th title="' + t(VENDOR[v].n) + '">' + judul + "</th>";
+  }
+  h += "<th>" + t({ id: "Catatan", en: "Note" }) + "</th></tr></thead><tbody>";
+
+  for (var r = 0; r < data.length; r++) {
+    var baris = data[r];
+    h += "<tr><td>" + t(baris[0]) + "</td>";
+    for (var c = 0; c < baris[1].length; c++) {
+      var nilai = baris[1][c];
+      var kelas = KELAS[nilai] + (c === 0 ? " bariva" : "");
+      h += '<td class="' + kelas + '" title="' + t(VENDOR[c].n) + " — " +
+           t(baris[0]) + ": " + KATA[nilai][BAHASA] + '">' +
+           '<span class="tanda">' + TANDA[nilai] + "</span></td>";
+    }
+    h += '<td class="kiri">' + (baris[2] ? t(baris[2]) : "—") + "</td></tr>";
+  }
+  wadah.innerHTML = h + "</tbody></table></div>";
+}
+
+function gambarPenjual() {
+  var wadah = document.getElementById("kartuPenjual");
+  if (!wadah) return;
+  wadah.innerHTML = "";
+  for (var i = 0; i < VENDOR.length; i++) {
+    var v = VENDOR[i];
+    var el = kartuKe("<h3>" + t(v.n) + "</h3><p>" + t(v.d) + "</p>");
+    if (i === 0) { el.style.borderLeftColor = "#0e7490"; el.style.background = "#f0fdff"; }
+    wadah.appendChild(el);
+  }
+}
+
+function gambarAngka() {
+  var wadah = document.getElementById("tabelAngka");
+  if (!wadah) return;
+  var h = '<table class="tabel-angka"><thead><tr><th>' +
+    t({ id: "Ukuran", en: "Measure" }) + "</th><th>" +
+    t({ id: "Hasil", en: "Result" }) + "</th><th>" +
+    t({ id: "Konteks", en: "Context" }) + "</th></tr></thead><tbody>";
+  for (var i = 0; i < ANGKA.length; i++) {
+    h += "<tr><td>" + t(ANGKA[i][0]) + '</td><td class="n">' + ANGKA[i][1] +
+         '</td><td style="color:var(--muted)">' + t(ANGKA[i][2]) + "</td></tr>";
+  }
+  wadah.innerHTML = h + "</tbody></table>";
+}
+
+function gambarSeruan() {
+  var wadah = document.getElementById("seruanPerbandingan");
+  if (!wadah) return;
+  var h = "";
+  for (var i = 0; i < SERUAN.length; i++) {
+    h += '<div class="seruan"><div class="t">' + t(SERUAN[i].j) + "</div><p>" +
+         t(SERUAN[i].i) + "</p></div>";
+  }
+  wadah.innerHTML = h;
+}
+
+function gambarSumber() {
+  var wadah = document.getElementById("daftarSumber");
+  if (!wadah) return;
+  var h = "";
+  for (var i = 0; i < SUMBER.length; i++) {
+    h += '<li><a href="' + SUMBER[i].u + '" target="_blank" rel="noopener">' +
+         SUMBER[i].u.replace(/^https?:\/\//, "") + "</a> — " + t(SUMBER[i].d) + "</li>";
+  }
+  wadah.innerHTML = h;
+}
+
+function gambarUlang() {
+  gambarKartu(KENAPA, "kartuKenapa");
+  gambarKartu(KEMAMPUAN, "kartuKemampuan");
+  gambarKartu(ARSITEKTUR, "kartuArsitektur");
+  gambarKartu(KEAMANAN, "kartuKeamanan");
+  gambarKartu(KONTAK, "kartuKontak");
+  gambarPenjual();
+  gambarTabel(TABEL_AKTIF);
+  gambarAngka();
+  gambarSeruan();
+  gambarSumber();
+}
+
+var TABEL_AKTIF = "fitur";
+
+/* ═════════════════════════════════════════════════════════════════════════
+   Peristiwa
+   ═════════════════════════════════════════════════════════════════════════ */
+var tabTombol = document.querySelectorAll(".tab button");
+for (var i = 0; i < tabTombol.length; i++) {
+  tabTombol[i].addEventListener("click", function () {
+    for (var j = 0; j < tabTombol.length; j++) {
+      tabTombol[j].setAttribute("aria-selected",
+        tabTombol[j] === this ? "true" : "false");
+    }
+    TABEL_AKTIF = this.getAttribute("data-tabel");
+    gambarTabel(TABEL_AKTIF);
+  });
+}
+
+var pilih = document.querySelectorAll("[data-pilih]");
+for (var i = 0; i < pilih.length; i++) {
+  pilih[i].addEventListener("click", function () {
+    pasangBahasa(this.getAttribute("data-pilih"));
+    tutupSplash();
+  });
+}
+
+/* ═════════════════════════════════════════════════════════════════════════
+   Splash
+   ═════════════════════════════════════════════════════════════════════════ */
+var waktuPilih = null;
+
+function tutupSplash() {
+  var s = document.getElementById("splash");
+  if (!s || s.classList.contains("selesai")) return;
+  s.classList.add("selesai");
+  document.body.classList.remove("splash-aktif");
+  document.body.classList.add("siap");
+  if (waktuPilih) { clearTimeout(waktuPilih); waktuPilih = null; }
+  setTimeout(function () { s.style.display = "none"; }, 700);
+}
+
+var lompat = document.querySelector("[data-lompat]");
+if (lompat) { lompat.addEventListener("click", tutupSplash); }
+
+/* Bila bahasa sudah pernah dipilih, lewati splash setelah sejenak. Bila
+   belum, tunggu pilihan pengunjung — jangan memilihkan untuknya. */
+var tersimpan = null;
+try { tersimpan = localStorage.getItem(SIMPAN); } catch (e) {}
+
+if (tersimpan === "id" || tersimpan === "en") {
+  BAHASA = tersimpan;
+  document.documentElement.lang = BAHASA;
+  var tb = document.querySelectorAll(".ganti-bahasa [data-pilih]");
+  for (var i = 0; i < tb.length; i++) {
+    tb[i].setAttribute("aria-pressed",
+      tb[i].getAttribute("data-pilih") === BAHASA ? "true" : "false");
+  }
+  gambarUlang();
+  waktuPilih = setTimeout(tutupSplash, 2200);
+} else {
+  gambarUlang();
+  document.body.classList.add("siap");
+  /* Pengunjung yang tidak memilih pun tidak boleh terkurung: lanjutkan
+     dengan bahasa baku setelah tujuh detik. */
+  waktuPilih = setTimeout(tutupSplash, 7000);
+}
+
+/* Splash tidak boleh mengurung pengunjung bila skrip lain gagal. */
+setTimeout(tutupSplash, 20000);
+</script>
+</body>
+</html>

@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="LiMS - Liquidity Management System. Integrated banking liquidity management solution for LCR, NDR, NSFR, and Basel III compliance.">
+<meta name="keywords" content="liquidity management, LCR, NDR, NSFR, banking software, Basel III, treasury management">
+<meta name="author" content="PT Bank Contoh Indonesia Tbk">
+<title>LiMS — Liquidity Management System</title>
+<link rel="icon" type="image/png" href="lims-favicon.png">
+<style>
+:root{--navy:#0F2A4A;--navy2:#1B3A5C;--gold:#B8860B;--gold2:#D4A53A;--green:#047857;--blue:#1E40AF;--white:#FFF;--bg:#F9FAFB;--text:#1F2937;--textMd:#4B5563;--textLt:#9CA3AF;--border:#E5E7EB}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;color:var(--text);line-height:1.6;overflow-x:hidden}
+
+/* Language Switcher */
+.lang-switcher{position:fixed;top:20px;right:20px;z-index:1001;display:flex;gap:8px;background:rgba(15,42,74,.95);padding:6px;border-radius:24px;backdrop-filter:blur(10px);box-shadow:0 4px 12px rgba(0,0,0,.2)}
+.lang-btn{padding:8px 16px;border:none;border-radius:18px;font-size:12px;font-weight:600;cursor:pointer;transition:all .3s;background:transparent;color:rgba(255,255,255,.7)}
+.lang-btn.active{background:var(--gold);color:var(--white)}
+.lang-btn:hover:not(.active){background:rgba(255,255,255,.1);color:var(--white)}
+
+/* Header */
+header{position:fixed;top:0;left:0;right:0;background:rgba(15,42,74,.95);backdrop-filter:blur(10px);z-index:1000;padding:16px 0;transition:all .3s}
+header.scrolled{padding:12px 0;box-shadow:0 2px 20px rgba(0,0,0,.1)}
+.nav{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:12px;text-decoration:none}
+.logo img{height:40px;width:auto}
+.logo-text{display:flex;flex-direction:column}
+.logo-text h1{font-size:20px;color:var(--white);font-weight:300;letter-spacing:2px;line-height:1}
+.logo-text p{font-size:9px;color:var(--gold);letter-spacing:3px;text-transform:uppercase}
+.nav-links{display:flex;gap:32px;align-items:center;margin-right:100px}
+.nav-links a{color:rgba(255,255,255,.8);text-decoration:none;font-size:14px;font-weight:500;transition:color .2s}
+.nav-links a:hover{color:var(--gold)}
+.nav-cta{background:var(--gold)!important;color:var(--white)!important;padding:10px 24px!important;border-radius:8px;font-weight:600!important}
+.nav-cta:hover{background:var(--gold2)!important;transform:translateY(-2px);box-shadow:0 4px 12px rgba(184,134,11,.3)}
+.menu-toggle{display:none;background:none;border:none;color:var(--white);font-size:24px;cursor:pointer}
+
+/* Hero */
+.hero{min-height:100vh;background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 100%);display:flex;align-items:center;position:relative;overflow:hidden;padding:100px 24px 60px}
+.hero::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse"><path d="M 100 0 L 0 0 0 100" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)"/></svg>');opacity:.5}
+.hero-content{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;position:relative;z-index:1}
+.hero-text h2{font-size:56px;color:var(--white);font-weight:700;line-height:1.1;margin-bottom:24px}
+.hero-text h2 span{color:var(--gold);font-weight:300}
+.hero-text p{font-size:18px;color:rgba(255,255,255,.8);margin-bottom:32px;line-height:1.7}
+.hero-cta{display:flex;gap:16px;flex-wrap:wrap}
+.btn-primary{background:var(--gold);color:var(--white);padding:16px 32px;border-radius:8px;text-decoration:none;font-weight:600;font-size:16px;transition:all .2s;display:inline-flex;align-items:center;gap:8px}
+.btn-primary:hover{background:var(--gold2);transform:translateY(-2px);box-shadow:0 8px 24px rgba(184,134,11,.3)}
+.btn-secondary{background:transparent;color:var(--white);padding:16px 32px;border-radius:8px;text-decoration:none;font-weight:600;font-size:16px;border:2px solid rgba(255,255,255,.3);transition:all .2s;display:inline-flex;align-items:center;gap:8px}
+.btn-secondary:hover{border-color:var(--white);background:rgba(255,255,255,.1)}
+.hero-visual{position:relative}
+.hero-image{width:100%;max-width:500px;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.3)}
+.hero-stats{position:absolute;bottom:-30px;left:-30px;background:var(--white);padding:24px;border-radius:12px;box-shadow:0 10px 40px rgba(0,0,0,.15);display:flex;gap:24px}
+.stat{text-align:center}
+.stat-value{font-size:32px;font-weight:700;color:var(--navy);line-height:1}
+.stat-label{font-size:12px;color:var(--textMd);margin-top:4px}
+
+/* Sections */
+section{padding:100px 24px}
+.section-header{text-align:center;max-width:700px;margin:0 auto 60px}
+.section-tag{display:inline-block;background:rgba(184,134,11,.1);color:var(--gold);padding:6px 16px;border-radius:20px;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:16px}
+.section-header h3{font-size:40px;color:var(--navy);font-weight:700;margin-bottom:16px;line-height:1.2}
+.section-header p{font-size:16px;color:var(--textMd);line-height:1.7}
+
+/* Features */
+.features{background:var(--white)}
+.features-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:32px}
+.feature-card{background:var(--white);padding:32px;border-radius:12px;border:1px solid var(--border);transition:all .3s;position:relative;overflow:hidden}
+.feature-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--navy),var(--gold));transform:scaleX(0);transition:transform .3s;transform-origin:left}
+.feature-card:hover{transform:translateY(-8px);box-shadow:0 12px 40px rgba(0,0,0,.1)}
+.feature-card:hover::before{transform:scaleX(1)}
+.feature-icon{width:60px;height:60px;background:linear-gradient(135deg,var(--navy),var(--navy2));border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:28px;margin-bottom:20px}
+.feature-card h4{font-size:20px;color:var(--navy);font-weight:700;margin-bottom:12px}
+.feature-card p{font-size:14px;color:var(--textMd);line-height:1.7}
+
+/* Modules */
+.modules{background:var(--bg)}
+.modules-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
+.module-card{background:var(--white);padding:24px;border-radius:12px;border:1px solid var(--border);transition:all .3s;text-align:center}
+.module-card:hover{transform:translateY(-4px);box-shadow:0 8px 24px rgba(0,0,0,.08);border-color:var(--gold)}
+.module-num{display:inline-flex;background:var(--navy);color:var(--white);width:40px;height:40px;border-radius:50%;align-items:center;justify-content:center;font-weight:700;font-size:16px;margin:0 auto 16px}
+.module-card h4{font-size:16px;color:var(--navy);font-weight:700;margin-bottom:8px}
+.module-card p{font-size:13px;color:var(--textMd)}
+
+/* Benefits */
+.benefits{background:var(--white)}
+.benefits-content{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.benefits-image{border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.15);max-width:500px;width:100%}
+.benefits-list{display:flex;flex-direction:column;gap:24px}
+.benefit-item{display:flex;gap:16px;align-items:flex-start}
+.benefit-icon{width:48px;height:48px;background:linear-gradient(135deg,var(--green),#10B981);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0}
+.benefit-text h4{font-size:18px;color:var(--navy);font-weight:700;margin-bottom:6px}
+.benefit-text p{font-size:14px;color:var(--textMd);line-height:1.6}
+
+/* CTA */
+.cta{background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 100%);text-align:center;position:relative;overflow:hidden}
+.cta::before{content:'';position:absolute;top:-50%;right:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(184,134,11,.1) 0%,transparent 70%);animation:pulse 20s ease-in-out infinite}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
+.cta-content{max-width:700px;margin:0 auto;position:relative;z-index:1}
+.cta h3{font-size:40px;color:var(--white);font-weight:700;margin-bottom:16px}
+.cta p{font-size:18px;color:rgba(255,255,255,.8);margin-bottom:32px}
+
+/* Footer */
+footer{background:var(--navy);color:var(--white);padding:60px 24px 24px}
+.footer-content{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:40px;margin-bottom:40px}
+.footer-col h4{font-size:16px;font-weight:700;margin-bottom:16px;color:var(--gold)}
+.footer-col p,.footer-col a{font-size:14px;color:rgba(255,255,255,.7);line-height:1.8;text-decoration:none;display:block}
+.footer-col a:hover{color:var(--gold)}
+.footer-bottom{max-width:1200px;margin:0 auto;padding-top:24px;border-top:1px solid rgba(255,255,255,.1);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+.footer-bottom p{font-size:13px;color:rgba(255,255,255,.5)}
+.footer-social{display:flex;gap:16px}
+.footer-social a{width:36px;height:36px;background:rgba(255,255,255,.1);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:all .2s;text-decoration:none}
+.footer-social a:hover{background:var(--gold);transform:translateY(-2px)}
+
+/* Responsive */
+@media(max-width:1024px){
+.hero-content{grid-template-columns:1fr;text-align:center}
+.hero-text h2{font-size:42px}
+.hero-cta{justify-content:center}
+.hero-visual{order:-1}
+.hero-stats{position:static;margin-top:32px;justify-content:center}
+.benefits-content{grid-template-columns:1fr}
+.benefits-image{order:-1;margin:0 auto}
+}
+@media(max-width:768px){
+.nav-links{display:none;position:absolute;top:100%;left:0;right:0;background:var(--navy);flex-direction:column;padding:24px;gap:16px;box-shadow:0 4px 20px rgba(0,0,0,.2)}
+.nav-links.active{display:flex}
+.menu-toggle{display:block}
+.hero-text h2{font-size:32px}
+.hero-stats{flex-direction:column;gap:16px}
+.section-header h3{font-size:28px}
+.features-grid,.modules-grid{grid-template-columns:1fr}
+.footer-bottom{flex-direction:column;text-align:center}
+.lang-switcher{top:80px;right:10px}
+}
+
+/* Animations */
+.fade-in{opacity:0;transform:translateY(30px);transition:opacity 0.6s ease,transform 0.6s ease}
+.fade-in.visible{opacity:1;transform:translateY(0)}
+</style>
+</head>
+<body>
+
+<!-- Language Switcher -->
+<div class="lang-switcher">
+<button class="lang-btn active" data-lang="en" onclick="switchLanguage('en')">EN</button>
+<button class="lang-btn" data-lang="id" onclick="switchLanguage('id')">ID</button>
+</div>
+
+<!-- Header -->
+<header id="header">
+<nav class="nav">
+<a href="#" class="logo">
+<img src="lims-logo.png" alt="LiMS Logo">
+<div class="logo-text">
+<h1>LiMS</h1>
+<p data-i18n="nav.subtitle">Liquidity Management</p>
+</div>
+</a>
+<div class="nav-links" id="navLinks">
+<a href="#features" data-i18n="nav.features">Features</a>
+<a href="#modules" data-i18n="nav.modules">Modules</a>
+<a href="#benefits" data-i18n="nav.benefits">Benefits</a>
+<a href="#contact" class="nav-cta" data-i18n="nav.cta">Request Demo</a>
+</div>
+<button class="menu-toggle" onclick="document.getElementById('navLinks').classList.toggle('active')">☰</button>
+</nav>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+<div class="hero-content">
+<div class="hero-text">
+<h2><span data-i18n="hero.title1">Enterprise</span> <span data-i18n="hero.title2">Liquidity Management</span> <span data-i18n="hero.title3">for Modern Banks</span></h2>
+<p data-i18n="hero.description">LiMS is a comprehensive liquidity management system that helps banks automate LCR, NDR, NSFR calculations, and regulatory reporting for Basel III compliance with real-time monitoring and advanced analytics.</p>
+<div class="hero-cta">
+<a href="#demo" class="btn-primary" data-i18n="hero.cta1">🚀 Request Free Demo</a>
+<a href="#features" class="btn-secondary" data-i18n="hero.cta2">📖 Learn More</a>
+</div>
+</div>
+<div class="hero-visual">
+<img src="lims-logo.png" alt="LiMS Dashboard" class="hero-image">
+<div class="hero-stats">
+<div class="stat">
+<div class="stat-value">17</div>
+<div class="stat-label" data-i18n="hero.stat1">Integrated Modules</div>
+</div>
+<div class="stat">
+<div class="stat-value">37</div>
+<div class="stat-label" data-i18n="hero.stat2">Database Tables</div>
+</div>
+<div class="stat">
+<div class="stat-value">12</div>
+<div class="stat-label" data-i18n="hero.stat3">REST APIs</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Features -->
+<section class="features" id="features">
+<div class="section-header">
+<span class="section-tag" data-i18n="features.tag">Key Features</span>
+<h3 data-i18n="features.title">Everything You Need in One Platform</h3>
+<p data-i18n="features.description">LiMS provides a complete solution for liquidity management, from ratio calculations to regulatory reporting.</p>
+</div>
+<div class="features-grid" id="featuresGrid"></div>
+</section>
+
+<!-- Modules -->
+<section class="modules" id="modules">
+<div class="section-header">
+<span class="section-tag" data-i18n="modules.tag">17 Modules</span>
+<h3 data-i18n="modules.title">Modular Architecture for Scalability</h3>
+<p data-i18n="modules.description">LiMS consists of 17 integrated modules across 5 architectural layers, designed for enterprise-scale banking operations.</p>
+</div>
+<div class="modules-grid" id="modulesGrid"></div>
+</section>
+
+<!-- Benefits -->
+<section class="benefits" id="benefits">
+<div class="benefits-content">
+<img src="lims-logo.png" alt="LiMS Benefits" class="benefits-image">
+<div class="benefits-list" id="benefitsList"></div>
+</div>
+</section>
+
+<!-- CTA -->
+<section class="cta" id="demo">
+<div class="cta-content">
+<h3 data-i18n="cta.title">Ready to Transform Your Liquidity Management?</h3>
+<p data-i18n="cta.description">Schedule a free demo and consultation with our expert team. See firsthand how LiMS can help your bank achieve compliance and optimize liquidity.</p>
+<a href="#contact" class="btn-primary" style="font-size:18px;padding:18px 40px" data-i18n="cta.button">📞 Schedule Demo Now</a>
+</div>
+</section>
+
+<!-- Footer -->
+<footer id="contact">
+<div class="footer-content">
+<div class="footer-col">
+<h4>LiMS</h4>
+<p data-i18n="footer.tagline">Liquidity Management System</p>
+<p style="margin-top:16px" data-i18n="footer.description">Enterprise-grade liquidity management solution for modern banks. Developed by PT Bank Contoh Indonesia Tbk.</p>
+</div>
+<div class="footer-col">
+<h4 data-i18n="footer.product">Product</h4>
+<a href="#features" data-i18n="footer.features">Key Features</a>
+<a href="#modules" data-i18n="footer.modules">17 Modules</a>
+<a href="#benefits" data-i18n="footer.benefits">Benefits</a>
+<a href="#demo" data-i18n="footer.demo">Free Demo</a>
+</div>
+<div class="footer-col">
+<h4 data-i18n="footer.resources">Resources</h4>
+<a href="#" data-i18n="footer.docs">Documentation</a>
+<a href="#" data-i18n="footer.api">API Reference</a>
+<a href="#" data-i18n="footer.guide">Production Guide</a>
+<a href="#" data-i18n="footer.support">Support Center</a>
+</div>
+<div class="footer-col">
+<h4 data-i18n="footer.contact">Contact</h4>
+<p>📧 sales@lims.bankcontoh.co.id</p>
+<p>📞 +62-21-555-0001</p>
+<p>📍 Jakarta, Indonesia</p>
+<p style="margin-top:12px;font-size:12px" data-i18n="footer.global">🌏 Serving banks across Southeast Asia</p>
+</div>
+</div>
+<div class="footer-bottom">
+<p>© 2026 PT Bank Contoh Indonesia Tbk. <span data-i18n="footer.rights">All rights reserved.</span></p>
+<div class="footer-social">
+<a href="#" title="LinkedIn">💼</a>
+<a href="#" title="Twitter">🐦</a>
+<a href="#" title="GitHub">💻</a>
+</div>
+</div>
+</footer>
+
+<script>
+// ============================================================
+// LANGUAGE DATA
+// ============================================================
+const translations = {
+en: {
+  'nav.subtitle': 'Liquidity Management',
+  'nav.features': 'Features',
+  'nav.modules': 'Modules',
+  'nav.benefits': 'Benefits',
+  'nav.cta': 'Request Demo',
+  
+  'hero.title1': 'Enterprise',
+  'hero.title2': 'Liquidity Management',
+  'hero.title3': 'for Modern Banks',
+  'hero.description': 'LiMS is a comprehensive liquidity management system that helps banks automate LCR, NDR, NSFR calculations, and regulatory reporting for Basel III compliance with real-time monitoring and advanced analytics.',
+  'hero.cta1': '🚀 Request Free Demo',
+  'hero.cta2': '📖 Learn More',
+  'hero.stat1': 'Integrated Modules',
+  'hero.stat2': 'Database Tables',
+  'hero.stat3': 'REST APIs',
+  
+  'features.tag': 'Key Features',
+  'features.title': 'Everything You Need in One Platform',
+  'features.description': 'LiMS provides a complete solution for liquidity management, from ratio calculations to regulatory reporting.',
+  
+  'modules.tag': '17 Modules',
+  'modules.title': 'Modular Architecture for Scalability',
+  'modules.description': 'LiMS consists of 17 integrated modules across 5 architectural layers, designed for enterprise-scale banking operations.',
+  
+  'cta.title': 'Ready to Transform Your Liquidity Management?',
+  'cta.description': 'Schedule a free demo and consultation with our expert team. See firsthand how LiMS can help your bank achieve compliance and optimize liquidity.',
+  'cta.button': '📞 Schedule Demo Now',
+  
+  'footer.tagline': 'Liquidity Management System',
+  'footer.description': 'Enterprise-grade liquidity management solution for modern banks. Developed by PT Bank Contoh Indonesia Tbk.',
+  'footer.product': 'Product',
+  'footer.features': 'Key Features',
+  'footer.modules': '17 Modules',
+  'footer.benefits': 'Benefits',
+  'footer.demo': 'Free Demo',
+  'footer.resources': 'Resources',
+  'footer.docs': 'Documentation',
+  'footer.api': 'API Reference',
+  'footer.guide': 'Production Guide',
+  'footer.support': 'Support Center',
+  'footer.contact': 'Contact',
+  'footer.global': '🌏 Serving banks across Southeast Asia',
+  'footer.rights': 'All rights reserved.'
+},
+id: {
+  'nav.subtitle': 'Manajemen Likuiditas',
+  'nav.features': 'Fitur',
+  'nav.modules': 'Modul',
+  'nav.benefits': 'Keunggulan',
+  'nav.cta': 'Minta Demo',
+  
+  'hero.title1': 'Solusi',
+  'hero.title2': 'Manajemen Likuiditas',
+  'hero.title3': 'untuk Bank Modern',
+  'hero.description': 'LiMS adalah sistem manajemen likuiditas komprehensif yang membantu bank mengotomatisasi perhitungan LCR, NDR, NSFR, dan pelaporan regulasi untuk kepatuhan Basel III dengan monitoring real-time dan analitik canggih.',
+  'hero.cta1': '🚀 Minta Demo Gratis',
+  'hero.cta2': '📖 Pelajari Lebih Lanjut',
+  'hero.stat1': 'Modul Terintegrasi',
+  'hero.stat2': 'Tabel Database',
+  'hero.stat3': 'REST API',
+  
+  'features.tag': 'Fitur Utama',
+  'features.title': 'Semua yang Anda Butuhkan dalam Satu Platform',
+  'features.description': 'LiMS menyediakan solusi lengkap untuk manajemen likuiditas, dari perhitungan rasio hingga pelaporan regulasi.',
+  
+  'modules.tag': '17 Modul',
+  'modules.title': 'Arsitektur Modular untuk Skalabilitas',
+  'modules.description': 'LiMS terdiri dari 17 modul terintegrasi di 5 layer arsitektur, dirancang untuk operasi perbankan skala enterprise.',
+  
+  'cta.title': 'Siap Mengtransformasi Manajemen Likuiditas Anda?',
+  'cta.description': 'Jadwalkan demo gratis dan konsultasi dengan tim ahli kami. Lihat langsung bagaimana LiMS dapat membantu bank Anda mencapai kepatuhan dan mengoptimalkan likuiditas.',
+  'cta.button': '📞 Jadwalkan Demo Sekarang',
+  
+  'footer.tagline': 'Sistem Manajemen Likuiditas',
+  'footer.description': 'Solusi manajemen likuiditas kelas enterprise untuk bank modern. Dikembangkan oleh PT Bank Contoh Indonesia Tbk.',
+  'footer.product': 'Produk',
+  'footer.features': 'Fitur Utama',
+  'footer.modules': '17 Modul',
+  'footer.benefits': 'Keunggulan',
+  'footer.demo': 'Demo Gratis',
+  'footer.resources': 'Sumber Daya',
+  'footer.docs': 'Dokumentasi',
+  'footer.api': 'Referensi API',
+  'footer.guide': 'Panduan Produksi',
+  'footer.support': 'Pusat Bantuan',
+  'footer.contact': 'Kontak',
+  'footer.global': '🌏 Melayani bank di seluruh Asia Tenggara',
+  'footer.rights': 'Hak cipta dilindungi.'
+}
+};
+
+// Features data
+const featuresData = {
+en: [
+  {icon: '📊', title: 'Automated Calculations', desc: 'LCR, NDR, NSFR, Maturity Gap, and Cash Flow Projection calculated automatically every day with high accuracy and Basel III compliance.'},
+  {icon: '🔄', title: 'End-of-Day Process', desc: '12-step automated EOD process from data extraction to reporting, running every night with comprehensive audit trails.'},
+  {icon: '🌊', title: 'Stress Testing', desc: 'Test liquidity resilience with 3 scenarios: Market-Wide, Idiosyncratic, and Combined. Calculate survival days and recovery actions.'},
+  {icon: '📋', title: 'Regulatory Reporting', desc: 'Automatically generate BI and OJK reports in XML, XBRL, Excel, and PDF formats with built-in validation and submission tracking.'},
+  {icon: '🚨', title: 'Real-Time Alerts', desc: 'Instant notifications for threshold breaches, EOD failures, data anomalies, and regulatory deadline reminders via email and dashboard.'},
+  {icon: '🔐', title: 'Enterprise Security', desc: 'JWT authentication, RBAC with 6 roles, maker-checker workflow, 10-year audit trail, and end-to-end data encryption.'}
+],
+id: [
+  {icon: '📊', title: 'Perhitungan Otomatis', desc: 'LCR, NDR, NSFR, Maturity Gap, dan Cash Flow Projection dihitung otomatis setiap hari dengan akurasi tinggi dan kepatuhan Basel III.'},
+  {icon: '🔄', title: 'Proses End-of-Day', desc: 'Proses EOD otomatis 12 langkah dari ekstraksi data hingga pelaporan, berjalan setiap malam dengan audit trail komprehensif.'},
+  {icon: '🌊', title: 'Stress Testing', desc: 'Uji ketahanan likuiditas dengan 3 skenario: Market-Wide, Idiosyncratic, dan Combined. Hitung hari survival dan tindakan recovery.'},
+  {icon: '📋', title: 'Pelaporan Regulasi', desc: 'Generate laporan BI dan OJK otomatis dalam format XML, XBRL, Excel, dan PDF dengan validasi bawaan dan tracking submission.'},
+  {icon: '🚨', title: 'Alert Real-Time', desc: 'Notifikasi instan untuk pelanggaran threshold, kegagalan EOD, anomali data, dan pengingat deadline regulasi via email dan dashboard.'},
+  {icon: '🔐', title: 'Keamanan Enterprise', desc: 'Autentikasi JWT, RBAC dengan 6 role, workflow maker-checker, audit trail 10 tahun, dan enkripsi data end-to-end.'}
+]
+};
+
+// Modules data
+const modulesData = {
+en: [
+  {num: '①', title: 'LCR Calculator', desc: 'HQLA + Outflow + Inflow with 75% cap'},
+  {num: '②', title: 'NDR/LDR Calculator', desc: 'Credit/DPK ratio per branch'},
+  {num: '③', title: 'NSFR Calculator', desc: 'ASF/RSF 12-month horizon'},
+  {num: '④', title: 'Maturity Gap', desc: '9 time buckets analysis'},
+  {num: '⑤', title: 'Cash Flow', desc: '12-month projection engine'},
+  {num: '⑥', title: 'HQLA Engine', desc: 'Asset classification & haircut'},
+  {num: '⑦', title: 'Stress Testing', desc: '3 scenario analysis'},
+  {num: '⑧', title: 'FTP Engine', desc: 'Fund Transfer Pricing'},
+  {num: '⑨', title: 'Behavioral', desc: 'Core/volatile deposit analysis'},
+  {num: '⑩', title: 'What-If', desc: 'Interactive scenario builder'},
+  {num: '⑪', title: 'CFP', desc: 'Contingency funding plan'},
+  {num: '⑫', title: 'Dashboard', desc: 'Visual KPI monitoring'},
+  {num: '⑬', title: 'Reporting', desc: '8 regulatory report types'},
+  {num: '⑭', title: 'Alert Center', desc: 'Threshold breach notifications'},
+  {num: '⑮', title: 'Parameters', desc: 'Configurable rules engine'},
+  {num: '⑯', title: 'User Access', desc: 'RBAC with 6 roles'},
+  {num: '⑰', title: 'Audit Trail', desc: 'Complete activity logging'}
+],
+id: [
+  {num: '①', title: 'Kalkulator LCR', desc: 'HQLA + Outflow + Inflow dengan cap 75%'},
+  {num: '②', title: 'Kalkulator NDR/LDR', desc: 'Rasio Kredit/DPK per cabang'},
+  {num: '③', title: 'Kalkulator NSFR', desc: 'ASF/RSF horizon 12 bulan'},
+  {num: '④', title: 'Maturity Gap', desc: 'Analisis 9 time bucket'},
+  {num: '⑤', title: 'Cash Flow', desc: 'Engine proyeksi 12 bulan'},
+  {num: '⑥', title: 'Engine HQLA', desc: 'Klasifikasi aset & haircut'},
+  {num: '⑦', title: 'Stress Testing', desc: 'Analisis 3 skenario'},
+  {num: '⑧', title: 'Engine FTP', desc: 'Fund Transfer Pricing'},
+  {num: '⑨', title: 'Behavioral', desc: 'Analisis deposit core/volatile'},
+  {num: '⑩', title: 'What-If', desc: 'Builder skenario interaktif'},
+  {num: '⑪', title: 'CFP', desc: 'Rencana pendanaan kontinjensi'},
+  {num: '⑫', title: 'Dashboard', desc: 'Monitoring KPI visual'},
+  {num: '⑬', title: 'Pelaporan', desc: '8 jenis laporan regulasi'},
+  {num: '⑭', title: 'Pusat Alert', desc: 'Notifikasi pelanggaran threshold'},
+  {num: '⑮', title: 'Parameter', desc: 'Engine aturan yang dapat dikonfigurasi'},
+  {num: '⑯', title: 'Akses User', desc: 'RBAC dengan 6 role'},
+  {num: '⑰', title: 'Audit Trail', desc: 'Logging aktivitas lengkap'}
+]
+};
+
+// Benefits data
+const benefitsData = {
+en: [
+  {icon: '⚡', title: 'Rapid Implementation', desc: 'Go-live in 4 months for Phase 1 (LCR & NDR), with an 18-month roadmap for full deployment across all modules.'},
+  {icon: '🎯', title: 'Guaranteed Compliance', desc: 'Fully compliant with Basel III, PBI No.18/2016, and OJK regulations. Automatic updates when regulations change.'},
+  {icon: '🔧', title: 'Flexible & Customizable', desc: '230+ configurable parameters without code changes. Adapt the system to your bank\'s specific requirements.'},
+  {icon: '📈', title: 'Scalable Architecture', desc: 'Docker-based, microservices-ready, supports high availability, disaster recovery, and horizontal scaling.'},
+  {icon: '💰', title: 'Cost Effective', desc: 'Total investment ~$500K for 18 months, including infrastructure, licenses, training, and ongoing support.'}
+],
+id: [
+  {icon: '⚡', title: 'Implementasi Cepat', desc: 'Go-live dalam 4 bulan untuk Phase 1 (LCR & NDR), dengan roadmap 18 bulan untuk deployment penuh di semua modul.'},
+  {icon: '🎯', title: 'Kepatuhan Terjamin', desc: 'Sepenuhnya patuh dengan Basel III, PBI No.18/2016, dan regulasi OJK. Update otomatis saat regulasi berubah.'},
+  {icon: '🔧', title: 'Fleksibel & Dapat Dikustomisasi', desc: '230+ parameter yang dapat dikonfigurasi tanpa perubahan kode. Sesuaikan sistem dengan kebutuhan spesifik bank Anda.'},
+  {icon: '📈', title: 'Arsitektur Skalabel', desc: 'Berbasis Docker, siap microservices, mendukung high availability, disaster recovery, dan horizontal scaling.'},
+  {icon: '💰', title: 'Hemat Biaya', desc: 'Total investasi ~Rp 8M untuk 18 bulan, termasuk infrastruktur, lisensi, training, dan support berkelanjutan.'}
+]
+};
+
+// ============================================================
+// LANGUAGE SWITCHER
+// ============================================================
+let currentLang = localStorage.getItem('lims_lang') || 'en';
+
+function switchLanguage(lang) {
+  currentLang = lang;
+  localStorage.setItem('lims_lang', lang);
+  
+  // Update active button
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.lang === lang);
+  });
+  
+  // Update HTML lang attribute
+  document.documentElement.lang = lang;
+  
+  // Update all text elements
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.dataset.i18n;
+    if (translations[lang][key]) {
+      el.textContent = translations[lang][key];
+    }
+  });
+  
+  // Update dynamic content
+  renderFeatures();
+  renderModules();
+  renderBenefits();
+}
+
+// ============================================================
+// RENDER FUNCTIONS
+// ============================================================
+function renderFeatures() {
+  const grid = document.getElementById('featuresGrid');
+  const features = featuresData[currentLang];
+  
+  grid.innerHTML = features.map(f => `
+    <div class="feature-card fade-in">
+      <div class="feature-icon">${f.icon}</div>
+      <h4>${f.title}</h4>
+      <p>${f.desc}</p>
+    </div>
+  `).join('');
+  
+  // Trigger animations
+  setTimeout(() => {
+    document.querySelectorAll('.feature-card').forEach(card => {
+      card.classList.add('visible');
+    });
+  }, 100);
+}
+
+function renderModules() {
+  const grid = document.getElementById('modulesGrid');
+  const modules = modulesData[currentLang];
+  
+  grid.innerHTML = modules.map(m => `
+    <div class="module-card fade-in">
+      <div class="module-num">${m.num}</div>
+      <h4>${m.title}</h4>
+      <p>${m.desc}</p>
+    </div>
+  `).join('');
+  
+  // Trigger animations
+  setTimeout(() => {
+    document.querySelectorAll('.module-card').forEach(card => {
+      card.classList.add('visible');
+    });
+  }, 100);
+}
+
+function renderBenefits() {
+  const list = document.getElementById('benefitsList');
+  const benefits = benefitsData[currentLang];
+  
+  const sectionHeader = `
+    <div class="section-header" style="text-align:left;margin:0 0 32px">
+      <span class="section-tag">${currentLang === 'en' ? 'Why Choose LiMS' : 'Mengapa Memilih LiMS'}</span>
+      <h3 style="font-size:32px">${currentLang === 'en' ? 'Built for Enterprise Banking' : 'Dibangun untuk Perbankan Enterprise'}</h3>
+    </div>
+  `;
+  
+  const benefitsHTML = benefits.map(b => `
+    <div class="benefit-item fade-in">
+      <div class="benefit-icon">${b.icon}</div>
+      <div class="benefit-text">
+        <h4>${b.title}</h4>
+        <p>${b.desc}</p>
+      </div>
+    </div>
+  `).join('');
+  
+  list.innerHTML = sectionHeader + benefitsHTML;
+  
+  // Trigger animations
+  setTimeout(() => {
+    document.querySelectorAll('.benefit-item').forEach(item => {
+      item.classList.add('visible');
+    });
+  }, 100);
+}
+
+// ============================================================
+// SCROLL EFFECTS
+// ============================================================
+window.addEventListener('scroll', () => {
+  const header = document.getElementById('header');
+  if (window.scrollY > 50) {
+    header.classList.add('scrolled');
+  } else {
+    header.classList.remove('scrolled');
+  }
+});
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({behavior: 'smooth', block: 'start'});
+      document.getElementById('navLinks').classList.remove('active');
+    }
+  });
+});
+
+// ============================================================
+// INITIALIZATION
+// ============================================================
+window.addEventListener('DOMContentLoaded', () => {
+  // Set initial language
+  switchLanguage(currentLang);
+  
+  // Intersection Observer for fade-in animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, {threshold: 0.1, rootMargin: '0px 0px -50px 0px'});
+  
+  // Observe all fade-in elements
+  setTimeout(() => {
+    document.querySelectorAll('.fade-in').forEach(el => {
+      observer.observe(el);
+    });
+  }, 500);
+});
+</script>
+
+</body>
+</html>

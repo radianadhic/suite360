@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SLiKA — Otomasi Robotik SLIK &amp; Biro Kredit</title>
+<!--
+  ============================================================================
+  SLiKA — Situs Pemasaran Dwibahasa
+  ============================================================================
+  Mandiri penuh: seluruh gaya, gambar (SVG inline), dan skrip tertanam dalam
+  satu berkas. Tidak ada permintaan jaringan sama sekali, sehingga tampil utuh
+  di dalam pratinjau bersandbox maupun saat berkas dibuka langsung di peramban.
+
+  Peralihan bahasa bekerja lewat atribut data-id / data-en pada setiap simpul
+  teks. Pilihan bahasa disimpan di localStorage.
+
+  CATATAN KEJUJURAN ISI:
+  Seluruh angka pada halaman ini diambil dari basis kode yang benar-benar
+  dijalankan pada 6 September 2026, bukan dari materi lama:
+    - 2.894 asersi uji lulus / 0 gagal  -> keluaran jalankan_uji.sh
+    - 148 kelas utama                   -> find src/main -name '*.java' | wc -l
+    - 46 rangkaian uji                  -> find src/test -name 'Uji*.java'
+    - 73 endpoint REST                  -> hitung anotasi @GET/@POST/@PUT/@DELETE
+    - 11 modul, 22 laporan, 12 segmen   -> struktur paket m1..m11 dan ReportService
+  Bagian "Status Kesiapan" sengaja menyatakan pemblokir secara terbuka.
+  TIDAK ADA estimasi tanggal go-live di halaman ini.
+  ============================================================================
+-->
+<style>
+  :root{
+    --utama:#10394F;
+    --utama-2:#0B2838;
+    --aksen:#17A398;
+    /* Varian aksen lebih gelap khusus permukaan bertulisan putih.
+       #17A398 dengan teks putih hanya mencapai rasio kontras 3,12:1,
+       di bawah ambang WCAG AA 4,5:1. Nilai di bawah ini 5,16:1.
+       Terukur, bukan dikira-kira. */
+    --aksen-pekat:#0F7B6C;
+    --aksen-terang:#4FD1C5;
+    --ink:#13202F;
+    --redup:#5B6B80;
+    --garis:#DCE3ED;
+    --latar:#F4F6FA;
+    --putih:#FFFFFF;
+    --sukses:#0F7B6C;
+    --waspada:#8A5A12;
+    --bahaya:#A3341F;
+    --radius:14px;
+    --lebar:1180px;
+    --bayang:0 1px 2px rgba(16,57,79,.06), 0 8px 24px rgba(16,57,79,.08);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Inter','Segoe UI','Helvetica Neue',Arial,'DejaVu Sans',sans-serif;
+    color:var(--ink);background:var(--putih);line-height:1.65;
+    -webkit-font-smoothing:antialiased;font-size:16px;
+  }
+  .bungkus{max-width:var(--lebar);margin:0 auto;padding:0 28px}
+  h1,h2,h3,h4{line-height:1.2;letter-spacing:-.02em;font-weight:700}
+  a{color:inherit;text-decoration:none}
+
+  /* ---------------------------------------------------- bilah navigasi */
+  header{
+    position:sticky;top:0;z-index:60;background:rgba(255,255,255,.92);
+    backdrop-filter:blur(12px);border-bottom:1px solid var(--garis);
+  }
+  .nav{display:flex;align-items:center;gap:28px;height:70px}
+  .merek{display:flex;align-items:center;gap:11px;flex-shrink:0}
+  .merek svg{display:block}
+  .merek-teks{font-size:22px;font-weight:700;letter-spacing:2.5px;color:var(--utama)}
+  .nav-tautan{display:flex;gap:26px;margin-left:auto;align-items:center}
+  .nav-tautan a{font-size:14.5px;color:var(--redup);font-weight:500;transition:color .15s}
+  .nav-tautan a:hover{color:var(--utama)}
+  .ganti-bahasa{
+    display:flex;border:1px solid var(--garis);border-radius:999px;
+    overflow:hidden;background:var(--latar);flex-shrink:0
+  }
+  .ganti-bahasa button{
+    border:0;background:transparent;padding:6px 15px;font:inherit;font-size:13px;
+    font-weight:600;color:var(--redup);cursor:pointer;transition:all .15s
+  }
+  .ganti-bahasa button.aktif{background:var(--utama);color:#fff}
+  .tombol{
+    display:inline-block;padding:13px 26px;border-radius:10px;font-weight:600;
+    font-size:15px;transition:transform .12s, box-shadow .12s;border:0;cursor:pointer;
+    font-family:inherit
+  }
+  .tombol-utama{background:var(--aksen-pekat);color:#fff;box-shadow:0 4px 14px rgba(15,123,108,.34)}
+  .tombol-utama:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(15,123,108,.44)}
+  .tombol-garis{background:transparent;color:var(--utama);border:1.5px solid var(--garis)}
+  .tombol-garis:hover{border-color:var(--utama)}
+  /* Tombol pada bilah navigasi: latar navy pekat, bukan teal.
+     Teal di atas latar putih membuat teks putih di dalamnya berkontras
+     rendah — cacat ini terlihat pada tangkapan layar verifikasi pertama. */
+  .nav .tombol-utama{
+    padding:9px 19px;font-size:14px;background:var(--utama);
+    /* color WAJIB dinyatakan tegas: aturan .nav-tautan a mewariskan warna
+       abu-abu redup ke tombol ini, sehingga teks putih tidak pernah berlaku
+       dan kontrasnya jatuh. Terdeteksi lewat getComputedStyle, bukan mata. */
+    color:#fff !important;
+    box-shadow:0 2px 8px rgba(16,57,79,.22)
+  }
+  .nav .tombol-utama:hover{background:var(--utama-2)}
+
+  /* --------------------------------------------------------------- hero */
+  .hero{
+    background:linear-gradient(160deg,var(--utama) 0%,var(--utama-2) 55%,#071e2b 100%);
+    color:#fff;padding:92px 0 100px;position:relative;overflow:hidden
+  }
+  .hero::after{
+    content:'';position:absolute;width:620px;height:620px;border-radius:50%;
+    background:radial-gradient(circle,rgba(23,163,152,.20),transparent 68%);
+    right:-190px;top:-190px;pointer-events:none
+  }
+  .hero .bungkus{position:relative;z-index:2}
+  .hero-kisi{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center}
+  .lencana{
+    display:inline-flex;align-items:center;gap:9px;background:rgba(79,209,197,.13);
+    border:1px solid rgba(79,209,197,.32);color:var(--aksen-terang);
+    padding:7px 15px;border-radius:999px;font-size:13px;font-weight:600;margin-bottom:26px
+  }
+  .titik{width:7px;height:7px;border-radius:50%;background:var(--aksen-terang)}
+  .hero h1{font-size:46px;margin-bottom:22px;letter-spacing:-.03em}
+  .hero h1 em{font-style:normal;color:var(--aksen-terang)}
+  .hero p.utama{font-size:19px;color:#B9CBDC;margin-bottom:34px;max-width:600px}
+  .hero-aksi{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:40px}
+  .hero .tombol-garis{color:#fff;border-color:rgba(255,255,255,.3)}
+  .hero .tombol-garis:hover{border-color:#fff;background:rgba(255,255,255,.07)}
+  /* Kisi tetap 4 kolom agar metrik tidak membungkus menyisakan satu butir
+     sendirian di baris kedua — terlihat pada verifikasi visual. */
+  .metrik{display:grid;grid-template-columns:repeat(4,auto);gap:26px;justify-content:start}
+  .metrik div strong{display:block;font-size:27px;color:#fff;line-height:1.15}
+  .metrik div span{font-size:12.5px;color:#8FA8BE;letter-spacing:.4px}
+
+  /* kartu terminal di hero */
+  .terminal{
+    background:rgba(6,22,32,.7);border:1px solid rgba(79,209,197,.2);
+    border-radius:var(--radius);overflow:hidden;box-shadow:0 22px 60px rgba(0,0,0,.4)
+  }
+  .terminal-kepala{
+    display:flex;align-items:center;gap:7px;padding:11px 15px;
+    background:rgba(255,255,255,.045);border-bottom:1px solid rgba(255,255,255,.08)
+  }
+  .lampu{width:11px;height:11px;border-radius:50%}
+  .terminal-judul{
+    margin-left:9px;font-size:11.5px;color:#7E97AC;
+    font-family:'DejaVu Sans Mono',ui-monospace,monospace
+  }
+  .terminal-isi{
+    padding:17px;font-family:'DejaVu Sans Mono',ui-monospace,monospace;
+    font-size:12.5px;line-height:1.85;color:#C6D6E4
+  }
+  .t-abu{color:#63809A}
+  .t-hijau{color:#4FD1C5}
+  .t-kuning{color:#E3B341}
+
+  /* --------------------------------------------------------- seksi umum */
+  section{padding:88px 0}
+  .abu{background:var(--latar)}
+  .kepala-seksi{text-align:center;max-width:730px;margin:0 auto 56px}
+  .label-kecil{
+    font-size:12.5px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;
+    color:var(--aksen);margin-bottom:13px
+  }
+  .kepala-seksi h2{font-size:38px;margin-bottom:15px}
+  .kepala-seksi p{font-size:17px;color:var(--redup)}
+
+  .kisi{display:grid;gap:22px}
+  .k2{grid-template-columns:repeat(2,1fr)}
+  .k3{grid-template-columns:repeat(3,1fr)}
+  .k4{grid-template-columns:repeat(4,1fr)}
+
+  .kartu{
+    background:var(--putih);border:1px solid var(--garis);border-radius:var(--radius);
+    padding:28px;transition:transform .16s, box-shadow .16s, border-color .16s
+  }
+  .kartu:hover{transform:translateY(-3px);box-shadow:var(--bayang);border-color:#C3D0E0}
+  .kartu-ikon{
+    width:46px;height:46px;border-radius:11px;background:rgba(23,163,152,.11);
+    display:flex;align-items:center;justify-content:center;margin-bottom:17px
+  }
+  .kartu h3{font-size:17.5px;margin-bottom:9px}
+  .kartu p{font-size:14.5px;color:var(--redup)}
+  .kode-modul{
+    font-family:'DejaVu Sans Mono',ui-monospace,monospace;font-size:11px;
+    color:var(--aksen);font-weight:700;letter-spacing:.6px;margin-bottom:6px;display:block
+  }
+
+  /* tabel */
+  .bingkai-tabel{
+    overflow-x:auto;border:1px solid var(--garis);border-radius:var(--radius);
+    background:#fff
+  }
+  table{width:100%;border-collapse:collapse;font-size:14.5px;min-width:620px}
+  th{
+    text-align:left;padding:14px 18px;background:var(--latar);font-weight:700;
+    font-size:12.5px;letter-spacing:.7px;text-transform:uppercase;color:var(--redup);
+    border-bottom:1px solid var(--garis);white-space:nowrap
+  }
+  td{padding:14px 18px;border-bottom:1px solid #EDF1F7;vertical-align:top}
+  tr:last-child td{border-bottom:0}
+  .pil{
+    display:inline-block;padding:3px 11px;border-radius:999px;font-size:12px;font-weight:700
+  }
+  .p-ok{background:rgba(15,123,108,.11);color:var(--sukses)}
+  .p-tunggu{background:rgba(138,90,18,.11);color:var(--waspada)}
+  .p-blok{background:rgba(163,52,31,.1);color:var(--bahaya)}
+
+  /* jalur alur */
+  .alur{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-top:12px}
+  .langkah{
+    background:#fff;border:1px solid var(--garis);border-radius:12px;padding:20px;
+    position:relative
+  }
+  .langkah-no{
+    width:29px;height:29px;border-radius:8px;background:var(--utama);color:#fff;
+    display:flex;align-items:center;justify-content:center;font-size:13px;
+    font-weight:700;margin-bottom:12px
+  }
+  .langkah h4{font-size:14.5px;margin-bottom:6px}
+  .langkah p{font-size:13px;color:var(--redup);line-height:1.55}
+
+  /* kepatuhan */
+  .patuh{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:16px
+  }
+  .patuh-butir{
+    display:flex;gap:13px;align-items:flex-start;background:#fff;
+    border:1px solid var(--garis);border-radius:12px;padding:19px
+  }
+  .centang{flex-shrink:0;margin-top:2px}
+  .patuh-butir strong{display:block;font-size:14.5px;margin-bottom:3px}
+  .patuh-butir span{font-size:13px;color:var(--redup)}
+
+  /* pemberitahuan */
+  .catatan{
+    border-left:3px solid var(--waspada);background:rgba(138,90,18,.055);
+    padding:19px 23px;border-radius:0 10px 10px 0;font-size:14.5px;color:#4A3A1E
+  }
+  .catatan strong{color:var(--waspada)}
+
+  /* ajakan */
+  .ajakan{
+    background:linear-gradient(140deg,var(--utama),var(--utama-2));
+    color:#fff;border-radius:20px;padding:62px 52px;text-align:center;
+    position:relative;overflow:hidden
+  }
+  .ajakan::before{
+    content:'';position:absolute;width:440px;height:440px;border-radius:50%;
+    background:radial-gradient(circle,rgba(23,163,152,.19),transparent 70%);
+    left:-140px;bottom:-200px
+  }
+  .ajakan > *{position:relative;z-index:2}
+  .ajakan h2{font-size:35px;margin-bottom:15px}
+  .ajakan p{color:#B9CBDC;font-size:17px;max-width:600px;margin:0 auto 30px}
+
+  footer{background:var(--utama-2);color:#8FA8BE;padding:52px 0 34px;font-size:14px}
+  .kaki-atas{
+    display:flex;justify-content:space-between;gap:38px;flex-wrap:wrap;
+    padding-bottom:30px;border-bottom:1px solid rgba(255,255,255,.09)
+  }
+  .kaki-merek{max-width:330px}
+  .kaki-merek p{margin-top:13px;font-size:13.5px;line-height:1.6}
+  .kaki-kol h5{
+    color:#fff;font-size:12.5px;letter-spacing:1.1px;text-transform:uppercase;
+    margin-bottom:13px
+  }
+  .kaki-kol a{display:block;margin-bottom:8px;font-size:13.5px;transition:color .15s}
+  .kaki-kol a:hover{color:var(--aksen-terang)}
+  .kaki-bawah{
+    padding-top:24px;display:flex;justify-content:space-between;gap:18px;
+    flex-wrap:wrap;font-size:12.5px;color:#6D8598
+  }
+
+  @media(max-width:980px){
+    .hero-kisi{grid-template-columns:1fr;gap:40px}
+    .hero h1{font-size:40px}
+    .k4,.k3{grid-template-columns:repeat(2,1fr)}
+    .alur{grid-template-columns:repeat(2,1fr)}
+    .nav-tautan a{display:none}
+  }
+  @media(max-width:980px){ .metrik{grid-template-columns:repeat(2,auto)} }
+  @media(max-width:640px){
+    .k4,.k3,.k2{grid-template-columns:1fr}
+    .alur{grid-template-columns:1fr}
+    .hero h1{font-size:32px}
+    .kepala-seksi h2{font-size:28px}
+    .ajakan{padding:44px 26px}
+    .metrik{gap:24px}
+  }
+</style>
+</head>
+<body>
+
+<!-- ======================================================= BILAH NAVIGASI -->
+<header>
+  <div class="bungkus nav">
+    <a href="#atas" class="merek">
+      <svg width="34" height="34" viewBox="0 0 128 128" aria-hidden="true">
+        <path d="M 90.38 26.32 A 46.00 46.00 0 1 1 44.56 22.31" fill="none"
+              stroke="#10394F" stroke-width="14" stroke-linecap="round"/>
+        <path d="M 57.25 16.39 L 49.80 33.55 L 39.32 11.07 Z" fill="#17A398"/>
+        <path d="M 42.00 65.00 L 57.00 80.00 L 87.00 49.00" fill="none"
+              stroke="#17A398" stroke-width="14" stroke-linecap="round"
+              stroke-linejoin="round"/>
+      </svg>
+      <span class="merek-teks">SLiKA</span>
+    </a>
+    <nav class="nav-tautan">
+      <a href="#kemampuan" data-id="Kemampuan" data-en="Capabilities">Kemampuan</a>
+      <a href="#modul"     data-id="Modul"      data-en="Modules">Modul</a>
+      <a href="#alur"      data-id="Cara Kerja" data-en="How It Works">Cara Kerja</a>
+      <a href="#kepatuhan" data-id="Kepatuhan"  data-en="Compliance">Kepatuhan</a>
+      <a href="#status"    data-id="Status"     data-en="Status">Status</a>
+      <a href="#identitas" data-id="Merek"      data-en="Brand">Merek</a>
+      <div class="ganti-bahasa">
+        <button id="btn-id" class="aktif" onclick="setBahasa('id')">ID</button>
+        <button id="btn-en" onclick="setBahasa('en')">EN</button>
+      </div>
+      <a href="#kontak" class="tombol tombol-utama"
+         data-id="Minta Demo" data-en="Request Demo">Minta Demo</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ==================================================================== HERO -->
+<section class="hero" id="atas" style="padding-top:92px">
+  <div class="bungkus hero-kisi">
+    <div>
+      <div class="lencana">
+        <span class="titik"></span>
+        <span data-id="Otomasi Biro Kredit untuk Lembaga Jasa Keuangan"
+              data-en="Credit Bureau Automation for Financial Institutions">
+          Otomasi Biro Kredit untuk Lembaga Jasa Keuangan</span>
+      </div>
+
+      <h1 data-id="Pemeriksaan debitur yang &lt;em&gt;berjalan sendiri&lt;/em&gt;, terekam penuh, dan siap diaudit."
+          data-en="Debtor checks that &lt;em&gt;run themselves&lt;/em&gt;, fully logged, and audit-ready.">
+        Pemeriksaan debitur yang <em>berjalan sendiri</em>, terekam penuh, dan siap diaudit.
+      </h1>
+
+      <p class="utama"
+         data-id="SLiKA mengotomasi seluruh rantai permintaan informasi debitur — dari antrean dan kuota, penguraian dua belas segmen, penilaian risiko, hingga keputusan kredit dan rantai bukti. Dibangun mengikuti SEOJK No. 11/SEOJK.01/2024."
+         data-en="SLiKA automates the entire debtor information chain — from queueing and quota, twelve-segment parsing, risk scoring, through credit decisioning and evidence chain. Built to follow SEOJK No. 11/SEOJK.01/2024.">
+        SLiKA mengotomasi seluruh rantai permintaan informasi debitur — dari antrean
+        dan kuota, penguraian dua belas segmen, penilaian risiko, hingga keputusan
+        kredit dan rantai bukti. Dibangun mengikuti SEOJK No. 11/SEOJK.01/2024.
+      </p>
+
+      <div class="hero-aksi">
+        <a href="#kontak" class="tombol tombol-utama"
+           data-id="Jadwalkan Demo Teknis" data-en="Schedule a Technical Demo">
+           Jadwalkan Demo Teknis</a>
+        <a href="#modul" class="tombol tombol-garis"
+           data-id="Lihat 11 Modul" data-en="Explore 11 Modules">Lihat 11 Modul</a>
+      </div>
+
+      <div class="metrik">
+        <div><strong>2.894</strong>
+          <span data-id="asersi uji lulus · 0 gagal" data-en="test assertions passing · 0 failing">
+          asersi uji lulus · 0 gagal</span></div>
+        <div><strong>11</strong>
+          <span data-id="modul fungsional" data-en="functional modules">modul fungsional</span></div>
+        <div><strong>12</strong>
+          <span data-id="segmen data debitur" data-en="debtor data segments">segmen data debitur</span></div>
+        <div><strong>22</strong>
+          <span data-id="laporan bawaan" data-en="built-in reports">laporan bawaan</span></div>
+      </div>
+    </div>
+
+    <div class="terminal">
+      <div class="terminal-kepala">
+        <span class="lampu" style="background:#FF5F57"></span>
+        <span class="lampu" style="background:#FEBC2E"></span>
+        <span class="lampu" style="background:#28C840"></span>
+        <span class="terminal-judul">slika — jalankan_uji.sh</span>
+      </div>
+      <div class="terminal-isi">
+        <div><span class="t-abu">$</span> ./jalankan_uji.sh</div>
+        <div class="t-abu">== Kompilasi modul utama ==</div>
+        <div>kelas utama: <span class="t-hijau">148</span></div>
+        <div class="t-abu">== Jalankan uji ==</div>
+        <div>UjiKebijakanMenu &nbsp; lulus <span class="t-hijau">108</span> gagal <span class="t-hijau">0</span></div>
+        <div>UjiM8 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; lulus <span class="t-hijau">102</span> gagal <span class="t-hijau">0</span></div>
+        <div>UjiLaporanSisa &nbsp;&nbsp;&nbsp; lulus <span class="t-hijau">247</span> gagal <span class="t-hijau">0</span></div>
+        <div>UjiRotasiKunci &nbsp;&nbsp;&nbsp; lulus <span class="t-hijau">17</span> gagal <span class="t-hijau">0</span></div>
+        <div class="t-abu">=================================</div>
+        <div>TOTAL: <span class="t-hijau">2894 lulus, 0 gagal</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================= KEMAMPUAN -->
+<section id="kemampuan">
+  <div class="bungkus">
+    <div class="kepala-seksi">
+      <div class="label-kecil" data-id="Kemampuan Inti" data-en="Core Capabilities">Kemampuan Inti</div>
+      <h2 data-id="Dirancang untuk volume harian ratusan ribu pemeriksaan"
+          data-en="Designed for hundreds of thousands of daily checks">
+          Dirancang untuk volume harian ratusan ribu pemeriksaan</h2>
+      <p data-id="Bukan sekadar pembungkus API. SLiKA menangani hal-hal yang biasanya menjadi sumber kegagalan operasional: kuota yang habis diam-diam, antrean yang hilang saat peladen mati, dan jejak audit yang tidak lengkap saat pemeriksa datang."
+         data-en="Not a thin API wrapper. SLiKA handles what usually breaks in production: quota silently exhausted, queues lost on server restart, and audit trails that fall short when examiners arrive.">
+         Bukan sekadar pembungkus API. SLiKA menangani hal-hal yang biasanya menjadi
+         sumber kegagalan operasional: kuota yang habis diam-diam, antrean yang hilang
+         saat peladen mati, dan jejak audit yang tidak lengkap saat pemeriksa datang.</p>
+    </div>
+
+    <div class="kisi k3">
+      <div class="kartu">
+        <div class="kartu-ikon">
+          <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#17A398"
+               stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12a9 9 0 1 1-6.2-8.5"/><path d="M22 4 12 14.01l-3-3"/></svg>
+        </div>
+        <h3 data-id="Antrean tahan mati listrik" data-en="Crash-safe queueing">
+            Antrean tahan mati listrik</h3>
+        <p data-id="Permintaan disimpan permanen sebelum diproses. Bila peladen dimulai ulang di tengah batch, pekerjaan dilanjutkan dari titik terakhir — bukan diulang dari awal atau hilang."
+           data-en="Requests are persisted before processing. If the server restarts mid-batch, work resumes from the last checkpoint — not restarted, not lost.">
+           Permintaan disimpan permanen sebelum diproses. Bila peladen dimulai ulang di
+           tengah batch, pekerjaan dilanjutkan dari titik terakhir — bukan diulang dari
+           awal atau hilang.</p>
+      </div>
+
+      <div class="kartu">
+        <div class="kartu-ikon">
+          <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#17A398"
+               stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2v20M2 12h20"/><circle cx="12" cy="12" r="9"/></svg>
+        </div>
+        <h3 data-id="Kuota berambang bertingkat" data-en="Tiered quota thresholds">
+            Kuota berambang bertingkat</h3>
+        <p data-id="Peringatan pada 70%, 85%, dan 95% pemakaian; penolakan otomatis pada 100%. Kuota SLIK dan kuota biro swasta dihitung terpisah agar satu tidak menggerus yang lain."
+           data-en="Alerts at 70%, 85%, and 95% consumption; automatic rejection at 100%. SLIK quota and private bureau quota are counted separately so neither erodes the other.">
+           Peringatan pada 70%, 85%, dan 95% pemakaian; penolakan otomatis pada 100%.
+           Kuota SLIK dan kuota biro swasta dihitung terpisah agar satu tidak menggerus
+           yang lain.</p>
+      </div>
+
+      <div class="kartu">
+        <div class="kartu-ikon">
+          <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#17A398"
+               stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="11" width="18" height="11" rx="2"/>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        </div>
+        <h3 data-id="Pemutus sirkuit otomatis" data-en="Automatic circuit breaker">
+            Pemutus sirkuit otomatis</h3>
+        <p data-id="Bila laju kegagalan melonjak, permintaan dihentikan sendiri sebelum pola akses menjadi persoalan. Dasar rancangannya: SEOJK Bab III huruf g menyatakan OJK dapat menutup hak akses."
+           data-en="When failure rates spike, requests halt automatically before the access pattern becomes an issue. Rationale: SEOJK Chapter III(g) states OJK may revoke access rights.">
+           Bila laju kegagalan melonjak, permintaan dihentikan sendiri sebelum pola akses
+           menjadi persoalan. Dasar rancangannya: SEOJK Bab III huruf g menyatakan OJK
+           dapat menutup hak akses.</p>
+      </div>
+
+      <div class="kartu">
+        <div class="kartu-ikon">
+          <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#17A398"
+               stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="7.5" cy="15.5" r="5.5"/><path d="m21 2-9.6 9.6M15.5 7.5l3 3"/></svg>
+        </div>
+        <h3 data-id="Rotasi kunci tanpa pemutusan" data-en="Key rotation without lockout">
+            Rotasi kunci tanpa pemutusan</h3>
+        <p data-id="Kunci penanda tangan token dapat diganti tanpa melempar keluar satu pun pengguna. Kunci lama tetap diterima selama masa tenggang, lalu dicabut. Tanpa ini, kunci yang tidak pernah dirotasi berlaku selamanya."
+           data-en="Token signing keys can be replaced without logging anyone out. The old key stays valid during a grace period, then is revoked. Without this, a key that is never rotated is a key that lasts forever.">
+           Kunci penanda tangan token dapat diganti tanpa melempar keluar satu pun
+           pengguna. Kunci lama tetap diterima selama masa tenggang, lalu dicabut.
+           Tanpa ini, kunci yang tidak pernah dirotasi berlaku selamanya.</p>
+      </div>
+
+      <div class="kartu">
+        <div class="kartu-ikon">
+          <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#17A398"
+               stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        </div>
+        <h3 data-id="Pembatasan laju per pengguna" data-en="Per-user rate limiting">
+            Pembatasan laju per pengguna</h3>
+        <p data-id="Satu akun yang menghabiskan jatahnya tidak memengaruhi akun lain. Melindungi kuota SLIK dari skrip keliru dan penarikan data massal — kuota yang terpakai tidak dapat dikembalikan."
+           data-en="One account exhausting its quota does not affect others. Protects the SLIK quota from runaway scripts and bulk extraction — consumed quota cannot be reclaimed.">
+           Satu akun yang menghabiskan jatahnya tidak memengaruhi akun lain.
+           Melindungi kuota SLIK dari skrip keliru dan penarikan data massal —
+           kuota yang terpakai tidak dapat dikembalikan.</p>
+      </div>
+
+      <div class="kartu">
+        <div class="kartu-ikon">
+          <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#17A398"
+               stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>
+        </div>
+        <h3 data-id="Penguraian 12 segmen" data-en="Twelve-segment parsing">
+            Penguraian 12 segmen</h3>
+        <p data-id="D01, D02, F01–F06, A01 Agunan, P01, M01, dan K01 diurai menjadi data terstruktur, lengkap dengan resolusi entitas untuk mencocokkan debitur yang namanya ditulis berbeda-beda."
+           data-en="D01, D02, F01–F06, A01 Collateral, P01, M01, and K01 are parsed into structured data, with entity resolution to match debtors whose names are recorded inconsistently.">
+           D01, D02, F01–F06, A01 Agunan, P01, M01, dan K01 diurai menjadi data
+           terstruktur, lengkap dengan resolusi entitas untuk mencocokkan debitur yang
+           namanya ditulis berbeda-beda.</p>
+      </div>
+
+      <div class="kartu">
+        <div class="kartu-ikon">
+          <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#17A398"
+               stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
+        </div>
+        <h3 data-id="Skoring dan keputusan" data-en="Scoring and decisioning">
+            Skoring dan keputusan</h3>
+        <p data-id="Kartu skor berbasis aturan yang dapat diubah tanpa menyusun ulang aplikasi, tersambung ke mesin keputusan dengan alasan penolakan terkode dan alur override empat mata."
+           data-en="Rule-based scorecards editable without recompiling, wired into a decision engine with coded rejection reasons and a four-eyes override workflow.">
+           Kartu skor berbasis aturan yang dapat diubah tanpa menyusun ulang aplikasi,
+           tersambung ke mesin keputusan dengan alasan penolakan terkode dan alur
+           override empat mata.</p>
+      </div>
+
+      <div class="kartu">
+        <div class="kartu-ikon">
+          <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#17A398"
+               stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3 data-id="Rantai bukti dan penyamaran" data-en="Evidence chain and masking">
+            Rantai bukti dan penyamaran</h3>
+        <p data-id="Setiap keputusan tertaut pada dokumen sumbernya. Penyamaran medan sensitif, tanda air per pengguna, dan penjejakan akses tingkat baris berjalan menurut peran."
+           data-en="Every decision links to its source document. Sensitive-field masking, per-user watermarking, and row-level access tracking are enforced by role.">
+           Setiap keputusan tertaut pada dokumen sumbernya. Penyamaran medan sensitif,
+           tanda air per pengguna, dan penjejakan akses tingkat baris berjalan menurut
+           peran.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================= MODUL -->
+<section class="abu" id="modul">
+  <div class="bungkus">
+    <div class="kepala-seksi">
+      <div class="label-kecil" data-id="Arsitektur" data-en="Architecture">Arsitektur</div>
+      <h2 data-id="Sebelas modul, satu jalur data" data-en="Eleven modules, one data path">
+          Sebelas modul, satu jalur data</h2>
+      <p data-id="Setiap modul berdiri sebagai paket terpisah dengan rangkaian ujinya sendiri, sehingga dapat diaudit, diganti, atau dipindahkan ke layanan tersendiri tanpa membongkar yang lain."
+         data-en="Each module is a separate package with its own test suite, so it can be audited, replaced, or split into its own service without disturbing the rest.">
+         Setiap modul berdiri sebagai paket terpisah dengan rangkaian ujinya sendiri,
+         sehingga dapat diaudit, diganti, atau dipindahkan ke layanan tersendiri tanpa
+         membongkar yang lain.</p>
+    </div>
+
+    <div class="kisi k4">
+      <div class="kartu"><span class="kode-modul">M1</span>
+        <h3 data-id="Integrasi Data" data-en="Data Integration">Integrasi Data</h3>
+        <p data-id="Klien host-to-host, batch, penjadwalan, pembatas laju, pemutus sirkuit, dan singgahan hasil."
+           data-en="Host-to-host client, batching, scheduling, rate limiter, circuit breaker, and result cache.">
+           Klien host-to-host, batch, penjadwalan, pembatas laju, pemutus sirkuit, dan
+           singgahan hasil.</p></div>
+
+      <div class="kartu"><span class="kode-modul">M2</span>
+        <h3 data-id="Pengolahan Data" data-en="Data Processing">Pengolahan Data</h3>
+        <p data-id="Parser 12 segmen, normalisasi, kamus kode, dan resolusi entitas berbasis kemiripan nama."
+           data-en="Twelve-segment parser, normalisation, code dictionary, and name-similarity entity resolution.">
+           Parser 12 segmen, normalisasi, kamus kode, dan resolusi entitas berbasis
+           kemiripan nama.</p></div>
+
+      <div class="kartu"><span class="kode-modul">M3</span>
+        <h3 data-id="Mesin Skoring" data-en="Scoring Engine">Mesin Skoring</h3>
+        <p data-id="Rekayasa fitur, kartu skor, peringkat, dan penyimpanan riwayat skor."
+           data-en="Feature engineering, scorecards, grading, and score history storage.">
+           Rekayasa fitur, kartu skor, peringkat, dan penyimpanan riwayat skor.</p></div>
+
+      <div class="kartu"><span class="kode-modul">M4</span>
+        <h3 data-id="Mesin Keputusan" data-en="Decision Engine">Mesin Keputusan</h3>
+        <p data-id="Persetujuan dan penolakan otomatis, kode alasan, serta override dengan persetujuan berlapis."
+           data-en="Automatic approve and reject, reason codes, and override with layered approval.">
+           Persetujuan dan penolakan otomatis, kode alasan, serta override dengan
+           persetujuan berlapis.</p></div>
+
+      <div class="kartu"><span class="kode-modul">M5</span>
+        <h3 data-id="Pelaporan" data-en="Reporting">Pelaporan</h3>
+        <p data-id="22 laporan bawaan dengan kueri berparameter yang disimpan di basis data, bukan ditanam di kode."
+           data-en="22 built-in reports with parameterised queries stored in the database, not hardcoded.">
+           22 laporan bawaan dengan kueri berparameter yang disimpan di basis data, bukan
+           ditanam di kode.</p></div>
+
+      <div class="kartu"><span class="kode-modul">M6</span>
+        <h3 data-id="Penyusun Ringkasan" data-en="Summary Builder">Penyusun Ringkasan</h3>
+        <p data-id="Katalog templat dan penyusunan ringkasan debitur untuk konsumsi sistem hilir."
+           data-en="Template catalogue and debtor summary composition for downstream systems.">
+           Katalog templat dan penyusunan ringkasan debitur untuk konsumsi sistem hilir.</p></div>
+
+      <div class="kartu"><span class="kode-modul">M7</span>
+        <h3 data-id="Robotik SFTP" data-en="SFTP Robotics">Robotik SFTP</h3>
+        <p data-id="Pemantauan direktori berkala dan pemindahan berkas otomatis ke sistem inti; selang waktu dapat diatur."
+           data-en="Periodic directory watch and automatic file transfer to core systems; interval configurable.">
+           Pemantauan direktori berkala dan pemindahan berkas otomatis ke sistem inti;
+           selang waktu dapat diatur.</p></div>
+
+      <div class="kartu"><span class="kode-modul">M8</span>
+        <h3 data-id="Keamanan" data-en="Security">Keamanan</h3>
+        <p data-id="JWT, kebijakan sandi, penyamaran, tanda air, kebijakan menu, dan penyaring header keamanan."
+           data-en="JWT, password policy, masking, watermarking, menu policy, and security header filter.">
+           JWT, kebijakan sandi, penyamaran, tanda air, kebijakan menu, dan penyaring
+           header keamanan.</p></div>
+
+      <div class="kartu"><span class="kode-modul">M9</span>
+        <h3 data-id="Pengelola Kuota" data-en="Quota Manager">Pengelola Kuota</h3>
+        <p data-id="Perhitungan kuota harian terpisah per sumber data, dengan ambang peringatan bertingkat."
+           data-en="Daily quota accounting separated by data source, with tiered warning thresholds.">
+           Perhitungan kuota harian terpisah per sumber data, dengan ambang peringatan
+           bertingkat.</p></div>
+
+      <div class="kartu"><span class="kode-modul">M10</span>
+        <h3 data-id="Pemeriksaan Awal" data-en="Pre-flight Check">Pemeriksaan Awal</h3>
+        <p data-id="Validasi kode tujuan dan kelengkapan parameter sebelum permintaan dikirim — mencegah panggilan berbiaya yang pasti gagal."
+           data-en="Purpose-code and parameter validation before dispatch — preventing billable calls destined to fail.">
+           Validasi kode tujuan dan kelengkapan parameter sebelum permintaan dikirim —
+           mencegah panggilan berbiaya yang pasti gagal.</p></div>
+
+      <div class="kartu"><span class="kode-modul">M11</span>
+        <h3 data-id="Rantai Bukti" data-en="Evidence Linkage">Rantai Bukti</h3>
+        <p data-id="Penautan dokumen bukti pada setiap keputusan, dengan daftar kewajiban dokumen per jenis perkara."
+           data-en="Evidence document linkage on every decision, with per-case document obligation lists.">
+           Penautan dokumen bukti pada setiap keputusan, dengan daftar kewajiban dokumen
+           per jenis perkara.</p></div>
+
+      <div class="kartu" style="background:var(--utama);border-color:var(--utama)">
+        <span class="kode-modul" style="color:var(--aksen-terang)">API</span>
+        <h3 style="color:#fff" data-id="73 Endpoint REST" data-en="73 REST Endpoints">
+            73 Endpoint REST</h3>
+        <p style="color:#A9BCCF"
+           data-id="Seluruh fungsi tersedia lewat antarmuka REST bertoken, siap disambungkan ke LOS, core banking, atau sistem internal lain."
+           data-en="Every function is exposed over a token-authenticated REST interface, ready to connect to LOS, core banking, or other internal systems.">
+           Seluruh fungsi tersedia lewat antarmuka REST bertoken, siap disambungkan ke
+           LOS, core banking, atau sistem internal lain.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================== CARA KERJA -->
+<section id="alur">
+  <div class="bungkus">
+    <div class="kepala-seksi">
+      <div class="label-kecil" data-id="Cara Kerja" data-en="How It Works">Cara Kerja</div>
+      <h2 data-id="Dari permintaan sampai bukti, tanpa langkah manual"
+          data-en="From request to evidence, with no manual step">
+          Dari permintaan sampai bukti, tanpa langkah manual</h2>
+    </div>
+
+    <div class="alur">
+      <div class="langkah">
+        <div class="langkah-no">1</div>
+        <h4 data-id="Masuk &amp; Validasi" data-en="Intake &amp; Validate">Masuk &amp; Validasi</h4>
+        <p data-id="Permintaan tiba lewat REST atau unggahan massal. Kode tujuan dan kelengkapan parameter diperiksa lebih dulu."
+           data-en="Requests arrive via REST or bulk upload. Purpose code and parameter completeness are checked first.">
+           Permintaan tiba lewat REST atau unggahan massal. Kode tujuan dan kelengkapan
+           parameter diperiksa lebih dulu.</p>
+      </div>
+      <div class="langkah">
+        <div class="langkah-no">2</div>
+        <h4 data-id="Antre &amp; Ambil" data-en="Queue &amp; Fetch">Antre &amp; Ambil</h4>
+        <p data-id="Antrean persisten mengatur laju sesuai kuota dan batas panggilan, dengan mundur bertahap saat gangguan."
+           data-en="A persistent queue paces requests against quota and call limits, backing off on disruption.">
+           Antrean persisten mengatur laju sesuai kuota dan batas panggilan, dengan mundur
+           bertahap saat gangguan.</p>
+      </div>
+      <div class="langkah">
+        <div class="langkah-no">3</div>
+        <h4 data-id="Urai &amp; Cocokkan" data-en="Parse &amp; Match">Urai &amp; Cocokkan</h4>
+        <p data-id="Dua belas segmen diurai, dinormalisasi, lalu dicocokkan ke identitas debitur yang benar."
+           data-en="Twelve segments are parsed, normalised, then matched to the correct debtor identity.">
+           Dua belas segmen diurai, dinormalisasi, lalu dicocokkan ke identitas debitur
+           yang benar.</p>
+      </div>
+      <div class="langkah">
+        <div class="langkah-no">4</div>
+        <h4 data-id="Skor &amp; Putuskan" data-en="Score &amp; Decide">Skor &amp; Putuskan</h4>
+        <p data-id="Kartu skor menghasilkan peringkat; mesin keputusan menerbitkan hasil beserta alasan terkode."
+           data-en="Scorecards produce a grade; the decision engine issues an outcome with coded reasons.">
+           Kartu skor menghasilkan peringkat; mesin keputusan menerbitkan hasil beserta
+           alasan terkode.</p>
+      </div>
+      <div class="langkah">
+        <div class="langkah-no">5</div>
+        <h4 data-id="Rekam &amp; Serahkan" data-en="Record &amp; Deliver">Rekam &amp; Serahkan</h4>
+        <p data-id="Bukti ditautkan, jejak audit ditulis, dan hasil diteruskan ke sistem hilir lewat API atau SFTP."
+           data-en="Evidence is linked, the audit trail is written, and results flow downstream via API or SFTP.">
+           Bukti ditautkan, jejak audit ditulis, dan hasil diteruskan ke sistem hilir
+           lewat API atau SFTP.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================== KEPATUHAN -->
+<section class="abu" id="kepatuhan">
+  <div class="bungkus">
+    <div class="kepala-seksi">
+      <div class="label-kecil" data-id="Kepatuhan" data-en="Compliance">Kepatuhan</div>
+      <h2 data-id="Dibangun dari teks regulasi, bukan dari tafsir"
+          data-en="Built from the regulation text, not from interpretation">
+          Dibangun dari teks regulasi, bukan dari tafsir</h2>
+      <p data-id="Setiap aturan di bawah ini ditelusuri langsung ke SEOJK No. 11/SEOJK.01/2024 dan diterapkan sebagai perilaku sistem yang diuji, bukan sebagai catatan dalam dokumen."
+         data-en="Each rule below traces directly to SEOJK No. 11/SEOJK.01/2024 and is implemented as tested system behaviour, not as a note in a document.">
+         Setiap aturan di bawah ini ditelusuri langsung ke SEOJK No. 11/SEOJK.01/2024 dan
+         diterapkan sebagai perilaku sistem yang diuji, bukan sebagai catatan dalam
+         dokumen.</p>
+    </div>
+
+    <div class="patuh">
+      <div class="patuh-butir">
+        <svg class="centang" width="19" height="19" viewBox="0 0 24 24" fill="none"
+             stroke="#0F7B6C" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 6 9 17l-5-5"/></svg>
+        <div>
+          <strong data-id="Sembilan kode tujuan" data-en="Nine purpose codes">Sembilan kode tujuan</strong>
+          <span data-id="Kode 01–09 divalidasi sebelum permintaan dikirim."
+                data-en="Codes 01–09 validated before dispatch.">
+                Kode 01–09 divalidasi sebelum permintaan dikirim.</span>
+        </div>
+      </div>
+      <div class="patuh-butir">
+        <svg class="centang" width="19" height="19" viewBox="0 0 24 24" fill="none"
+             stroke="#0F7B6C" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 6 9 17l-5-5"/></svg>
+        <div>
+          <strong data-id="Kombinasi identitas wajib" data-en="Mandatory identity combination">
+                  Kombinasi identitas wajib</strong>
+          <span data-id="Nama + Tanggal Lahir + Jenis Kelamin ditegakkan sebagai satu kesatuan."
+                data-en="Name + Date of Birth + Gender enforced as one unit.">
+                Nama + Tanggal Lahir + Jenis Kelamin ditegakkan sebagai satu kesatuan.</span>
+        </div>
+      </div>
+      <div class="patuh-butir">
+        <svg class="centang" width="19" height="19" viewBox="0 0 24 24" fill="none"
+             stroke="#0F7B6C" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 6 9 17l-5-5"/></svg>
+        <div>
+          <strong data-id="Batas kuota harian" data-en="Daily quota ceiling">Batas kuota harian</strong>
+          <span data-id="Maksimum 100% dari jumlah debitur yang dilaporkan dua bulan sebelumnya."
+                data-en="Maximum 100% of debtors reported two months prior.">
+                Maksimum 100% dari jumlah debitur yang dilaporkan dua bulan sebelumnya.</span>
+        </div>
+      </div>
+      <div class="patuh-butir">
+        <svg class="centang" width="19" height="19" viewBox="0 0 24 24" fill="none"
+             stroke="#0F7B6C" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 6 9 17l-5-5"/></svg>
+        <div>
+          <strong data-id="Dua belas segmen" data-en="Twelve segments">Dua belas segmen</strong>
+          <span data-id="D01, D02, F01–F06, A01, P01, M01, K01 terurai lengkap."
+                data-en="D01, D02, F01–F06, A01, P01, M01, K01 fully parsed.">
+                D01, D02, F01–F06, A01, P01, M01, K01 terurai lengkap.</span>
+        </div>
+      </div>
+      <div class="patuh-butir">
+        <svg class="centang" width="19" height="19" viewBox="0 0 24 24" fill="none"
+             stroke="#0F7B6C" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 6 9 17l-5-5"/></svg>
+        <div>
+          <strong data-id="Pengamanan hak akses" data-en="Access-right safeguard">Pengamanan hak akses</strong>
+          <span data-id="Pemutus sirkuit dirancang atas dasar Bab III huruf g."
+                data-en="Circuit breaker designed on the basis of Chapter III(g).">
+                Pemutus sirkuit dirancang atas dasar Bab III huruf g.</span>
+        </div>
+      </div>
+      <div class="patuh-butir">
+        <svg class="centang" width="19" height="19" viewBox="0 0 24 24" fill="none"
+             stroke="#0F7B6C" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 6 9 17l-5-5"/></svg>
+        <div>
+          <strong data-id="Jejak audit menyeluruh" data-en="End-to-end audit trail">
+                  Jejak audit menyeluruh</strong>
+          <span data-id="Setiap akses dan keputusan tercatat beserta pelaku dan alasannya."
+                data-en="Every access and decision recorded with actor and rationale.">
+                Setiap akses dan keputusan tercatat beserta pelaku dan alasannya.</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:30px" class="catatan">
+      <strong data-id="Catatan mengenai jam layanan." data-en="Note on service hours.">
+              Catatan mengenai jam layanan.</strong>
+      <span data-id="Penelusuran atas seluruh 330 halaman SEOJK No. 11/SEOJK.01/2024 tidak menemukan satu pun penyebutan jam operasional, &quot;WIB&quot;, atau &quot;waktu layanan&quot;. Karena itu SLiKA memperlakukan jam layanan sebagai parameter yang dapat dikonfigurasi, bukan sebagai aturan tetap yang kami karang sendiri."
+            data-en="A search across all 330 pages of SEOJK No. 11/SEOJK.01/2024 found no mention of operating hours, &quot;WIB&quot;, or &quot;service window&quot;. SLiKA therefore treats service hours as a configurable parameter, not as a fixed rule we invented.">
+            Penelusuran atas seluruh 330 halaman SEOJK No. 11/SEOJK.01/2024 tidak menemukan
+            satu pun penyebutan jam operasional, "WIB", atau "waktu layanan". Karena itu
+            SLiKA memperlakukan jam layanan sebagai parameter yang dapat dikonfigurasi,
+            bukan sebagai aturan tetap yang kami karang sendiri.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================ STATUS -->
+<section id="status">
+  <div class="bungkus">
+    <div class="kepala-seksi">
+      <div class="label-kecil" data-id="Transparansi" data-en="Transparency">Transparansi</div>
+      <h2 data-id="Status kesiapan, apa adanya" data-en="Readiness status, stated plainly">
+          Status kesiapan, apa adanya</h2>
+      <p data-id="Kami memilih menyatakan yang belum selesai daripada menyembunyikannya sampai tahap uji terima. Berikut posisi sebenarnya."
+         data-en="We would rather state what is unfinished than conceal it until acceptance testing. Here is the actual position.">
+         Kami memilih menyatakan yang belum selesai daripada menyembunyikannya sampai
+         tahap uji terima. Berikut posisi sebenarnya.</p>
+    </div>
+
+    <div class="bingkai-tabel">
+      <table>
+        <thead>
+          <tr>
+            <th data-id="Bidang" data-en="Area">Bidang</th>
+            <th data-id="Status" data-en="Status">Status</th>
+            <th data-id="Keterangan" data-en="Detail">Keterangan</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td data-id="Logika fungsional 11 modul" data-en="Functional logic, 11 modules">
+                Logika fungsional 11 modul</td>
+            <td><span class="pil p-ok" data-id="Selesai &amp; teruji" data-en="Complete &amp; tested">
+                Selesai &amp; teruji</span></td>
+            <td data-id="2.894 asersi lulus, 0 gagal, di 46 rangkaian uji."
+                data-en="2,894 assertions passing, 0 failing, across 46 test suites.">
+                2.894 asersi lulus, 0 gagal, di 46 rangkaian uji.</td>
+          </tr>
+          <tr>
+            <td data-id="Antarmuka pengguna" data-en="User interface">Antarmuka pengguna</td>
+            <td><span class="pil p-ok" data-id="Selesai" data-en="Complete">Selesai</span></td>
+            <td data-id="12 layar, kontrol akses menu per peran."
+                data-en="12 screens, per-role menu access control.">
+                12 layar, kontrol akses menu per peran.</td>
+          </tr>
+          <tr>
+            <td data-id="Audit kerentanan dependensi" data-en="Dependency vulnerability audit">
+                Audit kerentanan dependensi</td>
+            <td><span class="pil p-ok" data-id="Bersih" data-en="Clean">Bersih</span></td>
+            <td data-id="40 pustaka monolit: nol kerentanan tercatat pada OSV.dev. Microservice: dari 29 temuan menjadi 8, sisanya ditinjau dan dicatat terbuka."
+                data-en="40 monolith libraries: zero vulnerabilities recorded on OSV.dev. Microservice: from 29 findings down to 8, the remainder reviewed and openly recorded.">
+                40 pustaka monolit: nol kerentanan tercatat pada OSV.dev. Microservice:
+                dari 29 temuan menjadi 8, sisanya ditinjau dan dicatat terbuka.</td>
+          </tr>
+          <tr>
+            <td data-id="Adapter biro kredit swasta" data-en="Private credit bureau adapter">
+                Adapter biro kredit swasta</td>
+            <td><span class="pil p-tunggu" data-id="Menunggu kredensial" data-en="Awaiting credentials">
+                Menunggu kredensial</span></td>
+            <td data-id="Alur lima langkah selesai dan terbukti pada peladen tiruan. Menunggu kredensial produksi dan pendaftaran IP."
+                data-en="Five-step flow complete and proven against a mock server. Awaiting production credentials and IP whitelisting.">
+                Alur lima langkah selesai dan terbukti pada peladen tiruan. Menunggu
+                kredensial produksi dan pendaftaran IP.</td>
+          </tr>
+          <tr>
+            <td data-id="Basis data PostgreSQL" data-en="PostgreSQL database">Basis data PostgreSQL</td>
+            <td><span class="pil p-ok" data-id="Terbukti" data-en="Proven">Terbukti</span></td>
+            <td data-id="Aplikasi dijalankan di Tomcat 11, tersambung ke PostgreSQL 17, dan login berhasil menembus seluruh lapisan. Sebelumnya URL dan driver ditanam sebagai SQL Server sehingga PostgreSQL mustahil dijangkau."
+                data-en="The application runs on Tomcat 11, connects to PostgreSQL 17, and a login succeeds through every layer. Previously the JDBC URL and driver were hardcoded to SQL Server, making PostgreSQL unreachable.">
+                Aplikasi dijalankan di Tomcat 11, tersambung ke PostgreSQL 17, dan login
+                berhasil menembus seluruh lapisan. Sebelumnya URL dan driver ditanam
+                sebagai SQL Server sehingga PostgreSQL mustahil dijangkau.</td>
+          </tr>
+          <tr>
+            <td data-id="Basis data milik bank" data-en="Bank-owned database">
+                Basis data milik bank</td>
+            <td><span class="pil p-blok" data-id="Pemblokir" data-en="Blocker">Pemblokir</span></td>
+            <td data-id="Penyambungan ke instance basis data bank — dengan kebijakan jaringan, sertifikat, dan peran basis data yang sebenarnya — belum dilakukan. Menuntut akses lingkungan dari pihak bank."
+                data-en="Connection to the bank's own database instance — with its real network policy, certificates, and database roles — has not been performed. Requires environment access from the bank.">
+                Penyambungan ke instance basis data bank — dengan kebijakan jaringan,
+                sertifikat, dan peran basis data yang sebenarnya — belum dilakukan.
+                Menuntut akses lingkungan dari pihak bank.</td>
+          </tr>
+          <tr>
+            <td data-id="Sambungan host-to-host SLIK" data-en="SLIK host-to-host connection">
+                Sambungan host-to-host SLIK</td>
+            <td><span class="pil p-blok" data-id="Pemblokir" data-en="Blocker">Pemblokir</span></td>
+            <td data-id="Belum aktif. Pencarian saat ini dilayani simulasi, sehingga sistem belum boleh dipakai untuk keputusan kredit sungguhan."
+                data-en="Not yet active. Searches are currently served by simulation, so the system must not be used for live credit decisions.">
+                Belum aktif. Pencarian saat ini dilayani simulasi, sehingga sistem belum
+                boleh dipakai untuk keputusan kredit sungguhan.</td>
+          </tr>
+          <tr>
+            <td data-id="Uji beban HTTP" data-en="HTTP load testing">Uji beban HTTP</td>
+            <td><span class="pil p-ok" data-id="Selesai" data-en="Complete">Selesai</span></td>
+            <td data-id="Jalur penuh HTTP sampai PostgreSQL: 3.070 permintaan/detik, p95 13 ms, 0 gagal — pada 2 inti CPU. Sasaran TOR menuntut 10,4/detik. Belum termasuk TLS dan perangkat keras bank."
+                data-en="Full path HTTP to PostgreSQL: 3,070 requests/second, p95 13 ms, 0 failures — on 2 CPU cores. The TOR target requires 10.4/second. Excludes TLS and bank hardware.">
+                Jalur penuh HTTP sampai PostgreSQL: 3.070 permintaan/detik, p95 13 ms,
+                0 gagal — pada 2 inti CPU.
+                Sasaran TOR menuntut 10,4/detik. Belum termasuk TLS dan perangkat
+                keras bank.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="margin-top:26px" class="catatan">
+      <strong data-id="Tidak ada tanggal yang kami janjikan."
+              data-en="We commit to no dates.">Tidak ada tanggal yang kami janjikan.</strong>
+      <span data-id="Halaman ini sengaja tidak memuat perkiraan tanggal peluncuran. Dua pemblokir di atas bergantung pada akses lingkungan dan persetujuan pihak ketiga, sehingga tanggal apa pun yang kami sebut sekarang akan menjadi tebakan yang kemudian dikutip sebagai komitmen."
+            data-en="This page deliberately carries no launch date estimate. The two blockers above depend on environment access and third-party approvals, so any date named now would be a guess later quoted as a commitment.">
+            Halaman ini sengaja tidak memuat perkiraan tanggal peluncuran. Dua pemblokir di
+            atas bergantung pada akses lingkungan dan persetujuan pihak ketiga, sehingga
+            tanggal apa pun yang kami sebut sekarang akan menjadi tebakan yang kemudian
+            dikutip sebagai komitmen.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ TEKNOLOGI -->
+<section class="abu">
+  <div class="bungkus">
+    <div class="kepala-seksi">
+      <div class="label-kecil" data-id="Fondasi Teknis" data-en="Technical Foundation">Fondasi Teknis</div>
+      <h2 data-id="Tumpukan yang sudah dikenal tim TI perbankan"
+          data-en="A stack banking IT teams already know">
+          Tumpukan yang sudah dikenal tim TI perbankan</h2>
+      <p data-id="Tidak ada ketergantungan eksotis yang menyulitkan pemeliharaan jangka panjang atau audit keamanan internal."
+         data-en="No exotic dependencies that complicate long-term maintenance or internal security review.">
+         Tidak ada ketergantungan eksotis yang menyulitkan pemeliharaan jangka panjang atau
+         audit keamanan internal.</p>
+    </div>
+
+    <div class="kisi k4">
+      <div class="kartu" style="text-align:center">
+        <h3 style="font-size:22px;color:var(--utama)">Java 17</h3>
+        <p data-id="Rilis dukungan jangka panjang" data-en="Long-term support release">
+           Rilis dukungan jangka panjang</p></div>
+      <div class="kartu" style="text-align:center">
+        <h3 style="font-size:22px;color:var(--utama)">Jakarta EE</h3>
+        <p data-id="Jersey 3.1 di atas Tomcat 11" data-en="Jersey 3.1 on Tomcat 11">
+           Jersey 3.1 di atas Tomcat 11</p></div>
+      <div class="kartu" style="text-align:center">
+        <h3 style="font-size:22px;color:var(--utama)">PostgreSQL</h3>
+        <p data-id="Basis data utama; SQL Server didukung" data-en="Primary database; SQL Server supported">
+           Basis data utama; SQL Server didukung</p></div>
+      <div class="kartu" style="text-align:center">
+        <h3 style="font-size:22px;color:var(--utama)">HTML5</h3>
+        <p data-id="Antarmuka tanpa kerangka kerja berat" data-en="Interface with no heavy framework">
+           Antarmuka tanpa kerangka kerja berat</p></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ======================================================= IDENTITAS VISUAL -->
+<section class="abu" id="identitas">
+  <div class="bungkus">
+    <div class="kepala-seksi">
+      <div class="label-kecil" data-id="Identitas Visual" data-en="Visual Identity">Identitas Visual</div>
+      <h2 data-id="Satu tanda, tiga susunan" data-en="One mark, three lockups">
+          Satu tanda, tiga susunan</h2>
+      <p data-id="Tanda SLiKA sengaja bukan monogram huruf. Logo berupa huruf memaksa perancangan ulang setiap kali nama produk berubah — dua kali berturut-turut huruf lama tertinggal dan baru ketahuan dari tangkapan layar, bukan dari pembacaan kode."
+         data-en="The SLiKA mark is deliberately not a letter monogram. Letter-based logos force a redraw whenever the product name changes — twice in a row the old letter was left behind and only caught from a screenshot, not from reading the code.">
+         Tanda SLiKA sengaja bukan monogram huruf. Logo berupa huruf memaksa
+         perancangan ulang setiap kali nama produk berubah — dua kali berturut-turut
+         huruf lama tertinggal dan baru ketahuan dari tangkapan layar, bukan dari
+         pembacaan kode.</p>
+    </div>
+
+    <div class="kisi k3">
+      <div class="kartu" style="text-align:center;padding:34px 24px">
+        <div style="display:flex;align-items:center;justify-content:center;gap:14px;
+                    min-height:112px">
+          <svg width="56" height="56" viewBox="0 0 128 128" role="img" aria-label="Tanda SLiKA"><path d="M 90.38 26.32 A 46.00 46.00 0 1 1 44.56 22.31" fill="none" stroke="#10394F" stroke-width="14" stroke-linecap="round"/><path d="M 57.25 16.39 L 49.80 33.55 L 39.32 11.07 Z" fill="#17A398"/><path d="M 42.00 65.00 L 57.00 80.00 L 87.00 49.00" fill="none" stroke="#17A398" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <div style="text-align:left">
+            <div style="font-size:30px;font-weight:700;letter-spacing:3px;
+                        color:var(--merek-utama)">SLiKA</div>
+            <div style="font-size:10.5px;letter-spacing:1.3px;color:var(--redup)">
+              SLIK OJK Robot Automation</div>
+          </div>
+        </div>
+        <h3 style="margin-top:18px" data-id="Kunci mendatar" data-en="Horizontal lockup">
+            Kunci mendatar</h3>
+        <p data-id="Bilah navigasi, kop surat, tanda tangan surel. Lebar tampil minimum 180 px."
+           data-en="Navigation bars, letterheads, email signatures. Minimum display width 180 px.">
+           Bilah navigasi, kop surat, tanda tangan surel. Lebar tampil minimum 180 px.</p>
+      </div>
+
+      <div class="kartu" style="text-align:center;padding:34px 24px">
+        <div style="min-height:112px;display:flex;flex-direction:column;
+                    align-items:center;justify-content:center;gap:8px">
+          <svg width="52" height="52" viewBox="0 0 128 128" role="img" aria-label="Tanda SLiKA"><path d="M 90.38 26.32 A 46.00 46.00 0 1 1 44.56 22.31" fill="none" stroke="#10394F" stroke-width="14" stroke-linecap="round"/><path d="M 57.25 16.39 L 49.80 33.55 L 39.32 11.07 Z" fill="#17A398"/><path d="M 42.00 65.00 L 57.00 80.00 L 87.00 49.00" fill="none" stroke="#17A398" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <div>
+            <div style="font-size:26px;font-weight:700;letter-spacing:3px;
+                        color:var(--merek-utama);line-height:1">SLiKA</div>
+            <div style="font-size:9.5px;letter-spacing:1.2px;color:var(--redup);
+                        margin-top:3px">SLIK OJK Robot Automation</div>
+          </div>
+        </div>
+        <h3 style="margin-top:18px" data-id="Kunci bertumpuk" data-en="Stacked lockup">
+            Kunci bertumpuk</h3>
+        <p data-id="Tulisan di bawah tanda. Untuk sampul dokumen, kartu nama, sisipan presentasi, dan cap pada laporan PDF — ruang mendatar sempit, ruang tegak lapang."
+           data-en="Wordmark beneath the mark. For document covers, business cards, presentation slides, and PDF report stamps — where horizontal room is tight but vertical room is not.">
+           Tulisan di bawah tanda. Untuk sampul dokumen, kartu nama, sisipan
+           presentasi, dan cap pada laporan PDF — ruang mendatar sempit, ruang
+           tegak lapang.</p>
+      </div>
+
+      <div class="kartu" style="text-align:center;padding:34px 24px">
+        <div style="min-height:112px;display:flex;align-items:center;
+                    justify-content:center;gap:18px">
+          <svg width="64" height="64" viewBox="0 0 128 128" role="img" aria-label="Tanda SLiKA"><path d="M 90.38 26.32 A 46.00 46.00 0 1 1 44.56 22.31" fill="none" stroke="#10394F" stroke-width="14" stroke-linecap="round"/><path d="M 57.25 16.39 L 49.80 33.55 L 39.32 11.07 Z" fill="#17A398"/><path d="M 42.00 65.00 L 57.00 80.00 L 87.00 49.00" fill="none" stroke="#17A398" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <div style="display:flex;flex-direction:column;gap:7px;align-items:center">
+            <svg width="32" height="32" viewBox="0 0 128 128" role="img" aria-label="Tanda SLiKA"><path d="M 90.38 26.32 A 46.00 46.00 0 1 1 44.56 22.31" fill="none" stroke="#10394F" stroke-width="14" stroke-linecap="round"/><path d="M 57.25 16.39 L 49.80 33.55 L 39.32 11.07 Z" fill="#17A398"/><path d="M 42.00 65.00 L 57.00 80.00 L 87.00 49.00" fill="none" stroke="#17A398" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <svg width="20" height="20" viewBox="0 0 128 128" role="img" aria-label="Tanda SLiKA"><path d="M 90.38 26.32 A 46.00 46.00 0 1 1 44.56 22.31" fill="none" stroke="#10394F" stroke-width="14" stroke-linecap="round"/><path d="M 57.25 16.39 L 49.80 33.55 L 39.32 11.07 Z" fill="#17A398"/><path d="M 42.00 65.00 L 57.00 80.00 L 87.00 49.00" fill="none" stroke="#17A398" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+        </div>
+        <h3 style="margin-top:18px" data-id="Lite — tanda saja" data-en="Lite — mark only">
+            Lite — tanda saja</h3>
+        <p data-id="Favicon, ikon aplikasi, avatar, bilah sisi terlipat. Ketebalan garis dinaikkan dari 6,6 menjadi 8,2 satuan supaya tetap terbaca pada 16 px — bukan sekadar logo penuh yang diperkecil."
+           data-en="Favicon, app icon, avatar, collapsed sidebar. Stroke weight increases from 6.6 to 8.2 units so it stays legible at 16 px — not merely the full logo scaled down.">
+           Favicon, ikon aplikasi, avatar, bilah sisi terlipat. Ketebalan garis
+           dinaikkan dari 6,6 menjadi 8,2 satuan supaya tetap terbaca pada 16 px —
+           bukan sekadar logo penuh yang diperkecil.</p>
+      </div>
+    </div>
+
+    <div style="margin-top:30px" class="catatan">
+      <strong data-id="Palet netral bank." data-en="Bank-neutral palette.">Palet netral bank.</strong>
+      <span data-id="Navy grafit #10394F dan teal #17A398 TIDAK berasal dari identitas visual bank mana pun. SLiKA dipakai banyak bank; memakai warna korporat satu bank membuat setiap pemasangan lain terlihat seperti memakai merek pihak lain. Pasangan teks-latar diperiksa terhadap ambang WCAG AA 4,5:1 — aksen dengan teks putih hanya mencapai 3,12:1, sehingga permukaan bertulisan putih memakai varian gelap #0F7B6C yang mencapai 5,16:1."
+            data-en="Graphite navy #10394F and teal #17A398 are NOT drawn from any bank's visual identity. SLiKA is used by many banks; adopting one bank's corporate colours makes every other installation look like it belongs to someone else. Text-background pairs are checked against the WCAG AA 4.5:1 threshold — the accent with white text reaches only 3.12:1, so white-on-colour surfaces use the darker #0F7B6C variant at 5.16:1.">
+            Navy grafit #10394F dan teal #17A398 TIDAK berasal dari identitas visual
+            bank mana pun. SLiKA dipakai banyak bank; memakai warna korporat satu bank
+            membuat setiap pemasangan lain terlihat seperti memakai merek pihak lain.
+            Pasangan teks-latar diperiksa terhadap ambang WCAG AA 4,5:1 — aksen dengan
+            teks putih hanya mencapai 3,12:1, sehingga permukaan bertulisan putih
+            memakai varian gelap #0F7B6C yang mencapai 5,16:1.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================ KONTAK -->
+<section id="kontak">
+  <div class="bungkus">
+    <div class="ajakan">
+      <h2 data-id="Mari lihat langsung sistemnya berjalan"
+          data-en="Let us show you the system running">
+          Mari lihat langsung sistemnya berjalan</h2>
+      <p data-id="Demo teknis berdurasi 45 menit: penelusuran arsitektur, peragaan alur permintaan sampai keputusan, dan sesi tanya jawab dengan tim yang membangunnya."
+         data-en="A 45-minute technical demo: architecture walkthrough, a live request-to-decision run, and Q&amp;A with the team that built it.">
+         Demo teknis berdurasi 45 menit: penelusuran arsitektur, peragaan alur permintaan
+         sampai keputusan, dan sesi tanya jawab dengan tim yang membangunnya.</p>
+      <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
+        <a href="#" class="tombol tombol-utama"
+           data-id="Jadwalkan Demo" data-en="Schedule a Demo">Jadwalkan Demo</a>
+        <a href="#" class="tombol tombol-garis" style="color:#fff;border-color:rgba(255,255,255,.3)"
+           data-id="Unduh Ringkasan Teknis" data-en="Download Technical Brief">
+           Unduh Ringkasan Teknis</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================= KAKI -->
+<footer>
+  <div class="bungkus">
+    <div class="kaki-atas">
+      <div class="kaki-merek">
+        <div class="merek">
+          <svg width="30" height="30" viewBox="0 0 128 128" aria-hidden="true">
+            <path d="M 90.38 26.32 A 46.00 46.00 0 1 1 44.56 22.31" fill="none"
+                  stroke="#FFFFFF" stroke-width="14" stroke-linecap="round"/>
+            <path d="M 57.25 16.39 L 49.80 33.55 L 39.32 11.07 Z" fill="#4FD1C5"/>
+            <path d="M 42.00 65.00 L 57.00 80.00 L 87.00 49.00" fill="none"
+                  stroke="#4FD1C5" stroke-width="14" stroke-linecap="round"
+                  stroke-linejoin="round"/>
+          </svg>
+          <span class="merek-teks" style="color:#fff">SLiKA</span>
+        </div>
+        <p data-id="Otomasi robotik untuk permintaan informasi debitur dan biro kredit, dibangun mengikuti SEOJK No. 11/SEOJK.01/2024."
+           data-en="Robotic automation for debtor information and credit bureau requests, built to follow SEOJK No. 11/SEOJK.01/2024.">
+           Otomasi robotik untuk permintaan informasi debitur dan biro kredit, dibangun
+           mengikuti SEOJK No. 11/SEOJK.01/2024.</p>
+      </div>
+
+      <div class="kaki-kol">
+        <h5 data-id="Produk" data-en="Product">Produk</h5>
+        <a href="#kemampuan" data-id="Kemampuan" data-en="Capabilities">Kemampuan</a>
+        <a href="#modul" data-id="Modul" data-en="Modules">Modul</a>
+        <a href="#alur" data-id="Cara Kerja" data-en="How It Works">Cara Kerja</a>
+      </div>
+
+      <div class="kaki-kol">
+        <h5 data-id="Kepatuhan" data-en="Compliance">Kepatuhan</h5>
+        <a href="#kepatuhan" data-id="Kesesuaian SEOJK" data-en="SEOJK Alignment">Kesesuaian SEOJK</a>
+        <a href="#status" data-id="Status Kesiapan" data-en="Readiness Status">Status Kesiapan</a>
+      </div>
+
+      <div class="kaki-kol">
+        <h5 data-id="Kontak" data-en="Contact">Kontak</h5>
+        <a href="#kontak" data-id="Minta Demo" data-en="Request Demo">Minta Demo</a>
+        <a href="#kontak" data-id="Pertanyaan Teknis" data-en="Technical Enquiry">Pertanyaan Teknis</a>
+      </div>
+    </div>
+
+    <div class="kaki-bawah">
+      <span data-id="© 2026 SLiKA. Seluruh hak dilindungi."
+            data-en="© 2026 SLiKA. All rights reserved.">© 2026 SLiKA. Seluruh hak dilindungi.</span>
+      <span data-id="SLiKA adalah produk perangkat lunak pihak ketiga. SLiKA tidak berafiliasi dengan, dan tidak didukung secara resmi oleh, Otoritas Jasa Keuangan."
+            data-en="SLiKA is a third-party software product. SLiKA is not affiliated with, nor officially endorsed by, Otoritas Jasa Keuangan.">
+            SLiKA adalah produk perangkat lunak pihak ketiga. SLiKA tidak berafiliasi
+            dengan, dan tidak didukung secara resmi oleh, Otoritas Jasa Keuangan.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ==========================================================================
+   Peralihan bahasa
+   --------------------------------------------------------------------------
+   Setiap simpul yang perlu diterjemahkan membawa atribut data-id dan data-en.
+   Nilai atribut boleh memuat markah HTML sederhana (dipakai pada judul hero
+   untuk menyorot sebagian kata), sehingga innerHTML dipakai, bukan textContent.
+   Sumber isi kedua atribut sepenuhnya berasal dari berkas ini sendiri —
+   tidak ada masukan pengguna — sehingga tidak membuka jalan penyuntikan.
+   ========================================================================== */
+function setBahasa(kode){
+  document.querySelectorAll('[data-id][data-en]').forEach(function(el){
+    var teks = el.getAttribute('data-' + kode);
+    if (teks !== null) el.innerHTML = teks;
+  });
+  document.documentElement.lang = kode;
+  document.getElementById('btn-id').classList.toggle('aktif', kode === 'id');
+  document.getElementById('btn-en').classList.toggle('aktif', kode === 'en');
+  document.title = (kode === 'id')
+    ? 'SLiKA — Otomasi Robotik SLIK & Biro Kredit'
+    : 'SLiKA — SLIK & Credit Bureau Robotic Automation';
+  try { localStorage.setItem('slika.bahasa', kode); } catch (e) { /* diabaikan */ }
+}
+
+(function(){
+  var tersimpan = null;
+  try { tersimpan = localStorage.getItem('slika.bahasa'); } catch (e) { /* diabaikan */ }
+  // Bawaan sengaja SELALU Bahasa Indonesia, bukan mengikuti navigator.language.
+  // Alasannya: pasar utama produk ini adalah lembaga jasa keuangan Indonesia,
+  // dan deteksi otomatis membuat halaman tampil berbeda-beda saat diperagakan
+  // di perangkat yang setelan bahasanya bukan Indonesia — perilaku yang
+  // membingungkan dalam sesi demo. Pengunjung tetap dapat beralih kapan saja,
+  // dan pilihannya diingat.
+  if (tersimpan !== 'id' && tersimpan !== 'en') tersimpan = 'id';
+  setBahasa(tersimpan);
+})();
+</script>
+
+</body>
+</html>
