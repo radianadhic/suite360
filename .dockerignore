@@ -1,0 +1,8 @@
+.git
+.gitignore
+.dockerignore
+Dockerfile
+make_assets.py
+uploads
+**/__pycache__
+*.log
