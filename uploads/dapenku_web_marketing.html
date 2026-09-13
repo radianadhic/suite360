@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dapenku — Platform DPLK Konvensional & Syariah Terpatuh Regulasi Indonesia</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA5NiA5NiIgd2lkdGg9Ijk2IiBoZWlnaHQ9Ijk2Ij4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iZGctc2hpZWxkIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iIzE4YmQ4ZiIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjAuNTUiIHN0b3AtY29sb3I9IiMwZTdhNWYiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMDc0NTM0Ii8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPGxpbmVhckdyYWRpZW50IGlkPSJkZy1jb2luIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iI2ZkZTY4YSIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjAuNDUiIHN0b3AtY29sb3I9IiNmYmJmMjQiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjYzlhMjI3Ii8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogIDwvZGVmcz4KICA8IS0tIFBlcmlzYWk6IHBlcmxpbmR1bmdhbiBkYW5hIHBlbnNpdW4gLS0+CiAgPHBhdGggZD0iTTQ4IDQuNSBMODQuNSAxNyBWNDYuNSBDODQuNSA2OS40IDY5IDg0LjcgNDggOTEuOCBDMjcgODQuNyAxMS41IDY5LjQgMTEuNSA0Ni41IFYxNyBaIiBmaWxsPSJ1cmwoI2RnLXNoaWVsZCkiLz4KICA8IS0tIEdhcmlzIHRlcGkgZGFsYW0gKGhpZ2hsaWdodCkgLS0+CiAgPHBhdGggZD0iTTQ4IDExLjUgTDc4IDIxLjggVjQ2LjUgQzc4IDY2IDY0LjkgNzkgNDggODUuMSBDMzEuMSA3OSAxOCA2NiAxOCA0Ni41IFYyMS44IFoiCiAgICAgICAgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmZmZmIiBzdHJva2Utb3BhY2l0eT0iMC4xNiIgc3Ryb2tlLXdpZHRoPSIyLjQiLz4KICA8IS0tIEt1cnZhIHBlcnR1bWJ1aGFuIChha3VtdWxhc2kgZGFuYSkgLS0+CiAgPHBhdGggZD0iTTI1IDYzLjUgQzM2IDYxLjUgNDQuNSA1NC41IDUwLjUgNDQuNSBDNTUuNSAzNiA2MS41IDMwIDcwIDI3LjUiCiAgICAgICAgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmZmZmIiBzdHJva2Utd2lkdGg9IjYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDwhLS0gS29pbi9tYXRhaGFyaTogbWFzYSBkZXBhbiBzZWphaHRlcmEgLS0+CiAgPGNpcmNsZSBjeD0iNzAuNSIgY3k9IjI3IiByPSI4IiBmaWxsPSJ1cmwoI2RnLWNvaW4pIiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS1vcGFjaXR5PSIwLjU1IiBzdHJva2Utd2lkdGg9IjEuNiIvPgogIDxjaXJjbGUgY3g9IjcwLjUiIGN5PSIyNyIgcj0iNC4xIiBmaWxsPSJub25lIiBzdHJva2U9IiM4YTZkMTQiIHN0cm9rZS13aWR0aD0iMS42Ii8+Cjwvc3ZnPgo=">
+<style>
+  :root{
+    --ink:#0b1f33; --ink2:#33475b; --mut:#64748b; --brand:#0e7a5f; --brand2:#12a37f; --gold:#c9a227;
+    --bg:#f6f8fb; --card:#ffffff; --line:#e5eaf1; --ok:#0e9f6e; --no:#cbd5e1; --half:#f59e0b;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.55}
+
+  /* ---------- SPLASH ---------- */
+  #splash{position:fixed;inset:0;z-index:99;background:radial-gradient(1200px 700px at 70% 20%,#123c31 0%,#081812 60%,#050f0b 100%);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;transition:opacity .7s ease,visibility .7s}
+  #splash.hide{opacity:0;visibility:hidden;pointer-events:none}
+  .sp-logo{width:110px;height:110px;display:flex;align-items:center;justify-content:center;
+    font-size:44px;font-weight:900;color:#06281f;box-shadow:0 20px 60px rgba(18,163,127,.45);animation:pop .9s cubic-bezier(.2,1.4,.4,1) both}
+  .sp-name{font-size:44px;font-weight:900;letter-spacing:-1px;margin-top:22px;animation:rise .8s .25s ease both}
+  .sp-name span{color:var(--brand2)}
+  .sp-tag{margin-top:10px;color:#9fd8c6;font-size:15px;animation:rise .8s .45s ease both}
+  .sp-bar{width:220px;height:4px;border-radius:99px;background:rgba(255,255,255,.15);margin-top:28px;overflow:hidden;animation:rise .8s .55s ease both}
+  .sp-bar i{display:block;height:100%;width:40%;border-radius:99px;background:linear-gradient(90deg,var(--brand2),var(--gold));animation:slide 1.6s ease-in-out infinite}
+  .sp-skip{position:absolute;bottom:26px;color:#88b3a4;font-size:12.5px;letter-spacing:.6px;cursor:pointer;border:1px solid rgba(255,255,255,.25);padding:8px 18px;border-radius:99px}
+  .sp-skip:hover{background:rgba(255,255,255,.08)}
+  @keyframes pop{from{transform:scale(.4);opacity:0}to{transform:scale(1);opacity:1}}
+  @keyframes rise{from{transform:translateY(16px);opacity:0}to{transform:translateY(0);opacity:1}}
+  @keyframes slide{0%{margin-left:-40%}100%{margin-left:100%}}
+
+  /* ---------- NAV ---------- */
+  nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .nav-in{max-width:1180px;margin:0 auto;display:flex;align-items:center;gap:26px;padding:13px 22px}
+  .logo{display:flex;align-items:center;gap:10px;font-weight:900;font-size:19px;color:var(--ink)}
+  .logo svg{flex-shrink:0}
+  .logo b{color:var(--brand)}
+  .nav-links{display:flex;gap:20px;margin-left:auto;font-size:13.5px;font-weight:600;color:var(--ink2)}
+  .nav-links a{color:var(--ink2);text-decoration:none}.nav-links a:hover{color:var(--brand)}
+  .btn{display:inline-block;background:var(--brand);color:#fff;text-decoration:none;padding:11px 22px;border-radius:12px;font-weight:800;font-size:14px;border:none;cursor:pointer}
+  .btn:hover{background:#0a654e}
+  .btn.ghost{background:#fff;color:var(--brand);border:2px solid var(--brand)}
+  .btn.ghost:hover{background:#eefaf5}
+
+  /* ---------- HERO ---------- */
+  header.hero{background:linear-gradient(160deg,#0a2c23 0%,#0e3b2f 45%,#123c31 100%);color:#fff;padding:86px 22px 96px;position:relative;overflow:hidden}
+  header.hero::after{content:"";position:absolute;right:-160px;top:-160px;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(201,162,39,.28),transparent 65%)}
+  .hero-in{max-width:1180px;margin:0 auto;position:relative;z-index:1}
+  .chip{display:inline-block;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);color:#cdeedd;font-size:12.5px;font-weight:700;padding:7px 16px;border-radius:99px;letter-spacing:.4px}
+  h1{font-size:clamp(34px,5vw,56px);font-weight:900;letter-spacing:-1.5px;margin:22px 0 18px;line-height:1.08}
+  h1 em{font-style:normal;color:#7fe0c3}
+  .hero p.lead{font-size:17.5px;color:#c8ded6;max-width:660px}
+  .hero-cta{display:flex;gap:14px;margin-top:30px;flex-wrap:wrap}
+  .btn.light{background:#fff;color:#0a2c23}
+  .btn.light:hover{background:#eaf5f0}
+  .btn.outline{background:transparent;border:2px solid rgba(255,255,255,.5);color:#fff}
+  .btn.outline:hover{border-color:#fff;background:rgba(255,255,255,.08)}
+  .trust{display:flex;gap:26px;margin-top:42px;flex-wrap:wrap;color:#9fd8c6;font-size:13px;font-weight:600}
+  .trust b{display:block;color:#fff;font-size:22px;font-weight:900}
+
+  /* ---------- SECTIONS ---------- */
+  section{padding:76px 22px}
+  .wrap{max-width:1180px;margin:0 auto}
+  .kicker{color:var(--brand);font-weight:800;font-size:13px;letter-spacing:1.6px;text-transform:uppercase}
+  h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;letter-spacing:-1px;margin:10px 0 14px}
+  .sub{color:var(--mut);font-size:15.5px;max-width:720px}
+  .grid{display:grid;gap:18px;margin-top:36px}
+  .g3{grid-template-columns:repeat(auto-fit,minmax(290px,1fr))}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px}
+  .card .ico{width:44px;height:44px;border-radius:12px;background:#e9f6f1;color:var(--brand);display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:14px}
+  .card h3{font-size:16.5px;font-weight:800;margin-bottom:6px}
+  .card p{font-size:13.5px;color:var(--ink2)}
+  .alt{background:#fff}
+
+  /* stats */
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin-top:36px}
+  .stat{background:linear-gradient(150deg,#0e3b2f,#0a2c23);color:#fff;border-radius:18px;padding:24px;text-align:center}
+  .stat b{display:block;font-size:32px;font-weight:900;color:#7fe0c3}
+  .stat span{font-size:12.5px;color:#9fd8c6;font-weight:600}
+
+  /* compliance table */
+  table.reg{width:100%;border-collapse:collapse;margin-top:30px;font-size:13px;background:#fff;border-radius:16px;overflow:hidden;border:1px solid var(--line)}
+  table.reg th{background:#0e3b2f;color:#cdeedd;text-align:left;padding:12px 14px;font-size:11.5px;text-transform:uppercase;letter-spacing:.8px}
+  table.reg td{padding:12px 14px;border-top:1px solid var(--line);vertical-align:top;color:var(--ink2)}
+  table.reg td b{color:var(--ink)}
+  .tag{display:inline-block;font-size:10.5px;font-weight:800;padding:3px 10px;border-radius:99px}
+  .t-ok{background:#e3f6ec;color:var(--ok)} .t-wip{background:#fef3cd;color:#b45309}
+
+  /* matrix */
+  .tbl-scroll{overflow-x:auto;margin-top:30px;border:1px solid var(--line);border-radius:18px;background:#fff}
+  table.mx{border-collapse:collapse;width:100%;min-width:1560px;font-size:12.5px}
+  table.mx th,table.mx td{padding:9px 10px;border-top:1px solid var(--line);text-align:center;white-space:nowrap}
+  table.mx td.cap,table.mx th.cap{text-align:left;position:sticky;left:0;background:#fff;min-width:250px;font-weight:600;color:var(--ink2);z-index:2}
+  table.mx thead th{background:#0e3b2f;color:#cdeedd;font-size:10.5px;letter-spacing:.3px;position:sticky;top:0}
+  table.mx thead th.cap{z-index:3}
+  table.mx tr.cat td{background:#f1f6f3;font-weight:900;color:var(--brand);letter-spacing:.6px;font-size:11px;text-transform:uppercase}
+  table.mx tr.cat td.cap{background:#f1f6f3}
+  .me{background:#eefaf5!important;font-weight:900;color:var(--brand)}
+  td.me.cap{background:#e3f6ec!important}
+  .y{color:var(--ok);font-weight:900}
+  .n{color:#d7dee8;font-weight:700}
+  .p{color:var(--half);font-weight:900}
+  .score{font-size:10.5px;color:var(--mut)}
+  thead .score{color:#9fd8c6}
+
+  /* cta */
+  .cta{background:linear-gradient(140deg,#0e3b2f,#123c31);color:#fff;border-radius:26px;padding:56px 40px;text-align:center}
+  .cta h2{color:#fff}
+  .cta p{color:#bfe3d6;max-width:640px;margin:0 auto 26px}
+  footer{padding:36px 22px;text-align:center;color:var(--mut);font-size:12.5px}
+  footer b{color:var(--ink2)}
+  .note{font-size:11.5px;color:var(--mut);margin-top:12px}
+  @media(max-width:760px){.nav-links{display:none}}
+</style>
+</head>
+<body>
+
+<!-- ================= SPLASH ================= -->
+<div id="splash">
+  <div class="sp-logo"><svg viewBox="0 0 96 96" width="110" height="110" aria-hidden="true" style="display:block;filter:drop-shadow(0 10px 30px rgba(0,0,0,.35))"><defs><linearGradient id="mkss" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#18bd8f"/><stop offset="0.55" stop-color="#0e7a5f"/><stop offset="1" stop-color="#074534"/></linearGradient><linearGradient id="mksc" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fde68a"/><stop offset="0.45" stop-color="#fbbf24"/><stop offset="1" stop-color="#c9a227"/></linearGradient></defs><path d="M48 4.5 L84.5 17 V46.5 C84.5 69.4 69 84.7 48 91.8 C27 84.7 11.5 69.4 11.5 46.5 V17 Z" fill="url(#mkss)"/><path d="M48 11.5 L78 21.8 V46.5 C78 66 64.9 79 48 85.1 C31.1 79 18 66 18 46.5 V21.8 Z" fill="none" stroke="#fff" stroke-opacity="0.2" stroke-width="2.4"/><path d="M25 63.5 C36 61.5 44.5 54.5 50.5 44.5 C55.5 36 61.5 30 70 27.5" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round"/><circle cx="70.5" cy="27" r="8" fill="url(#mksc)" stroke="#fff" stroke-opacity="0.6" stroke-width="1.6"/><circle cx="70.5" cy="27" r="4.1" fill="none" stroke="#8a6d14" stroke-width="1.6"/></svg></div>
+  <div class="sp-name">Dapen<span>ku</span></div>
+  <div class="sp-tag">Platform DPLK Konvensional &amp; Syariah · Microservices · AI</div>
+  <div class="sp-bar"><i></i></div>
+  <div class="sp-skip" onclick="hideSplash()">MASUK KE SITUS →</div>
+</div>
+
+<!-- ================= NAV ================= -->
+<nav>
+  <div class="nav-in">
+    <div class="logo"><svg viewBox="0 0 96 96" width="30" height="30" aria-hidden="true" style="display:block;filter:drop-shadow(0 10px 30px rgba(0,0,0,.35))"><defs><linearGradient id="mkns" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#18bd8f"/><stop offset="0.55" stop-color="#0e7a5f"/><stop offset="1" stop-color="#074534"/></linearGradient><linearGradient id="mknc" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fde68a"/><stop offset="0.45" stop-color="#fbbf24"/><stop offset="1" stop-color="#c9a227"/></linearGradient></defs><path d="M48 4.5 L84.5 17 V46.5 C84.5 69.4 69 84.7 48 91.8 C27 84.7 11.5 69.4 11.5 46.5 V17 Z" fill="url(#mkns)"/><path d="M48 11.5 L78 21.8 V46.5 C78 66 64.9 79 48 85.1 C31.1 79 18 66 18 46.5 V21.8 Z" fill="none" stroke="#fff" stroke-opacity="0.2" stroke-width="2.4"/><path d="M25 63.5 C36 61.5 44.5 54.5 50.5 44.5 C55.5 36 61.5 30 70 27.5" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round"/><circle cx="70.5" cy="27" r="8" fill="url(#mknc)" stroke="#fff" stroke-opacity="0.6" stroke-width="1.6"/><circle cx="70.5" cy="27" r="4.1" fill="none" stroke="#8a6d14" stroke-width="1.6"/></svg>Dapen<b>ku</b></div>
+    <div class="nav-links">
+      <a href="#fitur">Fitur</a><a href="#kepatuhan">Kepatuhan</a><a href="#ai">Modul Pintar</a><a href="#arsitektur">Arsitektur</a><a href="#perbandingan">Perbandingan</a>
+    </div>
+    <a class="btn" href="#kontak" style="margin-left:14px">Jadwalkan Demo</a>
+  </div>
+</nav>
+
+<!-- ================= HERO ================= -->
+<header class="hero">
+  <div class="hero-in">
+    <span class="chip">⚖️ Dirancang patuh OJK · BI · PPATK · UU PDP sejak arsitektur</span>
+    <h1>Satu platform untuk seluruh<br>operasional <em>DPLK Anda</em> — dari iuran hingga manfaat pensiun.</h1>
+    <p class="lead">Dapenku menyatukan kepesertaan, iuran &amp; billing, multi-dana investasi (MTM/NAB), klaim e-claim, PPUKP pesangon, asuransi jiwa &amp; kesehatan, syariah &amp; zakat, EOD batch skala besar, dan Modul Pintar AI — dalam arsitektur microservices yang siap memproses lebih dari 10 juta transaksi per hari.</p>
+    <div class="hero-cta">
+      <a class="btn light" href="#kontak">🚀 Jadwalkan Demo</a>
+      <a class="btn outline" href="#perbandingan">Lihat Perbandingan 15 Platform</a>
+    </div>
+    <div class="trust">
+      <div><b>25</b> microservice</div>
+      <div><b>32</b> halaman fungsional</div>
+      <div><b>V1–V30</b> migrasi skema</div>
+      <div><b>10 jt+</b> transaksi/hari</div>
+      <div><b>3</b> persona AI</div>
+    </div>
+  </div>
+</header>
+
+<!-- ================= STATS ================= -->
+<section>
+  <div class="wrap">
+    <div class="kicker">Kenapa Dapenku</div>
+    <h2>Dibangun seperti bank — bukan seperti spreadsheet.</h2>
+    <p class="sub">DPLK modern menanggung kewajiban jangka panjang ratusan ribu peserta. Dapenku menghadirkan disiplin core banking ke dunia dana pensiun: jurnal berpasangan, EOD ber-checkpoint, idempotensi, dan jejak audit penuh.</p>
+    <div class="stats">
+      <div class="stat"><b>10 jt+</b><span>kapasitas transaksi per hari (partisi &amp; COPY bulk ingest)</span></div>
+      <div class="stat"><b>5</b><span>pool akuntansi P1–P5: COMPANY, Konvensional, Syariah, PPIP, PPUKP</span></div>
+      <div class="stat"><b>14 hari</b><span>riwayat EOD + checkpoint MTM/NAB/unitisasi yang dapat dipulihkan</span></div>
+      <div class="stat"><b>100%</b><span>alur klaim digital: e-sign PSrE, liveness, OCR, GL otomatis</span></div>
+      <div class="stat"><b>ID/EN/AR</b><span>multi-bahasa &amp; multi-mata uang sejak hari pertama</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FITUR ================= -->
+<section class="alt" id="fitur">
+  <div class="wrap">
+    <div class="kicker">Modul Lengkap</div>
+    <h2>Semua yang dijalankan DPLK setiap hari — dalam satu sistem.</h2>
+    <div class="grid g3">
+      <div class="card"><div class="ico">👥</div><h3>Kepesertaan &amp; Akun DPLK</h3><p>Multi-akun per peserta dengan alokasi iuran % (investasi / asuransi jiwa / kesehatan), dokumen &amp; ahli waris per akun, tombol GET Core Banking saat registrasi cabang.</p></div>
+      <div class="card"><div class="ico">💰</div><h3>Iuran, Billing &amp; Pembayaran</h3><p>Payroll bulk, rekonsiliasi 3 arah, invoice korporasi, VA/QRIS/BI-FAST, MT/MX ISO 20022 &amp; SWIFT via Prowide, bridging BPJS.</p></div>
+      <div class="card"><div class="ico">📈</div><h3>Investasi, NAB &amp; MTM</h3><p>Pilihan Dana Konvensional &amp; Syariah, IPS &amp; batas alokasi (SBN min. 30%), mark-to-market harian, robo-advisor &amp; switching.</p></div>
+      <div class="card"><div class="ico">🏦</div><h3>EOD &amp; Akunting</h3><p>End-of-Day ber-checkpoint (kontribusi, unitisasi, MTM, jurnal), CoA &amp; pool mapping P1–P5, jurnal manual &amp; fee GL lengkap.</p></div>
+      <div class="card"><div class="ico">🧾</div><h3>Klaim &amp; e-Claim</h3><p>Pensiun, meninggal, cacat, penarikan &amp; pesangon — estimasi PPh 21 otomatis, bridging klaim asuransi jiwa &amp; kesehatan dua arah.</p></div>
+      <div class="card"><div class="ico">💼</div><h3>PPUKP Pesangon</h3><p>Program pesangon korporasi Konvensional &amp; Syariah sesuai PP 35/2021: proyeksi liabilitas, funding ratio, tabel pengali UP/UPMK.</p></div>
+      <div class="card"><div class="ico">☪️</div><h3>Syariah &amp; Zakat</h3><p>Akad mudharabah/wakalah, tabarru' &amp; qard hasan, distribusi surplus 50/30/20, kalkulator &amp; pembayaran zakat, cleansing.</p></div>
+      <div class="card"><div class="ico">🚨</div><h3>AML / APU-PPT &amp; Fraud</h3><p>Screening watchlist (DTTOT/UNSC), deteksi structuring, kasus fraud, pelaporan TKM ke PPATK (GoAML), pemblokiran tanpa penundaan.</p></div>
+      <div class="card"><div class="ico">🧠</div><h3>Modul Pintar (AI)</h3><p>Asisten tiga persona: nasabah individual (simulator pensiun, zakat, klaim), korporasi (billing &amp; pesangon), internal (copilot EOD, ringkasan AML, Explain-AI).</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= KEPATUHAN ================= -->
+<section id="kepatuhan">
+  <div class="wrap">
+    <div class="kicker">Kepatuhan Regulasi</div>
+    <h2>Setiap kewajiban regulator — terpetakan, teruji, terpantau.</h2>
+    <p class="sub">Modul Kepatuhan Dapenku memetakan seluruh ketentuan yang mengikat DPLK ke dalam register regulasi, self-assessment berkala, jadwal pelaporan OJK, dan SLA yang dapat dibuktikan auditor.</p>
+    <table class="reg">
+      <thead><tr><th>Regulasi</th><th>Kewajiban Utama</th><th>Implementasi di Dapenku</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td><b>UU 4/2023 (P2SK)</b><br>jo. UU 11/1992 Dana Pensiun</td><td>Kelembagaan DPLK, usia pensiun normal, dana tidak aktif, anuitas manfaat berkala</td><td>Pemisahan entitas siap; struktur pendiri–pengurus–dewan pengawas di skema &amp; otorisasi</td><td><span class="tag t-ok">PATUH</span></td></tr>
+        <tr><td><b>POJK 35/2024</b> Perizinan &amp; Kelembagaan DP</td><td>Tata Kelola 5 prinsip, self-assessment tahunan, komite investasi (aset &gt; Rp500M), pedoman investasi, pengungkapan ke OJK</td><td>Halaman Kepatuhan: register + checklist self-assessment + laporan tata kelola</td><td><span class="tag t-ok">PATUH</span></td></tr>
+        <tr><td><b>POJK 8/2023</b> APU PPT &amp; PPPSPM</td><td>IRA tahunan, CDD/BO, pemblokiran DTTOT, pelaporan GoAML</td><td>Modul AML: screening, risk score, TKM ACK_PPATK, tabel aml_ira</td><td><span class="tag t-ok">PATUH</span></td></tr>
+        <tr><td><b>POJK 22/2023</b> Pelindungan Konsumen</td><td>SLA pengaduan 5 HK lisan / 10+10 HK tertulis, kanal 24 jam, pelaporan layanan pengaduan</td><td>consumer_complaint dengan SLA engine &amp; status ON_TRACK/BREACHED; CRM omnichannel</td><td><span class="tag t-ok">PATUH</span></td></tr>
+        <tr><td><b>UU 27/2022</b> Pelindungan Data Pribadi</td><td>Consent per tujuan, hak subjek data (akses/perbaikan/hapus/port), verifikasi 3×24 jam</td><td>pdp_consent &amp; pdp_data_request + form permintaan hak subjek data</td><td><span class="tag t-ok">PATUH</span></td></tr>
+        <tr><td><b>POJK 3/2015</b> jo. 30/2016 Investasi DP</td><td>Minimum SBN 30%, batas penyertaan langsung, prinsip kehati-hatian</td><td>IPS, investment breaches &amp; asset allocation di Dashboard Investasi</td><td><span class="tag t-ok">PATUH</span></td></tr>
+        <tr><td><b>PP 71/2019</b> PSTE / UU ITE</td><td>Tanda tangan elektronik tersertifikasi PSrE</td><td>e-sign PRIVY/VIDA/PERURI (PSrE berizin) + liveness check</td><td><span class="tag t-ok">PATUH</span></td></tr>
+        <tr><td><b>PBI 23/6/2021</b> Penyedia Jasa Pembayaran</td><td>Interkoneksi &amp; interoperabilitas (BI-FAST, QRIS, GPN, SNAP), transparansi biaya &amp; status (Pasal 10), pengaduan ack ≤2 HK / resolusi ≤20 HK, notifikasi insiden ke BI ≤2×24 jam, NMID &amp; KYC merchant QRIS (PADG 23/2021)</td><td>Suite pesan Prowide penuh: prowide-core (MT103/MT202) + prowide-iso20022 (pacs.008/002, pain.001/002, camt.029/053/054/056) dengan audit log; QrisPayload EMV TLV + CRC-16/CCITT &amp; NMID; tabel pjp_channel, payment_message_log, qris_merchant, payment_complaint, pjp_incident (V31); tab Kepatuhan PBI 23/2021 di halaman Pembayaran</td><td><span class="tag t-ok">PATUH</span></td></tr>
+        <tr><td><b>UU HPP / PMK 168/2023</b> PPh 21</td><td>Tarif efektif &amp; final manfaat pensiun/pesangon</td><td>Estimasi pajak otomatis pada modul klaim &amp; PPUKP</td><td><span class="tag t-ok">PATUH</span></td></tr>
+      </tbody>
+    </table>
+    <p class="note">* Status mencerminkan kapabilitas sistem pada versi rilis ini; penetapan kepatuhan akhir tetap merupakan keputusan fungsi Kepatuhan dan auditor.</p>
+  </div>
+</section>
+
+<!-- ================= AI ================= -->
+<section class="alt" id="ai">
+  <div class="wrap">
+    <div class="kicker">Modul Pintar</div>
+    <h2>Aplikasi yang ikut berpikir — untuk tiga persona.</h2>
+    <p class="sub">Mesin aturan deterministik (DAPENKU-RULES-V1) yang dapat ditingkatkan ke LLM, dengan tombol aksi langsung ke modul terkait.</p>
+    <div class="grid g3">
+      <div class="card"><div class="ico">👤</div><h3>Nasabah Individual</h3><p>Simulator kecukupan dana pensiun 3 skenario, panduan klaim &amp; dokumen, kalkulator zakat, saran switching dana, penjelasan saldo.</p></div>
+      <div class="card"><div class="ico">🏢</div><h3>Nasabah Korporasi</h3><p>Insight billing &amp; jatuh tempo, proyeksi liabilitas pesangon PPUKP beserta rekomendasi funding, checklist onboarding karyawan.</p></div>
+      <div class="card"><div class="ico">🛠️</div><h3>Pengguna Internal</h3><p>Copilot diagnosis EOD PARTIAL, ringkasan kasus AML/fraud, saran adjudikasi provider, dan Explain-AI untuk entitas apa pun.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ARSITEKTUR ================= -->
+<section id="arsitektur">
+  <div class="wrap">
+    <div class="kicker">Teknologi</div>
+    <h2>Arsitektur microservices kelas produksi.</h2>
+    <p class="sub">Frontend HTML5 + Tailwind (tanpa framework berat), backend JDK 21 + Spring Boot + Spring JDBC (tanpa Hibernate), PostgreSQL terpartisi, Kafka untuk event, dan gateway terpusat.</p>
+    <div class="grid g3">
+      <div class="card"><div class="ico">🧱</div><h3>25 Microservice Maven</h3><p>auth · participant · policy · contribution · claim · fund · ppukp · insurance · report · notification · batch · eod · accounting · aml · product · provider · analytics · flex · distribution · actuarial · openapi · intelligence · compliance · gateway · common.</p></div>
+      <div class="card"><div class="ico">🗄️</div><h3>PostgreSQL Skala Besar</h3><p>Partisi bulanan (kontribusi, ledger, audit log), COPY bulk ingest dengan idempotency key, 30 migrasi Flyway V1–V30.</p></div>
+      <div class="card"><div class="ico">🔌</div><h3>Integrasi Nyata</h3><p>Core Banking (CIF pull), kustodian &amp; MI, provider asuransi (adjudication), BPJS, e-sign PSrE, pembayaran ISO 20022/QRIS, Open API OAuth untuk mitra.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PERBANDINGAN ================= -->
+<section class="alt" id="perbandingan">
+  <div class="wrap">
+    <div class="kicker">Perbandingan Platform</div>
+    <h2>Dapenku vs 14 platform dana pensiun &amp; benefit Indonesia.</h2>
+    <p class="sub">Matriks kapabilitas fungsional — <span class="y">✔</span> tersedia penuh, <span class="n">—</span> tidak tersedia / tidak relevan. Geser tabel untuk melihat seluruh kolom.</p>
+    <div class="tbl-scroll">
+      <table class="mx" id="mx"></table>
+    </div>
+    <p class="note">Penilaian bersifat indikatif berdasarkan kapabilitas yang dipublikasikan masing-masing penyedia dan dapat berubah mengikuti versi produk mereka. Simbol Dapenku mencerminkan kapabilitas pada rilis ini.</p>
+  </div>
+</section>
+
+<!-- ================= CTA ================= -->
+<section id="kontak">
+  <div class="wrap">
+    <div class="cta">
+      <h2>Siap memodernisasi DPLK Anda?</h2>
+      <p>Lihat langsung bagaimana Dapenku menjalankan EOD, memproses klaim, menghitung pesangon, dan menjawab pertanyaan peserta dengan Modul Pintar — dalam satu demo 45 menit.</p>
+      <a class="btn light" href="/cdn-cgi/l/email-protection#dabebfb7b59abebbaabfb4b1aff4b3bee5a9afb8b0bfb9aee78abfa8b7b3b4aebbbbb4ffe8ea9ebfb7b5ffe8ea9ebbaabfb4b1af">📅 Jadwalkan Demo</a>
+      &nbsp;&nbsp;<a class="btn outline" href="#perbandingan">Bandingkan Dulu</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <b>Dapenku</b> — Platform DPLK Konvensional &amp; Syariah · © 2026 PT Dapenku Teknologi Finansial.<br>
+  Halaman ini adalah materi pemasaran; Dapenku beroperasi sesuai ketentuan OJK, Bank Indonesia, PPATK, dan peraturan perundang-undangan Republik Indonesia.
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// ---------- splash ----------
+function hideSplash(){ document.getElementById("splash").classList.add("hide"); }
+setTimeout(hideSplash, 3200);
+
+// ---------- matriks perbandingan ----------
+const APPS = [
+  "BPJS Ketenagakerjaan", "TASPEN", "DPLK Manulife", "DPLK BNI Simponi", "DPLK BRI (BRIFINE)",
+  "DPLK Bank Mandiri", "DPLK Muamalat", "DPLK AXA Mandiri", "DPLK AIA Financial", "DPLK Astra",
+  "DPLK BCA", "DPLK Tugu Mandiri", "Mekari Flex", "DPLK Bumiputera", "DAPENKU"
+];
+const CATS = [
+ ["Kepesertaan & Akun", [
+  ["Registrasi individual & korporasi digital","111111111111111","14 dari 15 platform mendukung registrasi — Mekari Flex berfokus benefit karyawan, bukan dana pensiun."],
+  ["Multi-akun DPLK per peserta + alokasi iuran %","000000000000001","Alokasi % per akun (investasi/jiwa/kesehatan) dan multi-akun adalah pembeda arsitektur Dapenku."],
+  ["GET Core Banking (CIF pull) saat registrasi","000000000000001","Integrasi host-to-host CIF bank saat onboarding cabang."],
+  ["Ahli waris & dokumen per akun","001010001000001","Umumnya beneficiary ada di tingkat polis, bukan per akun."],
+  ["Portal peserta self-service (mobile-first)","001111111111011","Portal peserta tersedia luas; fitur lengkap bervariasi."],
+  ["Multi-bahasa & multi-mata uang","000000000000001","ID/EN/AR + akun multi-valuta."]]],
+ ["Iuran, Billing & Pembayaran", [
+  ["Payroll bulk korporasi + rekonsiliasi 3 arah","111111111110111","Bank/MI besar memiliki bulk payroll; Mekari Flex untuk EWA, bukan DPLK."],
+  ["Invoice & billing korporasi terstruktur","011111111111011","Billing korporasi umumnya tersedia pada DPLK perbankan."],
+  ["VA / QRIS / BI-FAST / e-wallet","001110011000011","Kanal pembayaran bervariasi antar penyedia."],
+  ["MT/MX ISO 20022 & SWIFT (Prowide)","000000000000001","Standar pesan pembayaran tingkat bank pada platform DPLK."],
+  ["Bridging BPJS JHT/JP/JKN","000000000000001","Sinkronisasi data BPJS dua arah."]]],
+ ["Investasi & Dana", [
+  ["Pilihan dana konvensional + syariah","001111111111111","Mayoritas DPLK menawarkan paket dana syariah."],
+  ["NAB/valuasi harian & Mark-to-Market","001111111111111","Valuasi harian standar industri; MTM menyeluruh per posisi adalah kelebihan Dapenku."],
+  ["IPS & batas alokasi (SBN min. 30%)","000000000000001","Pemantauan Investment Policy Statement & breach otomatis."],
+  ["Robo-advisor & switching dana","000100000000011","Switching tersedia di beberapa; robo-advisor jarang."],
+  ["Multiple pool accounting P1–P5","000000000000001","Akuntansi multi-pool: perusahaan, konvensional, syariah, PPIP, PPUKP."],
+  ["Konektivitas kustodian & MI","001001000001011","Beberapa bank memiliki koneksi kustodian internal."]]],
+ ["Klaim & Manfaat", [
+  ["e-Claim digital penuh (upload + tracking)","001110011001011","Digital claim tersedia di sebagian besar DPLK besar."],
+  ["Estimasi PPh 21 otomatis","100000000000001","BPJS menghitung pajak manfaat JHT; Dapenku otomatis untuk semua jenis klaim & pesangon."],
+  ["Bridging klaim asuransi jiwa & kesehatan","000000000000001","Klaim DPLK otomatis menjembatani polis rider peserta."],
+  ["Anuitas / manfaat berkala","001100010000011","Opsional pada beberapa penyedia."],
+  ["PPUKP pesangon PP 35/2021 (konv. + syariah)","000000000000001","Program pesangon korporasi dengan proyeksi liabilitas & funding."]]],
+ ["Syariah & Kepatuhan", [
+  ["Akad, tabarru', surplus 50/30/20, qard hasan","001111111111111","Unit syariah ada pada mayoritas; mesin tabarru' lengkap pembeda Dapenku."],
+  ["Zakat terintegrasi","000000000000001","Kalkulator & penyaluran zakat dalam aplikasi."],
+  ["AML/APU-PPT: screening, TKM, GoAML","000000000000001","Modul AML in-house dengan pelaporan PPATK."],
+  ["Register regulasi + self-assessment (POJK 35/2024)","000000000000001","Modul Kepatuhan terdedikasi."],
+  ["SLA pengaduan POJK 22/2023 terukur","000000000000001","Engine SLA 5/10+10 HK dengan status audit."],
+  ["Hak subjek data UU PDP 27/2022","000000000000001","Consent registry + permintaan akses/hapus/portabilitas."]]],
+ ["Operasional & Teknologi", [
+  ["EOD ber-checkpoint + pemulihan","000000000000001","End-of-day bank-grade dengan riwayat 14 hari."],
+  ["Akunting GL berpasangan & fee jurnal","000000000000001","CoA, jurnal manual, skenario fee lengkap."],
+  ["Arsitektur microservices & API terbuka","000000000000001","25 microservice + Open API OAuth untuk mitra."],
+  ["Asisten AI untuk nasabah & internal","000000000000001","Modul Pintar tiga persona dengan Explain-AI."],
+  ["Kapasitas >10 juta transaksi/hari","000000000000001","Partisi, bulk COPY, dan pipeline Kafka."],
+  ["Aplikasi mobile installable (PWA) + offline","000000000000001","mobile.html dengan manifest + service worker, installable ke layar utama, offline-ready."],
+  ["Personalisasi tema soft (multi-tema)","000000000000001","Empat tema lembut (indigo/teal/rose/hijau) yang langsung mengubah kulit seluruh aplikasi."]]]
+];
+
+function build(){
+  const t = document.getElementById("mx");
+  let h = "<thead><tr><th class='cap'>Kapabilitas</th>" + APPS.map((a,i)=>"<th class='"+(i===14?"me":"")+"'>"+a+(i===14?"":"<br><span class='score'>"+score(i)+"</span>")+"</th>").join("") + "</tr></thead><tbody>";
+  let grand = new Array(15).fill(0), tot = 0;
+  for (const [cat, rows] of CATS){
+    h += "<tr class='cat'><td class='cap' colspan='"+(APPS.length+1)+"'>"+cat+"</td></tr>";
+    for (const [cap, bits, note] of rows){
+      tot++;
+      h += "<tr><td class='cap'>"+cap+"</td>";
+      for (let i=0;i<15;i++){
+        const b = bits[i];
+        const cls = i===14 ? "me" : "";
+        const sym = b==="1" ? "<span class='y'>✔</span>" : b==="2" ? "<span class='p'>◐</span>" : "<span class='n'>—</span>";
+        if (b==="1") grand[i]++;
+        h += "<td class='"+cls+"'"+(i===14?"":" title='"+note.replace(/'/g,"&#39;")+"'")+">"+sym+"</td>";
+      }
+      h += "</tr>";
+    }
+  }
+  h += "<tr><td class='cap'><b>SKOR TOTAL</b></td>" + grand.map((g,i)=>"<td class='"+(i===14?"me":"")+"'><b>"+g+"/"+tot+"</b></td>").join("") + "</tr>";
+  t.innerHTML = h + "</tbody>";
+  function score(i){ return ""; }
+}
+build();
+</script>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495" integrity="sha512-iIg7k2xntmwu6/uSb5tpc/hySgZc4eoL31yB29W6tJFo2akwjPWcEqnCEdJvGexCL0KEQwVYv5BlowfhVz26hg==" data-cf-beacon='{"version":"2024.11.0","token":"1954b47c125f43f8b4338b3c4f804e4f","spa":2}' crossorigin="anonymous"></script>
+<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a3a5a255bc57ea7f',t:'MTc4OTI4NjU5Mg=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

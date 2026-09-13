@@ -1,6 +1,6 @@
 # suite360 — Web Suite (Suite All Application)
 
-Layar launcher seluruh produk perbankan digital dalam satu halaman bergaya suite aplikasi modern: latar navy bergradasi dengan motif *guilloché*, grain, vignette, animasi cahaya (orb aurora, beam sweep, kelip bintang), dan 13 tile produk dengan logo serta keterangan masing‑masing.
+Layar launcher seluruh produk perbankan digital dalam satu halaman bergaya suite aplikasi modern: latar navy bergradasi dengan motif *guilloché*, grain, vignette, animasi cahaya (orb aurora, beam sweep, kelip bintang), dan 14 tile produk dengan logo serta keterangan masing‑masing.
 
 **Live (GitHub Pages):** https://radianadhic.github.io/suite360/
 
@@ -21,6 +21,7 @@ Layar launcher seluruh produk perbankan digital dalam satu halaman bergaya suite
 | 11 | Pensia | DPLK Syariah | `product/pensia_web_reporting.html` |
 | 12 | Aurea | Master Data Management | `product/aurea_web_reporting.html` |
 | 13 | Slika | Slik OJK Robot Automation | `product/slika_web_reporting.html` |
+| 14 | Dapenku | DPLK Konvensional & Syariah | `product/dapen_web_marketing.html` |
 
 ## Struktur repo
 
