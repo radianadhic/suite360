@@ -1,6 +1,6 @@
 # suite360 — Web Suite (Suite All Application)
 
-Layar launcher seluruh produk perbankan digital dalam satu halaman bergaya suite aplikasi modern: latar navy bergradasi dengan motif *guilloché*, grain, vignette, animasi cahaya (orb aurora, beam sweep, kelip bintang), dan 15 tile produk dengan logo serta keterangan masing‑masing.
+Layar launcher seluruh produk perbankan digital dalam satu halaman bergaya suite aplikasi modern: latar navy bergradasi dengan motif *guilloché*, grain, vignette, animasi cahaya (orb aurora, beam sweep, kelip bintang), dan 16 tile produk dengan logo serta keterangan masing‑masing.
 
 **Live (GitHub Pages):** https://radianadhic.github.io/suite360/
 
@@ -23,6 +23,7 @@ Layar launcher seluruh produk perbankan digital dalam satu halaman bergaya suite
 | 13 | Slika | Slik OJK Robot Automation | `product/slika_web_reporting.html` |
 | 14 | Dapenku | DPLK Konvensional & Syariah | `product/dapen_web_marketing.html` |
 | 15 | TradeBridge | Trade Finance Workspace | `product/tradebridge_web_marketing.html` |
+| 16 | Regovia | Regulatory Reporting | `product/regovia_web_marketing.html` |
 
 ## Struktur repo
 
