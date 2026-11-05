@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>OriginIQ — Loan Origination System untuk Perbankan Indonesia</title>
-<meta name="description" content="OriginIQ LOS — platform loan origination microservices: pengajuan, eKYC, biro kredit (SLIK OJK & Pefindo), underwriting berbasis AI, persetujuan berjenjang, dokumen elektronik, dan pencairan. Siap 1 juta transaksi per hari." />
+<meta name="description" content="OriginIQ LOS — platform loan origination microservices: pengajuan, eKYC, biro kredit (SLIK OJK dan Pefindo), underwriting berbasis AI, persetujuan berjenjang, dokumen elektronik, dan pencairan. Siap 1 juta transaksi per hari." />
 <link rel="icon" type="image/svg+xml" href="frontend/assets/img/favicon.svg" />
 <link rel="icon" type="image/png" sizes="32x32" href="frontend/assets/img/favicon-32.png" />
 <style>
@@ -234,7 +234,7 @@
     <div>
       <span class="badge"><span class="dot"></span><span data-i18n="hero_badge">Loan Origination System untuk Perbankan Indonesia</span></span>
       <h1><span data-i18n="hero_title_1">Origination kredit yang</span> <em data-i18n="hero_title_2">cepat, akurat,</em> <span data-i18n="hero_title_3">dan patuh regulasi</span></h1>
-      <p data-i18n="hero_desc">OriginIQ menyatukan pengajuan, eKYC, biro kredit (SLIK OJK &amp; Pefindo), underwriting berbasis AI, persetujuan berjenjang, dokumen elektronik, hingga pencairan — dalam satu platform microservices.</p>
+      <p data-i18n="hero_desc">OriginIQ menyatukan pengajuan, eKYC, biro kredit (SLIK OJK dan Pefindo), <i>underwriting</i> berbasis AI, persetujuan berjenjang, dokumen elektronik, hingga pencairan — dalam satu platform microservices.</p>
       <div class="hero-cta">
         <a class="btn btn-primary" href="#contact" data-i18n="hero_cta1">Jadwalkan Demo</a>
         <a class="btn btn-ghost" href="#modules" data-i18n="hero_cta2">Jelajahi Modul</a>
@@ -275,7 +275,7 @@
     <div class="sec-head">
       <span class="kicker" data-i18n="mod_kicker">Group Modul LOS</span>
       <h2 data-i18n="mod_title">Semua tahapan origination, satu platform</h2>
-      <p data-i18n="mod_desc">Enam kelompok modul mencakup seluruh siklus hidup kredit — dari onboarding hingga administrasi &amp; analitik.</p>
+      <p data-i18n="mod_desc">Enam kelompok modul mencakup seluruh siklus hidup kredit — dari onboarding hingga administrasi dan analitik.</p>
     </div>
     <div class="grid g3" id="modules-grid"></div>
   </div>
@@ -299,7 +299,7 @@
     <div class="sec-head">
       <span class="kicker" data-i18n="int_kicker">Integrasi &amp; Skala</span>
       <h2 data-i18n="int_title">Terhubung ke ekosistem perbankan Indonesia</h2>
-      <p data-i18n="int_desc">Konektor siap-pakai ke biro kredit, kependudukan, tanda tangan elektronik, dan core banking — dirancang untuk 1 juta transaksi per hari.</p>
+      <p data-i18n="int_desc">Konektor siap-pakai ke biro kredit, kependudukan, tanda tangan elektronik, dan <i>core banking</i> — dirancang untuk 1 juta transaksi per hari.</p>
     </div>
     <div class="int-row" id="integration-chips"></div>
 
@@ -323,18 +323,18 @@
   <div class="wrap">
     <div class="sec-head">
       <span class="kicker" data-i18n="docs_kicker">Dokumentasi</span>
-      <h2 data-i18n="docs_title">Blueprint fungsional &amp; analisis kesenjangan</h2>
+      <h2 data-i18n="docs_title">Blueprint fungsional dan analisis kesenjangan</h2>
       <p data-i18n="docs_desc">Konten berikut disematkan langsung dari dokumen referensi.</p>
     </div>
 
     <article class="doc-panel md" id="docs-03">
-<h1>03 — Fitur, Modul, Menu &amp; Form (Blueprint Fungsional)</h1>
+<h1>03 — Fitur, Modul, Menu dan Form (Blueprint Fungsional)</h1>
 <blockquote><p>Benchmark terhadap: <strong>TurnKey Lender</strong>, <strong>nCino</strong>, <strong>Temenos</strong>, <strong>Ellie Mae / ICE Mortgage Technology</strong>, <strong>Oracle Banking Loan Origination</strong>, <strong>CRIF Indonesia</strong>, <strong>Ad-ins (PT Adicipta Inovasi Teknologi)</strong>, <strong>CorSys</strong>, <strong>Indonesian Cloud</strong>, <strong>AlurKerja (PT Javan Cipta Solusi)</strong>, <strong>RDS (PT Reycom Document Solusi)</strong>, dan <strong>MARS-LOS (PT Marstech Global)</strong>.</p></blockquote>
 <p>Dokumen ini mendefinisikan <strong>fitur</strong>, <strong>modul</strong>, <strong>menu</strong>, dan <strong>form</strong> dari OriginIQ LOS. Penomoran (mis. <code>MD-01</code>) menjadi referensi bagi menu &amp; form di frontend.</p>
 <hr>
 <h2>A. Daftar Modul &amp; Menu (Informasi Arsitektur / Peta Aplikasi)</h2>
 <h3>MD-01 — Dasbor &amp; Pipeline</h3>
-<div class="tblwrap"><table><thead><tr><th>Menu</th><th>Deskripsi</th><th>Form/Tampilan</th></tr></thead><tbody><tr><td><strong>Dasbor Eksekutif</strong></td><td>KPI portfolio: total aplikasi, approval rate, time-to-decision, volume hari ini, NPL indikatif</td><td><code>F-DAS-01</code></td></tr><tr><td><strong>Pipeline Kanban</strong></td><td>Kartu pengajuan per tahap (New → KYC → Underwriting → Approval → Document → Disburse)</td><td><code>F-PIP-01</code></td></tr><tr><td><strong>Worklist Saya</strong></td><td>Daftar tugas yang menunggu aksi user (sesuai role)</td><td><code>F-WKL-01</code></td></tr></tbody></table></div>
+<div class="tblwrap"><table><thead><tr><th>Menu</th><th>Deskripsi</th><th>Form/Tampilan</th></tr></thead><tbody><tr><td><strong>Dasbor Eksekutif</strong></td><td>KPI portfolio: total aplikasi, approval rate, time-to-decision, volume hari ini, NPL indikatif</td><td><code>F-DAS-01</code></td></tr><tr><td><strong>Pipeline Kanban</strong></td><td>Kartu pengajuan per tahap (New → KYC → Underwriting → Approval → Document → Disburse)</td><td><code>F-PIP-01</code></td></tr><tr><td><strong>Worklist Saya</strong></td><td>Daftar tugas yang menunggu aksi <i>user</i> (sesuai role)</td><td><code>F-WKL-01</code></td></tr></tbody></table></div>
 <h3>MD-02 — Origination &amp; Aplikasi Kredit</h3>
 <div class="tblwrap"><table><thead><tr><th>Menu</th><th>Deskripsi</th><th>Form/Tampilan</th></tr></thead><tbody><tr><td><strong>Pengajuan Baru</strong></td><td>Buat aplikasi (perorangan/UKM/korporasi)</td><td><code>F-APP-01</code></td></tr><tr><td><strong>Daftar Pengajuan</strong></td><td>Pencarian, filter, ekspor</td><td><code>F-APP-02</code></td></tr><tr><td><strong>Detail Pengajuan (360°)</strong></td><td>Tab lengkap: ringkasan, data, kredit, dokumen, keputusan, aktivitas</td><td><code>F-APP-03</code></td></tr><tr><td><strong>Daftar Produk Kredit</strong></td><td>CRUD penuh produk (KPR, KKB, KMG, KMK, dll) + aktivasi/nonaktif &amp; soft-delete; segmen, tenor min/maks, provisi, grace period, wajib agunan</td><td><code>F-PRD-01</code></td></tr><tr><td><strong>Pricing &amp; Simulation</strong></td><td>Simulasi angsuran, suku bunga, biaya</td><td><code>F-PRC-01</code></td></tr></tbody></table></div>
 <h3>MD-03 — KYC, AML &amp; Nasabah</h3>
@@ -346,7 +346,7 @@
 <h3>MD-06 — Dokumen &amp; Tanda Tangan Elektronik</h3>
 <div class="tblwrap"><table><thead><tr><th>Menu</th><th>Deskripsi</th><th>Form/Tampilan</th></tr></thead><tbody><tr><td><strong>Checklist Dokumen</strong></td><td>Daftar syarat dokumen per produk</td><td><code>F-DOC-01</code></td></tr><tr><td><strong>Penyimpanan Dokumen</strong></td><td>Upload, versioning, preview (MinIO)</td><td><code>F-DOC-02</code></td></tr><tr><td><strong>Tanda Tangan Elektronik</strong></td><td>eSign (akad, PO, dll)</td><td><code>F-DOC-03</code></td></tr><tr><td><strong>Template Dokumen (Doc Gen)</strong></td><td>Template akad/surat (variabel merge): Perjanjian Kredit, SPK, Addendum, Surat Kuasa + clause library + jadwal angsuran</td><td><code>F-DOC-04</code></td></tr></tbody></table></div>
 <h3>MD-07 — Pencairan (Disbursement)</h3>
-<div class="tblwrap"><table><thead><tr><th>Menu</th><th>Deskripsi</th><th>Form/Tampilan</th></tr></thead><tbody><tr><td><strong>Instruksi Pencairan</strong></td><td>Jadwal &amp; metode pencairan</td><td><code>F-DIS-01</code></td></tr><tr><td><strong>Batching Pencairan</strong></td><td>Pencairan massal (bulk)</td><td><code>F-DIS-02</code></td></tr><tr><td><strong>Rekonsiliasi</strong></td><td>Rekonsiliasi dengan core banking</td><td><code>F-DIS-03</code></td></tr></tbody></table></div>
+<div class="tblwrap"><table><thead><tr><th>Menu</th><th>Deskripsi</th><th>Form/Tampilan</th></tr></thead><tbody><tr><td><strong>Instruksi Pencairan</strong></td><td>Jadwal &amp; metode pencairan</td><td><code>F-DIS-01</code></td></tr><tr><td><strong>Batching Pencairan</strong></td><td>Pencairan massal (bulk)</td><td><code>F-DIS-02</code></td></tr><tr><td><strong>Rekonsiliasi</strong></td><td>Rekonsiliasi dengan <i>core banking</i></td><td><code>F-DIS-03</code></td></tr></tbody></table></div>
 <h3>MD-08 — Kepatuhan, Pelaporan &amp; Biro Kredit</h3>
 <div class="tblwrap"><table><thead><tr><th>Menu</th><th>Deskripsi</th><th>Form/Tampilan</th></tr></thead><tbody><tr><td><strong>Koneksi SLIK OJK</strong></td><td>Konfigurasi pelapor, jadwal, log permintaan</td><td><code>F-CMP-01</code></td></tr><tr><td><strong>Koneksi Pefindo IdScore</strong></td><td>Konfigurasi kredensial &amp; paket</td><td><code>F-CMP-02</code></td></tr><tr><td><strong>Pelaporan Regulator</strong></td><td>Antrian laporan (SLIK bulanan, LBU, dll)</td><td><code>F-CMP-03</code></td></tr><tr><td><strong>Audit Trail</strong></td><td>Jejak semua perubahan &amp; keputusan</td><td><code>F-CMP-04</code></td></tr></tbody></table></div>
 <h3>MD-09 — Administrasi &amp; Konfigurasi</h3>
@@ -362,7 +362,7 @@
 <h3>F-UW-01 — Analisis Kredit</h3>
 <ul><li><strong>Debt Service Ratio (DSR)</strong>: perhitungan otomatis vs ambang</li><li><strong>Loan to Value (LTV)</strong>: nilai agunan vs plafon</li><li><strong>Skor internal</strong> (scorecard) &amp; <strong>skor biro</strong>; <em>risk grade</em> akhir</li><li><strong>Rekomendasi</strong>: APPROVE / REJECT / REVIEW + catatan analis</li><li><strong>Fasilitas usulan</strong>: plafon akhir, tenor, pricing</li></ul>
 <h3>F-APR-01 — Persetujuan Berjenjang</h3>
-<ul><li>Detail pengajuan &amp; hasil underwriting (read-only)</li><li><strong>Tindakan</strong>: Setuju / Tolak / Kembalikan (return) / Tunda (pending) + catatan wajib</li><li><strong>Tingkat persetujuan</strong> sesuai LKMK; notifikasi ke pemutus berikutnya</li></ul>
+<ul><li>Detail pengajuan dan hasil <i>underwriting</i> (read-only)</li><li><strong>Tindakan</strong>: Setuju / Tolak / Kembalikan (return) / Tunda (pending) + catatan wajib</li><li><strong>Tingkat persetujuan</strong> sesuai LKMK; notifikasi ke pemutus berikutnya</li></ul>
 <h3>F-DOC-03 — Tanda Tangan Elektronik</h3>
 <ul><li>Daftar dokumen akad, status sign tiap pihak (pemohon, bank, saksi)</li><li>Metode sign: TTE tersertifikasi (PSrE) / digital signature</li><li>Log waktu tanda tangan &amp; integritas (hash)</li></ul>
 <h3>F-DIS-01 — Instruksi Pencairan</h3>
@@ -396,9 +396,9 @@ REVIEW → APPROVED / REJECTED (via approval workflow)</code></pre>
     <article class="doc-panel md" id="docs-10">
 <h1>10 — Gap Analysis Group Modul LOS &amp; Modul Pintar (AI)</h1>
 <blockquote><p>Hasil pemeriksaan aplikasi terhadap <strong>6 Group Modul LOS</strong> + <strong>6 Modul Pintar (AI)</strong> yang diminta, beserta status "sudah ada / sebagian / belum" dan apa yang ditambahkan pada pembaruan ini.</p></blockquote>
-<blockquote><p><strong>Pembaruan terbaru (penyempurnaan modul):</strong> 7 modul dilengkapi &amp; disempurnakan — <strong>Alternatif Data (Enrichment)</strong>, <strong>Deteksi Penipuan (FDS)</strong>, <strong>Pembuat Kontrak (Doc Gen)</strong>, <strong>Manajemen Produk</strong>, <strong>Distribusi Tugas (Routing)</strong>, <strong>Mesin Aturan Bisnis (BRE)</strong>, dan <strong>e-KYC &amp; Biometrik</strong>. Rincian endpoint &amp; perubahan tercantum di bawah.</p></blockquote>
+<blockquote><p><strong>Pembaruan terbaru (penyempurnaan modul):</strong> 7 modul dilengkapi dan disempurnakan — <strong>Alternatif Data (Enrichment)</strong>, <strong>Deteksi Penipuan (FDS)</strong>, <strong>Pembuat Kontrak (Doc Gen)</strong>, <strong>Manajemen Produk</strong>, <strong>Distribusi Tugas (Routing)</strong>, <strong>Mesin Aturan Bisnis (BRE)</strong>, dan <strong>e-KYC dan Biometrik</strong>. Rincian endpoint dan perubahan tercantum di bawah.</p></blockquote>
 <h2>1. Status Group Modul LOS (18 Modul)</h2>
-<h3>Group 1 — Front-End &amp; Onboarding (Interaksi Nasabah &amp; Petugas)</h3>
+<h3>Group 1 — Front-End &amp; Onboarding (Interaksi Nasabah dan Petugas)</h3>
 <div class="tblwrap"><table><thead><tr><th>#</th><th>Modul</th><th>Status</th><th>Lokasi Saat Ini / Yang Ditambahkan</th></tr></thead><tbody><tr><td>1a</td><td>Registrasi &amp; Pengajuan</td><td>✅ <strong>Ada</strong></td><td><code>loan-service</code> (origination, state machine) + <code>customer-service</code> (registrasi); UI: menu <strong>Pengajuan</strong>, <strong>Nasabah &amp; KYC</strong></td></tr><tr><td>1b</td><td>e-KYC &amp; Biometrik</td><td>✅ <strong>Lengkap</strong></td><td><code>customer-service</code> <code>POST /{id}/kyc</code> (Dukcapil + biometrik), <code>POST /{id}/biometric</code> (face-match + liveness). Kolom <code>biometric_status</code>, <code>face_match_score</code>, <code>liveness_score</code>. UI: tombol <strong>Biometrik</strong> + <strong>Verifikasi eKYC</strong> per nasabah (produksi: Dukcapil + vendor biometrik tersertifikasi)</td></tr><tr><td>1c</td><td>Manajemen Dokumen (DMS)</td><td>✅ <strong>Ada</strong></td><td><code>document-service</code> + MinIO (object storage); UI: menu <strong>Dokumen &amp; eSign</strong> (checklist, upload, eSign)</td></tr></tbody></table></div>
 <h3>Group 2 — Verifikasi &amp; Pengayaan Data (Validasi Keaslian Data)</h3>
 <div class="tblwrap"><table><thead><tr><th>#</th><th>Modul</th><th>Status</th><th>Lokasi / Yang Ditambahkan</th></tr></thead><tbody><tr><td>2a</td><td>Integrasi Biro Kredit</td><td>✅ <strong>Ada</strong></td><td><code>credit-service</code>: adapter <strong>SLIK OJK</strong> (POJK 18/2017 jo. 11/2024) + <strong>Pefindo IdScore</strong>; UI: menu <strong>Biro Kredit</strong></td></tr><tr><td>2b</td><td>Alternatif Data (Enrichment)</td><td>✅ <strong>Lengkap</strong></td><td><code>risk-intelligence-service</code> <code>/api/v1/data/enrichment</code> + <code>/enrichment/batch</code>. Sumber: telco, e-commerce, sosial, utilitas, <strong>fintech, pekerjaan, geolokasi</strong>. Wajib <strong>consent</strong> (UU PDP 27/2022) → <code>NEEDS_CONSENT</code>; output: <code>enrichmentScore</code> (400–899), <code>scoreBand</code> (THIN/FAIR/GOOD/STRONG), <code>creditworthinessUplift</code>, <code>recommendation</code>, <code>signals</code>. UI: menu <strong>Enrichment</strong></td></tr><tr><td>2c</td><td>Deteksi Penipuan (FDS)</td><td>✅ <strong>Lengkap</strong></td><td><code>risk-intelligence-service</code> <code>/api/v1/fraud/score</code> + admin <code>/api/v1/fraud/rules</code>. Device fingerprint (root/emulator/VPN), velocity, daftar hitam → <code>caseId</code>, <code>deviceId</code>, <code>decision</code> (<strong>PASS/REVIEW/BLOCK</strong>), aturan terpicu ber-severity. UI: menu <strong>Deteksi Penipuan (FDS)</strong></td></tr></tbody></table></div>
@@ -409,19 +409,19 @@ REVIEW → APPROVED / REJECTED (via approval workflow)</code></pre>
 <h3>Group 5 — Finalisasi &amp; Pencairan (Tahap Akhir Kontrak)</h3>
 <div class="tblwrap"><table><thead><tr><th>#</th><th>Modul</th><th>Status</th><th>Lokasi / Yang Ditambahkan</th></tr></thead><tbody><tr><td>5a</td><td>Pembuat Kontrak (Doc Gen)</td><td>✅ <strong>Lengkap</strong></td><td><code>document-service</code> <code>/api/v1/documents/generate-contract</code> + <code>/templates</code> (clause library) + <code>/amortization</code>. Jenis dokumen: <strong>Perjanjian Kredit, SPK, Addendum, Surat Kuasa</strong>; mendukung debitur <strong>korporasi</strong> (NIB/PIC); <strong>jadwal angsuran anuitas</strong> otomatis. UI: menu <strong>Pembuat Kontrak</strong></td></tr><tr><td>5b</td><td>Tanda Tangan Digital</td><td>✅ <strong>Ada</strong></td><td><code>document-service</code> eSign (simulasi); target produksi TTE tersertifikasi PSrE</td></tr><tr><td>5c</td><td>Gerbang Integrasi (API Core)</td><td>✅ <strong>Ada</strong></td><td><code>api-gateway</code> (routing, JWT, rate-limit) + <code>integration-hub</code> (docs/09); client ke credit-service &amp; core banking</td></tr></tbody></table></div>
 <h3>Group 6 — Administrasi &amp; Analitik (Manajemen &amp; Evaluasi)</h3>
-<div class="tblwrap"><table><thead><tr><th>#</th><th>Modul</th><th>Status</th><th>Lokasi / Yang Ditambahkan</th></tr></thead><tbody><tr><td>6a</td><td>Manajemen Produk</td><td>✅ <strong>Lengkap</strong></td><td><code>loan-service</code> <code>ProductController</code> CRUD penuh (<code>GET /{id}</code>, <code>PUT /{id}</code>, <code>PATCH /{id}</code>, <code>DELETE /{id}</code> soft-delete) + field: segmen, tujuan, tenor min, biaya provisi, grace period, wajib agunan, deskripsi. UI: menu <strong>Manajemen Produk</strong> (list + tambah + edit + aktif/nonaktif + hapus)</td></tr><tr><td>6b</td><td>Audit Trail &amp; Pelaporan</td><td>✅ <strong>Ada</strong></td><td>Menu <strong>Audit Trail</strong> (event log immutable) + <strong>Report Studio</strong> (designer/viewer)</td></tr></tbody></table></div>
+<div class="tblwrap"><table><thead><tr><th>#</th><th>Modul</th><th>Status</th><th>Lokasi / Yang Ditambahkan</th></tr></thead><tbody><tr><td>6a</td><td>Manajemen Produk</td><td>✅ <strong>Lengkap</strong></td><td><code>loan-service</code> <code>ProductController</code> CRUD penuh (<code>GET /{id}</code>, <code>PUT /{id}</code>, <code>PATCH /{id}</code>, <code>DELETE /{id}</code> soft-delete) + field: segmen, tujuan, tenor min, biaya provisi, grace period, wajib agunan, deskripsi. UI: menu <strong>Manajemen Produk</strong> (list + tambah + edit + aktif/nonaktif + hapus)</td></tr><tr><td>6b</td><td>Audit Trail dan Pelaporan</td><td>✅ <strong>Ada</strong></td><td>Menu <strong>Audit Trail</strong> (event log immutable) + <strong>Report Studio</strong> (designer/viewer)</td></tr></tbody></table></div>
 <hr>
 <h2>2. Status Modul Pintar (AI) — 6 Modul</h2>
-<blockquote><p>Keenam modul pintar <strong>belum ada</strong> dan <strong>ditambahkan sekarang</strong>: (1) satu microservice baru <code>risk-intelligence-service</code> di backend, dan (2) menu interaktif <strong>"Modul Pintar (AI)"</strong> di frontend dengan simulasi deterministic yang mencerminkan perilaku produksi.</p></blockquote>
+<blockquote><p>Keenam modul pintar <strong>belum ada</strong> dan <strong>ditambahkan sekarang</strong>: (1) satu microservice baru <code>risk-intelligence-service</code> di <i>backend</i>, dan (2) menu interaktif <strong>"Modul Pintar (AI)"</strong> di <i>frontend</i> dengan simulasi deterministic yang mencerminkan perilaku produksi.</p></blockquote>
 <div class="tblwrap"><table><thead><tr><th>#</th><th>Modul Pintar</th><th>Backend (endpoint)</th><th>Frontend (menu)</th></tr></thead><tbody><tr><td>S1</td><td><strong>AI Credit Scoring &amp; Predictive Modeling</strong></td><td><code>/api/v1/ai/scoring</code></td><td><strong>AI Credit Scoring</strong></td></tr><tr><td>S2</td><td><strong>Intelligent Document Processing (IDP) + Gen-AI</strong></td><td><code>/api/v1/ai/idp</code></td><td><strong>IDP Dokumen (Gen-AI)</strong></td></tr><tr><td>S3</td><td><strong>Behavioral Analytics &amp; Digital Footprint</strong></td><td><code>/api/v1/ai/behavioral</code></td><td><strong>Behavioral Analytics</strong></td></tr><tr><td>S4</td><td><strong>Automated Dynamic Pricing Engine</strong></td><td><code>/api/v1/ai/pricing</code></td><td><strong>Pricing Dinamis</strong></td></tr><tr><td>S5</td><td><strong>Graph Analytics untuk Anti-Fraud &amp; Sindikat</strong></td><td><code>/api/v1/ai/graph</code></td><td><strong>Graph Anti-Fraud</strong></td></tr><tr><td>S6</td><td><strong>AI Conversational Assistant (Virtual Underwriter)</strong></td><td><code>/api/v1/ai/assistant</code></td><td><strong>Virtual Underwriter</strong></td></tr></tbody></table></div>
 <hr>
 <h2>3. Spesifikasi Modul Pintar (Cara Kerja Konvensional → Sentuhan Pintar)</h2>
-<h3>S1 — AI Credit Scoring &amp; Predictive Modeling</h3>
+<h3>S1 — AI Credit Scoring dan Predictive Modeling</h3>
 <ul><li><strong>Konvensional:</strong> skor = rumus tambah-kurang dari data form + SLIK.</li><li><strong>Pintar:</strong> model <strong>ML (XGBoost / Random Forest)</strong> menganalisis ribuan fitur, menghasilkan <strong>Probability of Default (PD)</strong>, mencakup <strong>unbanked/underbanked</strong> (alternatif data).</li><li><strong>Implementasi:</strong> <code>risk-intelligence-service</code> → <code>POST /api/v1/ai/scoring</code> mengembalikan <code>pd</code>, <code>score</code> (300–850), <code>grade</code>, <strong>reason codes bergaya SHAP</strong> + kontribusi fitur.</li><li><strong>Governance:</strong> model registry + versi + evaluasi bias + explainability (wajib transparansi OJK).</li></ul>
 <h3>S2 — Intelligent Document Processing (IDP) dengan Gen-AI</h3>
 <ul><li><strong>Konvensional:</strong> OCR biasa — gagal saat dokumen buram/miring.</li><li><strong>Pintar:</strong> <strong>Computer Vision + LLM</strong> memahami konteks: deteksi <strong>slip gaji editan Photoshop</strong>, deteksi <strong>KTP hasil jepretan layar</strong> (screen-recapture), dan <strong>pencocokan tanda tangan</strong> kontrak vs KTP.</li><li><strong>Implementasi:</strong> <code>POST /api/v1/ai/idp</code> → <code>ocrConfidence</code>, <code>photoshopDetected</code>, <code>screenRecapture</code>, <code>signatureMatch</code>, <code>blurDetected</code>, <code>riskFlags</code>.</li></ul>
 <h3>S3 — Behavioral Analytics &amp; Digital Footprint Profiling</h3>
-<ul><li><strong>Konvensional:</strong> sistem hanya tahu data yang diketik nasabah.</li><li><strong>Pintar:</strong> analisis <strong>psikometri &amp; jejak digital</strong> (dengan izin via SDK): kecepatan ketik (copy-paste KTP → indikasi bot/fraud), <strong>pola GPS</strong>, <strong>waktu pengajuan</strong> (jam 2 pagi berkorelasi risiko), <strong>riwayat aplikasi terpasang</strong>.</li><li><strong>Implementasi:</strong> <code>POST /api/v1/ai/behavioral</code> → <code>typingSpeed</code>, <code>copyPasteDetected</code>, <code>gpsVariance</code>, <code>submissionHour</code>, <code>anomalyScore</code>, <code>riskLevel</code>, <code>signals</code>.</li></ul>
+<ul><li><strong>Konvensional:</strong> sistem hanya tahu data yang diketik nasabah.</li><li><strong>Pintar:</strong> analisis <strong>psikometri dan jejak digital</strong> (dengan izin via SDK): kecepatan ketik (copy-paste KTP → indikasi bot/<i>fraud</i>), <strong>pola GPS</strong>, <strong>waktu pengajuan</strong> (jam 2 pagi berkorelasi risiko), <strong>riwayat aplikasi terpasang</strong>.</li><li><strong>Implementasi:</strong> <code>POST /api/v1/ai/behavioral</code> → <code>typingSpeed</code>, <code>copyPasteDetected</code>, <code>gpsVariance</code>, <code>submissionHour</code>, <code>anomalyScore</code>, <code>riskLevel</code>, <code>signals</code>.</li></ul>
 <h3>S4 — Automated Dynamic Pricing Engine (Risk-Based Pricing)</h3>
 <ul><li><strong>Konvensional:</strong> bunga &amp; limit kaku/seragam.</li><li><strong>Pintar:</strong> <strong>Risk-Based Pricing</strong> personal dalam hitungan detik — low risk → limit lebih besar + bunga lebih murah; high risk → limit dikecilkan + bunga dinaikkan.</li><li><strong>Implementasi:</strong> <code>POST /api/v1/ai/pricing</code> (input PD/profil) → <code>offeredRate</code>, <code>offeredLimit</code>, <code>tier</code>, <code>rationale</code>.</li></ul>
 <h3>S5 — Graph Analytics untuk Anti-Fraud &amp; Sindikat Kredit</h3>
@@ -456,15 +456,15 @@ REVIEW → APPROVED / REJECTED (via approval workflow)</code></pre>
         customer-service (diperluas)
               • eKYC (Dukcapil + biometrik)             /api/v1/customers/{id}/kyc
               • Biometrik (face-match + liveness)       /api/v1/customers/{id}/biometric</code></pre>
-<blockquote><p>Semua modul AI &amp; biometrik memakai <strong>simulasi deterministic</strong> (seed dari NIK) agar bisa dijalankan tanpa kredensial produksi. Di produksi, ganti dengan model &amp; integrasi sungguhan (ML, LLM, Neo4j, Dukcapil, vendor biometrik, dsb.) — lihat <code>docs/09</code> untuk rekomendasi engine &amp; lisensi.</p></blockquote>
+<blockquote><p>Semua modul AI dan biometrik memakai <strong>simulasi deterministic</strong> (seed dari NIK) agar bisa dijalankan tanpa kredensial produksi. Di produksi, ganti dengan model dan integrasi sungguhan (ML, LLM, Neo4j, Dukcapil, vendor biometrik, dsb.) — lihat <code>docs/09</code> untuk rekomendasi engine &amp; lisensi.</p></blockquote>
     </article>
     <article class="doc-panel md" id="docs-13">
 <h1>13 — Alur Kerja &amp; Alur Data Perbankan (Login → Logout)</h1>
-<blockquote><p>Panduan ini menjelaskan <strong>alur kerja (workflow)</strong> pemakai sistem dan <strong>alur data (data flow)</strong> antarsistem OriginIQ LOS secara menyeluruh — <strong>dari proses login hingga logout</strong> — termasuk fase origination, verifikasi, penilaian risiko, persetujuan, kontrak, dan pencairan.  Pemetaan didasarkan pada implementasi aktual: frontend SPA (menu &amp; state machine) dan microservices backend (<code>service-registry</code> → <code>api-gateway</code> → <code>auth/customer/loan/credit/ document/notification/risk-intelligence</code>).</p></blockquote>
+<blockquote><p>Panduan ini menjelaskan <strong>alur kerja (workflow)</strong> pemakai sistem dan <strong>alur data (data flow)</strong> antarsistem OriginIQ LOS secara menyeluruh — <strong>dari proses login hingga logout</strong> — termasuk fase origination, verifikasi, penilaian risiko, persetujuan, kontrak, dan pencairan.  Pemetaan didasarkan pada implementasi aktual: <i>frontend</i> SPA (menu dan state machine) dan microservices <i>backend</i> (<code>service-registry</code> → <code>api-gateway</code> → <code>auth/customer/loan/credit/ document/notification/risk-intelligence</code>).</p></blockquote>
 <hr>
 <h2>1. Aktor &amp; Peran (RBAC)</h2>
-<div class="tblwrap"><table><thead><tr><th>Peran</th><th>Siapa</th><th>Tugas utama di sistem</th><th>Menu khas</th></tr></thead><tbody><tr><td><code>ADMIN</code></td><td>Administrator TI/operasional</td><td>Kelola user, role, produk, parameter, routing</td><td>Manajemen Produk, User &amp; Role, Audit Trail</td></tr><tr><td><code>LOAN_OFFICER</code></td><td>Petugas/AO kredit</td><td>Registrasi nasabah, buat pengajuan, lengkapi data &amp; dokumen</td><td>Pengajuan, Nasabah &amp; eKYC, Dokumen</td></tr><tr><td><code>UNDERWRITER</code></td><td>Analis kredit</td><td>Analisis kemampuan bayar, cek biro kredit, skoring</td><td>Underwriting, Biro Kredit, Enrichment, FDS</td></tr><tr><td><code>APPROVER</code></td><td>Komite kredit / pemutus</td><td>Putusan berjenjang sesuai LKMK</td><td>Persetujuan, Pipeline</td></tr><tr><td><code>COMPLIANCE</code></td><td>Kepatuhan</td><td>Audit, kebijakan (BRE), pelaporan regulator</td><td>Aturan Bisnis (BRE), Audit Trail</td></tr><tr><td><code>CUSTOMER</code></td><td>Nasabah (portal)</td><td>Pantau status &amp; unggah dokumen</td><td>Portal Nasabah</td></tr></tbody></table></div>
-<blockquote><p>Catatan: kontrol akses per-peran saat ini direpresentasikan pada level menu/UI (frontend) dan <strong>enforced di gateway</strong> (JWT + header <code>X-User-Role</code>) untuk produksi. Detail RBAC ada di <code>docs/11</code> (Audit Keamanan).</p></blockquote>
+<div class="tblwrap"><table><thead><tr><th>Peran</th><th>Siapa</th><th>Tugas utama di sistem</th><th>Menu khas</th></tr></thead><tbody><tr><td><code>ADMIN</code></td><td>Administrator TI/operasional</td><td>Kelola <i>user</i>, role, produk, parameter, routing</td><td>Manajemen Produk, User &amp; Role, Audit Trail</td></tr><tr><td><code>LOAN_OFFICER</code></td><td>Petugas/AO kredit</td><td>Registrasi nasabah, buat pengajuan, lengkapi data &amp; dokumen</td><td>Pengajuan, Nasabah &amp; eKYC, Dokumen</td></tr><tr><td><code>UNDERWRITER</code></td><td>Analis kredit</td><td>Analisis kemampuan bayar, cek biro kredit, skoring</td><td>Underwriting, Biro Kredit, Enrichment, FDS</td></tr><tr><td><code>APPROVER</code></td><td>Komite kredit / pemutus</td><td>Putusan berjenjang sesuai LKMK</td><td>Persetujuan, Pipeline</td></tr><tr><td><code>COMPLIANCE</code></td><td>Kepatuhan</td><td>Audit, kebijakan (BRE), pelaporan regulator</td><td>Aturan Bisnis (BRE), Audit Trail</td></tr><tr><td><code>CUSTOMER</code></td><td>Nasabah (portal)</td><td>Pantau status &amp; unggah dokumen</td><td>Portal Nasabah</td></tr></tbody></table></div>
+<blockquote><p>Catatan: kontrol akses per-peran saat ini direpresentasikan pada level menu/UI (<i>frontend</i>) dan <strong>enforced di gateway</strong> (JWT + header <code>X-User-Role</code>) untuk produksi. Detail RBAC ada di <code>docs/11</code> (Audit Keamanan).</p></blockquote>
 <hr>
 <h2>2. Ringkasan Alur Kerja End-to-End</h2>
 <pre><code>┌─────────┐   ┌──────────────┐   ┌──────────┐   ┌──────────────┐   ┌─────────────┐
@@ -483,8 +483,8 @@ REVIEW → APPROVED / REJECTED (via approval workflow)</code></pre>
 <h3>Fase 0 — Login &amp; Otentikasi</h3>
 <div class="tblwrap"><table><thead><tr><th>#</th><th>Langkah</th><th>Aktor</th><th>UI / Menu</th><th>Backend</th></tr></thead><tbody><tr><td>1</td><td>Buka aplikasi, isi <strong>username</strong> &amp; <strong>password</strong></td><td>Semua</td><td>Layar login</td><td>—</td></tr><tr><td>2</td><td>Kirim kredensial</td><td>—</td><td>Tombol "Masuk"</td><td><code>POST /api/v1/auth/login</code> (auth-service)</td></tr><tr><td>3</td><td>Verifikasi user + password (bcrypt) + status aktif</td><td>—</td><td>—</td><td><code>AuthController</code> → <code>AppUserRepository</code></td></tr><tr><td>4</td><td>Cek <strong>rate limiter</strong> (blokir 15 mnt setelah percobaan gagal beruntun)</td><td>—</td><td>—</td><td><code>LoginRateLimiter</code></td></tr><tr><td>5</td><td>Terbitkan <strong>JWT (HS256, TTL 900 detik)</strong> berisi <code>sub, name, role, uid, exp</code></td><td>—</td><td>—</td><td><code>JwtService.issueToken</code></td></tr><tr><td>6</td><td>Terima <code>accessToken</code> + profil, simpan di state aplikasi</td><td>—</td><td>Session (in-memory SPA)</td><td>respons login</td></tr><tr><td>7</td><td>Redirect ke <strong>Dasbor</strong> sesuai peran</td><td>Aktor</td><td>Hash route <code>#/dashboard</code></td><td>—</td></tr></tbody></table></div>
 <p><strong>Catatan keamanan:</strong> password tidak pernah disimpan plaintext (bcrypt); token kedaluwarsa 15 menit; produksi disarankan <strong>OIDC/Keycloak + refresh token + revocation list</strong> (lihat §7).</p>
-<h3>Fase 1 — Dasbor &amp; Pipeline</h3>
-<ul><li>Aktor melihat KPI (pengajuan hari ini, approval rate, antrean putusan, rata-rata plafon), grafik volume 14 hari, dan distribusi pipeline.</li><li><strong>Menu:</strong> <code>#/dashboard</code>, <code>#/pipeline</code>.</li></ul>
+<h3>Fase 1 — Dasbor dan Pipeline</h3>
+<ul><li>Aktor melihat KPI (pengajuan hari ini, approval rate, antrean putusan, rata-rata plafon), grafik volume 14 hari, dan distribusi <i>pipeline</i>.</li><li><strong>Menu:</strong> <code>#/dashboard</code>, <code>#/pipeline</code>.</li></ul>
 <h3>Fase 2 — Origination (Registrasi Nasabah → Pengajuan)</h3>
 <div class="tblwrap"><table><thead><tr><th>#</th><th>Langkah</th><th>Aktor</th><th>Menu</th><th>Backend</th></tr></thead><tbody><tr><td>1</td><td>Buat <strong>nasabah</strong> (perorangan/SME/korporasi)</td><td>LOAN_OFFICER</td><td><code>#/customers</code> → "Nasabah Baru"</td><td><code>POST /api/v1/customers</code></td></tr><tr><td>2</td><td>Validasi form (NIK 16 digit, NPWP/NIB, email, HP)</td><td>—</td><td>validasi inline</td><td><code>customer-service</code> (bean validation)</td></tr><tr><td>3</td><td>Buat <strong>pengajuan kredit</strong> (pilih nasabah, produk, plafon, tenor, jaminan)</td><td>LOAN_OFFICER</td><td><code>#/loans</code> → "Pengajuan Baru"</td><td><code>POST /api/v1/loans</code></td></tr><tr><td>4</td><td>Submit pengajuan → status <code>SUBMITTED</code></td><td>LOAN_OFFICER</td><td>tombol "Ajukan"</td><td><code>POST /api/v1/loans/{id}/submit</code></td></tr></tbody></table></div>
 <h3>Fase 3 — Verifikasi &amp; Pengayaan Data</h3>
@@ -500,11 +500,11 @@ REVIEW → APPROVED / REJECTED (via approval workflow)</code></pre>
 <h3>Fase 8 — Analitik, Pelaporan &amp; Audit</h3>
 <ul><li><strong>Report Studio</strong> (<code>#/reports</code>): designer + viewer + ekspor CSV.</li><li><strong>Audit Trail</strong> (<code>#/audit</code>): semua perubahan &amp; keputusan (immutable log).</li><li><strong>Pelaporan regulator</strong> (SLIK bulanan, LBU) — <code>#/bureau</code> "Kirim Laporan".</li></ul>
 <h3>Fase 9 — Logout</h3>
-<div class="tblwrap"><table><thead><tr><th>#</th><th>Langkah</th><th>Aktor</th><th>Backend</th></tr></thead><tbody><tr><td>1</td><td>Klik <strong>"Keluar"</strong></td><td>Semua</td><td>—</td></tr><tr><td>2</td><td>Hapus token &amp; state user dari sesi</td><td>—</td><td><code>state.user = null</code>, hapus token</td></tr><tr><td>3</td><td>Kembali ke layar login</td><td>—</td><td>hash <code>""</code></td></tr><tr><td>4</td><td>(Produksi) token dimasukkan <strong>revocation/blacklist</strong> atau dibiarkan kedaluwarsa</td><td>—</td><td><code>auth-service</code> / OIDC</td></tr></tbody></table></div>
+<div class="tblwrap"><table><thead><tr><th>#</th><th>Langkah</th><th>Aktor</th><th>Backend</th></tr></thead><tbody><tr><td>1</td><td>Klik <strong>"Keluar"</strong></td><td>Semua</td><td>—</td></tr><tr><td>2</td><td>Hapus token dan state <i>user</i> dari sesi</td><td>—</td><td><code>state.user = null</code>, hapus token</td></tr><tr><td>3</td><td>Kembali ke layar login</td><td>—</td><td>hash <code>""</code></td></tr><tr><td>4</td><td>(Produksi) token dimasukkan <strong>revocation/blacklist</strong> atau dibiarkan kedaluwarsa</td><td>—</td><td><code>auth-service</code> / OIDC</td></tr></tbody></table></div>
 <blockquote><p>JWT bersifat <strong>stateless</strong> — "logout" di sisi klien cukup membuang token. Untuk standar perbankan, tambahkan <strong>token revocation</strong> (refresh-token rotation) atau <strong>session di Redis</strong> agar logout benar-benar mematikan sesi server.</p></blockquote>
 <hr>
 <h2>4. Alur Data (Data Flow) Antar Microservice</h2>
-<h3>4.1 Peta Layanan &amp; Port</h3>
+<h3>4.1 Peta Layanan dan Port</h3>
 <div class="tblwrap"><table><thead><tr><th>Layanan</th><th>Port</th><th>Database (PostgreSQL)</th><th>Tanggung jawab data</th></tr></thead><tbody><tr><td><code>service-registry</code></td><td>8761</td><td>—</td><td>Registri Eureka (service discovery)</td></tr><tr><td><code>api-gateway</code></td><td>8080</td><td>—</td><td>Entry point, JWT verify, routing, CORS</td></tr><tr><td><code>auth-service</code></td><td>8081</td><td><code>authdb</code></td><td>User, role, login, JWT</td></tr><tr><td><code>customer-service</code></td><td>8082</td><td><code>customerdb</code></td><td>Nasabah, eKYC, biometrik, pengurus/pemegang saham</td></tr><tr><td><code>loan-service</code></td><td>8083</td><td><code>loandb</code></td><td>Pengajuan, produk, approval task, routing</td></tr><tr><td><code>credit-service</code></td><td>8084</td><td><code>creditdb</code></td><td>SLIK, Pefindo, decision engine</td></tr><tr><td><code>document-service</code></td><td>8085</td><td><code>documentdb</code> + MinIO</td><td>Dokumen, kontrak, template, eSign</td></tr><tr><td><code>notification-service</code></td><td>8086</td><td><code>notificationdb</code></td><td>Email/SMS/push</td></tr><tr><td><code>risk-intelligence-service</code></td><td>8087</td><td>— (stateless, model eksternal)</td><td>Enrichment, FDS, AI (scoring/IDP/behavioral/pricing/graph/assistant)</td></tr></tbody></table></div>
 <p>Infrastruktur bersama: <strong>Kafka</strong> (event antar-layanan), <strong>Redis</strong> (cache/session/rate-limit), <strong>MinIO</strong> (object storage dokumen).</p>
 <h3>4.2 Alur Data Login (Otentikasi)</h3>
@@ -555,7 +555,7 @@ REVIEW → APPROVED / REJECTED (via approval workflow)</code></pre>
 <div class="tblwrap"><table><thead><tr><th>Tahap</th><th>Tabel utama</th><th>Isi penting</th></tr></thead><tbody><tr><td>Otentikasi</td><td><code>authdb.app_user</code></td><td>username, <code>password_hash</code> (bcrypt), role, branch, <code>active</code></td></tr><tr><td>Nasabah</td><td><code>customerdb.customer</code></td><td>NIK, NPWP, data individual/korporasi, <code>kyc_status</code>, <code>biometric_status</code>, <code>aml_risk</code></td></tr><tr><td>Korporasi</td><td><code>customerdb.company_official</code>, <code>company_shareholder</code></td><td>pengurus &amp; pemegang saham</td></tr><tr><td>Pengajuan</td><td><code>loandb.loan_application</code></td><td><code>application_no</code>, <code>customer_id</code>, <code>product_code</code>, plafon, tenor, <code>status</code></td></tr><tr><td>Persetujuan</td><td><code>loandb.approval_task</code></td><td>level, assignee, decision, catatan</td></tr><tr><td>Produk</td><td><code>loandb.product</code></td><td>kode, segmen, plafon, tenor, bunga, provisi, grace period</td></tr><tr><td>Routing</td><td><code>loandb.routing_task</code></td><td>task, skill, priority, assignee, SLA</td></tr><tr><td>Evaluasi</td><td><code>creditdb.credit_evaluation</code></td><td>DSR, LTV, skor internal, SLIK, Pefindo, rekomendasi</td></tr><tr><td>FDS</td><td><code>creditdb.fds_rule</code></td><td>katalog aturan deteksi penipuan</td></tr><tr><td>Dokumen</td><td><code>documentdb.document_item</code> + <code>contract_template</code></td><td>file key (MinIO), tipe, status sign</td></tr><tr><td>Notifikasi</td><td><code>notificationdb.notification_log</code></td><td>channel, recipient, status kirim</td></tr></tbody></table></div>
 <hr>
 <h3>4.6 Diagram Urutan (Sequence Diagram) per Fase</h3>
-<blockquote><p>Notasi: panah solid <code>──▶</code> = request/response sinkron (HTTP); panah putus-putus <code>···▶</code> = event asinkron (Kafka) / notifikasi. Aktor luar sistem (Dukcapil, biro kredit, PSrE, core banking) berada paling kanan.  <strong>Versi interaktif:</strong> kedelapan diagram di bawah tersedia sebagai diagram Mermaid.js yang di-render di browser di situs marketing OriginIQ (<code>OriginIQ_web_marketing.html</code>, bagian <code>#diagrams</code>) — Mermaid di-vendor lokal tanpa CDN.</p></blockquote>
+<blockquote><p>Notasi: panah solid <code>──▶</code> = request/response sinkron (HTTP); panah putus-putus <code>···▶</code> = event asinkron (Kafka) / notifikasi. Aktor luar sistem (Dukcapil, biro kredit, PSrE, <i>core banking</i>) berada paling kanan.  <strong>Versi interaktif:</strong> kedelapan diagram di bawah tersedia sebagai diagram Mermaid.js yang di-render di browser di situs marketing OriginIQ (<code>OriginIQ_web_marketing.html</code>, bagian <code>#diagrams</code>) — Mermaid di-vendor lokal tanpa CDN.</p></blockquote>
 <h4>Fase 0 — Login</h4>
 <pre><code>Petugas      Frontend (SPA)      api-gateway        auth-service             authdb
    │            │                    │                   │                     │
@@ -572,7 +572,7 @@ REVIEW → APPROVED / REJECTED (via approval workflow)</code></pre>
    │            │◀───────────────────│                   │                     │
    │◀─ simpan   │                    │                   │                     │
    │   token    │                    │                   │                     │</code></pre>
-<h4>Fase 1 — Dasbor &amp; Pipeline</h4>
+<h4>Fase 1 — Dasbor dan Pipeline</h4>
 <blockquote><p>Mode demo menghitung KPI di sisi klien dari <code>store.applications</code>; di produksi agregat dihitung di <code>loan-service</code> (SQL aggregate) lalu di-cache Redis — lihat §6.</p></blockquote>
 <pre><code>Semua peran   Frontend (SPA)      api-gateway       loan-service        loandb
    │               │                   │                 │                 │
@@ -661,7 +661,7 @@ REVIEW → APPROVED / REJECTED (via approval workflow)</code></pre>
    │ cair    │ POST /loans/{id}/disburse   │                 │              │               │
    │────────▶│────────────▶│────────────▶│ status DISBURSED │              │──▶ transfer    │
    │          │             │             │  ···▶ notifikasi (email/SMS/push)               │</code></pre>
-<h4>Fase 8 — Analitik, Pelaporan &amp; Audit</h4>
+<h4>Fase 8 — Analitik, Pelaporan dan Audit</h4>
 <pre><code>COMPLIANCE    Frontend       gateway      loan-service     loandb     credit-service   SLIK OJK
    │             │              │             │              │             │             │
    │ buka #/reports (Report Studio)          │              │             │             │
@@ -709,11 +709,11 @@ REVIEW → APPROVED / REJECTED (via approval workflow)</code></pre>
 <div class="tblwrap"><table><thead><tr><th>Tahap</th><th>Kontrol saat ini</th><th>Rekomendasi produksi</th></tr></thead><tbody><tr><td>Login</td><td>bcrypt + rate limiter (15 mnt) + JWT 15 mnt</td><td>OIDC/Keycloak, MFA/2FA (POJK 21/2023), CAPTCHA, audit login</td></tr><tr><td>Setiap request</td><td>JWT verify di gateway + header identitas</td><td>JWT asimetris (JWKS), mTLS, WAF, RBAC per endpoint</td></tr><tr><td>eKYC</td><td>Dukcapil + biometrik + consent</td><td>vendor biometrik tersertifikasi, AML screening (PEP/sanksi)</td></tr><tr><td>Biro kredit</td><td>consent wajib (UU PDP), masking NIK</td><td>pencatatan inquiry (IDEKU), enkripsi transit &amp; at rest</td></tr><tr><td>Putusan</td><td>4-eyes / LKMK + catatan wajib</td><td>limit kewenangan per level, segregation of duties</td></tr><tr><td>Dokumen/eSign</td><td>TTE tersertifikasi (PSrE)</td><td>hash + timestamp, kunci HSM</td></tr><tr><td>Logout</td><td>buang token klien</td><td>token revocation/blacklist, session di Redis, idle timeout</td></tr><tr><td>Audit</td><td>log immutable</td><td>SIEM, retensi sesuai regulasi</td></tr></tbody></table></div>
 <hr>
 <h2>8. Kesimpulan</h2>
-<p>Alur kerja OriginIQ LOS dari <strong>login hingga logout</strong> membentuk satu siklus penuh origination kredit: <strong>otentikasi → registrasi → verifikasi (eKYC + biro kredit + data alternatif + FDS) → penilaian risiko (scoring + BRE) → persetujuan berjenjang → kontrak &amp; e-sign → pencairan → pelaporan/audit → logout</strong>. Sepanjang alur, data mengalir antar-microservice melalui <code>api-gateway</code> (JWT) dan event Kafka, tersimpan di database per-layanan, dan setiap langkah tercatat di audit trail.</p>
+<p>Alur kerja OriginIQ LOS dari <strong>login hingga logout</strong> membentuk satu siklus penuh origination kredit: <strong>otentikasi → registrasi → verifikasi (eKYC + biro kredit + data alternatif + FDS) → penilaian risiko (scoring + BRE) → persetujuan berjenjang → kontrak &amp; e-sign → pencairan → pelaporan/audit → logout</strong>. Sepanjang alur, data mengalir antar-microservice melalui <code>api-gateway</code> (JWT) dan event Kafka, tersimpan di <i>database</i> per-layanan, dan setiap langkah tercatat di audit trail.</p>
     </article>
     <article class="doc-panel md" id="docs-14">
 <h1>14 — Runbook Operasional (Produksi)</h1>
-<blockquote><p>Runbook ini melengkapi <code>docs/07</code> (menjalankan di development). Di sini dibahas <strong>operasi harian produksi</strong> OriginIQ LOS: urutan start/stop, backup &amp; restore, disaster recovery, monitoring &amp; alerting, penanganan insiden, keamanan operasional, dan runbook per layanan.  Target SLA mengikuti <code>docs/04</code>: <strong>availability 99,95%</strong>, <strong>RPO &lt; 15 menit</strong>, <strong>RTO &lt; 1 jam</strong>, p95 latensi read &lt; 300 ms / write &lt; 500 ms. Kepatuhan mengikuti <code>docs/05</code> (DRC &amp; BCP wajib diuji).</p></blockquote>
+<blockquote><p>Runbook ini melengkapi <code>docs/07</code> (menjalankan di development). Di sini dibahas <strong>operasi harian produksi</strong> OriginIQ LOS: urutan start/stop, <i>backup</i> &amp; restore, disaster recovery, monitoring &amp; alerting, penanganan insiden, keamanan operasional, dan runbook per layanan.  Target SLA mengikuti <code>docs/04</code>: <strong>availability 99,95%</strong>, <strong>RPO &lt; 15 menit</strong>, <strong>RTO &lt; 1 jam</strong>, p95 latensi read &lt; 300 ms / write &lt; 500 ms. Kepatuhan mengikuti <code>docs/05</code> (DRC &amp; BCP wajib diuji).</p></blockquote>
 <hr>
 <h2>1. Cakupan &amp; Peran Operasional</h2>
 <h3>1.1 Layanan yang dioperasikan</h3>
@@ -757,7 +757,7 @@ kubectl scale deployment auth-service customer-service loan-service \
   credit-service document-service notification-service --replicas=0
 # infra (postgres/kafka/redis/minio) tetap jalan sampai maintenance window selesai</code></pre>
 <hr>
-<h2>3. Backup &amp; Restore</h2>
+<h2>3. Backup dan Restore</h2>
 <h3>3.1 Apa yang wajib di-backup</h3>
 <div class="tblwrap"><table><thead><tr><th>Komponen</th><th>Metode</th><th>Frekuensi</th><th>Retensi</th></tr></thead><tbody><tr><td>PostgreSQL (6 DB: authdb…notificationdb)</td><td><code>pg_dump</code> (logika) + <strong>WAL archiving</strong> (fisik/PITR)</td><td>full harian + WAL kontinu</td><td>30 hari + 12 bulan (arsip)</td></tr><tr><td>MinIO (dokumen &amp; kontrak)</td><td><code>mc mirror</code> / replikasi site</td><td>harian</td><td>30 hari + versi objek</td></tr><tr><td>Redis</td><td>snapshot RDB + AOF</td><td>— (AOF kontinu)</td><td>hanya untuk cache/rate-limit, boleh reset</td></tr><tr><td>Kafka</td><td>replikasi broker + schema registry</td><td>kontinu</td><td>sesuai retensi topik</td></tr><tr><td>Konfigurasi</td><td>Git (deklaratif) + secret di Vault</td><td>setiap perubahan</td><td>selamanya di Git</td></tr></tbody></table></div>
 <h3>3.2 Backup PostgreSQL (contoh)</h3>
@@ -799,7 +799,7 @@ Redis AOF                                  Redis AOF (replikasi)</code></pre>
 <h3>4.3 Data loss &amp; rollback</h3>
 <ul><li><strong>Kehilangan data DB</strong>: restore PITR ke titik sebelum insiden (WAL), lalu re-run event dari Kafka (outbox) agar state konsisten.</li><li><strong>Dokumen hilang</strong>: restore bucket MinIO dari replika site.</li><li><strong>Konfigurasi salah</strong>: rollback deploy (lihat §8.2) + restore secret dari Vault (versioned).</li></ul>
 <hr>
-<h2>5. Monitoring &amp; Alerting</h2>
+<h2>5. Monitoring dan Alerting</h2>
 <h3>5.1 Endpoint kesehatan</h3>
 <div class="tblwrap"><table><thead><tr><th>Cek</th><th>Endpoint</th><th>Yang diekspos</th></tr></thead><tbody><tr><td>Liveness/readiness</td><td><code>GET /actuator/health</code></td><td><code>UP/DOWN</code> + komponen (DB, Redis, Kafka)</td></tr><tr><td>Info</td><td><code>GET /actuator/info</code></td><td>versi, git commit</td></tr><tr><td>Gateway routes</td><td><code>GET /actuator/gateway/routes</code></td><td>daftar route aktif</td></tr><tr><td>Registry</td><td><code>GET /eureka/apps</code></td><td>instance terdaftar</td></tr></tbody></table></div>
 <blockquote><p>Saat ini exposure terbatas (<code>health,info,gateway</code>) dan <strong>metrics/prometheus tidak diekspos di port publik</strong> (lihat komentar <code>application.yml</code> tiap service). Untuk produksi, scrape metrik lewat port manajemen terpisah — lihat <code>docs/05</code>.</p></blockquote>
@@ -813,7 +813,7 @@ Redis AOF                                  Redis AOF (replikasi)</code></pre>
 <h3>6.1 Severity</h3>
 <div class="tblwrap"><table><thead><tr><th>Level</th><th>Definisi</th><th>Respons awal</th><th>Eskalasi</th></tr></thead><tbody><tr><td>SEV1</td><td>Platform down / data loss / breach</td><td>&lt; 15 mnt</td><td>War room, seluruh tim</td></tr><tr><td>SEV2</td><td>Fitur utama terdegradasi (mis. underwriting gagal)</td><td>&lt; 30 mnt</td><td>Tim terkait</td></tr><tr><td>SEV3</td><td>Gangguan minor (satu user/flow)</td><td>&lt; 4 jam</td><td>On-call</td></tr><tr><td>SEV4</td><td>Kosmetik / non-blocking</td><td>backlog</td><td>—</td></tr></tbody></table></div>
 <h3>6.2 Alur standar</h3>
-<p>1. <strong>Deteksi</strong> (alert / laporan user) → buka tiket &amp; kanal insiden. 2. <strong>Triage</strong> → tentukan severity &amp; pemilik. 3. <strong>Mitigasi</strong> (stop bleeding): blokir, rollback, scale-up, failover — <strong>sebelum</strong> root cause. 4. <strong>Root cause analysis</strong> (RCA) → perbaiki permanen. 5. <strong>Postmortem</strong> (blameless) → action items + retensi sesuai regulasi.</p>
+<p>1. <strong>Deteksi</strong> (alert / laporan <i>user</i>) → buka tiket &amp; kanal insiden. 2. <strong>Triage</strong> → tentukan severity &amp; pemilik. 3. <strong>Mitigasi</strong> (stop bleeding): blokir, rollback, scale-up, failover — <strong>sebelum</strong> root cause. 4. <strong>Root cause analysis</strong> (RCA) → perbaiki permanen. 5. <strong>Postmortem</strong> (blameless) → action items + retensi sesuai regulasi.</p>
 <h3>6.3 Playbook insiden umum</h3>
 <div class="tblwrap"><table><thead><tr><th>Gejala</th><th>Cek cepat</th><th>Mitigasi awal</th></tr></thead><tbody><tr><td>Semua API 5xx</td><td>health gateway, route, registry</td><td>restart gateway / scale up</td></tr><tr><td>Login lambat/gagal</td><td>Redis (rate-limit), authdb pool</td><td>scale auth-service, cek Redis</td></tr><tr><td>Inquiry SLIK/Pefindo gagal</td><td>konektor eksternal, kredensial</td><td>fallback mock (dev) / buka tiket vendor</td></tr><tr><td>Disbursement ganda</td><td>idempotency key, <code>disbursement.request_id</code></td><td>pause gateway, validasi unique constraint</td></tr><tr><td>Antrean Kafka menumpuk</td><td>consumer lag, DLQ</td><td>scale consumer, cek DLQ</td></tr><tr><td>Disk DB penuh</td><td><code>df</code>, growth tabel</td><td>archive + scale volume</td></tr></tbody></table></div>
 <hr>
@@ -837,19 +837,19 @@ Redis AOF                                  Redis AOF (replikasi)</code></pre>
 <p><strong>Mingguan</strong></p>
 <ul><li>[ ] Review dashboard kapasitas (CPU/memori/disk) &amp; proyeksi tren.</li><li>[ ] Review log keamanan (login gagal, akses anomali, perubahan konfigurasi).</li></ul>
 <p><strong>Bulanan</strong></p>
-<ul><li>[ ] <strong>Restore drill</strong>: restore backup ke lingkungan uji &amp; verifikasi data.</li><li>[ ] <strong>Failover drill</strong>: uji cut-over ke SITE B (tanpa memutus produksi bila memungkinkan).</li><li>[ ] Rotasi secret &amp; review akses operator.</li></ul>
+<ul><li>[ ] <strong>Restore drill</strong>: restore <i>backup</i> ke lingkungan uji dan verifikasi data.</li><li>[ ] <strong>Failover drill</strong>: uji cut-over ke SITE B (tanpa memutus produksi bila memungkinkan).</li><li>[ ] Rotasi secret dan review akses operator.</li></ul>
 <p><strong>Kuartalan</strong></p>
 <ul><li>[ ] Chaos test (matikan DB/Kafka/registry) sesuai checklist <code>docs/04</code>.</li><li>[ ] Review &amp; perbarui BCP/DR dengan hasil drill terakhir.</li><li>[ ] Uji kapasitas kuota SLIK OJK / Pefindo ke vendor.</li></ul>
 <hr>
 <h2>11. Kesimpulan</h2>
-<p>Runbook ini menjadikan OriginIQ LOS <strong>dapat dioperasikan dengan disiplin standar perbankan</strong>: urutan start/stop yang benar, backup yang teruji restore, DR dengan RPO &lt; 15 menit &amp; RTO &lt; 1 jam, monitoring dengan ambang jelas, serta respons insiden ber-severity. Operasikan bersama <code>docs/04</code> (SLA &amp; skalabilitas), <code>docs/05</code> (kepatuhan &amp; DRC/BCP), <code>docs/07</code> (menjalankan di development), dan <code>docs/13</code> (alur kerja &amp; data) agar produksi aman, cepat, dan diaudit.</p>
+<p>Runbook ini menjadikan OriginIQ LOS <strong>dapat dioperasikan dengan disiplin standar perbankan</strong>: urutan start/stop yang benar, <i>backup</i> yang teruji restore, DR dengan RPO &lt; 15 menit dan RTO &lt; 1 jam, monitoring dengan ambang jelas, serta respons insiden ber-severity. Operasikan bersama <code>docs/04</code> (SLA &amp; skalabilitas), <code>docs/05</code> (kepatuhan &amp; DRC/BCP), <code>docs/07</code> (menjalankan di development), dan <code>docs/13</code> (alur kerja &amp; data) agar produksi aman, cepat, dan diaudit.</p>
     </article>
     <article class="doc-panel md" id="docs-15">
 <h1>15 — Checklist Go-Live &amp; Panduan Deploy (Produksi)</h1>
 <blockquote><p>Dokumen ini adalah <strong>pintu terakhir sebelum produksi</strong>: daftar periksa go/no-go, rencana
 cutover, dan cara deploy statis. Melengkapi <code>docs/04</code> (SLA &amp; skalabilitas), <code>docs/05</code>
 (kepatuhan), <code>docs/07</code> (menjalankan), <code>docs/11</code> (audit keamanan), dan <code>docs/14</code> (runbook
-operasional). <strong>Jangan go-live sebelum semua item wajib (MUST) terpenuhi.</strong></p></blockquote>
+operasional). <strong>Jangan <i>go-live</i> sebelum semua item wajib (MUST) terpenuhi.</strong></p></blockquote>
 <hr>
 <hr />
 <h2>1. Kriteria Go / No-Go</h2>
@@ -878,7 +878,7 @@ operasional). <strong>Jangan go-live sebelum semua item wajib (MUST) terpenuhi.<
 <td>0 terbuka</td>
 </tr>
 <tr>
-<td>Kepatuhan &amp; persetujuan regulator</td>
+<td>Kepatuhan dan persetujuan regulator</td>
 <td>Persetujuan &amp; sertifikasi selesai (lihat §3)</td>
 </tr>
 <tr>
@@ -890,7 +890,7 @@ operasional). <strong>Jangan go-live sebelum semua item wajib (MUST) terpenuhi.<
 <blockquote><p><strong>Go/No-Go:</strong> keputusan diambil rapat komite (bisnis, TI, kepatuhan, risiko) — bukan oleh
 tim teknis saja.</p></blockquote>
 <hr />
-<h2>2. Kesiapan Regulasi &amp; Hukum (MUST)</h2>
+<h2>2. Kesiapan Regulasi dan Hukum (MUST)</h2>
 <div class="tblwrap"><table>
 <thead>
 <tr>
@@ -902,12 +902,12 @@ tim teknis saja.</p></blockquote>
 <tbody>
 <tr>
 <td>2.1</td>
-<td>Persetujuan &amp; pelaporan SLIK OJK sesuai POJK 18/2017 jo. POJK 11/2024; UAT iDebku &amp; pelaporan bulanan</td>
+<td>Persetujuan dan pelaporan SLIK OJK sesuai POJK 18/2017 jo. POJK 11/2024; UAT iDebku dan pelaporan bulanan</td>
 <td>docs/05, docs/06</td>
 </tr>
 <tr>
 <td>2.2</td>
-<td>Perjanjian &amp; kredensial <strong>Pefindo IdScore</strong> (LPIP diawasi OJK) + UAT inquiry (250–900)</td>
+<td>Perjanjian dan kredensial <strong>Pefindo IdScore</strong> (LPIP diawasi OJK) + UAT inquiry (250–900)</td>
 <td>docs/06</td>
 </tr>
 <tr>
@@ -917,12 +917,12 @@ tim teknis saja.</p></blockquote>
 </tr>
 <tr>
 <td>2.4</td>
-<td><strong>UU PDP 27/2022</strong>: consent inquiry biro kredit &amp; data alternatif, masking NIK, hak subjek data</td>
+<td><strong>UU PDP 27/2022</strong>: consent inquiry biro kredit dan data alternatif, masking NIK, hak subjek data</td>
 <td>docs/05, docs/13</td>
 </tr>
 <tr>
 <td>2.5</td>
-<td><strong>TTE tersertifikasi PSrE</strong> untuk akad elektronik (UU ITE &amp; PP PSTE)</td>
+<td><strong>TTE tersertifikasi PSrE</strong> untuk akad elektronik (UU ITE dan PP PSTE)</td>
 <td>docs/03, docs/13</td>
 </tr>
 <tr>
@@ -1041,7 +1041,7 @@ tim teknis saja.</p></blockquote>
 </tr>
 <tr>
 <td>5.2</td>
-<td><strong>SLIK OJK &amp; Pefindo</strong>: endpoint/sertifikat produksi, kuota inquiry terkonfirmasi, SLA vendor ditandatangani</td>
+<td><strong>SLIK OJK dan Pefindo</strong>: endpoint/sertifikat produksi, kuota inquiry terkonfirmasi, SLA vendor ditandatangani</td>
 <td>docs/06</td>
 </tr>
 <tr>
@@ -1056,7 +1056,7 @@ tim teknis saja.</p></blockquote>
 </tr>
 <tr>
 <td>5.5</td>
-<td>Migrasi data (produk, user, master) tervalidasi; data lama diaudit</td>
+<td>Migrasi data (produk, <i>user</i>, master) tervalidasi; data lama diaudit</td>
 <td>—</td>
 </tr>
 </tbody>
@@ -1094,7 +1094,7 @@ tim teknis saja.</p></blockquote>
 </tr>
 <tr>
 <td>6.5</td>
-<td>Restore drill &amp; failover drill bulanan terjadwal</td>
+<td>Restore drill dan failover drill bulanan terjadwal</td>
 <td>docs/14</td>
 </tr>
 </tbody>
@@ -1107,7 +1107,7 @@ tim teknis saja.</p></blockquote>
 <li><strong>Verifikasi pasca-cutover</strong>: health UP, login OK, inquiry SLIK/Pefindo OK, disbursement
    end-to-end OK, laporan regulator terkirim.</li>
 <li><strong>Rollback</strong>: titik kembali = versi sebelumnya (image tag) + restore DB PITR + rollback
-   konfigurasi; prosedur harus diuji <strong>sebelum</strong> go-live (bukan saat insiden).</li>
+   konfigurasi; prosedur harus diuji <strong>sebelum</strong> <i>go-live</i> (bukan saat insiden).</li>
 </ol>
 <blockquote><p>Idempotency pencairan (<code>disbursement.request_id</code> + unique constraint) tetap dijaga selama
 cutover agar tidak ada pencairan ganda (lihat <code>docs/04</code> §6).</p></blockquote>
@@ -1130,7 +1130,7 @@ cutover agar tidak ada pencairan ganda (lihat <code>docs/04</code> §6).</p></bl
 <tr>
 <td>2. Canary / perluasan</td>
 <td>10–25% volume</td>
-<td>p95 latensi &amp; error rate dalam SLA</td>
+<td>p95 latensi dan error rate dalam SLA</td>
 </tr>
 <tr>
 <td>3. Full launch</td>
@@ -1143,13 +1143,13 @@ cutover agar tidak ada pencairan ganda (lihat <code>docs/04</code> §6).</p></bl
 <h2>9. Post-Launch (Hypercare)</h2>
 <ul>
 <li><strong>Hypercare 2–4 minggu</strong>: tim inti siaga, review harian metrik &amp; insiden.</li>
-<li><strong>Pelaporan regulator</strong>: pastikan SLIK bulanan &amp; laporan SPOJK terkirim tepat waktu sejak
+<li><strong>Pelaporan regulator</strong>: pastikan SLIK bulanan dan laporan SPOJK terkirim tepat waktu sejak
   bulan pertama.</li>
-<li><strong>Review pasca 30 hari</strong>: evaluasi kapasitas, keamanan, dan checklist ulang go-live.</li>
+<li><strong>Review pasca 30 hari</strong>: evaluasi kapasitas, keamanan, dan checklist ulang <i>go-live</i>.</li>
 </ul>
 <hr />
 <h2>10. Deploy Statis (Situs Marketing + SPA)</h2>
-<p>Situs marketing &amp; SPA bersifat statis — dikemas sebagai image <strong>nginx</strong>:</p>
+<p>Situs marketing dan SPA bersifat statis — dikemas sebagai image <strong>nginx</strong>:</p>
 <pre><code class="language-bash"># Build &amp; jalankan (menyajikan situs marketing di /, SPA di /app/, proxy /api/ ke gateway)
 docker build -f deploy/Dockerfile -t originiq-frontend .
 docker run -p 80:80 originiq-frontend
@@ -1187,7 +1187,7 @@ docker run -p 80:80 originiq-frontend
 <p>Konfigurasi: <code>frontend/nginx/nginx.conf</code> (header keamanan, gzip, cache aset, proxy API).
 CI otomatis: <code>.github/workflows/ci.yml</code> (syntax check JS + validasi struktur HTML).</p>
 <h3>10.1 Deploy Backend (Microservices Spring Boot)</h3>
-<p>Satu <code>Dockerfile</code> multi-stage melayani semua modul backend (build arg <code>SERVICE</code>):</p>
+<p>Satu <code>Dockerfile</code> multi-stage melayani semua modul <i>backend</i> (build arg <code>SERVICE</code>):</p>
 <pre><code class="language-bash"># Build image per service (contoh auth-service)
 docker build -f deploy/Dockerfile.backend \
   --build-arg SERVICE=auth-service -t originiq-auth-service .
@@ -1207,8 +1207,8 @@ docker compose -f deploy/docker-compose.prod.yml ps
 <h3>10.2 Deploy ke Kubernetes (target 1 jt transaksi/hari &amp; SLA 99,95%)</h3>
 <p>Manifest produksi lengkap di folder <strong><code>k8s/</code></strong>: namespace, ConfigMap + Secret, infra
 (PostgreSQL/Redis/Kafka/MinIO), 9 service Spring Boot dengan <strong>liveness/readiness probe</strong>,
-frontend + Ingress TLS, dan <strong>HPA</strong> untuk autoscaling (gateway, loan, credit, customer).</p>
-<pre><code class="language-bash">kubectl apply -f k8s/                # lihat k8s/README.md untuk build image &amp; secret
+<i>frontend</i> + Ingress TLS, dan <strong>HPA</strong> untuk autoscaling (gateway, loan, credit, customer).</p>
+<pre><code class="language-bash">kubectl apply -f k8s/                # lihat k8s/README.md untuk build image dan secret
 kubectl -n originiq-prod get pods,svc,hpa
 </code></pre>
 <ul>
@@ -1317,9 +1317,9 @@ Lihat <code>docs/14</code> untuk detail operasional dan <code>docs/04</code>/<co
       </div>
       <div class="foot-col">
         <h4 data-i18n="nav_docs">Dokumentasi</h4>
-        <a href="#docs-03" data-i18n="docs_03_title">03 — Fitur, Modul, Menu &amp; Form</a>
+        <a href="#docs-03" data-i18n="docs_03_title">03 — Fitur, Modul, Menu dan Form</a>
         <a href="#docs-10" data-i18n="docs_10_title">10 — Gap Analysis Modul Pintar</a>
-        <a href="#docs-13" data-i18n="docs_13_title">13 — Alur Kerja &amp; Alur Data</a>
+        <a href="#docs-13" data-i18n="docs_13_title">13 — Alur Kerja dan Alur Data</a>
         <a href="#docs-14" data-i18n="docs_14_title">14 — Runbook Operasional</a>
         <a href="#docs-15" data-i18n="docs_15_title">15 — Checklist Go-Live &amp; Deploy</a>
         <a href="#diagrams" data-i18n="nav_diagrams">Diagram Interaktif</a>
@@ -1327,7 +1327,7 @@ Lihat <code>docs/14</code> untuk detail operasional dan <code>docs/04</code>/<co
     </div>
     <div class="legal">
       <span>© <span id="year"></span> OriginIQ LOS. <span data-i18n="legal_rights">Seluruh hak cipta dilindungi.</span></span>
-      <span data-i18n="legal_note">Materi referensi. Verifikasi kepatuhan &amp; spesifikasi integrasi resmi sebelum produksi.</span>
+      <span data-i18n="legal_note">Materi referensi. Verifikasi kepatuhan dan spesifikasi integrasi resmi sebelum produksi.</span>
     </div>
   </div>
 </footer>
@@ -1351,7 +1351,7 @@ Lihat <code>docs/14</code> untuk detail operasional dan <code>docs/04</code>/<co
       hero_title_1: "Origination kredit yang",
       hero_title_2: "cepat, akurat,",
       hero_title_3: "dan patuh regulasi",
-      hero_desc: "OriginIQ menyatukan pengajuan, eKYC, biro kredit (SLIK OJK & Pefindo), underwriting berbasis AI, persetujuan berjenjang, dokumen elektronik, hingga pencairan — dalam satu platform microservices.",
+      hero_desc: "OriginIQ menyatukan pengajuan, eKYC, biro kredit (SLIK OJK dan Pefindo), underwriting berbasis AI, persetujuan berjenjang, dokumen elektronik, hingga pencairan — dalam satu platform microservices.",
       hero_cta1: "Jadwalkan Demo",
       hero_cta2: "Jelajahi Modul",
       stat1: "Transaksi / hari",
@@ -1366,7 +1366,7 @@ Lihat <code>docs/14</code> untuk detail operasional dan <code>docs/04</code>/<co
       comp_kicker: "Dirancang untuk kepatuhan",
       mod_kicker: "Group Modul LOS",
       mod_title: "Semua tahapan origination, satu platform",
-      mod_desc: "Enam kelompok modul mencakup seluruh siklus hidup kredit — dari onboarding hingga administrasi & analitik.",
+      mod_desc: "Enam kelompok modul mencakup seluruh siklus hidup kredit — dari onboarding hingga administrasi dan analitik.",
       ai_kicker: "Modul Pintar (AI)",
       ai_title: "Kecerdasan buatan di setiap keputusan kredit",
       ai_desc: "Dari skoring prediktif hingga wawancara virtual — enam modul AI memperkuat akurasi sekaligus mempercepat proses.",
@@ -1382,36 +1382,36 @@ Lihat <code>docs/14</code> untuk detail operasional dan <code>docs/04</code>/<co
       foot_prod: "Produk",
       foot_comp: "Perusahaan",
       legal_rights: "Seluruh hak cipta dilindungi.",
-      legal_note: "Materi referensi. Verifikasi kepatuhan & spesifikasi integrasi resmi sebelum produksi.",
+      legal_note: "Materi referensi. Verifikasi kepatuhan dan spesifikasi integrasi resmi sebelum produksi.",
       nav_docs: "Dokumentasi",
       nav_diagrams: "Diagram",
       docs_kicker: "Dokumentasi",
-      docs_title: "Blueprint fungsional & analisis kesenjangan",
+      docs_title: "Blueprint fungsional dan analisis kesenjangan",
       docs_desc: "Konten di bawah disematkan langsung dari dokumen referensi 03, 10, 13, dan 14.",
-      docs_03_title: "03 — Fitur, Modul, Menu & Form",
-      docs_03_desc: "Blueprint fungsional: daftar modul & menu (MD-01…MD-10), kamus form (F-*), state machine, dan matriks fitur vs benchmark vendor.",
+      docs_03_title: "03 — Fitur, Modul, Menu dan Form",
+      docs_03_desc: "Blueprint fungsional: daftar modul dan menu (MD-01…MD-10), kamus form (F-*), state machine, dan matriks fitur vs benchmark vendor.",
       docs_10_title: "10 — Gap Analysis Modul Pintar",
       docs_10_desc: "Hasil pemeriksaan 6 Group Modul LOS + 6 Modul Pintar (AI) — status tiap modul, endpoint backend, menu frontend, dan spesifikasi cara kerja.",
-      docs_13_title: "13 — Alur Kerja & Alur Data",
-      docs_13_desc: "Panduan alur kerja & alur data perbankan dari login hingga logout — aktor, fase, diagram urutan, dan data flow antar-microservice.",
+      docs_13_title: "13 — Alur Kerja dan Alur Data",
+      docs_13_desc: "Panduan alur kerja dan alur data perbankan dari login hingga logout — aktor, fase, diagram urutan, dan data flow antar-microservice.",
       docs_14_title: "14 — Runbook Operasional",
       docs_15_title: "15 — Checklist Go-Live & Deploy",
-      docs_14_desc: "Operasi produksi OriginIQ LOS — urutan start/stop, backup & restore, disaster recovery (RPO/RTO), monitoring, penanganan insiden, dan keamanan operasional.",
+      docs_14_desc: "Operasi produksi OriginIQ LOS — urutan start/stop, backup dan restore, disaster recovery (RPO/RTO), monitoring, penanganan insiden, dan keamanan operasional.",
       diag_kicker: "Visualisasi Interaktif",
       diag_group_seq: "Diagram Urutan (Fase 0–9)",
-      diag_group_flow: "Pipeline & State Machine",
+      diag_group_flow: "Pipeline dan State Machine",
       diag_title: "Diagram urutan alur kredit",
       diag_desc: "Pilih fase untuk melihat alur permintaan antar aktor dan layanan secara interaktif — di-render dari Mermaid.js (vendor lokal, tanpa CDN).",
       diag_loading: "Menggambar diagram…",
       diag_fallback: "Diagram interaktif tidak dapat dimuat (mermaid.js tidak tersedia). Lihat diagram teks di dokumentasi 13.",
       docs_read: "Baca dokumen",
       modules: [
-        { icon: "🚀", c: "#dbe6fe", t: "Front-End & Onboarding", d: "Registrasi & pengajuan, eKYC & biometrik, dan manajemen dokumen (DMS).", tags: ["Registrasi", "eKYC", "DMS"] },
-        { icon: "🔎", c: "#fce7f3", t: "Verifikasi & Pengayaan Data", d: "Integrasi biro kredit (SLIK OJK & Pefindo), data alternatif, dan deteksi penipuan (FDS).", tags: ["SLIK", "Pefindo", "FDS"] },
-        { icon: "⚖️", c: "#fef3c7", t: "Analisis & Penilaian Risiko", d: "Scoring engine, mesin aturan bisnis (BRE), dan analisis kemampuan bayar.", tags: ["Scoring", "BRE", "DSR/LTV"] },
-        { icon: "🔀", c: "#d1fae5", t: "Alur Kerja & Operasional", d: "Alur kerja dinamis (BPMN 2.0), distribusi tugas (routing), dan dasbor analis.", tags: ["BPMN 2.0", "Routing", "Dasbor"] },
-        { icon: "📄", c: "#e0e7ff", t: "Finalisasi & Pencairan", d: "Pembuat kontrak (Doc Gen), tanda tangan digital, dan gerbang integrasi API core.", tags: ["Doc Gen", "eSign", "API"] },
-        { icon: "📊", c: "#cffafe", t: "Administrasi & Analitik", d: "Manajemen produk, audit trail, dan pelaporan untuk kontrol penuh.", tags: ["Produk", "Audit", "Laporan"] }
+        { icon: "🚀", c: "#dbe6fe", t: "Front-End dan Onboarding", d: "Registrasi dan pengajuan, eKYC dan biometrik, dan manajemen dokumen (DMS).", tags: ["Registrasi", "eKYC", "DMS"] },
+        { icon: "🔎", c: "#fce7f3", t: "Verifikasi dan Pengayaan Data", d: "Integrasi biro kredit (SLIK OJK dan Pefindo), data alternatif, dan deteksi penipuan (FDS).", tags: ["SLIK", "Pefindo", "FDS"] },
+        { icon: "⚖️", c: "#fef3c7", t: "Analisis dan Penilaian Risiko", d: "Scoring engine, mesin aturan bisnis (BRE), dan analisis kemampuan bayar.", tags: ["Scoring", "BRE", "DSR/LTV"] },
+        { icon: "🔀", c: "#d1fae5", t: "Alur Kerja dan Operasional", d: "Alur kerja dinamis (BPMN 2.0), distribusi tugas (routing), dan dasbor analis.", tags: ["BPMN 2.0", "Routing", "Dasbor"] },
+        { icon: "📄", c: "#e0e7ff", t: "Finalisasi dan Pencairan", d: "Pembuat kontrak (Doc Gen), tanda tangan digital, dan gerbang integrasi API core.", tags: ["Doc Gen", "eSign", "API"] },
+        { icon: "📊", c: "#cffafe", t: "Administrasi dan Analitik", d: "Manajemen produk, audit trail, dan pelaporan untuk kontrol penuh.", tags: ["Produk", "Audit", "Laporan"] }
       ],
       ai: [
         { icon: "🧠", t: "AI Credit Scoring", d: "Model ML (XGBoost / Random Forest) memprediksi Probability of Default — termasuk debitur unbanked.", tags: ["XGBoost", "PD", "Unbanked"] },
@@ -1429,10 +1429,10 @@ Lihat <code>docs/14</code> untuk detail operasional dan <code>docs/04</code>/<co
       ],
       compliance: [
         { t: "UU P2SK (4/2023)", d: "Kerangka sektor keuangan terintegrasi." },
-        { t: "POJK 18/2017 jo. 11/2024", d: "Pelaporan & permintaan informasi debitur via SLIK OJK." },
+        { t: "POJK 18/2017 jo. 11/2024", d: "Pelaporan dan permintaan informasi debitur via SLIK OJK." },
         { t: "POJK 21/2023", d: "Layanan digital oleh bank umum — 2FA, APU-PPT, penanganan pengaduan." },
         { t: "UU PDP (27/2022)", d: "Perlindungan data pribadi — persetujuan & masking." },
-        { t: "APU-PPT", d: "Anti pencucian uang & pencegahan pendanaan terorisme." },
+        { t: "APU-PPT", d: "Anti pencucian uang dan pencegahan pendanaan terorisme." },
         { t: "POJK 22/2025", d: "Pelaporan bank umum melalui SPOJK." }
       ]
     },
@@ -1448,7 +1448,7 @@ Lihat <code>docs/14</code> untuk detail operasional dan <code>docs/04</code>/<co
       hero_title_1: "Loan origination that is",
       hero_title_2: "fast, accurate,",
       hero_title_3: "and regulation-ready",
-      hero_desc: "OriginIQ unifies application intake, eKYC, credit bureaus (SLIK OJK & Pefindo), AI-powered underwriting, tiered approval, electronic documents, and disbursement — in one microservices platform.",
+      hero_desc: "OriginIQ unifies application intake, eKYC, credit bureaus (SLIK OJK dan Pefindo), AI-powered underwriting, tiered approval, electronic documents, and disbursement — in one microservices platform.",
       hero_cta1: "Schedule a Demo",
       hero_cta2: "Explore Modules",
       stat1: "Transactions / day",
@@ -1486,7 +1486,7 @@ Lihat <code>docs/14</code> untuk detail operasional dan <code>docs/04</code>/<co
       docs_title: "Functional blueprint & gap analysis",
       docs_desc: "The content below is embedded directly from reference documents 03, 10, 13, and 14.",
       docs_03_title: "03 — Features, Modules, Menus & Forms",
-      docs_03_desc: "Functional blueprint: module & menu list (MD-01…MD-10), form dictionary (F-*), state machine, and feature matrix vs benchmark vendors.",
+      docs_03_desc: "Functional blueprint: module dan menu list (MD-01…MD-10), form dictionary (F-*), state machine, and feature matrix vs benchmark vendors.",
       docs_10_title: "10 — Smart Module Gap Analysis",
       docs_10_desc: "Assessment of the 6 LOS Module Groups + 6 Smart (AI) Modules — per-module status, backend endpoints, frontend menus, and specifications.",
       docs_13_title: "13 — Workflow & Data Flow",
@@ -1504,7 +1504,7 @@ Lihat <code>docs/14</code> untuk detail operasional dan <code>docs/04</code>/<co
       docs_read: "Read the document",
       modules: [
         { icon: "🚀", c: "#dbe6fe", t: "Front-End & Onboarding", d: "Registration & application, eKYC & biometrics, and document management (DMS).", tags: ["Registration", "eKYC", "DMS"] },
-        { icon: "🔎", c: "#fce7f3", t: "Verification & Data Enrichment", d: "Credit bureau integration (SLIK OJK & Pefindo), alternative data, and fraud detection (FDS).", tags: ["SLIK", "Pefindo", "FDS"] },
+        { icon: "🔎", c: "#fce7f3", t: "Verification & Data Enrichment", d: "Credit bureau integration (SLIK OJK dan Pefindo), alternative data, and fraud detection (FDS).", tags: ["SLIK", "Pefindo", "FDS"] },
         { icon: "⚖️", c: "#fef3c7", t: "Risk Analysis & Assessment", d: "Scoring engine, business rules engine (BRE), and repayment capacity analysis.", tags: ["Scoring", "BRE", "DSR/LTV"] },
         { icon: "🔀", c: "#d1fae5", t: "Workflow & Operations", d: "Dynamic workflow (BPMN 2.0), task routing, and analyst dashboard.", tags: ["BPMN 2.0", "Routing", "Dashboard"] },
         { icon: "📄", c: "#e0e7ff", t: "Finalization & Disbursement", d: "Contract generation (Doc Gen), digital signature, and core API integration gateway.", tags: ["Doc Gen", "eSign", "API"] },
@@ -1628,12 +1628,12 @@ Lihat <code>docs/14</code> untuk detail operasional dan <code>docs/04</code>/<co
 
   var SEQ = [
     { id: "s0", label: { id: "Fase 0 — Login", en: "Phase 0 — Login" }, code: "sequenceDiagram\n    actor U as Petugas\n    participant F as Frontend (SPA)\n    participant G as api-gateway\n    participant A as auth-service\n    participant D as authdb\n    U->>F: isi username dan password\n    F->>G: POST /api/v1/auth/login\n    G->>A: forward (open path)\n    A->>A: cek rate limiter (5x per 15 mnt)\n    A->>D: SELECT app_user\n    D-->>A: baris user\n    A->>A: bcrypt.matches + status aktif\n    A->>A: issue JWT (HS256, TTL 900 dtk)\n    A-->>G: 200 {accessToken, profile}\n    G-->>F: 200 {accessToken, profile}\n    F-->>U: simpan token lalu ke dashboard" },
-    { id: "s1", label: { id: "Fase 1 — Dasbor & Pipeline", en: "Phase 1 — Dashboard & Pipeline" }, code: "sequenceDiagram\n    actor U as Semua peran\n    participant F as Frontend (SPA)\n    participant G as api-gateway\n    participant L as loan-service\n    participant D as loandb\n    U->>F: buka halaman dashboard\n    F->>G: GET /loans/aggregate\n    G->>L: forward (JWT verified)\n    L->>D: SELECT SUM/COUNT (14 hari)\n    D-->>L: KPI + volume\n    L-->>G: 200 {kpi, distribusi status}\n    G-->>F: 200 {kpi, distribusi status}\n    U->>F: buka halaman pipeline\n    F->>G: GET /loans?groupBy=status\n    G->>L: forward\n    L->>D: SELECT by status\n    D-->>L: baris kanban\n    L-->>F: 200 kanban" },
+    { id: "s1", label: { id: "Fase 1 — Dasbor dan Pipeline", en: "Phase 1 — Dashboard & Pipeline" }, code: "sequenceDiagram\n    actor U as Semua peran\n    participant F as Frontend (SPA)\n    participant G as api-gateway\n    participant L as loan-service\n    participant D as loandb\n    U->>F: buka halaman dashboard\n    F->>G: GET /loans/aggregate\n    G->>L: forward (JWT verified)\n    L->>D: SELECT SUM/COUNT (14 hari)\n    D-->>L: KPI + volume\n    L-->>G: 200 {kpi, distribusi status}\n    G-->>F: 200 {kpi, distribusi status}\n    U->>F: buka halaman pipeline\n    F->>G: GET /loans?groupBy=status\n    G->>L: forward\n    L->>D: SELECT by status\n    D-->>L: baris kanban\n    L-->>F: 200 kanban" },
     { id: "s2", label: { id: "Fase 2 — Origination", en: "Phase 2 — Origination" }, code: "sequenceDiagram\n    actor O as LOAN_OFFICER\n    participant F as Frontend\n    participant G as api-gateway\n    participant C as customer-service\n    participant CD as customerdb\n    participant L as loan-service\n    participant LD as loandb\n    O->>F: buat nasabah\n    F->>G: POST /api/v1/customers\n    G->>C: forward\n    C->>C: validasi NIK 16 digit, NPWP/NIB, email, HP\n    C->>CD: INSERT customer\n    CD-->>C: nasabah tersimpan\n    C-->>F: 200 customer\n    O->>F: buat pengajuan\n    F->>G: POST /api/v1/loans\n    G->>L: forward\n    L->>LD: INSERT loan_application (DRAFT)\n    LD-->>L: application_no\n    L-->>F: 200 application\n    O->>F: ajukan\n    F->>G: POST /api/v1/loans/{id}/submit\n    G->>L: forward\n    L->>LD: status = SUBMITTED" },
     { id: "s3", label: { id: "Fase 3 — Verifikasi (eKYC + Biro Kredit)", en: "Phase 3 — Verification (eKYC + Credit Bureau)" }, code: "sequenceDiagram\n    actor U as UNDERWRITER / Sistem\n    participant F as Frontend\n    participant G as api-gateway\n    participant C as customer-service\n    participant DK as Dukcapil\n    participant BM as Biometrik vendor\n    participant CR as credit-service\n    participant SL as SLIK OJK\n    participant PF as Pefindo\n    U->>F: verifikasi eKYC\n    F->>G: POST /customers/{id}/kyc\n    G->>C: forward\n    C->>DK: verify(NIK)\n    DK-->>C: {match}\n    C->>BM: face-match + liveness\n    BM-->>C: {passed}\n    C->>C: kyc_status = VERIFIED / REJECTED\n    U->>F: cek SLIK\n    F->>G: POST /credit/bureau/slik\n    G->>CR: forward\n    CR->>SL: inquiry NIK\n    SL-->>CR: {fasilitas, kolektibilitas}\n    U->>F: cek Pefindo\n    F->>G: POST /credit/bureau/pefindo/score\n    G->>CR: forward\n    CR->>PF: inquiry IdScore\n    PF-->>CR: {skor 250-900}" },
     { id: "s4", label: { id: "Fase 4 — Underwriting & BRE", en: "Phase 4 — Underwriting & BRE" }, code: "sequenceDiagram\n    actor U as UNDERWRITER\n    participant F as Frontend\n    participant G as api-gateway\n    participant L as loan-service\n    participant C as credit-service\n    participant R as risk-intelligence\n    participant CD as creditdb\n    U->>F: input penghasilan + kewajiban\n    F->>G: POST /loans/{id}/underwrite\n    G->>L: forward\n    L->>C: evaluate(income, obligations)\n    C->>C: hitung DSR, LTV, skor internal\n    C->>C: ambil SLIK + Pefindo\n    C->>C: cek aturan BRE (cut-off)\n    C->>R: opsional: enrichment + FDS\n    R-->>C: skor pengayaan + keputusan FDS\n    C->>CD: INSERT credit_evaluation\n    C-->>L: {APPROVE / REJECT / REVIEW}\n    L->>L: set status pengajuan\n    L-->>F: 200 hasil" },
     { id: "s5", label: { id: "Fase 5–7 — Persetujuan → Kontrak → Pencairan", en: "Phase 5–7 — Approval → Contract → Disbursement" }, code: "sequenceDiagram\n    actor A as APPROVER\n    participant F as Frontend\n    participant G as api-gateway\n    participant L as loan-service\n    participant D as document-service\n    participant PS as PSrE\n    participant CB as core-banking\n    A->>F: putusan (setujui/tolak)\n    F->>G: POST /loans/{id}/decision\n    G->>L: forward\n    L->>L: INSERT approval_task, status APPROVED/REJECTED\n    A->>F: generate kontrak\n    F->>G: POST /documents/generate-contract\n    G->>D: forward\n    D->>D: merge template + jadwal angsuran\n    D->>D: simpan DOCX ke MinIO\n    A->>F: tanda tangan elektronik\n    F->>G: POST /documents/{id}/sign\n    G->>D: forward\n    D->>PS: TTE (hash + timestamp)\n    PS-->>D: tersertifikasi\n    D->>D: status DOCUMENT_SIGNED\n    A->>F: cairkan dana\n    F->>G: POST /loans/{id}/disburse\n    G->>L: forward\n    L->>L: status DISBURSED\n    L->>CB: transfer dana" },
-    { id: "s7", label: { id: "Fase 8 — Analitik, Pelaporan & Audit", en: "Phase 8 — Analytics, Reporting & Audit" }, code: "sequenceDiagram\n    actor C as COMPLIANCE\n    participant F as Frontend\n    participant G as api-gateway\n    participant L as loan-service\n    participant D as loandb\n    participant CR as credit-service\n    participant SL as SLIK OJK\n    C->>F: buka Report Studio\n    F->>G: GET /reports/aggregate\n    G->>L: forward\n    L->>D: SELECT agregat / group-by\n    D-->>L: rows\n    L-->>F: 200 tabel / CSV\n    C->>F: buka Audit Trail\n    F->>G: GET /audit/trail\n    G->>L: forward\n    L-->>F: 200 jejak audit (immutable)\n    C->>F: kirim laporan SLIK bulanan\n    F->>G: POST /credit/bureau/slik/report\n    G->>CR: forward\n    CR->>SL: kirim LKPB\n    SL-->>CR: ack ID\n    CR-->>F: 200 {reportId}" },
+    { id: "s7", label: { id: "Fase 8 — Analitik, Pelaporan dan Audit", en: "Phase 8 — Analytics, Reporting & Audit" }, code: "sequenceDiagram\n    actor C as COMPLIANCE\n    participant F as Frontend\n    participant G as api-gateway\n    participant L as loan-service\n    participant D as loandb\n    participant CR as credit-service\n    participant SL as SLIK OJK\n    C->>F: buka Report Studio\n    F->>G: GET /reports/aggregate\n    G->>L: forward\n    L->>D: SELECT agregat / group-by\n    D-->>L: rows\n    L-->>F: 200 tabel / CSV\n    C->>F: buka Audit Trail\n    F->>G: GET /audit/trail\n    G->>L: forward\n    L-->>F: 200 jejak audit (immutable)\n    C->>F: kirim laporan SLIK bulanan\n    F->>G: POST /credit/bureau/slik/report\n    G->>CR: forward\n    CR->>SL: kirim LKPB\n    SL-->>CR: ack ID\n    CR-->>F: 200 {reportId}" },
     { id: "s8", label: { id: "Fase 9 — Logout", en: "Phase 9 — Logout" }, code: "sequenceDiagram\n    actor U as Petugas\n    participant F as Frontend (SPA)\n    participant G as api-gateway\n    participant A as auth-service\n    U->>F: klik Keluar\n    F->>F: hapus token + state.user = null\n    F->>F: location.hash = \"\" (layar login)\n    F-->>G: produksi: POST /auth/logout\n    G->>A: forward\n    A->>A: simpan token ke revocation list\n    A-->>G: 202\n    F-->>U: kembali ke layar login" }
   ];
 

@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Clarity71 — Platform CKPN (PSAK 71 / IFRS 9)</title>
-  <meta name="description" content="Clarity71 — platform kerugian kredit ekspektasian (ECL) sesuai PSAK 71 / IFRS 9: dari model, workflow persetujuan, sampai jurnal & laporan keuangan + template OJK." />
+  <meta name="description" content="Clarity71 — platform kerugian kredit ekspektasian (ECL) sesuai PSAK 71 / IFRS 9: dari model, workflow persetujuan, sampai jurnal dan laporan keuangan + template OJK." />
   <meta name="theme-color" content="#0b1b33" />
   <link rel="icon" href="../assets/favicon.ico" sizes="any" />
   <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg" />
@@ -150,7 +150,7 @@
         <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-[#0b1b33] text-[#c6a15b]">
           <svg class="h-5.5 w-5.5" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h18M3 12h18M3 18h18" stroke-linecap="round"/><path d="M7 4v4M17 4v4M7 10v4M17 10v4M7 16v4M17 16v4" stroke-linecap="round"/></svg>
         </div>
-        <h3 class="mt-5 text-[17px] font-bold text-[#0b1b33]">Jurnal, GL &amp; Laporan Keuangan</h3>
+        <h3 class="mt-5 text-[17px] font-bold text-[#0b1b33]">Jurnal, GL dan Laporan Keuangan</h3>
         <p class="mt-2 text-[13.5px] leading-relaxed text-slate-600">Hasil ECL otomatis menjadi jurnal CKPN (debit beban / kredit cadangan). Posting dua sisi, saldo per periode, neraca seimbang, laba-rugi, disclosure CKPN per bucket — plus template CSV OJK.</p>
         <div class="mt-4 flex flex-wrap gap-1.5"><span class="chip">POST /gl/post/{jurnalId}</span><span class="chip">GET /lk/neraca</span><span class="chip">/ojk/ckpn.csv</span></div>
       </article>
@@ -210,7 +210,7 @@
           <svg class="w-5.5 h-5.5" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3.5" y="3.5" width="17" height="17" rx="3"/><circle cx="8.5" cy="8.5" r="1.4"/><circle cx="15.5" cy="8.5" r="1.4"/><circle cx="8.5" cy="15.5" r="1.4"/><circle cx="15.5" cy="15.5" r="1.4"/><path d="M12 4v16" stroke-dasharray="1.8 2.6"/><path d="M4 12h16" stroke-dasharray="1.8 2.6"/></svg>
         </div>
         <h3 class="mt-5 text-[17px] font-bold text-[#0b1b33]">Monte Carlo — Distribusi CKPN</h3>
-        <p class="mt-2 text-[13.5px] leading-relaxed text-slate-600">Simulasi hingga ribuan iterasi guncangan makro di atas hasil ECL: rata-rata, deviasi, VaR &amp; CVaR per segmen. Seed direkam sehingga hasil dapat direproduksi persis untuk validasi model &amp; audit.</p>
+        <p class="mt-2 text-[13.5px] leading-relaxed text-slate-600">Simulasi hingga ribuan iterasi guncangan makro di atas hasil ECL: rata-rata, deviasi, VaR dan CVaR per segmen. Seed direkam sehingga hasil dapat direproduksi persis untuk validasi model dan audit.</p>
         <div class="mt-4 flex flex-wrap gap-1.5"><span class="chip">mc_iterasi · mc_run</span><span class="chip">p01–p99 · cvar99</span><span class="chip">seed deterministik</span></div>
       </article>
 
@@ -230,7 +230,7 @@
           <svg class="w-5.5 h-5.5" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3.4 2" stroke-linecap="round"/><path d="M5 3.5 3 5.5M19 3.5l2 2" stroke-linecap="round"/></svg>
         </div>
         <h3 class="mt-5 text-[17px] font-bold text-[#0b1b33]">Jadwal, Notifikasi, Arsip &amp; ETL</h3>
-        <p class="mt-2 text-[13.5px] leading-relaxed text-slate-600">Jadwal batch/laporan berbasis cron yang divalidasi saat disimpan, pusat notifikasi &amp; arsip dokumen (kebijakan/SK/berita acara), plus pengaturan alur Apache NiFi dengan generator flow CSV → PostgreSQL siap impor.</p>
+        <p class="mt-2 text-[13.5px] leading-relaxed text-slate-600">Jadwal batch/laporan berbasis cron yang divalidasi saat disimpan, pusat notifikasi dan arsip dokumen (kebijakan/SK/berita acara), plus pengaturan alur Apache NiFi dengan generator flow CSV → PostgreSQL siap impor.</p>
         <div class="mt-4 flex flex-wrap gap-1.5"><span class="chip">jadwal_tugas · cron valid</span><span class="chip">notifikasi · arsip</span><span class="chip">flow NiFi 2.x</span></div>
       </article>
     </div>
@@ -274,7 +274,7 @@
         </ul>
       </div>
       <div class="glass rounded-2xl p-5">
-        <p class="text-[11px] uppercase tracking-widest text-[#c6a15b] font-bold">04 · Laporan &amp; Keluar</p>
+        <p class="text-[11px] uppercase tracking-widest text-[#c6a15b] font-bold">04 · Laporan dan Keluar</p>
         <ul class="mt-3 space-y-2 text-[13px] text-slate-300">
           <li class="flex items-center gap-2"><span class="h-1.5 w-1.5 rounded-full bg-[#c6a15b]"></span>accounting-service — jurnal, GL, LK, template OJK</li>
           <li class="flex items-center gap-2"><span class="h-1.5 w-1.5 rounded-full bg-[#c6a15b]"></span>reporting-service — ringkasan &amp; ekspor CSV</li>
@@ -296,11 +296,11 @@
     <ol class="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
       <li class="step-line flex gap-4 rounded-2xl border border-slate-200 bg-white p-5">
         <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#0b1b33] text-sm font-bold text-[#c6a15b] num">1</span>
-        <div><h3 class="font-bold text-[#0b1b33] text-[15px]">Eksposur masuk</h3><p class="mt-1 text-[13px] text-slate-600 leading-relaxed">Upload massal CSV sampai jutaan rekord, dengan validasi batch &amp; pratinjau — sumber bisa juga dari integrasi core/DWH.</p></div>
+        <div><h3 class="font-bold text-[#0b1b33] text-[15px]">Eksposur masuk</h3><p class="mt-1 text-[13px] text-slate-600 leading-relaxed">Upload massal CSV sampai jutaan rekord, dengan validasi batch dan pratinjau — sumber bisa juga dari integrasi core/DWH.</p></div>
       </li>
       <li class="step-line flex gap-4 rounded-2xl border border-slate-200 bg-white p-5">
         <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#0b1b33] text-sm font-bold text-[#c6a15b] num">2</span>
-        <div><h3 class="font-bold text-[#0b1b33] text-[15px]">Engine ECL paralel</h3><p class="mt-1 text-[13px] text-slate-600 leading-relaxed">Stage 1/2/3, ECL 12 bulan &amp; lifetime, skenario terbobot — parameter di-snapshot per run supaya hasil bisa direproduksi.</p></div>
+        <div><h3 class="font-bold text-[#0b1b33] text-[15px]">Engine ECL paralel</h3><p class="mt-1 text-[13px] text-slate-600 leading-relaxed">Stage 1/2/3, ECL 12 bulan dan lifetime, skenario terbobot — parameter di-snapshot per run supaya hasil bisa direproduksi.</p></div>
       </li>
       <li class="step-line flex gap-4 rounded-2xl border border-slate-200 bg-white p-5">
         <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#0b1b33] text-sm font-bold text-[#c6a15b] num">3</span>
@@ -312,11 +312,11 @@
       </li>
       <li class="step-line flex gap-4 rounded-2xl border border-slate-200 bg-white p-5">
         <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#0b1b33] text-sm font-bold text-[#c6a15b] num">5</span>
-        <div><h3 class="font-bold text-[#0b1b33] text-[15px]">LK &amp; disclosure</h3><p class="mt-1 text-[13px] text-slate-600 leading-relaxed">Neraca yang seimbang, laba-rugi, dan disclosure CKPN per stage/portofolio — kontra-aset disajikan sebagai pengurang kredit.</p></div>
+        <div><h3 class="font-bold text-[#0b1b33] text-[15px]">LK dan disclosure</h3><p class="mt-1 text-[13px] text-slate-600 leading-relaxed">Neraca yang seimbang, laba-rugi, dan disclosure CKPN per stage/portofolio — kontra-aset disajikan sebagai pengurang kredit.</p></div>
       </li>
       <li class="step-line flex gap-4 rounded-2xl border border-slate-200 bg-white p-5">
         <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#0b1b33] text-sm font-bold text-[#c6a15b] num">6</span>
-        <div><h3 class="font-bold text-[#0b1b33] text-[15px]">Template OJK</h3><p class="mt-1 text-[13px] text-slate-600 leading-relaxed">Ekspor CSV template Laporan Keuangan &amp; CKPN OJK langsung dari aplikasi — siap diisi ke pelaporan regulator.</p></div>
+        <div><h3 class="font-bold text-[#0b1b33] text-[15px]">Template OJK</h3><p class="mt-1 text-[13px] text-slate-600 leading-relaxed">Ekspor CSV template Laporan Keuangan dan CKPN OJK langsung dari aplikasi — siap diisi ke pelaporan regulator.</p></div>
       </li>
     </ol>
 
@@ -345,11 +345,11 @@
     <div>
       <p class="text-[12px] font-bold uppercase tracking-[.2em] text-[#a68540]">Performa</p>
       <h2 class="mt-3 text-3xl sm:text-4xl font-extrabold text-[#0b1b33] tracking-tight">100 juta rekord ± 5 menit</h2>
-      <p class="mt-4 text-[15px] text-slate-600 leading-relaxed">Engine membagi eksposur menjadi partisi yang diproses paralel lalu menggabungkan hasil secara deterministik — arsitektur yang sama dipakai untuk batch bulanan, komitmen &amp; CCF, hingga skenario makro berganda.</p>
+      <p class="mt-4 text-[15px] text-slate-600 leading-relaxed">Engine membagi eksposur menjadi partisi yang diproses paralel lalu menggabungkan hasil secara deterministik — arsitektur yang sama dipakai untuk batch bulanan, komitmen dan CCF, hingga skenario makro berganda.</p>
       <ul class="mt-6 space-y-3 text-[14px] text-slate-700">
         <li class="flex gap-3"><span class="mt-0.5 text-[#a68540] font-bold">✓</span>Partisi paralel per portofolio/segmen dengan agregasi konsisten</li>
-        <li class="flex gap-3"><span class="mt-0.5 text-[#a68540] font-bold">✓</span>Snapshot parameter per run — hasil dapat direproduksi &amp; diaudit</li>
-        <li class="flex gap-3"><span class="mt-0.5 text-[#a68540] font-bold">✓</span>REST API untuk setiap tahap: upload, run, review, posting, laporan</li>
+        <li class="flex gap-3"><span class="mt-0.5 text-[#a68540] font-bold">✓</span>Snapshot parameter per run — hasil dapat direproduksi dan diaudit</li>
+        <li class="flex gap-3"><span class="mt-0.5 text-[#a68540] font-bold">✓</span>REST API untuk setiap tahap: <i>upload</i>, run, review, posting, laporan</li>
         <li class="flex gap-3"><span class="mt-0.5 text-[#a68540] font-bold">✓</span>PostgreSQL sebagai sumber tunggal: skema per service, tanpa duplikasi</li>
       </ul>
       <div class="mt-7 rounded-xl border border-emerald-200 bg-emerald-50/60 p-4">
@@ -358,7 +358,7 @@
           <li class="flex gap-2.5"><span class="mt-0.5 text-emerald-600 font-bold">✓</span>Tanpa rahasia bawaan: JWT/DB/password admin wajib env — aplikasi menolak start bila kosong/contoh (vault/secret ops)</li>
           <li class="flex gap-2.5"><span class="mt-0.5 text-emerald-600 font-bold">✓</span>Password PBKDF2-HMAC-SHA256 210.000 iterasi; hash lama dimigrasikan otomatis saat login</li>
           <li class="flex gap-2.5"><span class="mt-0.5 text-emerald-600 font-bold">✓</span>Kunci akun sementara setelah 5 login gagal (HTTP 429) + log percobaan</li>
-          <li class="flex gap-2.5"><span class="mt-0.5 text-emerald-600 font-bold">✓</span>Pemulihan run ECL saat restart, healthcheck per service, skrip backup &amp; runbook produksi</li>
+          <li class="flex gap-2.5"><span class="mt-0.5 text-emerald-600 font-bold">✓</span>Pemulihan run ECL saat restart, healthcheck per service, skrip <i>backup</i> dan runbook produksi</li>
         </ul>
       </div>
     </div>
@@ -382,7 +382,7 @@
 <section class="bg-[#0b1b33] py-16">
   <div class="max-w-6xl mx-auto px-5 sm:px-6 flex flex-col items-center text-center">
     <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">Lihat sendiri dari model sampai neraca</h2>
-    <p class="mt-4 max-w-xl text-[15px] text-slate-300/90 leading-relaxed">Dataset demo sudah terpasang: jalankan ECL, setujui lewat workflow, posting jurnal, dan unduh CSV template OJK — semua dari satu aplikasi.</p>
+    <p class="mt-4 max-w-xl text-[15px] text-slate-300/90 leading-relaxed">Dataset demo sudah terpasang: jalankan ECL, setujui lewat <i>workflow</i>, posting jurnal, dan unduh CSV template OJK — semua dari satu aplikasi.</p>
     <div class="mt-8 flex flex-wrap justify-center gap-3">
       <a href="../index.html" class="rounded-lg bg-[#c6a15b] px-7 py-3.5 text-sm font-bold text-[#0b1b33] hover:bg-[#dbc795] transition shadow-lg shadow-[#c6a15b]/20">Buka aplikasi →</a>
       <a href="#fitur" class="rounded-lg border border-white/25 bg-white/5 px-7 py-3.5 text-sm font-semibold text-white hover:bg-white/10 transition">Kembali ke fitur</a>

@@ -89,7 +89,7 @@ header .sp{flex:1}
     <div id="chks-agent"></div>
     <h4 style="color:var(--gold)" data-i18n="hadmin">SISI ADMIN / MANAJEMEN</h4>
     <div id="chks-admin"></div>
-    <h4 style="color:var(--gold2)" data-i18n="htrust">Kepatuhan &amp; Keamanan</h4>
+    <h4 style="color:var(--gold2)" data-i18n="htrust">Kepatuhan dan Keamanan</h4>
     <div id="chks-trust"></div>
   </div>
   <div class="preview">
@@ -103,16 +103,16 @@ header .sp{flex:1}
 var I18N={
   id:{ sub:'Generator brosur & landing page', branding:'Konten & Branding', lbrand:'Nama Produk', ltag:'Tagline',
     lhero:'Tajuk Hero', lcta:'Tombol CTA', hcust:'SISI NASABAH / CUSTOMER', hagent:'SISI AGEN / TENAGA PEMASAR',
-    hadmin:'SISI ADMIN / MANAJEMEN', htrust:'Kepatuhan & Keamanan', preview:'⬇ Pratinjau — hasil unduhan identik (self-contained)',
+    hadmin:'SISI ADMIN / MANAJEMEN', htrust:'Kepatuhan dan Keamanan', preview:'⬇ Pratinjau — hasil unduhan identik (self-contained)',
     selAll:'Pilih Semua', clear:'Kosongkan', dl:'⤓ Unduh web-marketing.html', btnCust:'Lihat Tampilan Nasabah', btnAdmin:'Lihat Admin Console',
     defaults:{ tagline:'Menata Kekayaan, Mengawal Masa Depan',
       hero:'Satu Super-App untuk Semua Kebutuhan Finansial Anda', cta:'Mulai Sekarang' },
-    kpiEco:'Ekosisistem', kpiFeat:'Fitur & Modul', kpiGw:'Gerbang LJK', kpiRole:'Peran Pengguna',
+    kpiEco:'Ekosisistem', kpiFeat:'Fitur dan Modul', kpiGw:'Gerbang LJK', kpiRole:'Peran Pengguna',
     heroSub:'Investasi, Asuransi, Pembiayaan, & Perbankan dalam satu aplikasi.',
-    custTitle:'Untuk Anda sebagai Nasabah', custSub:'Kelola kekayaan & perlindungan secara mandiri dari genggaman.',
-    agentTitle:'Satu Platform untuk Semua Pengguna', agentSub:'Nasabah, agen, dan manajemen — masing-masing punya peran & modulnya.',
+    custTitle:'Untuk Anda sebagai Nasabah', custSub:'Kelola kekayaan dan perlindungan secara mandiri dari genggaman.',
+    agentTitle:'Satu Platform untuk Semua Pengguna', agentSub:'Nasabah, agen, dan manajemen — masing-masing punya peran dan modulnya.',
     roleAgent:'Untuk Agen / Tenaga Pemasar', roleAdmin:'Untuk Admin / Manajemen', ag:'AGEN', adm:'ADMIN',
-    trustTitle:'Aman & Sesuai Regulasi', trustSub:'Perlindungan data dan kepatuhan sebagai fondasi.',
+    trustTitle:'Aman dan Sesuai Regulasi', trustSub:'Perlindungan data dan kepatuhan sebagai fondasi.',
     advTitle:'Kelebihan dibanding Aplikasi Lain', advSub:'Bandingkan: kebanyakan aplikasi pasar hanya punya satu ekosisistem.',
     colCapability:'Kapabilitas', colRobo:'Robo/APERD', colInsur:'Insurtech', colMulti:'Multifinance', colLaku:'Laku Pandai', colCrm:'CRM Umum', colNara:'NARA PRO 360°',
     advRows:[
@@ -120,49 +120,49 @@ var I18N={
       ['Onboarding e-KYC + suitability (CDD)','partial','yes','partial','yes','no','yes'],
       ['Transaksi asinkron 202 + idempoten (anti double)','no','partial','no','partial','no','yes'],
       ['Simulator finansial 4 skenario','partial','partial','no','no','no','yes'],
-      ['Pencairan komisi & BI-FAST dengan OTP','no','partial','no','yes','no','yes'],
+      ['Pencairan komisi dan BI-FAST dengan OTP','no','partial','no','yes','no','yes'],
       ['Report Designer drag-and-drop','no','no','no','no','partial(berbayar)','yes'],
       ['Workflow approval BPMN 2.0 (bercabang)','no','no','no','no','partial','yes'],
       ['12 gerbang koneksi API/sFTP LJK','partial','partial','partial','no','no','yes'],
       ['Enkripsi PII + 2FA + audit trail otomatis','partial','partial','partial','partial','partial','yes'],
       ['Siap skala 10.000+ TPS (Kafka/K8s)','partial','partial','partial','partial','partial','yes']
     ],
-    closeTitle:'Mulai perjalanan finansial Anda hari ini', closeSub:'Unduh aplikasi atau daftar sebagai agen. Tersedia di Android & iOS.',
-    tAes:'Enkripsi AES-256', tOtp:'2FA & OTP', tAudit:'Audit Trail', tLjk:'LJK Berizin OJK/Bank',
+    closeTitle:'Mulai perjalanan finansial Anda hari ini', closeSub:'Unduh aplikasi atau daftar sebagai agen. Tersedia di Android dan iOS.',
+    tAes:'Enkripsi AES-256', tOtp:'2FA dan OTP', tAudit:'Audit Trail', tLjk:'LJK Berizin OJK/Bank',
     footer1:'— Platform Keagenan Finansial (Fintech Agency, Bukan Bank).',
     footer2:'Produk investasi/asuransi/pembiayaan/perbankan diterbitkan oleh Lembaga Jasa Keuangan berizin. Nama mitra adalah merek masing-masing.',
-    footer3:'Investasi tidak mengandung jaminan imbal hasil. Baca prospektus & ketentuan sebelum bertransaksi.',
+    footer3:'Investasi tidak mengandung jaminan imbal hasil. Baca prospektus dan ketentuan sebelum bertransaksi.',
     done:'web-marketing.html berhasil dibuat ✓',
     modules:{
       customer:[
         ['🙋','Portal Nasabah 360°','Ringkasan aset, proteksi, dan tujuan finansial dalam satu layar.'],
-        ['📈','Portofolio & Investasi','Reksadana, SBN, dan Unit Penyertaan dengan nilai & return real-time.'],
-        ['🛡️','Asuransi & e-Polis','Beli polis, unduh e-Polis, dan lihat manfaat/UP kapan saja.'],
-        ['📑','Pengajuan & Status Klaim','Ajukan klaim, unggah dokumen, pantau DIAJUKAN → DIPROSES → DIBAYAR.'],
-        ['💳','Top-Up & Pembayaran','e-Money (GoPay/OVO/DANA), transfer, dan tagihan via BI-FAST.'],
-        ['🎯','Target & Simulasi','Dana pendidikan, pensiun, darurat dengan simulasi setoran bulanan.'],
-        ['🗂️','e-Document & Statement','Kontrak, polis, konfirmasi unit, dan laporan berkala.'],
+        ['📈','Portofolio dan Investasi','Reksadana, SBN, dan Unit Penyertaan dengan nilai dan return real-time.'],
+        ['🛡️','Asuransi dan e-Polis','Beli polis, unduh e-Polis, dan lihat manfaat/UP kapan saja.'],
+        ['📑','Pengajuan dan Status Klaim','Ajukan klaim, unggah dokumen, pantau DIAJUKAN → DIPROSES → DIBAYAR.'],
+        ['💳','Top-Up dan Pembayaran','e-Money (GoPay/OVO/DANA), transfer, dan tagihan via BI-FAST.'],
+        ['🎯','Target dan Simulasi','Dana pendidikan, pensiun, darurat dengan simulasi setoran bulanan.'],
+        ['🗂️','e-Document dan Statement','Kontrak, polis, konfirmasi unit, dan laporan berkala.'],
         ['🔐','Keamanan Akun','2FA/TOTP, OTP via email, PIN, reset kata sandi, dan biometrik.'],
-        ['👆','Login Biometrik','Sidik jari & Face ID (Android/iOS) serta WebAuthn di browser.'],
+        ['👆','Login Biometrik','Sidik jari dan Face ID (Android/iOS) serta WebAuthn di browser.'],
         ['🔔','Notifikasi Push','Info transaksi, klaim, dan pengumuman langsung ke perangkat.']],
       agent:[
         ['🪪','Onboarding e-KYC','Wizard 5 langkah: identitas, kontak, pekerjaan, kepatuhan, dokumen + validasi NIK/NPWP.'],
         ['📚','Katalog Multi-Produk','4 ekosisistem: investasi, asuransi, pembiayaan, perbankan — multi-quote.'],
         ['🧮','Simulator Finansial','4 kalkulator (pendidikan, pensiun, darurat, aset) dengan konversi ke transaksi.'],
-        ['🧾','Transaksi & e-Polis (202)','Pengajuan asinkron anti double-submit, idempoten, sumber dana dari gerbang LJK.'],
+        ['🧾','Transaksi dan e-Polis (202)','Pengajuan asinkron anti double-submit, idempoten, sumber dana dari gerbang LJK.'],
         ['👥','CRM Nasabah','Profil 360°, pipeline, suitability, dan riwayat interaksi.'],
-        ['💬','Follow-up WhatsApp','Template pesan follow-up & reminder polis yang siap kirim.'],
-        ['💰','Komisi & E-Wallet','Mutasi komisi, pajak NPPN, pencairan BI-FAST dengan OTP.'],
-        ['🏦','Layanan Laku Pandai','Setor/tarik tunai & transfer atas nama bank (BRILink/BNI46).'],
-        ['🎓','Akademi & LMS','Ujian sertifikasi, materi pemasaran, dan sertifikat digital.'],
-        ['🏛️','Master LJK & Referensi','Penerbit produk dikelola sebagai data master sesuai ekosisistem.']],
+        ['💬','Follow-up WhatsApp','Template pesan follow-up dan reminder polis yang siap kirim.'],
+        ['💰','Komisi dan E-Wallet','Mutasi komisi, pajak NPPN, pencairan BI-FAST dengan OTP.'],
+        ['🏦','Layanan Laku Pandai','Setor/tarik tunai dan transfer atas nama bank (BRILink/BNI46).'],
+        ['🎓','Akademi dan LMS','Ujian sertifikasi, materi pemasaran, dan sertifikat digital.'],
+        ['🏛️','Master LJK dan Referensi','Penerbit produk dikelola sebagai data master sesuai ekosisistem.']],
       admin:[
-        ['🌐','Gerbang Koneksi (12 LJK)','API mTLS atau sFTP/FTP (host, port, kredensial) dengan ping & circuit breaker.'],
+        ['🌐','Gerbang Koneksi (12 LJK)','API mTLS atau sFTP/FTP (host, port, kredensial) dengan ping dan circuit breaker.'],
         ['🧩','Report Designer','Rancang laporan drag-and-drop dari kolom semua modul lalu pratinjau.'],
         ['🔀','Workflow BPMN 2.0','Susun proses approval dengan exclusive gateway (YA/TIDAK) & ekspor .bpmn20.xml.'],
         ['⚙️','Parameter Sistem','Pengaturan limit, bunga, gateway, dan aturan aplikasi.'],
         ['📊','Laporan CQRS','Agregat transaksi harian O(1) dari read-model (tidak membebani sistem).'],
-        ['📑','Audit & Kepatuhan','Jejak audit otomatis (AOP), AML/DTTOT, PEP, suitability gate.'],
+        ['📑','Audit dan Kepatuhan','Jejak audit otomatis (AOP), AML/DTTOT, PEP, suitability gate.'],
         ['🔐','Pusat Keamanan','RBAC 7 peran, 2FA/TOTP, refresh token, rate-limit, enkripsi PII.'],
         ['🧱','Infra Skala Besar','Docker/Kubernetes, HPA/KEDA, Kafka, multi-region — siap 10.000+ TPS.'],
         ['📡','Observability','Prometheus, Grafana, Loki, Tempo + alerting & health probes.'],
@@ -170,7 +170,7 @@ var I18N={
       trust:[
         ['✅','Sesuai Regulasi','POJK 1/2022 (Laku Pandai), APERD OJK, Asuransi (BUSB/AAJI), SNAP BI, PDP UU No.27/2022.'],
         ['🔒','Enkripsi Berlapis','Data pribadi dienkripsi AES-256-GCM at-rest, mTLS/TLS in-transit.'],
-        ['🏦','Dana Ditanggung LJK','NARA adalah fintech keagenan (bukan bank); produk & dana nasabah dijamin lembaga penerbit berizin.']]
+        ['🏦','Dana Ditanggung LJK','NARA adalah fintech keagenan (bukan bank); produk dan dana nasabah dijamin lembaga penerbit berizin.']]
     }
   },
   en:{ sub:'Marketing brochure & landing page generator', branding:'Content & Branding', lbrand:'Product Name', ltag:'Tagline',
@@ -192,7 +192,7 @@ var I18N={
       ['e-KYC onboarding + suitability (CDD)','partial','yes','partial','yes','no','yes'],
       ['Async 202 transactions + idempotency (no double-charge)','no','partial','no','partial','no','yes'],
       ['4-scenario financial simulators','partial','partial','no','no','no','yes'],
-      ['Commission payout & BI-FAST with OTP','no','partial','no','yes','no','yes'],
+      ['Commission payout dan BI-FAST with OTP','no','partial','no','yes','no','yes'],
       ['Drag-and-drop Report Designer','no','no','no','no','partial(paid)','yes'],
       ['BPMN 2.0 branching approval workflow','no','no','no','no','partial','yes'],
       ['12 LJK API/sFTP connection gateways','partial','partial','partial','no','no','yes'],
